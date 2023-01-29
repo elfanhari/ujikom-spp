@@ -15,12 +15,21 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name');                         //WAJIB
+            $table->foreignId('kelas_id')->nullable();      // Wajib bagi siswa
+            $table->foreignId('spp_id')->nullable();        // Wajib bagi siswa
+            $table->string('nisn')->unique()->nullable();   // Wajib bagi siswa
+            $table->string('nis')->unique()->nullable();    // Wajib bagi siswa
+            $table->string('telepon');                      //WAJIB
+            $table->text('alamat')->nullable();             // Wajib bagi siswa
+            $table->string('email')->unique();              //WAJIB
+            $table->string('username')->unique();           //WAJIB
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->enum('level', ['admin', 'petugas', 'siswa']);   //WAJIB
+            $table->text('password');   //WAJIB
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
