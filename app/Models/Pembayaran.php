@@ -11,6 +11,14 @@ class Pembayaran extends Model
 
     protected $guarded = ['id'];
 
-    // 
+    public function userPetugas() //relasiInverse
+    {
+        return $this->belongsTo(User::class, 'petugas_id', 'id');
+    }
+
+    public function userSiswa() //relasiInverse
+    {
+        return $this->belongsTo(User::class, 'petugas_id', 'id');
+    }
 
 }

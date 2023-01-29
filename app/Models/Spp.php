@@ -11,6 +11,9 @@ class Spp extends Model
 
     protected $guarded = ['id'];
 
-    // 
+    public function userSiswa() //relasi
+    {
+        return $this->hasMany(User::class, 'spp_id', 'id');
+    }
 
 }
