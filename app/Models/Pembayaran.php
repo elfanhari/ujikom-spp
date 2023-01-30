@@ -18,7 +18,7 @@ class Pembayaran extends Model
 
     public function userSiswa() //relasiInverse
     {
-        return $this->belongsTo(User::class, 'petugas_id', 'id');
+        return $this->belongsTo(User::class, 'siswa_id', 'id');
     }
 
 }
