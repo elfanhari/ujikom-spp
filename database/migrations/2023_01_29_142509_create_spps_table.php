@@ -11,6 +11,7 @@ class CreateSppsTable extends Migration
      *
      * @return void
      */
+    
     public function up()
     {
         Schema::create('spps', function (Blueprint $table) {

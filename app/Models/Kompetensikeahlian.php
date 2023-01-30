@@ -15,5 +15,5 @@ class Kompetensikeahlian extends Model
     {
         return $this->hasMany(Kelas::class, 'kompetensikeahlian_id', 'id');
     } 
-
+    
 }
