@@ -90,4 +90,5 @@ class UserSeeder extends Seeder
             User::create($user);
         });
     }
+
 }

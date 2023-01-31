@@ -11,6 +11,8 @@ class Kompetensikeahlian extends Model
 
     protected $guarded = ['id'];
 
+    // protected $with = ['kompetensikeahlian'];
+
     public function kelas() //relasi
     {
         return $this->hasMany(Kelas::class, 'kompetensikeahlian_id', 'id');
