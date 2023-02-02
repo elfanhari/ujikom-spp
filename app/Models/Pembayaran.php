@@ -11,6 +11,8 @@ class Pembayaran extends Model
 
     protected $guarded = ['id'];
 
+    // protected $with = ['user']; // Mengurangi N+1 Problem
+
     public function userPetugas() //relasiInverse
     {
         return $this->belongsTo(User::class, 'petugas_id', 'id');

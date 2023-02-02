@@ -11,6 +11,8 @@ class Kelas extends Model
     
     protected $guarded = ['id'];
 
+    // protected $with = ['kompetensikeahlian']; // Mengurangi N+1 Problem
+
     public function kompetensikeahlian() // relasiInverse
     {
         return $this->belongsTo(Kompetensikeahlian::class, 'kompetensikeahlian_id', 'id');

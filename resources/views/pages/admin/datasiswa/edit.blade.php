@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h5 class="mb-3 fw-bold text-xs-center">Data Siswa</h5>
+    <h5 class="mb-3 fw-bold text-xs-center poppins">Data Siswa</h5>
 
     <div class="row">
         <div class="col-md-6">

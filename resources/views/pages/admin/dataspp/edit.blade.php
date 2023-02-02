@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h5 class="mb-3 fw-bold text-xs-center">Data SPP</h5>
+    <h5 class="mb-3 fw-bold text-xs-center poppins">Data SPP</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">

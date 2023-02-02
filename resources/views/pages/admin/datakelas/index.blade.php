@@ -1,7 +1,7 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center">Data Kelas</h5>
+    <h5 class="mb-3 fw-bold text-xs-center poppins">Data Kelas</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -44,7 +44,7 @@
                     <p class="m-0 font-weight-bold text-primary">Input Data Kelas</p>
                 </div>
                 <div class="card-body input-group-sm">
-                    <form action="{{ route('kelas.store') }}" method="POST" class="">
+                    <form action="{{ route('kelas.store') }}" method="POST" class="input-group-sm fs-14">
                         @csrf
 
                         @include('pages.admin.datakelas._addform')

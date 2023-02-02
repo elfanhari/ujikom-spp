@@ -12,7 +12,7 @@ class KelasController extends Controller
     public function index()
     {
 
-        $kelas = Kelas::orderBy('id', 'desc');
+        $kelas = Kelas::latest();
 
         if(request('search')) {
             $kelas->where('name', 'like', '%' . request('search') . '%');

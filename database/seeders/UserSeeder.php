@@ -16,10 +16,10 @@ class UserSeeder extends Seeder
     {
         collect([
             [   // 1 - PETUGAS
-                'name' => 'Jamaludin S.Pd.I',
+                'name' => 'Yasrifan S.Kom',
                 'telepon' => '0837427647263',
-                'email' => 'jamaludin@gmail.com',
-                'username' => 'jamaludin',
+                'email' => 'yasrifan@gmail.com',
+                'username' => 'yasrifan',
                 'level' => 'petugas',
                 'password' => bcrypt('petugas'),
             ],

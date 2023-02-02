@@ -6,4 +6,4 @@
 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
     <use xlink:href="#check-circle-fill"/>
 </svg>
-<button type="button" class="pb-3 btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+@include('_closebutton')

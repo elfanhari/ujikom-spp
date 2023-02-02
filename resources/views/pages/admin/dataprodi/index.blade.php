@@ -1,7 +1,7 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center">Data Kompetensi Keahlian</h5>
+    <h5 class="mb-3 fw-bold text-xs-center poppins">Data Kompetensi Keahlian</h5>
 
 
 
@@ -70,7 +70,7 @@
                             <div class="input-group mb-3 mt-0">
                                 <input type="text" name="search" id="search"
                                     class="form-control bg-light border-0 small" placeholder="Cari..." aria-label="Search"
-                                    aria-describedby="basic-addon2" value="{{ request('search') }}">
+                                    aria-describedby="basic-addon2" value="{{ old('search', request('search')) }}">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fas fa-search fa-sm"></i>

@@ -1,6 +1,6 @@
 
-<label for="name" class="mt-3">name</label>
-<input type="text" value="{{ old('name', $siswa->name) }}" name="name" id="name" class="text-black input-sm form form-control mt-0  @error('name') is-invalid @enderror" placeholder="Masukkan name SPP">
+<label for="name" class="mt-3">Nama Siswa</label>
+<input type="text" value="{{ old('name', $siswa->name) }}" name="name" id="name" class="text-black input-sm form form-control mt-0  @error('name') is-invalid @enderror" placeholder="Masukkan nama iswa">
 @error('name')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
@@ -27,38 +27,38 @@
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="nisn" class="mt-3">nisn</label>
-<input type="text" value="{{ old('nisn', $siswa->nisn) }}" name="nisn" id="nisn" class="text-black input-sm form form-control mt-0  @error('nisn') is-invalid @enderror" placeholder="Masukkan nisn SPP">
+<label for="nisn" class="mt-3">NISN</label>
+<input type="text" value="{{ old('nisn', $siswa->nisn) }}" name="nisn" id="nisn" class="text-black input-sm form form-control mt-0  @error('nisn') is-invalid @enderror" placeholder="Masukkan nisn siswa">
 @error('nisn')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="nis" class="mt-3">nis</label>
-<input type="text" value="{{ old('nis', $siswa->nis) }}" name="nis" id="nis" class="text-black input-sm form form-control mt-0  @error('nis') is-invalid @enderror" placeholder="Masukkan nis SPP">
+<label for="nis" class="mt-3">NIS</label>
+<input type="text" value="{{ old('nis', $siswa->nis) }}" name="nis" id="nis" class="text-black input-sm form form-control mt-0  @error('nis') is-invalid @enderror" placeholder="Masukkan nis siswa">
 @error('nis')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="telepon" class="mt-3">telepon</label>
-<input type="text" value="{{ old('telepon', $siswa->telepon) }}" name="telepon" id="telepon" class="text-black input-sm form form-control mt-0  @error('telepon') is-invalid @enderror" placeholder="Masukkan telepon SPP">
+<label for="telepon" class="mt-3">Telepon</label>
+<input type="text" value="{{ old('telepon', $siswa->telepon) }}" name="telepon" id="telepon" class="text-black input-sm form form-control mt-0  @error('telepon') is-invalid @enderror" placeholder="Masukkan telepon siswa">
 @error('telepon')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="alamat" class="mt-3">alamat</label>
-<input type="text" value="{{ old('alamat', $siswa->alamat) }}" name="alamat" id="alamat" class="text-black input-sm form form-control mt-0  @error('alamat') is-invalid @enderror" placeholder="Masukkan alamat SPP">
+<label for="alamat" class="mt-3">Alamat</label>
+<input type="text" value="{{ old('alamat', $siswa->alamat) }}" name="alamat" id="alamat" class="text-black input-sm form form-control mt-0  @error('alamat') is-invalid @enderror" placeholder="Masukkan alamat siswa">
 @error('alamat')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="email" class="mt-3">email</label>
-<input type="text" value="{{ old('email', $siswa->email) }}" name="email" id="email" class="text-black input-sm form form-control mt-0  @error('email') is-invalid @enderror" placeholder="Masukkan email SPP">
+<label for="email" class="mt-3">Email</label>
+<input type="text" value="{{ old('email', $siswa->email) }}" name="email" id="email" class="text-black input-sm form form-control mt-0  @error('email') is-invalid @enderror" placeholder="Masukkan email siswa">
 @error('email')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="username" class="mt-3">username</label>
-<input type="text" value="{{ old('username', $siswa->username) }}" name="username" id="username" class="text-black input-sm form form-control mt-0  @error('username') is-invalid @enderror" placeholder="Masukkan username SPP">
+<label for="username" class="mt-3">Username</label>
+<input type="text" value="{{ old('username', $siswa->username) }}" name="username" id="username" class="text-black input-sm form form-control mt-0  @error('username') is-invalid @enderror" placeholder="Masukkan username siswa">
 @error('username')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror

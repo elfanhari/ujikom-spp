@@ -1,7 +1,7 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center">Data siswa</h5>
+    <h5 class="mb-3 fw-bold text-xs-center poppins">Data siswa</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,7 +26,7 @@
                     <p class="m-0 font-weight-bold text-primary">Input Data Siswa</p>
                 </div>
                 <div class="card-body input-group-sm">
-                    <form action="{{ route('siswa.store') }}" method="POST" class="">
+                    <form action="{{ route('siswa.store') }}" method="POST" class="input-group-sm fs-14">
                         @csrf
 
                         @include('pages.admin.datasiswa._addform')
@@ -65,11 +65,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Nama Siswa</th>
                                         <th scope="col">NISN</th>
-                                        <th scope="col">NIS</th>
                                         <th scope="col">Kelas</th>
-                                        <th scope="col">Tahun SPP</th>
-                                        <th scope="col">Telepon</th>
-                                        <th scope="col">Alamat</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
@@ -81,15 +77,18 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->name }}</td>
                                             <td>{{ $tampilkan->nisn }}</td>
-                                            <td>{{ $tampilkan->nis }}</td>
                                             <td>{{ $tampilkan->kelas->name }}</td>
-                                            <td>{{ $tampilkan->spp->tahun }}</td>
-                                            <td>{{ $tampilkan->telepon }}</td>
-                                            <td>{{ $tampilkan->alamat }}</td>
                                             <td>{{ $tampilkan->email }}</td>
                                             <td class="">
 
-                                                <a href="{{ route('siswa.edit', $tampilkan->id) }}" type="button"
+                                                <a href="{{ route('siswa.show', $tampilkan) }}" type="button" class="btn btn-success pb-1 pt-0 px-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                    </svg>
+                                                </a>
+
+                                                <a href="{{ route('siswa.edit', $tampilkan) }}" type="button"
                                                     class=" btn btn-primary pb-1 pt-0 px-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
