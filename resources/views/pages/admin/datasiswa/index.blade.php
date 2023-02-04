@@ -99,7 +99,7 @@
                                                     </svg>
                                                 </a>
 
-                                                <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                                                <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2 d-inline" data-bs-toggle="modal" data-bs-target="#modalDelete">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor"
                                                         class="bi bi-trash3-fill pt-0" viewBox="0 0 16 16">

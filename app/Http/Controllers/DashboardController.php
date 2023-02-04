@@ -22,7 +22,7 @@ class DashboardController extends Controller
         return view('pages.admin.dashboard.index', [
             'prodi'      => Kompetensikeahlian::all(),
             'kelas'      => Kelas::all(),
-            'siswa'      => User::where('level', 'siswa'),
+            'siswa'      => User::with('user')->where('level', 'siswa'),
             'spp'        => Spp::all(),
             'petugas'    => User::where('level', 'petugas')->get(),
             'admin'      => User::where('level', 'admin')->get(),

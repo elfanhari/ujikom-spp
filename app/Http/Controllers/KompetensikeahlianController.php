@@ -51,9 +51,9 @@ class KompetensikeahlianController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(KompetensikeahlianRequest $request, Kompetensikeahlian $prodi)
     {
-        Kompetensikeahlian::find($id)->update($request->all()); 
+        Kompetensikeahlian::find($prodi->id)->update($request->all()); 
         return redirect(route('prodi.index'))->with('info','Data berhasil diperbarui!');
     }
 

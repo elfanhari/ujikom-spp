@@ -27,7 +27,7 @@
                   @csrf
                     @include('pages.admin.entripembayaran._addform')
 
-                    <button class="btn btn-sm btn-primary float-right" type="submit">Simpan</button>
+                    <button class="btn btn-sm mt-3 btn-primary float-right" type="submit">Simpan</button>
                   </form>
               </div>
           </div>

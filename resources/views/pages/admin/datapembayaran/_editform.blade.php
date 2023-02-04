@@ -1,4 +1,15 @@
-<label for="tanggalbayar" class="mt-0">Tanggal Bayar</label>
+<label for="siswa_id" class="mb-1 mt-0">Siswa</label>
+<select name="siswa_id" id="siswa_id" class="text-black form form-control form-select mt-0   @error('siswa_id') is-invalid @enderror" >
+  <option value="" selected disabled>-- Pilih siswa --</option>
+  @foreach ($siswa as $tampilkan)
+    <option value=" {{ $tampilkan->id }} " {{ $tampilkan->id == $pembayaran->siswa_id ? 'selected' : '' }}> {{ $tampilkan->name }}</option>
+  @endforeach
+</select>
+@error('siswa_id')
+  <span class="invalid-feedback mt-1">{{ $message }}</span>
+@enderror
+
+<label for="tanggalbayar" class="mt-3">Tanggal Bayar</label>
 <input type="date" value="{{ old('tanggalbayar', $pembayaran->tanggalbayar) }}" name="tanggalbayar" id="tanggalbayar" class="text-black input-sm form form-control mt-0  @error('tanggalbayar') is-invalid @enderror" placeholder="Masukkan tanggalbayar siswa">
 @error('tanggalbayar')
   <span class="invalid-feedback mt-1">{{ $message }}</span>

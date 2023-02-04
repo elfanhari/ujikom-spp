@@ -8,14 +8,19 @@ use App\Models\Pembayaran;
 use App\Models\Spp;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PembayaranController extends Controller
 {
     
     public function index()
     {
+        $vw_bayar = DB::table('vw_pembayaran');
+        
         return view('pages.admin.datapembayaran.index', [
-            'pembayaran' => Pembayaran::with(['userSiswa', 'userPetugas'])->get(),
+            'pembayaran' => Pembayaran::with(['userSiswa', 'userPetugas'])->latest()->get(),
+            // 'pembayaran' => $vw_bayar->get()
         ]);
     }
 
@@ -23,7 +28,7 @@ class PembayaranController extends Controller
     public function create()
     {
         return view('pages.admin.entripembayaran.create', [
-            'siswa' => User::with('kelas')->whereLevel('siswa')->get(),
+            'siswa' => User::with(['kelas'])->whereLevel('siswa')->get(),
             'spp' => Spp::all(),
             'kelas' => Kelas::all()
         ]);
@@ -49,7 +54,7 @@ class PembayaranController extends Controller
     {
         return view('pages.admin.datapembayaran.edit', [
             'pembayaran' => $pembayaran,
-            'siswa' => User::whereLevel('siswa'),
+            'siswa' => User::whereLevel('siswa')->get(),
         ]);
     }
 
@@ -58,6 +63,7 @@ class PembayaranController extends Controller
     {
         Pembayaran::find($pembayaran->id)->update($request->all());
         return redirect(route('pembayaran.index'))->with('info', 'Data berhasil diubah!');
+        // return route('index');
     }
 
     

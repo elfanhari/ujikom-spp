@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class LaporanController extends Controller
 {
@@ -12,9 +16,22 @@ class LaporanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('pages.admin.laporan.index');
+    public function index(Request $request)
+    {   
+        $daritanggal = $request->daritanggal;
+        $sampaitanggal = $request->sampaitanggal;
+        $petugas_id = $request->petugas_id;
+
+        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->latest()->get();
+
+        if(request('daritanggal')){
+            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->where('petugas_id', $petugas_id)->latest()->get();
+        }
+
+        return view('pages.admin.laporan.index', [
+            'pembayaran' => $pembayaran,
+            'petugas' => User::where('level', 'petugas')->orWhere('level', 'admin')->get(),
+        ]);
         
     }
 
@@ -36,7 +53,13 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $daritanggal = $request->daritanggal;
+        $sampaitanggal = $request->sampaitanggal;
+        $pick = Pembayaran::whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->get();
+        dd($pick->count());
+        return route('laporan.show', [
+            'pick' => $pick
+        ]);
     }
 
     /**

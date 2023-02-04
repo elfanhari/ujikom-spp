@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('/prodi', KompetensikeahlianController::class); // ADMIN - Kompetensi Keahlian
     
         Route::name('kelas.')->group(function() {   // ADMIN - Data Kelas | Prefix Route Name
-            Route::get('/kelas', [KelasController::class, 'index'])->name('index');
+            Route::get('/kelas', [KelasController::class, 'index'])->name('index'); //name('kelas.index'), etc..
             Route::post('/kelas', [KelasController::class, 'store'])->name('store');
             Route::get('/kelas/{kelas}/edit', [KelasController::class, 'edit'])->name('edit');
             Route::put('/kelas/{kelas}', [KelasController::class, 'update'])->name('update');
@@ -72,11 +72,12 @@ Route::group(['middleware' => ['auth']], function(){
         
         Route::get('entri', [PembayaranController::class, 'create'])->name('entri.create');
 
-        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-
         Route::resource('/history', HistoryController::class);
-
+        
         Route::resource('/laporan', LaporanController::class);
+
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('admin.update.profile');
 
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });

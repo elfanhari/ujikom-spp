@@ -4,14 +4,16 @@
 
     <h5 class="mb-3 fw-bold text-xs-center poppins">Data Pembayaran</h5>
 
-    <div class="row">
+    <div class="row mb-3">
       
       <div class="col-md-6">
 
         <div class="card">
             <div class="card-header">
                 <p class="m-0 d-inline font-weight-bold text-primary">Detail Pembayaran</p>
-                <a href="{{ route('pembayaran.edit', $pembayaran) }}" class="float-right">Edit pembayaran</a>
+                @can('admin')
+                  <a href="{{ route('pembayaran.edit', $pembayaran) }}" class="float-right">Edit pembayaran</a>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -54,8 +56,7 @@
                           <tr class="border-bottom">
                             <td>Nominal SPP</td>
                             <td style="width: 1px;">:</td>
-                            <td>{{ $pembayaran->userSiswa->spp->nominal }}</td>
-                          </tr>
+                            <td>Rp{{ number_format($pembayaran->userSiswa->spp->nominal, 0, '.', '.') }}</td>                          </tr>
                     </table>
                 </div>
             </div>
@@ -67,7 +68,9 @@
         <div class="card">
             <div class="card-header">
                 <p class="m-0 d-inline font-weight-bold text-primary">Detail Siswa</p>
-                <a href="{{ route('siswa.edit', $pembayaran->userSiswa->username) }}" class="float-right">Edit siswa</a>
+                @can('admin')
+                  <a href="{{ route('siswa.edit', $pembayaran->userSiswa->username) }}" class="float-right">Edit siswa</a>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive">

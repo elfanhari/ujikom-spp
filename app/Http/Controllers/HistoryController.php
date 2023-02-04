@@ -11,7 +11,8 @@ class HistoryController extends Controller
     public function index()
     {
         return view('pages.admin.history.index', [
-            'pembayaran' => Pembayaran::all()
+            'my' => Pembayaran::with(['userSiswa', 'userPetugas'])->where('petugas_id', auth()->user()->id)->get(),
+            'all' => Pembayaran::with(['userSiswa', 'userPetugas'])->get()
         ]);
     }
 

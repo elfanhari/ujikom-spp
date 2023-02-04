@@ -163,7 +163,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Apakah anda yakin.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <form action="{{ route('logout') }}" method="POST">
@@ -176,6 +176,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script src="/bootstrap/js/popper.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/sb-admin/vendor/jquery/jquery.min.js"></script>
     <script src="/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -192,6 +193,24 @@
     <!-- Page level custom scripts -->
     <script src="/sb-admin/js/demo/chart-area-demo.js"></script>
     <script src="/sb-admin/js/demo/chart-pie-demo.js"></script>
+
+    <script>
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
+    
+    <script>
+        var exampleEl = document.getElementById('example')
+        var popover = new bootstrap.Popover(exampleEl, options)
+    </script>
+
+    <script>
+        var popover = new bootstrap.Popover(document.querySelector('.popover-dismiss'), {
+            trigger: 'focus'
+        })
+    </script>
 
 </body>
 

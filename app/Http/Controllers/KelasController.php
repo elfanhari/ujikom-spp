@@ -20,7 +20,7 @@ class KelasController extends Controller
 
         return view('pages.admin.datakelas.index', [
             'kelas' => $kelas->get(),
-            'prodi' => Kompetensikeahlian::all()
+            'prodi' => Kompetensikeahlian::get()
         ]);
     }
     
@@ -29,6 +29,7 @@ class KelasController extends Controller
         Kelas::create($request->all());
         return redirect(route('kelas.index'))->with('info', 'Data berhasil ditambahkan!');
     }
+
     public function edit(Kelas $kelas)
     {
         return view('pages.admin.datakelas.edit', [
@@ -36,11 +37,13 @@ class KelasController extends Controller
             'kompetensikeahlian' => Kompetensikeahlian::all()
         ]); 
     }
+
     public function update(KelasRequest $request, $id)
     {
         Kelas::find($id)->update($request->all());
         return redirect(route('kelas.index'))->with('info', 'Data berhasil diubah!');
     }
+    
     public function destroy($id)
     {
         Kelas::find($id)->delete();

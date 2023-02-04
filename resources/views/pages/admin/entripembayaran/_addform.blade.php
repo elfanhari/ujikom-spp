@@ -9,29 +9,6 @@
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="kelas_id" class="mb-1 mt-3">Kelas</label>
-<select name="kelas_id" id="kelas_id" value="{{ old('kelas_id') }}" class="text-black form form-control form-select mt-0  @error('kelas_id') is-invalid @enderror" >
-  <option value="" selected disabled>-- Pilih Kelas --</option>
-  @foreach ($kelas as $tampilkan)
-    <option value="{{ $tampilkan->id }}">{{ $tampilkan->name }}</option>
-  @endforeach
-</select>
-@error('kelas_id')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
-
-<label for="spp_id" class="mb-1 mt-3">Tahun SPP</label>
-<select name="spp_id" id="spp_id" value="{{ old('spp_id') }}" class="text-black form form-control form-select mt-0   @error('spp_id') is-invalid @enderror" >
-  <option value="" selected disabled>-- Pilih tahun SPP --</option>
-  @foreach ($spp as $tampilkan)
-    <option value="{{ $tampilkan->id }}">{{ $tampilkan->tahun }}</option>
-  @endforeach
-</select>
-@error('spp_id')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
-
-
 <label for="tanggalbayar" class="mt-3">Tanggal Bayar</label>
 <input type="date" value="{{ old('tanggalbayar') }}" name="tanggalbayar" id="tanggalbayar" class="text-black input-sm form form-control mt-0  @error('tanggalbayar') is-invalid @enderror" placeholder="Masukkan nomor tanggalbayar siswa">
 @error('tanggalbayar')

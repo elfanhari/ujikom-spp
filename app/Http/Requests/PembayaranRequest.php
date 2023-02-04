@@ -20,7 +20,7 @@ class PembayaranRequest extends FormRequest
             'siswa_id' => ['required', 'numeric'],
             'tanggalbayar' => ['required', 'date'],
             'bulanbayar' => ['required'],
-            'tahunbayar' => ['required'],
+            'tahunbayar' => ['required', 'numeric'],
             'jumlahbayar' => ['required', 'numeric'],
         ];
     }

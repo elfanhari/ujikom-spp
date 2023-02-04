@@ -45,6 +45,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // protected $with = ['kelas', 'spp'];
+
     public function pembayaranPetugas() //relasi
     {
         return $this->hasMany(Pembayaran::class, 'petugas_id', 'id');
