@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PetugasRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class PetugasRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->user();
     }
 
     /**
@@ -24,15 +24,13 @@ class PetugasRequest extends FormRequest
      */
     public function rules()
     {
-        $unique = Rule::unique('users')->ignore($this->petuga); // Pengeculian Unique Saat Update
+        $unique = Rule::unique('users')->ignore(auth()->user()->id); // Pengeculian Unique Saat Update
 
         return [
             'name'      => ['required'],
-            'level'     => ['required'],
             'telepon'   => ['required', 'numeric'],
             'email'     => ['required', 'email', $unique],
             'username'  => ['required', 'min:8', 'max:20', $unique],
-            'password'  => ['required', 'min:8'],
         ];
     }
 }

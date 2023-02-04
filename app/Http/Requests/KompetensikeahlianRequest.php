@@ -27,7 +27,7 @@ class KompetensikeahlianRequest extends FormRequest
         $unique = Rule::unique('kompetensikeahlians')->ignore($this->prodi); // Pengeculian Unique Saat Update
 
         return [
-            'name' => ['required', 'string', $unique],
+            'name'      => ['required', 'string', $unique],
             'singkatan' => ['required', 'string', $unique],
         ];
     }

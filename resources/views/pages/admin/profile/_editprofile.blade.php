@@ -37,7 +37,3 @@
       <span class="invalid-feedback mt-1">{{ $message }}</span>
   @enderror
 </div>
-
-<input type="hidden" name="petugas_id" value="{{ $user->id }}">
-{{-- <input type="hidden" name="password" value="{{ $user->password }}"> --}}
-{{-- <input type="hidden" name="level" value="{{ $user->level }}"> --}}

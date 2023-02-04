@@ -114,7 +114,7 @@ return [
     'starts_with' => 'harus diawali salah satu dari berikut: :values',
     'string'      => 'harus berupa string.',
     'timezone'    => 'harus berisi zona waktu yang valid.',
-    'unique'      => 'sudah ada sebelumnya, silahkan gunakan yang lain.',
+    'unique'      => 'sudah ada, silahkan gunakan yang lain.',
     'uploaded'    => 'gagal diunggah.',
     'url'         => 'Format tidak valid.',
     'uuid'        => 'harus merupakan UUID yang valid.',

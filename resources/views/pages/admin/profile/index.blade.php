@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-primary">Profil Saya</p>
-                    <a href="#" class="float-right fs-14 text-warning">Edit password</a>
+                    <a href="{{ route('password-user.edit') }}" class="float-right fs-14 text-warning">Edit password</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -83,8 +83,9 @@
                 </div>
                 <div class="card-body input-group-sm fs-14">
 
-                    <form action="{{ route('admin.update.profile') }}" method="post">
-                    @csrf
+                    <form action="{{ route('update.profile') }}" method="post">
+                        @method('PUT')
+                        @csrf
                     
                       @include('pages.admin.profile._editprofile')
 

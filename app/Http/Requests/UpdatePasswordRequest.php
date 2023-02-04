@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class SppRequest extends FormRequest
+class UpdatePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +23,9 @@ class SppRequest extends FormRequest
      */
     public function rules()
     {
-        $unique = Rule::unique('spps')->ignore($this->spp); // Pengeculian Unique Saat Update
-
         return [
-            'tahun'   => ['required', 'numeric', $unique],
-            'nominal' => ['required', 'numeric'],
+            'password_sebelumnya' => ['required'],
+            'password'            => ['required', 'min:8', 'confirmed'],
         ];
     }
 }

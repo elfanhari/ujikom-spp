@@ -40,7 +40,7 @@ class SppController extends Controller
 
     public function edit(Spp $spp)
     {
-        return view('pages.admin.datakelas.edit', [
+        return view('pages.admin.dataspp.edit', [
             'spp' => $spp,
         ]);
     }

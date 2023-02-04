@@ -55,11 +55,11 @@
                                     @foreach ($pembayaran as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $tampilkan->user_id }}</td>
-                                            {{-- <td>{{ $tampilkan->userSiswa->kelas->name }}</td> --}}
+                                            <td>{{ $tampilkan->userSiswa->name }}</td>
+                                            <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                             <td> Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                                             <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
-                                            <td>{{ $tampilkan->petugas_id }}</td>
+                                            <td>{{ $tampilkan->userPetugas->name }}</td>
                                             <td class="">
 
                                                 <a href="{{ route('pembayaran.show', $tampilkan->id) }}" type="button" class="btn btn-success pb-1 pt-0 px-2">

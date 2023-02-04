@@ -77,7 +77,9 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('/laporan', LaporanController::class);
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-        Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('admin.update.profile');
+        Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('update.profile');
+        Route::get('/profile/password-edit', [ProfileController::class, 'editPassword'])->name('password-user.edit');
+        Route::put('/profile/password-update', [ProfileController::class, 'updatePassword'])->name('password-user.update');
 
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });

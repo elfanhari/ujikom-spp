@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class KelasRequest extends FormRequest
 {
@@ -30,10 +31,12 @@ class KelasRequest extends FormRequest
     }
 
     public function rules()
-    {
+    {   
+        $unique = Rule::unique('kelas')->ignore($this->kelas); // Pengeculian Unique Saat Update
+
         return [
             'kompetensikeahlian_id' => ['required'],
-            'name' => ['required'],
+            'name'                  => ['required', $unique],
         ];
     }
 
