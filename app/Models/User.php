@@ -66,4 +66,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
     }
+
+    public function userphoto() {
+        return $this->hasOne(Userphoto::class, 'user_id','id');
+    }
 }

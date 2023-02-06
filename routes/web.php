@@ -14,6 +14,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SiswaShowController;
 use App\Http\Controllers\SppController;
+use App\Http\Controllers\UserphotoController;
+use App\Models\Userphoto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -80,6 +82,10 @@ Route::group(['middleware' => ['auth']], function(){
         Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('update.profile');
         Route::get('/profile/password-edit', [ProfileController::class, 'editPassword'])->name('password-user.edit');
         Route::put('/profile/password-update', [ProfileController::class, 'updatePassword'])->name('password-user.update');
+        Route::get('/profile/photo-edit', [UserphotoController::class, 'editPhoto'])->name('photo-user.edit');
+        Route::post('/profile/photo-store', [UserphotoController::class, 'storePhoto'])->name('photo-user.store');
+        Route::put('/profile/photo-update', [UserphotoController::class, 'updatePhoto'])->name('photo-user.update');
+        Route::delete('/profile/photo-delete', [UserphotoController::class, 'deletePhoto'])->name('photo-user.delete');
 
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });

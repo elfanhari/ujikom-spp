@@ -7,6 +7,7 @@ use App\Http\Requests\PetugasRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
+use App\Models\Userphoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,8 @@ class ProfileController extends Controller
     public function index()
     {
         return view('pages.admin.profile.index', [
-            'user' => auth()->user()
+            'user' => auth()->user(),
+            'userphoto' => Userphoto::where('user_id', auth()->user()->id)->get()
         ]);
     }
 
