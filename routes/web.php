@@ -89,16 +89,35 @@ Route::group(['middleware' => ['auth']], function(){
 
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
-    
-Route::prefix('siswa')->group(function () {
 
-    Route::get('/history', function() {
-        return view('pages.siswa.history.index');
+    // SISWA
+    Route::prefix('siswa')->group(function () {
+
+        Route::get('/beranda', function() {
+            if (auth()->user()->level !== 'siswa') { // Pembatasan Akses Selain Admin
+                return view('denied');
+            }
+            return view('pages.siswa.beranda.index');
+        })->name('siswa.beranda');
+
+        Route::get('/transaksi', function() {
+            return view('pages.siswa.transaksi.index');
+        });
+
+        Route::get('/riwayat', function() {
+            return view('pages.siswa.history.index');
+        });
+
+        Route::get('/notifikasi', function() {
+            return view('pages.siswa.notifikasi.index');
+        });
+
+        Route::get('/profile', function() {
+            return view('pages.siswa.profile.index');
+        });
+
     });
-
 });
 
-
-});
 
 

@@ -25,9 +25,9 @@
                                 <div class="text-center postion-relative">
 
                                     @if ($userphoto->count() > 0)
-                                        <img src="/gallery/{{ $userphoto->first()->url }}" class="mb-3 rounded-circle" alt="{{ auth()->user()->name }}" style="width: 100px;">
+                                        <img src="/gallery/{{ $userphoto->first()->url }}" class="img-profile mb-3 rounded-circle" alt="{{ auth()->user()->name }}" style="width: 100px;">
                                     @else
-                                        <img src="/img/profil.png" class="mb-3 rounded-circle" alt="{{ auth()->user()->name }}" style="width: 100px;">
+                                        <img src="/img/profil.png" class="img-profile mb-3 rounded-circle" alt="{{ auth()->user()->name }}" style="width: 100px;">
                                     @endif
 
                                         <a href="{{ route('photo-user.edit') }}" class="position-absolute">Edit</a>

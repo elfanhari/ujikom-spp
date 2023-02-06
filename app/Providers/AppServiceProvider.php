@@ -34,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
             return $user->level === 'petugas';    
         });
 
+        Gate::define('siswa', function(User $user) {
+            return $user->level === 'siswa';    
+        });
 
         // LOCAL TIME
         config(['app.locale' => 'id']);

@@ -17,10 +17,6 @@
 
             <!-- Input XS -->
             <div class="d-sm-none">
-                <button class="btn btn-sm btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse"
-                    aria-expanded="true" aria-controls="collapseExample">
-                    Tambah Kompetensi Keahlian
-                </button>
                 <div class="card mt-2 collapse mb-3 show" id="collapse">
                     <div class="card-header fs-16">
                         <button type="button" class="btn-close float-right d-inline" data-bs-toggle="collapse"
@@ -60,13 +56,17 @@
         <div class="col-md-8 mb-xs-3">
             <div class="card fs-16 mb">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Data Kompetensi Keahlian</p>
+                    <p class="m-0 d-inline font-weight-bold text-primary">Data Prodi</p>
+                    <button class="float-right btn btn-sm btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse"
+                    aria-expanded="true" aria-controls="collapseExample">
+                    + Prodi
+                </button>
                 </div>
                 <div class="card-body">
 
                     @if ($prodi->count() > 0)
                         <form
-                            class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            class="w-xs-full float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group mb-3 mt-0">
                                 <input type="text" name="search" id="search"
                                     class="form-control bg-light border-0 small" placeholder="Cari..." aria-label="Search"

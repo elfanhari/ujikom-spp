@@ -28,7 +28,10 @@ class AuthController extends Controller
             elseif ($level == 'petugas') {
                 return redirect('/admin')->withInfo('Petugas');
             } 
-        else {
+            elseif ($level == 'siswa') {
+                return redirect('/siswa/beranda')->withInfo('Siswa');
+            } 
+            else {
                 Auth::logout(); //Hapus Session
                 return back()->with('info', 'Email atau password salah!');
             }

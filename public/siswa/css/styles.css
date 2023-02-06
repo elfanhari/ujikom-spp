@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('./component/sidebar.css');
+@import url('./component/content.css');
+@import url('./component/card-product.css');
+@import url('./component/card-store.css');
+@import url('./variable.css');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 0 !important;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.vertical-line {
+  border-right: 1px solid #ededed;
+}
+
+.fa-close,
+.fa-bars {
+  color: var(--navy);
+}
+
+.button {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 12px;
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-scroll-content);
+}
+
+@media (min-width: 992px) {
+  .content {
+    margin-left: 374px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 32px 16px;
+  }
+}
+
+@media (max-width: 501px) {
+  .product-card > img,
+  .store-card > img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1196px) {
+  .search-wrapper {
+    width: 100%;
+  }
+}
+
+@media (max-width: 822px) {
+  .search-wrapper {
+    width: 100%;
+  }
+}
+
+/* Dark Theme */
+
+.dark {
+  --color-scroll-sidebar: #292a2b;
+  --color-scroll-content: #292a2b;
+}
+
+body.dark,
+.dark .offcanvas-lg,
+.dark .product-card,
+.dark .store-card {
+  background-color: #181a1b;
+}
+
+.dark .content {
+  background-color: #1b1d1e;
+}
+
+.dark .title-store,
+.dark .section-menu > p,
+.dark .label-mode,
+.dark .title-content,
+.dark .title-section-content,
+.dark .title-detail,
+.dark .section-detail > h6 {
+  color: #d1cdc7;
+}
+
+.dark .tagline-store,
+.dark .item-menu,
+.dark .label-mode,
+.dark .section-detail > p,
+.dark .fa-close,
+.dark .fa-bars {
+  color: #9e9e9e;
+}
+
+.dark .item-menu.active {
+  color: var(--blue-primary);
+  background: linear-gradient(
+    90deg,
+    rgb(27, 30, 31) 0%,
+    rgba(36, 39, 41, 0) 100%
+  );
+}
+
+.dark .circle-notif {
+  background-color: #1e2122;
+}
+
+.dark .search-bar > input,
+.dark .btn-setting {
+  background: #181a1b;
+  color: #d1cdc7;
+}
+
+.dark .store-detail {
+  background-color: #1a1c1e;
+}
+
+/* End Dark Mode */

@@ -11,7 +11,7 @@
     @endif
 
     <div class="row">
-        <div class="col-md-5 d-xs">
+        <div class="col-md-5">
 
             <!-- Input XS -->
 

@@ -28,7 +28,15 @@
             {{-- @if (Route::has('login')) --}}
                 <div class="fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        @can('admin')
+                            <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        @endcan
+                        @can('petugas')
+                            <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        @endcan
+                        @can('siswa')
+                            <a href="{{ route('siswa.beranda') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        @endcan
                     @else
                         <a href="{{ route('loginadmin.page') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
                     @endauth

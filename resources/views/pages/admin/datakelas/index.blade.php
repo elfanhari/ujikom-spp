@@ -15,27 +15,26 @@
 
             <!-- Input XS -->
             <div class="d-sm-none">
-                <button class="btn btn-sm btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse"
-                    aria-expanded="true" aria-controls="collapseExample">
-                    Tambah Kelas
-                </button>
-                <div class="card mt-2 collapse mb-3 show" id="collapse">
+                
+                    
+                <div class="card mt-2 collapse show mb-3" id="collapse">
                     <div class="card-header fs-16">
                         <button type="button" class="btn-close float-right d-inline" data-bs-toggle="collapse"
                             data-bs-target="#collapse" aria-expanded="false" aria-controls="collapseExample"></button>
-                        <p class="m-0 font-weight-bold text-primary">Input Data Kelas</p>
-                    </div>
+                            <p class="m-0 font-weight-bold text-primary">Input Data Kelas</p>
+                        </div>
                     <div class="card-body input-group-sm">
                         <form action="{{ route('kelas.store') }}" method="POST">
                             @csrf
-
+                            
                             @include('pages.admin.datakelas._addform')
-
-                            <button class="btn btn-sm btn-primary float-right mt-3">Simpan</button>
-
+                            
+                            <button class="btn btn-sm btn-success float-right mt-3 ">Simpan</button>
+                            
                         </form>
                     </div>
                 </div>
+               
             </div>
 
             <!-- Input MD -->
@@ -58,14 +57,18 @@
         <div class="col-md-8 mb-xs-3">
             <div class="card fs-16 mb">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Data Kelas</p>
+                    <p class="m-0 d-inline font-weight-bold text-primary mt-3">Data Kelas</p>
+                    <button class="btn btn-sm btn-primary float-right d-sm-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapse"
+                    aria-expanded="true" aria-controls="collapseExample">
+                    + Kelas
+                </button>
                 </div>
                 <div class="card-body">
 
                     @if ($kelas->count() > 0)
                         <form
-                            class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group mb-3 mt-0">
+                            class="w-xs-full float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group mb-3 mt-0 ">
                                 <input type="text" name="search" id="search"
                                     class="form-control bg-light border-0 small" placeholder="Cari..." aria-label="Search"
                                     aria-describedby="basic-addon2" value="{{ request('search') }}">
