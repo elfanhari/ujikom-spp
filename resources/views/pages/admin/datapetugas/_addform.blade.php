@@ -2,7 +2,7 @@
 <label for="name" class="mt-2">Nama Petugas</label>
 <input type="text" value="{{ old('name') }}" name="name" id="name" class="text-black input-sm form form-control mt-0  @error('name') is-invalid @enderror" placeholder="Masukkan nama siswa">
 @error('name')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
+<span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
 <label for="telepon" class="mt-3">Telepon</label>

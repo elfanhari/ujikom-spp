@@ -11,6 +11,10 @@ class KompetensikeahlianController extends Controller
    
     public function index()
     {   
+        if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
+            return view('denied');
+        }
+        
         $prodi = Kompetensikeahlian::latest();
 
         if(request('search')) {

@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');                         //WAJIB
             $table->enum('level', ['admin', 'petugas', 'siswa']);   //WAJIB
             $table->foreignId('kelas_id')->nullable();      // Wajib bagi siswa
+            $table->enum('jk', ['laki-laki', 'perempuan']);   //WAJIB
             $table->foreignId('spp_id')->nullable();        // Wajib bagi siswa
             $table->string('nisn')->unique()->nullable();   // Wajib bagi siswa
             $table->string('nis')->unique()->nullable();    // Wajib bagi siswa

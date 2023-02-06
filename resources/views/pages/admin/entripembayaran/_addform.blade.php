@@ -1,4 +1,4 @@
-<label for="siswa_id" class="mb-1 mt-0">Siswa</label>
+{{-- <label for="siswa_id" class="mb-1 mt-0">Siswa</label>
 <select name="siswa_id" id="siswa_id" value="{{ old('siswa_id') }}" class="text-black form form-control form-select mt-0  @error('siswa_id') is-invalid @enderror" >
   <option value="" selected disabled>-- Pilih siswa --</option>
     @foreach ($siswa as $tampilkan)
@@ -7,7 +7,9 @@
   </select>
 @error('siswa_id')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+@enderror --}}
+
+<input type="hidden" name="siswa_id" value="{{ $siswa[0]->id }}">
 
 <label for="tanggalbayar" class="mt-3">Tanggal Bayar</label>
 <input type="date" value="{{ old('tanggalbayar') }}" name="tanggalbayar" id="tanggalbayar" class="text-black input-sm form form-control mt-0  @error('tanggalbayar') is-invalid @enderror" placeholder="Masukkan nomor tanggalbayar siswa">
@@ -28,7 +30,7 @@
 @enderror
 
 <label for="jumlahbayar" class="mt-3">jumlahbayar</label>
-<input type="text" value="{{ old('jumlahbayar') }}" name="jumlahbayar" id="jumlahbayar" class="text-black input-sm form form-control mt-0  @error('jumlahbayar') is-invalid @enderror" placeholder="Masukkan jumlahbayar siswa">
+<input type="text" id="dengan-rupiah" value="{{ old('jumlahbayar') }}" name="jumlahbayar" class="text-black input-sm form form-control mt-0  @error('jumlahbayar') is-invalid @enderror" placeholder="Masukkan jumlahbayar siswa">
 @error('jumlahbayar')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror

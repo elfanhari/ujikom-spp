@@ -34,7 +34,6 @@
                     </ul>
                     <div class="tab-content" id="tableTabContent">
 
-                        @can('admin')
                             <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                                 <div class="mt-3">
                                     <p class="d-inline text-warning" style="font-size: 16px;">NB: History pembayaran diurutkan
@@ -72,10 +71,10 @@
                                             @foreach ($my as $tampilkan)
                                                 <tr class="border-bottom">
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $tampilkan->created_at }}</td>
+                                                    <td>{{ $tampilkan->created_at->diffForHumans() }}</td>
                                                     <td>{{ $tampilkan->userSiswa->name }}</td>
-                                                    <td>{{ $tampilkan->userSiswa->load('kelas')->kelas->name }}</td>
-                                                     <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
+                                                    <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
+                                                     <td> {{  date('d F Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                                                     <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                                                     <td>{{ $tampilkan->userPetugas->name }}</td>
                                                     <td class="">
@@ -136,7 +135,7 @@
                                             @foreach ($all as $tampilkan)
                                                 <tr class="border-bottom">
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $tampilkan->created_at }}</td>
+                                                    <td>{{ $tampilkan->created_at->diffForHumans() }}</td>
                                                     <td>{{ $tampilkan->userSiswa->name }}</td>
                                                     <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                                      <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
@@ -162,8 +161,6 @@
                                     </table>
                                 </div>
                             </div>
-                        @endcan
-
 
                     </div>
 

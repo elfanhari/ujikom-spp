@@ -22,9 +22,10 @@
                     <div class="table-responsive">
                         <table class="table table-sm table-hover fs-14 c-black">
                             <tr class="border-bottom">
-                                <div class="text-center">
+                                <div class="text-center postion-relative">
                                     <img src="/img/profil.png" class="mb-3 rounded-circle" alt=""
                                         style="width: 100px;">
+                                        <a href="" class="position-absolute">Edit</a>
                                 </div>
                             </tr>
                             <tr class="border-bottom">

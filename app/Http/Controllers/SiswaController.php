@@ -14,6 +14,10 @@ class SiswaController extends Controller
     // Siswa - Index
     public function index()
     {
+        if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
+            return view('denied');
+        }
+
         $siswa = User::with('kelas')->where('level', 'siswa');
 
         if(request('search')) {

@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function gate() // Pembatasan Akses Selain Admin
+    {
+       if (auth()->user()->level !== 'admin') {
+            return view('denied');
+       }
+    }
 }

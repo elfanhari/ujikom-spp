@@ -12,6 +12,13 @@ class Pembayaran extends Model
     protected $guarded = ['id'];
 
     // protected $with = ['user']; // Mengurangi N+1 Problem
+    
+    public function gate()
+    {
+        if(auth()->user()->level !== 'admin'){
+            return view('denied');
+        }
+    }
 
     public function userPetugas() //relasiInverse
     {

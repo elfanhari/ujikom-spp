@@ -11,9 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+use App\Http\Controllers;
+use Illuminate\Support\Facades\Redis;
+
 class PembayaranController extends Controller
-{
-    
+{  
     public function index()
     {
         $vw_bayar = DB::table('vw_pembayaran');
@@ -25,15 +27,16 @@ class PembayaranController extends Controller
     }
 
     
-    public function create()
-    {
+    public function create(Request $request)
+    {   
+        $siswa = User::where('nisn', $request->nisn);
+        
         return view('pages.admin.entripembayaran.create', [
-            'siswa' => User::with(['kelas'])->whereLevel('siswa')->get(),
+            'siswa' => $siswa->get(),
             'spp' => Spp::all(),
             'kelas' => Kelas::all()
         ]);
     }
-
     
     public function store(PembayaranRequest $request)
     {
@@ -52,6 +55,10 @@ class PembayaranController extends Controller
     
     public function edit(Pembayaran $pembayaran)
     {
+        if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
+            return view('denied');
+        }
+
         return view('pages.admin.datapembayaran.edit', [
             'pembayaran' => $pembayaran,
             'siswa' => User::whereLevel('siswa')->get(),

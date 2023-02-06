@@ -84,6 +84,15 @@ Route::group(['middleware' => ['auth']], function(){
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
     
+Route::prefix('siswa')->group(function () {
+
+    Route::get('/history', function() {
+        return view('pages.siswa.history.index');
+    });
+
+});
+
+
 });
 
 
