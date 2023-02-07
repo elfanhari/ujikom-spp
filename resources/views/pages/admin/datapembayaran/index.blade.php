@@ -1,7 +1,8 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center poppins">Data Pembayaran</h5>
+    <h5 class="mb-3 fw-bold text-xs-center text-black poppins
+    ">Data Pembayaran</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">

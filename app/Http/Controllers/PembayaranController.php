@@ -21,7 +21,7 @@ class PembayaranController extends Controller
         $vw_bayar = DB::table('vw_pembayaran');
         
         return view('pages.admin.datapembayaran.index', [
-            'pembayaran' => Pembayaran::with(['userSiswa', 'userPetugas'])->latest()->get(),
+            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa'])->latest()->get(),
             // 'pembayaran' => $vw_bayar->get()
         ]);
     }

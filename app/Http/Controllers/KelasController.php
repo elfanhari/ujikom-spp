@@ -11,6 +11,9 @@ class KelasController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
+            return view('denied');
+        }
 
         $kelas = Kelas::latest();
 

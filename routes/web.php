@@ -15,6 +15,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SiswaShowController;
 use App\Http\Controllers\SppController;
 use App\Http\Controllers\UserphotoController;
+use App\Models\Pembayaran;
 use App\Models\Userphoto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -105,7 +106,9 @@ Route::group(['middleware' => ['auth']], function(){
         });
 
         Route::get('/riwayat', function() {
-            return view('pages.siswa.history.index');
+            return view('pages.siswa.history.index', [
+                'transaksi' => Pembayaran::where('siswa_id', auth()->user()->id)->get()
+            ]);
         });
 
         Route::get('/notifikasi', function() {

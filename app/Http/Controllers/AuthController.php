@@ -9,6 +9,7 @@ class AuthController extends Controller
 {
     public function pageLoginAdmin()
     {
+        
         return view('pages.auth.admin.login');
     }   
 

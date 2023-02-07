@@ -15,7 +15,6 @@ class UserphotoController extends Controller
         return view('pages.admin.profile.editphoto', [
             'user' => User::where('id', auth()->user()->id)->first(),
             'userphoto' => Userphoto::where('user_id', auth()->user()->id)->get(),
-            DB
         ]);
     }
 
@@ -23,7 +22,6 @@ class UserphotoController extends Controller
     {   
         $files = $request->file('files');
         if ($request->hasFile('files')) {
-            // foreach ($files as $file) {
             $filenameWithExtension      = $request->file('files')->getClientOriginalExtension();
             $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
             $extension                  = $files->getClientOriginalExtension();
@@ -35,7 +33,6 @@ class UserphotoController extends Controller
                 'url'               => $filenamesimpan,
                 'is_featured'       => 0
             ]);
-            // }
         }
         return redirect(route('profile.index'))->with('info', 'Foto profil anda berhasil ditambahkan!');
     }
