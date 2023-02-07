@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Pembayaran;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class PembayaranSeeder extends Seeder
 {
@@ -14,31 +16,194 @@ class PembayaranSeeder extends Seeder
      */
     public function run()
     {
+        $petugas_id = [1, 2, 3, 4];
+        $siswa_id = [5, 6, 7, 8, 9, 10, 11, 12, 13];
+        $jumlahbayar = [100000, 200000, 300000, 400000];
+
+        $char = 'abcdefghijklmnopqrstuvwxyz1234567890';
+        $rand = substr(str_shuffle($char), 0, 9);
+
         collect([
             [   //1
-                'petugas_id' => '1',
-                'siswa_id' => '5',
-                'tanggalbayar' => '2023-01-01',
-                'bulanbayar' => 'Januari',
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
                 'tahunbayar' => '2023',
-                'jumlahbayar' => '200000',
-            ],
-            [   //2
-                'petugas_id' => '1',
-                'siswa_id' => '6',
-                'tanggalbayar' => '2023-01-01',
-                'bulanbayar' => 'Januari',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
                 'tahunbayar' => '2023',
-                'jumlahbayar' => '300000',
-            ],
-            [   //3
-                'petugas_id' => '3',
-                'siswa_id' => '7',
-                'tanggalbayar' => '2022-12-01',
-                'bulanbayar' => 'Desember',
-                'tahunbayar' => '2022',
-                'jumlahbayar' => '180000',
-            ],
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
+            [   //1
+                'petugas_id' => Arr::random($petugas_id),
+                'siswa_id' => Arr::random($siswa_id),
+                'tanggalbayar' => '2023-02-08',
+                'bulanbayar' => 'Februari',
+                'tahunbayar' => '2023',
+                'jumlahbayar' => Arr::random($jumlahbayar),
+                'identifier' => 'i' . Str::random(9),
+            ],  
         ])->each(function($pembayaran){
             Pembayaran::create($pembayaran);
         });

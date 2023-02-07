@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('identifier')->unique()->nullable();               
             $table->string('name');                         //WAJIB
             $table->enum('level', ['admin', 'petugas', 'siswa']);   //WAJIB
             $table->foreignId('kelas_id')->nullable();      // Wajib bagi siswa
@@ -28,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();           //WAJIB
             $table->timestamp('email_verified_at')->nullable();
             $table->text('password');   //WAJIB
+            $table->enum('spp_status', ['lunas', 'belumlunas'])->nullable();   //WAJIB
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

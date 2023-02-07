@@ -23,22 +23,61 @@
                 </div>
                 <div class="fs-14 card-body input-group-sm">
 
-                    <form action="" method="GET">
+                    {{-- <form action="" method="GET">
                         <div class="input-group">
                             <input type="text" name="nisn" value="{{ request('nisn') }}" class="form-control"
                                 placeholder="Masukkan NISN" aria-label="Recipient's username with two button addons"
                                 required>
                             <button class="btn btn-outline-primary" type="submit">Cek</button>
                         </div>
+                    </form> --}}
+
+                    <form action="" method="GET" class="{{ request('siswa_id') ? 'd-none' : '' }}">
+                        <div class="input-group">
+                            <select name="kelas_id" id="kelas_id" value="{{ old('kelas_id') }}"
+                                class="text-black disabled form form-control form-select mt-0  @error('kelas_id') is-invalid @enderror">
+                                <option value="" selected disabled>-- Pilih kelas --</option>
+                                @foreach ($kelas as $tampilkan)
+                                    <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == request('kelas_id') ? 'selected' : '' }}>{{ $tampilkan->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('kelas_id')
+                                <span class="invalid-feedback mt-1">{{ $message }}</span>
+                            @enderror
+                            <button class="btn btn-outline-primary" type="submit">Cek</button>
+                        </div>
                     </form>
 
-                    <form action="{{ route('pembayaran.store') }}" method="POST" class="input-group-sm">
+                    @if ($siswa->count()>0)
+                       <form action="" method="get" class="{{ !request('kelas_id') ? 'd-none' : '' }}">
+                        <div class="input-group mt-3">
+                            <select name="siswa_id" id="siswa_id" value="{{ old('siswa_id') }}"
+                                class="text-black form form-control form-select mt-0  @error('siswa_id') is-invalid @enderror">
+                                <option value="" selected disabled>-- Pilih siswa --</option>
+                                @foreach ($siswa as $tampilkan)
+                                    <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == request('siswa_id') ? 'selected' : '' }}>{{ $tampilkan->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('siswa_id')
+                                <span class="invalid-feedback mt-1">{{ $message }}</span>
+                            @enderror
+                            <button class="btn btn-outline-primary" type="submit">Cek</button>
+                        </div>
+                       </form>
+                    @else
+                       <p class="mt-3">Siswa tidak ada.</p>
+                    @endif
 
-                        @csrf
-                        @include('pages.admin.entripembayaran._addform')
+                    @if ($siswaCek->count() > 0)
+                        <form action="{{ route('pembayaran.store') }}" method="POST" class="input-group-sm">
 
-                        <button class="btn btn-sm mt-3 btn-primary float-right" type="submit">Simpan</button>
-                    </form>
+                            @csrf
+                            @include('pages.admin.entripembayaran._addform')
+
+                            <button class="btn btn-sm mt-3 btn-primary float-right" type="submit">Simpan</button>
+                        </form>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -48,8 +87,8 @@
                     <p class="m-0 d-inline font-weight-bold text-primary">Detail Siswa</p>
                 </div>
                 <div class="card-body">
-                    @if (request('nisn'))
-                        @foreach ($siswa as $tampilkan)
+                    @if ($siswaCek->count() > 0)
+                        @foreach ($siswaCek as $tampilkan)
                             <div class="table-responsive">
                                 <table class="table table-sm table-hover fs-14 c-black">
                                     <tr class="border-bottom">
@@ -96,7 +135,7 @@
                                 </table>
                             </div>
                         @endforeach
-                    @elseif($siswa->count() > 1)
+                    @else
                         Data tidak ditemukan.
                 </div>
             </div>

@@ -21,7 +21,7 @@ class PembayaranController extends Controller
         $vw_bayar = DB::table('vw_pembayaran');
         
         return view('pages.admin.datapembayaran.index', [
-            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa'])->latest()->get(),
+            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa'])->paginate('10'),
             // 'pembayaran' => $vw_bayar->get()
         ]);
     }
@@ -29,17 +29,19 @@ class PembayaranController extends Controller
     
     public function create(Request $request)
     {   
-        $siswa = User::where('nisn', $request->nisn);
-        
+        $siswa = User::where('kelas_id', $request->kelas_id);
+        $siswaCek = User::where('id', $request->siswa_id);
         return view('pages.admin.entripembayaran.create', [
+            'kelas' => Kelas::all(),
             'siswa' => $siswa->get(),
+            'siswaCek' => $siswaCek->get(),
             'spp' => Spp::all(),
             'kelas' => Kelas::all()
         ]);
     }
     
     public function store(PembayaranRequest $request)
-    {
+    {   
         Pembayaran::create($request->all());
         return redirect(route('pembayaran.index'))->with('info', 'Data berhasil ditambahkan!');
     }

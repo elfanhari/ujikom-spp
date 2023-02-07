@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -14,9 +15,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $char = 'abcdefghijklmnopqrstuvwxyz1234567890';
+        $rand = substr(str_shuffle($char), 0, 9);
+
         collect([
             [   // 1 - PETUGAS
                 'name' => 'Yasrifan S.Kom',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'laki-laki',
                 'telepon' => '0837427647263',
                 'email' => 'yasrifan@gmail.com',
                 'username' => 'yasrifan',
@@ -25,6 +31,8 @@ class UserSeeder extends Seeder
             ],
             [   // 2 - PETUGAS
                 'name' => 'Dian Nugraha, S.Pd',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'laki-laki',
                 'telepon' => '085878434176',
                 'email' => 'dian@gmail.com',
                 'username' => 'dian',
@@ -33,6 +41,8 @@ class UserSeeder extends Seeder
             ],
             [   // 3 - ADMIN
                 'name' => 'Maman Suparman, S.T',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'laki-laki',
                 'telepon' => '087623481434',
                 'email' => 'maman@gmail.com',
                 'username' => 'maman',
@@ -41,6 +51,8 @@ class UserSeeder extends Seeder
             ],
             [   // 4 - ADMIN
                 'name' => 'Wahyu Suryaman, S.T',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'laki-laki',
                 'telepon' => '086273647241',
                 'email' => 'wahyu@gmail.com',
                 'username' => 'wahyu',
@@ -49,6 +61,8 @@ class UserSeeder extends Seeder
             ],
             [   // 5 - SISWA
                 'name' => 'Elfan Hari Saputra',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'laki-laki',
                 'kelas_id' => '1',
                 'spp_id' => '3',
                 'nisn' => '3071526318',
@@ -59,9 +73,12 @@ class UserSeeder extends Seeder
                 'username' => 'elfan',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
             ],
             [   // 6 - SISWA
                 'name' => 'Alfitka Haerul Kurniawan',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'laki-laki',
                 'kelas_id' => '3',
                 'spp_id' => '4',
                 'nisn' => '3071526387',
@@ -72,9 +89,12 @@ class UserSeeder extends Seeder
                 'username' => 'alfitka',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
             ],
             [   // 7 - SISWA
                 'name' => 'Khikmal Kurniawan',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'laki-laki',
                 'kelas_id' => '3',
                 'spp_id' => '4',
                 'nisn' => '3071526312',
@@ -85,9 +105,12 @@ class UserSeeder extends Seeder
                 'username' => 'khikmal',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
             ],
             [   // 8 - SISWA
                 'name' => 'Dwi Utami',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'perempuan',
                 'kelas_id' => '1',
                 'spp_id' => '4',
                 'nisn' => '3071576343',
@@ -98,9 +121,12 @@ class UserSeeder extends Seeder
                 'username' => 'dwi',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
             ],
             [   // 9 - SISWA
                 'name' => 'Intan',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'perempuan',
                 'kelas_id' => '3',
                 'spp_id' => '4',
                 'nisn' => '3781576387',
@@ -111,9 +137,12 @@ class UserSeeder extends Seeder
                 'username' => 'intan',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
             ],
             [   // 10 - SISWA
                 'name' => 'Cantika Aurelia April',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'perempuan',
                 'kelas_id' => '1',
                 'spp_id' => '4',
                 'nisn' => '3071587387',
@@ -124,9 +153,12 @@ class UserSeeder extends Seeder
                 'username' => 'cantika',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
             ],
             [   // 11 - SISWA
                 'name' => 'Delista',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'perempuan',
                 'kelas_id' => '8',
                 'spp_id' => '4',
                 'nisn' => '3079076387',
@@ -137,9 +169,12 @@ class UserSeeder extends Seeder
                 'username' => 'delista',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
             ],
             [   // 12 - SISWA
                 'name' => 'Fera Asti Setiani',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'perempuan',
                 'kelas_id' => '9',
                 'spp_id' => '3',
                 'nisn' => '3082576387',
@@ -150,9 +185,12 @@ class UserSeeder extends Seeder
                 'username' => 'fera',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
             ],
             [   // 13 - SISWA
                 'name' => 'Andre Daniswara Putra',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'laki-laki',
                 'kelas_id' => '1',
                 'spp_id' => '4',
                 'nisn' => '3071626387',
@@ -163,6 +201,23 @@ class UserSeeder extends Seeder
                 'username' => 'andre',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
+            ],
+            [   // 14 - SISWA
+                'name' => 'Teguh Afriansyah',
+                'identifier' => 'i' . Str::random(9),
+                'jk' => 'laki-laki',
+                'kelas_id' => '1',
+                'spp_id' => '4',
+                'nisn' => '3071626237',
+                'nis' => '10.2021.008',
+                'telepon' => '081232367523',
+                'alamat' => 'Jl. Raya Pondokunyur',
+                'email' => 'teguh@gmail.com',
+                'username' => 'teguh',
+                'level' => 'siswa',
+                'password' => bcrypt('siswa'),
+                'spp_status' => 'belumlunas',
             ],
         ])->each(function($user){
             User::create($user);

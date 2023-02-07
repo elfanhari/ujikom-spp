@@ -16,6 +16,7 @@ class CreateSppsTable extends Migration
     {
         Schema::create('spps', function (Blueprint $table) {
             $table->id();
+            $table->string('identifier')->unique()->nullable();
             $table->string('tahun');
             $table->bigInteger('nominal');
             $table->timestamps();

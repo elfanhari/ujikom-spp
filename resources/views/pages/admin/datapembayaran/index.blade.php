@@ -121,7 +121,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    
+                        Sekarang di halaman: {{ $pembayaran->currentPage() }}<br>
+                        Jumlah Data: {{ $pembayaran->total() }}<br>
+                        Data perhalaman: {{ $pembayaran->perPage() }}<br>
+                        <br>
+                        {{ $pembayaran->links() }}
                     @else
                         
                       Data tidak ditemukan. <a href="{{ route('siswa.index') }}" class="">Refresh halaman</a>

@@ -30,10 +30,10 @@ class UserphotoController extends Controller
 
             Userphoto::create([
                 'user_id'       => $request->user_id,
-                'url'               => $filenamesimpan,
-                'is_featured'       => 0
+                'url'           => $filenamesimpan,
+                'is_featured'   => 0
             ]);
-        }
+        } 
         return redirect(route('profile.index'))->with('info', 'Foto profil anda berhasil ditambahkan!');
     }
 

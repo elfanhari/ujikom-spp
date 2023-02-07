@@ -4,40 +4,45 @@ namespace Database\Seeders;
 
 use App\Models\Kompetensikeahlian;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class KompetensikeahlianSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
+        $char = 'abcdefghijklmnopqrstuvwxyz1234567890';
+        $rand = substr(str_shuffle($char), 0, 9);
+        
         collect([
             [   //1
                 'name' => 'Rekayasa Perangkat Lunak', 
                 'singkatan' => 'RPL',
+                 'identifier' => 'i' . Str::random(9),
             ],
             [   //2
                 'name' => 'Akuntansi dan Keuangan Lembaga', 
                 'singkatan' => 'AKL',
+                 'identifier' => 'i' . Str::random(9),
             ],
             [   //3
                 'name' => 'Teknik Bisnis Sepeda Motor', 
                 'singkatan' => 'TBSM',
+                 'identifier' => 'i' . Str::random(9),
             ],
             [   //4
                 'name' => 'Teknik Kendaraan Ringan Otomotif', 
                 'singkatan' => 'TKRO',
+                 'identifier' => 'i' . Str::random(9),
             ],
             [   //5
                 'name' => 'Agribisnis Pengolahan Hasil Pertanian', 
                 'singkatan' => 'APHP',
+                 'identifier' => 'i' . Str::random(9),
             ],
             [   //6
                 'name' => 'Agribisnis Pengolahan Air Tawar', 
                 'singkatan' => 'APAT',
+                 'identifier' => 'i' . Str::random(9),
             ],
         ])->each(function($kompetensikeahlian){
             Kompetensikeahlian::create($kompetensikeahlian);
