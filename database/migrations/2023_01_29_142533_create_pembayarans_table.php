@@ -18,9 +18,9 @@ class CreatePembayaransTable extends Migration
             $table->string('identifier')->unique()->nullable();
             $table->foreignId('petugas_id');
             $table->foreignId('siswa_id');
-            $table->date('tanggalbayar');
-            $table->string('bulanbayar');
+            $table->foreignId('bulanbayar_id');
             $table->string('tahunbayar');
+            $table->date('tanggalbayar');
             $table->bigInteger('jumlahbayar');
             $table->timestamps();
             $table->softDeletes();

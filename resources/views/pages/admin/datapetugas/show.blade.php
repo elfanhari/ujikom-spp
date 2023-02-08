@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-header">
                 <p class="m-0 d-inline font-weight-bold text-primary">Detail petugas</p>
-                <a href="{{ route('petugas.edit', $petugas) }}" class="float-right">Edit profil</a>
+                <a href="{{ route('petugas.edit', $petuga) }}" class="float-right">Edit profil</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -22,22 +22,22 @@
                           <tr class="border-bottom">
                             <td>Nama petugas</td>
                             <td style="width: 1px;">:</td>
-                            <td>{{ $petugas->name }}</td>
+                            <td>{{ $petuga->name }}</td>
                           </tr>
                           <tr class="border-bottom">
                             <td>Telepon</td>
                             <td style="width: 1px;">:</td>
-                            <td>{{ $petugas->telepon }}</td>
+                            <td>{{ $petuga->telepon }}</td>
                           </tr>
                           <tr class="border-bottom">
                             <td>Email</td>
                             <td style="width: 1px;">:</td>
-                            <td>{{ $petugas->email }}</td>
+                            <td>{{ $petuga->email }}</td>
                           </tr>
                           <tr class="border-bottom">
                             <td>Username</td>
                             <td style="width: 1px;">:</td>
-                            <td>{{ $petugas->username }}</td>
+                            <td>{{ $petuga->username }}</td>
                           </tr>
                     </table>
                 </div>

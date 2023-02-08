@@ -32,6 +32,7 @@ class SiswaRequest extends FormRequest
             'email'     => ['required', 'email', $unique],
             'username'  => ['required', 'min:6', 'max:20', $unique],
             'password'  => ['required', 'min:8'],
+            'identifier' => [$unique],
         ];
     }
 }

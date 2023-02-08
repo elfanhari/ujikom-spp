@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SppRequest;
 use App\Models\Spp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SppController extends Controller
 {
+    
     public function index()
     {
         $spp = Spp::latest();
@@ -29,6 +31,7 @@ class SppController extends Controller
 
     public function store(SppRequest $request)
     {
+        $request['identifier'] = 'i' . Str::random(9);
         Spp::create($request->all());
         return redirect(route('spp.index'))->with('info', 'Data berhasil ditambahkan!');
     }
@@ -47,13 +50,13 @@ class SppController extends Controller
 
     public function update(SppRequest $request, Spp  $spp)
     {   
-        Spp::find($spp->id)->update($request->all());
+        $spp->update($request->all());
         return redirect(route('spp.index'))->with('info', 'Data berhasil diubah!');
     }
 
     public function destroy(Spp $spp)
     {
-        Spp::find($spp->id)->delete();
+        $spp->delete();
         return redirect(route('spp.index'))->with('info', 'Data berhasil dihapus!');
     }
 }

@@ -34,6 +34,11 @@
                             <td>{{ $pembayaran->userSiswa->kelas->name }}</td>
                           </tr>
                           <tr class="border-bottom">
+                            <td>Jumlah Bayar</td>
+                            <td style="width: 1px;">:</td>
+                            <td>Rp{{ number_format($pembayaran->jumlahbayar, 0, '.', '.') }}</td>
+                          </tr>
+                          <tr class="border-bottom">
                             <td>Tanggal Pembayaran</td>
                             <td style="width: 1px;">:</td>
                             <td>{{ $pembayaran->tanggalbayar }}</td>
@@ -41,7 +46,7 @@
                           <tr class="border-bottom">
                             <td>Bulan Bayar</td>
                             <td style="width: 1px;">:</td>
-                            <td>{{ $pembayaran->bulanbayar }}</td>
+                            <td>{{ $pembayaran->bulanbayar->name }}</td>
                           </tr>
                           <tr class="border-bottom">
                             <td>Tahun Bayar</td>
@@ -56,7 +61,8 @@
                           <tr class="border-bottom">
                             <td>Nominal SPP</td>
                             <td style="width: 1px;">:</td>
-                            <td>Rp{{ number_format($pembayaran->userSiswa->spp->nominal, 0, '.', '.') }}</td>                          </tr>
+                            <td>Rp{{ number_format($pembayaran->userSiswa->spp->nominal, 0, '.', '.') }}</td>                          
+                          </tr>
                     </table>
                 </div>
             </div>
@@ -111,14 +117,14 @@
                             <td>{{ $pembayaran->userSiswa->telepon }}</td>
                           </tr>
                           <tr class="border-bottom">
-                            <td>Tahun SPP</td>
-                            <td style="width: 1px;">:</td>
-                            <td>{{ $pembayaran->userSiswa->spp->tahun }}</td>
-                          </tr>
-                          <tr class="border-bottom">
                             <td>Email</td>
                             <td style="width: 1px;">:</td>
                             <td>{{ $pembayaran->userSiswa->email }}</td>
+                          </tr>
+                          <tr class="border-bottom">
+                            <td>Tahun SPP</td>
+                            <td style="width: 1px;">:</td>
+                            <td>{{ $pembayaran->userSiswa->spp->tahun }}</td>
                           </tr>
                     </table>
                 </div>

@@ -35,6 +35,11 @@
                             <td>{{ $siswa->nis }}</td>
                           </tr>
                           <tr class="border-bottom">
+                            <td>Jenis Kelamin</td>
+                            <td style="width: 1px;">:</td>
+                            <td>{{ $siswa->jk == 'laki-laki' ? 'Laki-laki' : 'Perempuan' }}</td>
+                          </tr>
+                          <tr class="border-bottom">
                             <td>Kelas</td>
                             <td style="width: 1px;">:</td>
                             <td>{{ $siswa->kelas->name }}</td>
@@ -50,14 +55,14 @@
                             <td>{{ $siswa->telepon }}</td>
                           </tr>
                           <tr class="border-bottom">
-                            <td>Tahun SPP</td>
-                            <td style="width: 1px;">:</td>
-                            <td>{{ $siswa->spp->tahun }}</td>
-                          </tr>
-                          <tr class="border-bottom">
                             <td>Email</td>
                             <td style="width: 1px;">:</td>
                             <td>{{ $siswa->email }}</td>
+                          </tr>
+                          <tr class="border-bottom">
+                            <td>Tahun SPP</td>
+                            <td style="width: 1px;">:</td>
+                            <td>{{ $siswa->spp->tahun }}</td>
                           </tr>
                     </table>
                 </div>

@@ -18,6 +18,7 @@
           <p class="mb-1"><b>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</b> | <a href="" class="text-decoration-none">Detail</a></p>
         </div>
         <small>{{ $tampilkan->created_at->diffForHumans() }}</small>
+        <p class="mb-1">{{ $tampilkan->bulanbayar->name }} | {{ $tampilkan->tahunbayar }}</p>
       </div>
       @endforeach
     </div>

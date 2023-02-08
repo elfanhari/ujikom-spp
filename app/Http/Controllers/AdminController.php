@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdminRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -20,7 +21,7 @@ class AdminController extends Controller
         }
 
         return view('pages.admin.dataadmin.index', [
-            'admin' => $admin->get(),
+            'admin' => $admin->latest()->get(),
         ]);
     }
 
@@ -31,7 +32,7 @@ class AdminController extends Controller
 
     public function store(AdminRequest $request)
     {
-        // dd($request->all());
+        $request['identifier'] = 'i' . Str::random(9);
         $request['password'] = bcrypt($request->password);
         User::create(
             $request->all()
@@ -55,13 +56,13 @@ class AdminController extends Controller
 
     public function update(AdminRequest $request, User $admin)
     {
-        User::find($admin->id)->update($request->all());
+        $admin->update($request->all());
         return redirect(route('admin.index'))->with('info', 'Data berhasil diubah!');
     }
 
     public function destroy(User $admin)
     {
-        User::find($admin->id)->delete();
+        $admin->delete();
         return redirect(route('admin.index'))->with('info', 'Data berhasil dihapus!');
     }
 }

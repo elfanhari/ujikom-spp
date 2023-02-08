@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\KompetensikeahlianRequest;
 use App\Models\Kompetensikeahlian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+use function PHPUnit\Framework\returnSelf;
 
 class KompetensikeahlianController extends Controller
 {
@@ -15,16 +18,14 @@ class KompetensikeahlianController extends Controller
             return view('denied');
         }
         
-        $prodi = Kompetensikeahlian::latest();
+        $prodi = Kompetensikeahlian::latest()->get();
 
         if(request('search')) {
             $prodi->where('name', 'like', '%' . request('search') . '%')
-            ->orWhere('singkatan', 'like', '%' . request('search') . '%');
+            ->orWhere('singkatan', 'like', '%' . request('search') . '%')->get();
         }
 
-        return view('pages.admin.dataprodi.index', [
-            'prodi' => $prodi->get(),
-        ]);
+        return view('pages.admin.dataprodi.index', compact('prodi'));
     }
 
    
@@ -36,8 +37,9 @@ class KompetensikeahlianController extends Controller
    
     public function store(KompetensikeahlianRequest $request)
     {   
+        $request['identifier'] = 'i' . Str::random(9);
         Kompetensikeahlian::create($request->all()); 
-        return redirect(route('prodi.index'))->with('info','Data berhasil ditambahkan!');
+        return redirect(route('prodi.index'))->withInfo('Data berhasil ditambahkan!');
     }
 
    
@@ -47,24 +49,22 @@ class KompetensikeahlianController extends Controller
     }
 
   
-    public function edit(Kompetensikeahlian $kompetensikeahlian, $id)
+    public function edit(Kompetensikeahlian $prodi)
     {
-        return view('pages.admin.dataprodi.edit', [
-            // 'prodi' => $kompetensikeahlian,
-            'prodi' => Kompetensikeahlian::whereId($id)->first(),
-        ]);
-    }
-
-    public function update(KompetensikeahlianRequest $request, Kompetensikeahlian $prodi)
-    {
-        Kompetensikeahlian::find($prodi->id)->update($request->all()); 
-        return redirect(route('prodi.index'))->with('info','Data berhasil diperbarui!');
+        return view('pages.admin.dataprodi.edit', compact('prodi'));
     }
 
     
-    public function destroy($id)
+    public function update(KompetensikeahlianRequest $request, Kompetensikeahlian $prodi)
     {
-        Kompetensikeahlian::find($id)->delete(); 
-        return back()->with('info','Data berhasil dihapus!');
+        $prodi->update($request->all()); 
+        return redirect(route('prodi.index'))->withInfo('Data berhasil diperbarui!');
+    }
+
+    
+    public function destroy(Kompetensikeahlian $prodi)
+    {
+        $prodi->delete(); 
+        return back()->withInfo('Data berhasil dihapus!');
     }
 }

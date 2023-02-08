@@ -13,6 +13,7 @@ class AuthController extends Controller
         return view('pages.auth.admin.login');
     }   
 
+    
     public function cekLoginAdmin(Request $request)
     {
         $input = $request->validate([
@@ -42,6 +43,7 @@ class AuthController extends Controller
             return back()->with('info', 'Email atau password salah!');
         }
     }
+
 
     public function logout() {
         Auth::logout();

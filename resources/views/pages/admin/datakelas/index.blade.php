@@ -65,7 +65,7 @@
                 </div>
                 <div class="card-body">
 
-                    @if ($kelas->count() > 0)
+                    @if ($kela->count() > 0)
                         <form
                             class="w-xs-full float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group mb-3 mt-0 ">
@@ -91,14 +91,14 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($kelas as $tampilkan)
+                                    @foreach ($kela as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->name }}</td>
                                             <td>{{ $tampilkan->Kompetensikeahlian->name }}</td>
                                             <td class="">
 
-                                                <a href="{{ route('kelas.edit', $tampilkan->id) }}" type="button"
+                                                <a href="{{ route('kelas.edit', $tampilkan) }}" type="button"
                                                     class=" btn btn-primary pb-1 pt-0 px-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -129,7 +129,7 @@
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <form action="{{ route('kelas.destroy', $tampilkan->id) }}" method="POST"
+                                                        <form action="{{ route('kelas.destroy', $tampilkan) }}" method="POST"
                                                             class="d-inline">
                                                             @csrf
                                                             @method('DELETE')

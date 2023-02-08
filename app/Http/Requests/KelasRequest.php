@@ -32,11 +32,12 @@ class KelasRequest extends FormRequest
 
     public function rules()
     {   
-        $unique = Rule::unique('kelas')->ignore($this->kelas); // Pengeculian Unique Saat Update
+        $unique = Rule::unique('kelas')->ignore($this->kela); // Pengeculian Unique Saat Update
 
         return [
             'kompetensikeahlian_id' => ['required'],
             'name'                  => ['required', $unique],
+            'identifier' => [$unique],
         ];
     }
 

@@ -23,4 +23,9 @@ class Kelas extends Model
         return $this->hasMany(User::class, 'user_id', 'id');
     }
 
+    public function getRouteKeyName() //RouteModelBindings
+    {
+        return 'identifier';
+    }
+
 }

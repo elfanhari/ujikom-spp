@@ -15,7 +15,7 @@
                         <p class="m-0 font-weight-bold text-primary">Edit Data pembayaran</p>
                     </div>
                     <div class="card-body input-group-sm">
-                        <form action="{{ route('pembayaran.update', $pembayaran->id) }}" method="POST">
+                        <form action="{{ route('pembayaran.update', $pembayaran) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -34,7 +34,7 @@
                     <p class="m-0 font-weight-bold text-primary">Edit Data pembayaran</p>
                 </div>
                 <div class="card-body input-group-sm">
-                    <form action="{{ route('pembayaran.update', $pembayaran->id) }}" method="POST">
+                    <form action="{{ route('pembayaran.update', $pembayaran) }}" method="POST">
                       @csrf
                       @method('PUT')
 

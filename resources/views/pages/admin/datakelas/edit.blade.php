@@ -22,7 +22,7 @@
                         <p class="m-0 font-weight-bold text-primary">Edit Data Kelas</p>
                     </div>
                     <div class="card-body input-group-sm">
-                        <form action="{{ route('kelas.update', $kelas->id) }}" method="POST">
+                        <form action="{{ route('kelas.update', $kela) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -41,7 +41,7 @@
                     <p class="m-0 font-weight-bold text-primary">Edit Data Kelas</p>
                 </div>
                 <div class="card-body input-group-sm">
-                    <form action="{{ route('kelas.update', $kelas->id) }}" method="POST">
+                    <form action="{{ route('kelas.update', $kela) }}" method="POST">
                       @csrf
                       @method('PUT')
 

@@ -29,6 +29,7 @@ class SppRequest extends FormRequest
         return [
             'tahun'   => ['required', 'numeric', $unique],
             'nominal' => ['required', 'numeric'],
+            'identifier' => [$unique],
         ];
     }
 }

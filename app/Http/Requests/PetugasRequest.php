@@ -33,6 +33,7 @@ class PetugasRequest extends FormRequest
             'email'     => ['required', 'email', $unique],
             'username'  => ['required', 'min:8', 'max:20', $unique],
             'password'  => ['required', 'min:8'],
+            'identifier' => [$unique],
         ];
     }
 }

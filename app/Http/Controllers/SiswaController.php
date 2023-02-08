@@ -7,6 +7,7 @@ use App\Models\Kelas;
 use App\Models\Spp;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SiswaController extends Controller
 {
@@ -33,7 +34,7 @@ class SiswaController extends Controller
         }
 
         return view('pages.admin.datasiswa.index', [
-            'siswa' => $siswa->get(),
+            'siswa' => $siswa->latest()->paginate(5),
             'kelas' => Kelas::all(),
             'spp' => Spp::all(),
         ]);
@@ -51,10 +52,7 @@ class SiswaController extends Controller
     // Siswa - Store
     public function store(SiswaRequest $request)
     {
-        $request['password'] = bcrypt($request->password);
-        User::create(
-            $request->all()
-        );
+        User::create($request->all());
         return redirect(route('siswa.index'))->with('info', 'Data berhasil ditambahkan!');
     }
 
@@ -79,14 +77,14 @@ class SiswaController extends Controller
     // Siswa - Update
     public function update(SiswaRequest $request, User $siswa)
     {
-        User::find($siswa->id)->update($request->all());
+        $siswa->update($request->all());
         return redirect(route('siswa.index'))->with('info', 'Data berhasil diubah!');
     }
 
     // Destroy - Delete
     public function destroy(User $siswa)
     {
-        User::find($siswa->id)->delete();
+        $siswa->delete();
         return redirect(route('siswa.index'))->with('info', 'Data berhasil dihapus!');
     }
 }

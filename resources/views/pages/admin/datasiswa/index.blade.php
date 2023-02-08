@@ -88,7 +88,7 @@
                                                     </svg>
                                                 </a>
 
-                                                <a href="{{ route('siswa.edit', $tampilkan->username) }}" type="button"
+                                                <a href="{{ route('siswa.edit', $tampilkan) }}" type="button"
                                                     class=" btn btn-primary pb-1 pt-0 px-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -119,7 +119,7 @@
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <form action="{{ route('siswa.destroy', $tampilkan->id) }}" method="POST"
+                                                        <form action="{{ route('siswa.destroy', $tampilkan) }}" method="POST"
                                                             class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
@@ -133,10 +133,14 @@
                                             </td>
                                         </tr>
                                     @endforeach
-
+                                        
                                 </tbody>
                             </table>
                         </div>
+
+                            <div class="float-right">
+                                {{ $siswa->links() }}
+                            </div>
                     
                     @else
                         

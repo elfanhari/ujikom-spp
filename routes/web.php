@@ -38,6 +38,7 @@ Route::get('/', function () {
 Route::get('/loginadmin', [AuthController::class, 'pageLoginAdmin'])->name('loginadmin.page')->middleware('guest');
 Route::post('/loginadmin', [AuthController::class, 'cekLoginAdmin'])->name('loginadmin.check')->middleware('guest');
 
+// ADMIN DAN PETUGAS
 Route::group(['middleware' => ['auth']], function(){
 
     Route::view('/petugas', 'pages.petugas.dashboard.index')->name('petugas.dashboard'); // PETUGAS - Dashboard
@@ -45,38 +46,16 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::prefix('admin')->group(function () {
 
-        Route::get('/', DashboardController::class)->name('admin.dashboard');
-        
+        Route::get('/', DashboardController::class)->name('admin.dashboard');        
         Route::resource('/prodi', KompetensikeahlianController::class); // ADMIN - Kompetensi Keahlian
-    
-        Route::name('kelas.')->group(function() {   // ADMIN - Data Kelas | Prefix Route Name
-            Route::get('/kelas', [KelasController::class, 'index'])->name('index'); //name('kelas.index'), etc..
-            Route::post('/kelas', [KelasController::class, 'store'])->name('store');
-            Route::get('/kelas/{kelas}/edit', [KelasController::class, 'edit'])->name('edit');
-            Route::put('/kelas/{kelas}', [KelasController::class, 'update'])->name('update');
-            Route::delete('/kelas/{id}', [KelasController::class, 'destroy'])->name('destroy');
-        });
-    
+        Route::resource('/kelas', KelasController::class);
         Route::resource('/spp', SppController::class);
-    
         Route::resource('/siswa', SiswaController::class);
-        Route::get('/siswa/{siswa:username}', [SiswaController::class, 'show'])->name('siswa.show');
-        Route::get('/siswa/{siswa:username}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
-        
         Route::resource('/petugas', PetugasController::class);
-        Route::get('/petugas/{petuga:username}', [PetugasController::class, 'show'])->name('petugas.show');
-        Route::get('/petugas/{petuga:username}/edit', [PetugasController::class, 'edit'])->name('petugas.edit');
-        
         Route::resource('/admin', AdminController::class);
-        Route::get('/admin/{admin:username}', [AdminController::class, 'show'])->name('admin.show');
-        Route::get('/admin/{admin:username}/edit', [AdminController::class, 'edit'])->name('admin.edit');
-    
         Route::resource('/pembayaran', PembayaranController::class);
-        
         Route::get('entri', [PembayaranController::class, 'create'])->name('entri.create');
-
         Route::resource('/history', HistoryController::class);
-        
         Route::resource('/laporan', LaporanController::class);
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

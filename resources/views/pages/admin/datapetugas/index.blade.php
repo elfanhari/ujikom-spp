@@ -44,7 +44,7 @@
                 </div>
                 <div class="card-body">
 
-                    @if ($petugas->count() > 0)
+                    @if ($petuga->count() > 0)
                         <form
                             class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search w-xs-full">
                             <div class="input-group mb-3 mt-0">
@@ -73,7 +73,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($petugas as $tampilkan)
+                                    @foreach ($petuga as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->name }}</td>
@@ -120,7 +120,7 @@
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <form action="{{ route('petugas.destroy', $tampilkan->id) }}" method="POST"
+                                                        <form action="{{ route('petugas.destroy', $tampilkan) }}" method="POST"
                                                             class="d-inline">
                                                             @csrf
                                                             @method('DELETE')

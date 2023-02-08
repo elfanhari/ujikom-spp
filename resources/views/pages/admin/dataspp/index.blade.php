@@ -95,7 +95,7 @@
                                             <td>{{ $tampilkan->nominal }}</td>
                                             <td class="">
 
-                                                <a href="{{ route('spp.edit', $tampilkan->id) }}" type="button"
+                                                <a href="{{ route('spp.edit', $tampilkan) }}" type="button"
                                                     class=" btn btn-primary pb-1 pt-0 px-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -126,7 +126,7 @@
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <form action="{{ route('spp.destroy', $tampilkan->id) }}" method="POST"
+                                                        <form action="{{ route('spp.destroy', $tampilkan) }}" method="POST"
                                                             class="d-inline">
                                                             @csrf
                                                             @method('DELETE')

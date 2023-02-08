@@ -16,13 +16,16 @@ class PembayaranRequest extends FormRequest
     
     public function rules()
     {
+        $unique = Rule::unique('pembayarans')->ignore($this->pembayaran);
+
         return [
             'petugas_id'    => ['required', 'numeric'],
             'siswa_id'      => ['required', 'numeric'],
             'tanggalbayar'  => ['required', 'date'],
-            'bulanbayar'    => ['required'],
+            'bulanbayar_id' => ['required'],
             'tahunbayar'    => ['required', 'numeric'],
             'jumlahbayar'   => ['required', 'numeric'],
+            'identifier' => [$unique],
         ];
     }
 }

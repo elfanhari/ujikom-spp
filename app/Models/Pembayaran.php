@@ -30,4 +30,14 @@ class Pembayaran extends Model
         return $this->belongsTo(User::class, 'siswa_id', 'id');
     }
 
+    public function bulanbayar() //relasiInverse
+    {
+        return $this->belongsTo(Bulanbayar::class, 'bulanbayar_id', 'id');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'identifier';
+    }
+
 }

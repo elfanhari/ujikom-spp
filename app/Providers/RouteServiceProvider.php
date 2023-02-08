@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -35,6 +36,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Route::bind('siswa', function ($user) {
+            return User::where('id', $user)
+                        ->orWhere('identifier', $user)
+                        ->orWhere('username', $user)
+                        ->firstOrfail();
+        }); // Multiple Route Model Binding @DataSiswa
+
         $this->configureRateLimiting();
 
         $this->routes(function () {

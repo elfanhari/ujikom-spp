@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Spp extends Model
 {
@@ -14,6 +15,16 @@ class Spp extends Model
     public function userSiswa() //relasi
     {
         return $this->hasMany(User::class, 'spp_id', 'id');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'identifier';
+    }
+
+    public function setIdentifierAttribute($identifier)
+    {
+        $this->attributes['identifier'] = 'i' . Str::random(9);
     }
 
 }

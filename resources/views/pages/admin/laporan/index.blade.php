@@ -88,7 +88,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->created_at }}</td>
                                             <td>
-                                              <a href="{{ route('siswa.show', $tampilkan->userSiswa->username) }}">
+                                              <a href="{{ route('siswa.show', $tampilkan->userSiswa->id) }}">
                                                 {{ $tampilkan->userSiswa->name }}
                                               </a>
                                             </td>
@@ -97,7 +97,7 @@
                                             <td>{{ $tampilkan->tanggalbayar }}</td>
                                             <td>{{ $tampilkan->userSiswa->spp->tahun }}</td>
                                             <td> 
-                                              <a href="{{ route('petugas.show', $tampilkan->userPetugas->username) }}">
+                                              <a href="{{ route('petugas.show', $tampilkan->userPetugas->id) }}">
                                                 {{ $tampilkan->userPetugas->name }}
                                               </a>
                                             </td>
@@ -110,6 +110,7 @@
                             <div class="float-right">
                                 {{ $pembayaran->links() }}
                             </div>
+                            
                         @endif
 
                     </div>

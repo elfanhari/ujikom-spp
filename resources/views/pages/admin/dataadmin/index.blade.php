@@ -120,7 +120,7 @@
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <form action="{{ route('admin.destroy', $tampilkan->id) }}" method="POST"
+                                                        <form action="{{ route('admin.destroy', $tampilkan) }}" method="POST"
                                                             class="d-inline">
                                                             @csrf
                                                             @method('DELETE')

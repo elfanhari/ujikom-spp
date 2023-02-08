@@ -73,7 +73,6 @@ class UserSeeder extends Seeder
                 'username' => 'elfan',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
             [   // 6 - SISWA
                 'name' => 'Alfitka Haerul Kurniawan',
@@ -89,7 +88,6 @@ class UserSeeder extends Seeder
                 'username' => 'alfitka',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
             [   // 7 - SISWA
                 'name' => 'Khikmal Kurniawan',
@@ -105,7 +103,6 @@ class UserSeeder extends Seeder
                 'username' => 'khikmal',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
             [   // 8 - SISWA
                 'name' => 'Dwi Utami',
@@ -121,7 +118,6 @@ class UserSeeder extends Seeder
                 'username' => 'dwi',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
             [   // 9 - SISWA
                 'name' => 'Intan',
@@ -137,7 +133,6 @@ class UserSeeder extends Seeder
                 'username' => 'intan',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
             [   // 10 - SISWA
                 'name' => 'Cantika Aurelia April',
@@ -153,7 +148,6 @@ class UserSeeder extends Seeder
                 'username' => 'cantika',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
             [   // 11 - SISWA
                 'name' => 'Delista',
@@ -169,7 +163,6 @@ class UserSeeder extends Seeder
                 'username' => 'delista',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
             [   // 12 - SISWA
                 'name' => 'Fera Asti Setiani',
@@ -185,7 +178,6 @@ class UserSeeder extends Seeder
                 'username' => 'fera',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
             [   // 13 - SISWA
                 'name' => 'Andre Daniswara Putra',
@@ -201,7 +193,6 @@ class UserSeeder extends Seeder
                 'username' => 'andre',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
             [   // 14 - SISWA
                 'name' => 'Teguh Afriansyah',
@@ -217,7 +208,6 @@ class UserSeeder extends Seeder
                 'username' => 'teguh',
                 'level' => 'siswa',
                 'password' => bcrypt('siswa'),
-                'spp_status' => 'belumlunas',
             ],
         ])->each(function($user){
             User::create($user);

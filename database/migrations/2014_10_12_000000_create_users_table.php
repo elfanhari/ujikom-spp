@@ -29,7 +29,6 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();           //WAJIB
             $table->timestamp('email_verified_at')->nullable();
             $table->text('password');   //WAJIB
-            $table->enum('spp_status', ['lunas', 'belumlunas'])->nullable();   //WAJIB
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

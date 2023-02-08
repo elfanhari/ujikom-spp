@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             KompetensikeahlianSeeder::class,
             SppSeeder::class,
             PembayaranSeeder::class,
+            BulanbayarSeeder::class,
         ]);
     }
 }

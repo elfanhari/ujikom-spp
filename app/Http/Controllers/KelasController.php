@@ -6,6 +6,7 @@ use App\Http\Requests\KelasRequest;
 use App\Models\Kelas;
 use App\Models\Kompetensikeahlian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class KelasController extends Controller
 {
@@ -15,42 +16,47 @@ class KelasController extends Controller
             return view('denied');
         }
 
-        $kelas = Kelas::latest();
+        $kela = Kelas::latest();
 
         if(request('search')) {
-            $kelas->where('name', 'like', '%' . request('search') . '%');
+            $kela->where('name', 'like', '%' . request('search') . '%');
         }
 
         return view('pages.admin.datakelas.index', [
-            'kelas' => $kelas->get(),
+            'kela' => $kela->get(),
             'prodi' => Kompetensikeahlian::get()
         ]);
     }
     
+
     public function store(KelasRequest $request)
     {
+        $request['identifier'] = 'i' . Str::random(9);
         Kelas::create($request->all());
-        return redirect(route('kelas.index'))->with('info', 'Data berhasil ditambahkan!');
+        return redirect(route('kelas.index'))->withInfo('Data berhasil ditambahkan!');
     }
 
-    public function edit(Kelas $kelas)
+
+    public function edit(Kelas $kela)
     {
         return view('pages.admin.datakelas.edit', [
-            'kelas' => $kelas,
+            'kela' => $kela,
             'kompetensikeahlian' => Kompetensikeahlian::all()
         ]); 
     }
 
-    public function update(KelasRequest $request, $id)
+
+    public function update(KelasRequest $request, Kelas $kela)
     {
-        Kelas::find($id)->update($request->all());
-        return redirect(route('kelas.index'))->with('info', 'Data berhasil diubah!');
+        $kela->update($request->all());
+        return redirect(route('kelas.index'))->withInfo('Data berhasil diubah!');
     }
     
-    public function destroy($id)
+
+    public function destroy(Kelas $kela)
     {
-        Kelas::find($id)->delete();
-        return redirect(route('kelas.index'))->with('info', 'Data berhasil dihapus!');
+        $kela->delete();
+        return redirect(route('kelas.index'))->withInfo('Data berhasil dihapus!');
     }
 
 }

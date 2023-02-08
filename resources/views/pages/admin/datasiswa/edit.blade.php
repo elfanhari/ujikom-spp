@@ -15,7 +15,7 @@
                         <p class="m-0 font-weight-bold text-primary">Edit Data Siswa</p>
                     </div>
                     <div class="card-body input-group-sm">
-                        <form action="{{ route('siswa.update', $siswa->id) }}" method="POST" class="d-inline">
+                        <form action="{{ route('siswa.update', $siswa) }}" method="POST" class="d-inline">
                             @csrf
                             @method('PUT')
 
@@ -34,7 +34,7 @@
                     <p class="m-0 font-weight-bold text-primary">Edit Data Siswa</p>
                 </div>
                 <div class="card-body input-group-sm">
-                    <form action="{{ route('siswa.update', $siswa->id) }}" method="POST">
+                <form action="{{ route('siswa.update', $siswa) }}" method="POST">
                       @csrf
                       @method('PUT')
 

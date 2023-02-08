@@ -27,7 +27,7 @@
                         <p class="m-0 font-weight-bold text-primary">Edit Data Prodi</p>
                     </div>
                     <div class="card-body input-group-sm">
-                        <form action="{{ route('prodi.update', $prodi->id) }}" method="POST">
+                        <form action="{{ route('prodi.update', $prodi) }}" method="POST">
                             @csrf
 
                             @include('pages.admin.dataprodi._editform')
@@ -45,7 +45,7 @@
                     <p class="m-0 font-weight-bold text-primary">Edit Data Prodi</p>
                 </div>
                 <div class="card-body input-group-sm">
-                    <form action="{{ route('prodi.update', $prodi->id) }}" method="POST">
+                    <form action="{{ route('prodi.update', $prodi) }}" method="POST">
                       @csrf
                       @method('PUT')
 
