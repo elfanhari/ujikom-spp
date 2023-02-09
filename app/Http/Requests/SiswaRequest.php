@@ -24,6 +24,7 @@ class SiswaRequest extends FormRequest
             'name'      => ['required'],
             'kelas_id'  => ['required'],
             'level'     => ['required'],
+            'jk'        => ['required'],
             'spp_id'    => ['required'],
             'nisn'      => ['required', 'digits:10', $unique],
             'nis'       => ['required', 'min:9', $unique],

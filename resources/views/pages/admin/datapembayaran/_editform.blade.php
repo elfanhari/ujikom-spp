@@ -15,9 +15,14 @@
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="bulanbayar" class="mt-3">bulanbayar</label>
-<input type="text" value="{{ old('bulanbayar', $pembayaran->bulanbayar) }}" name="bulanbayar" id="bulanbayar" class="text-black input-sm form form-control mt-0  @error('bulanbayar') is-invalid @enderror" placeholder="Masukkan bulanbayar siswa">
-@error('bulanbayar')
+<label for="bulanbayar_id" class="mb-1 mt-3">Bulan dibayar</label>
+<select name="bulanbayar_id" id="bulanbayar_id" class="text-black form form-control form-select mt-0   @error('bulanbayar_id') is-invalid @enderror" >
+  <option value="" selected disabled>-- Pilih pembayaran untuk bulan --</option>
+  @foreach ($bulanbayar as $tampilkan)
+    <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == $pembayaran->bulanbayar_id ? 'selected' : '' }}>{{ $tampilkan->name }}</option>
+  @endforeach
+</select>
+@error('bulanbayar_id')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
@@ -27,12 +32,7 @@
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="jumlahbayar" class="mt-3">Jumlah Bayar</label>
-<input type="text" value="{{ old('jumlahbayar', $pembayaran->jumlahbayar) }}" name="jumlahbayar" id="jumlahbayar" class="text-black input-sm form form-control mt-0  @error('jumlahbayar') is-invalid @enderror" placeholder="Masukkan jumlahbayar siswa">
-@error('jumlahbayar')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
-
+<input type="hidden" name="jumlahbayar" value="{{ $pembayaran->jumlahbayar }}">
 <input type="hidden" value="{{ old('petugas_id', $pembayaran->petugas_id) }}" name="petugas_id" id="password" class="text-black input-sm form form-control mt-0" >
 <input type="hidden" value="{{ old('siswa_id', $pembayaran->siswa_id) }}" name="siswa_id" id="password" class="text-black input-sm form form-control mt-0" >
 

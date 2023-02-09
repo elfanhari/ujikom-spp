@@ -35,6 +35,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+// Route::post('/ceklogin', [AuthController::class, 'cekLogin'])->name('ceklogin');
+
 Route::get('/loginadmin', [AuthController::class, 'pageLoginAdmin'])->name('loginadmin.page')->middleware('guest');
 Route::post('/loginadmin', [AuthController::class, 'cekLoginAdmin'])->name('loginadmin.check')->middleware('guest');
 
@@ -100,6 +102,5 @@ Route::group(['middleware' => ['auth']], function(){
 
     });
 });
-
 
 

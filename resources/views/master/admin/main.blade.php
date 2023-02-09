@@ -22,6 +22,8 @@
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/my-css/style.css" rel="stylesheet">
+    <link href="/extensions/simple-datatables/style.css" rel="stylesheet">
+    <link href="/extensions/simple-datatables.css" rel="stylesheet">
 
 </head>
 
@@ -215,6 +217,9 @@
             trigger: 'focus'
         })
     </script>
+
+    <script src="/extensions/simple-datatables/umd/simple-datatables.js"></script>
+    <script src="/extensions/simple-datatables.js"></script>
 
 </body>
 

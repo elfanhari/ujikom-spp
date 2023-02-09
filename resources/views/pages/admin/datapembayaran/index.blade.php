@@ -39,14 +39,15 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table table-sm table-hover fs-14 c-black">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
+                                        <th scope="col">Tanggal Pembayaran</th>
                                         <th scope="col">Nama Siswa</th>
                                         <th scope="col">Kelas</th>
+                                        <th scope="col">Pembayaran untuk</th>
                                         <th scope="col">Jumlah Bayar</th>
-                                        <th scope="col">Tanggal Pembayaran</th>
                                         <th scope="col">Petugas</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
@@ -56,10 +57,11 @@
                                     @foreach ($pembayaran as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
+                                            <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                                             <td>{{ $tampilkan->userSiswa->name }}</td>
                                             <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
+                                            <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
                                             <td> Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
-                                            <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                                             <td>{{ $tampilkan->userPetugas->name }}</td>
                                             <td class="">
 

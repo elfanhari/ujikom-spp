@@ -16,12 +16,14 @@ class AuthController extends Controller
     
     public function cekLoginAdmin(Request $request)
     {
+        
         $input = $request->validate([
             'username' => ['required'],
             'password' => ['required'],
         ]); 
 
         if (Auth::attempt($input)) {
+
             $level = auth()->user()->level;
 
             if ($level == 'admin') {
@@ -43,7 +45,6 @@ class AuthController extends Controller
             return back()->with('info', 'Email atau password salah!');
         }
     }
-
 
     public function logout() {
         Auth::logout();

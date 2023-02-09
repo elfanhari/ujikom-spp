@@ -41,17 +41,12 @@
                           <tr class="border-bottom">
                             <td>Tanggal Pembayaran</td>
                             <td style="width: 1px;">:</td>
-                            <td>{{ $pembayaran->tanggalbayar }}</td>
+                            <td>{{ date('d-m-Y', strtotime($pembayaran->tanggalbayar)) }}</td>
                           </tr>
                           <tr class="border-bottom">
-                            <td>Bulan Bayar</td>
+                            <td>Pembayaran untuk</td>
                             <td style="width: 1px;">:</td>
-                            <td>{{ $pembayaran->bulanbayar->name }}</td>
-                          </tr>
-                          <tr class="border-bottom">
-                            <td>Tahun Bayar</td>
-                            <td style="width: 1px;">:</td>
-                            <td>{{ $pembayaran->tahunbayar }}</td>
+                            <td>{{ $pembayaran->bulanbayar->name }} - {{ $pembayaran->tahunbayar }} </td>
                           </tr>
                           <tr class="border-bottom">
                             <td>Tahun SPP</td>
@@ -127,6 +122,34 @@
                             <td>{{ $pembayaran->userSiswa->spp->tahun }}</td>
                           </tr>
                     </table>
+                </div>
+                <div class="mt-3">
+                  <div class="my-2 text-black text-xs-center fw-bold">
+                    History Pembayaran Siswa
+                  </div>
+                  <div class="table-responsive">
+
+                    @if ($historysiswa->count()<1)
+                     <small> <a href="">{{ $pembayaran->userSiswa->name }}</a> belum memiliki riwayat pembayaran.</small>
+                    @else
+                    <table class="table table-sm table-hover fs-14 c-black">
+                      <tr class="border-bottom bg-dark text-white"">
+                        <td>#</td>
+                        <td>Tanggal</td>
+                        <td>Pembayaran untuk</td>
+                        <td>Nominal bayar</td>
+                      </tr>
+                      @foreach ($historysiswa as $tampilkan)
+                      <tr class="border-bottom">
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
+                        <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
+                        <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                      </tr>
+                      @endforeach
+                    </table>
+                    @endif
+                  </div>
                 </div>
             </div>
           </div>

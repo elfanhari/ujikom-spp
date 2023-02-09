@@ -40,9 +40,29 @@ class LaporanController extends Controller
     }
 
    
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $daritanggal = $request->daritanggal;
+        $sampaitanggal = $request->sampaitanggal;
+        $petugas_id = $request->petugas_id;
+
+        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->latest();
+
+        if(request('petugas_id')){
+            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->where('petugas_id', $petugas_id)->latest();
+        }
+
+        if(request('daritanggal')){
+            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->where('petugas_id', $petugas_id)->latest();
+        }
+        
+        return view('pages.admin.laporan.printlaporan', [
+            'pembayaran' => $pembayaran->get(),
+            'petugas_id' => $petugas_id,
+            'daritanggal' => $daritanggal,
+            'sampaitanggal' => $sampaitanggal,
+            'petugas' => User::where('level', 'petugas')->orWhere('level', 'admin')->get(),
+        ]);   
     }
 
     
@@ -57,9 +77,9 @@ class LaporanController extends Controller
     }
 
     
-    public function show(Pembayaran $pembayaran)
+    public function show(Request $request)
     {
-        //
+        
     }
 
 

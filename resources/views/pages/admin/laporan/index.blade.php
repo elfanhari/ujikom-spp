@@ -57,9 +57,15 @@
             <div class="card mt-4">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-primary">Laporan Transaksi</p>
-                    <button class="btn float-right btn btn-sm btn-outline-success">
-                        Cetak Laporan
-                    </button>
+                    <form action="{{ route('laporan.create') }}" target="_blank" method="GET">
+                    @csrf
+                    <input type="hidden" name="petugas_id" id="petugas_id" value="{{ request('petugas_id') }}">
+                    <input type="hidden" name="daritanggal" id="daritanggal" value="{{ request('daritanggal') }}">
+                    <input type="hidden" name="sampaitanggal" id="sampaitanggal" value="{{ request('sampaitanggal') }}">
+                        <button type="submit" class="btn float-right btn btn-sm btn-outline-success">
+                            Cetak Laporan
+                        </button>
+                    </form>
                 </div>
                 <div class="card-body">
 
@@ -75,9 +81,9 @@
                                         <th scope="col">Waktu Transaksi</th>
                                         <th scope="col">Nama Siswa</th>
                                         <th scope="col">Kelas</th>
+                                        <th scope="col">Pembayaran untuk</th>
                                         <th scope="col">Jumlah Bayar</th>
                                         <th scope="col">Tanggal Bayar</th>
-                                        <th scope="col">Tahun SPP</th>
                                         <th scope="col">Nama Petugas</th>
                                     </tr>
                                 </thead>
@@ -88,16 +94,16 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->created_at }}</td>
                                             <td>
-                                              <a href="{{ route('siswa.show', $tampilkan->userSiswa->id) }}">
+                                              <a href="{{ route('siswa.show', $tampilkan->userSiswa->id) }}" class="text-decoration-none">
                                                 {{ $tampilkan->userSiswa->name }}
                                               </a>
                                             </td>
-                                            <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
+                                            <td>{{ $tampilkan->userSiswa->load('kelas')->kelas->name }}</td>
+                                            <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
                                             <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
-                                            <td>{{ $tampilkan->tanggalbayar }}</td>
-                                            <td>{{ $tampilkan->userSiswa->spp->tahun }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                                             <td> 
-                                              <a href="{{ route('petugas.show', $tampilkan->userPetugas->id) }}">
+                                              <a href="{{ route('petugas.show', $tampilkan->userPetugas->id) }}" class="text-decoration-none">
                                                 {{ $tampilkan->userPetugas->name }}
                                               </a>
                                             </td>

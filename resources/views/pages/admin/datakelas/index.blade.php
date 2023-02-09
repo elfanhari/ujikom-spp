@@ -80,7 +80,7 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table class="table table-sm table-hover fs-14 c-black">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>

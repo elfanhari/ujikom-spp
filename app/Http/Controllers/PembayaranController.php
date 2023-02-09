@@ -20,7 +20,7 @@ class PembayaranController extends Controller
     public function index()
     {
         return view('pages.admin.datapembayaran.index', [
-            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa'])->latest()->paginate('10'),
+            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->latest()->paginate('10'),
         ]);
     }
 
@@ -50,7 +50,10 @@ class PembayaranController extends Controller
     
     public function show(Pembayaran $pembayaran)
     {
-        return view('pages.admin.datapembayaran.show', compact('pembayaran'));
+        return view('pages.admin.datapembayaran.show', [
+            'pembayaran' => $pembayaran,
+            'historysiswa' => Pembayaran::where('siswa_id', $pembayaran->siswa_id)->latest()->get()
+        ]);
     }
 
     
@@ -59,6 +62,7 @@ class PembayaranController extends Controller
         return view('pages.admin.datapembayaran.edit', [
             'pembayaran' => $pembayaran,
             'siswa' => User::whereLevel('siswa')->get(),
+            'bulanbayar' => Bulanbayar::all(),
         ]);
     }
 

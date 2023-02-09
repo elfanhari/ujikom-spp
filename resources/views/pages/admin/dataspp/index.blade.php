@@ -92,7 +92,7 @@
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->tahun }}</td>
-                                            <td>{{ $tampilkan->nominal }}</td>
+                                            <td>Rp{{ number_format($tampilkan->nominal, 0, '.', '.') }}</td>
                                             <td class="">
 
                                                 <a href="{{ route('spp.edit', $tampilkan) }}" type="button"

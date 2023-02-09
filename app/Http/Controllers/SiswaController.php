@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SiswaRequest;
 use App\Models\Kelas;
+use App\Models\Pembayaran;
 use App\Models\Spp;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -52,6 +53,7 @@ class SiswaController extends Controller
     // Siswa - Store
     public function store(SiswaRequest $request)
     {
+        $request['identifier'] = 'i' . Str::random(9);
         User::create($request->all());
         return redirect(route('siswa.index'))->with('info', 'Data berhasil ditambahkan!');
     }
@@ -61,6 +63,7 @@ class SiswaController extends Controller
     {   
         return view('pages.admin.datasiswa.show', [
             'siswa' => $siswa,
+            'historysiswa' => Pembayaran::where('siswa_id', $siswa->id)->latest()->get()
         ]);
     }
 

@@ -15,9 +15,9 @@
       <div href="#" class="list-group-item list-group-item-action" aria-current="true">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1"><b>SPP</b></h5>
-          <p class="mb-1"><b>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</b> | <a href="" class="text-decoration-none">Detail</a></p>
+          <small>{{ $tampilkan->created_at->diffForHumans() }}</small>
         </div>
-        <small>{{ $tampilkan->created_at->diffForHumans() }}</small>
+        <p class="mb-1"><b>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</b></p>
         <p class="mb-1">{{ $tampilkan->bulanbayar->name }} | {{ $tampilkan->tahunbayar }}</p>
       </div>
       @endforeach

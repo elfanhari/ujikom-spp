@@ -5,6 +5,16 @@
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
+<label for="jk" class="mb-1 mt-3">Jenis Kelamin</label>
+<select name="jk" id="jk" class="text-black form form-control form-select mt-0 @error('jk') is-invalid @enderror" >
+  <option value="" selected disabled>-- Pilih Jenis Kelamin --</option>
+  <option value="laki-laki"> Laki-laki </option>
+  <option value="perempuan"> Perempuan </option>
+</select>
+@error('jk')
+  <span class="invalid-feedback mt-1">{{ $message }}</span>
+@enderror
+
 <label for="kelas_id" class="mb-1 mt-3">Kelas</label>
 <select name="kelas_id" id="kelas_id" value="{{ old('kelas_id') }}" class="text-black form form-control form-select mt-0  @error('kelas_id') is-invalid @enderror" >
   <option value="" selected disabled>-- Pilih Kelas --</option>
