@@ -27,13 +27,13 @@ class LaporanController extends Controller
         if(request('petugas_id')){
             $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->where('petugas_id', $petugas_id)->latest();
         }
-
+        
         if(request('daritanggal')){
             $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->where('petugas_id', $petugas_id)->latest();
         }
 
         return view('pages.admin.laporan.index', [
-            'pembayaran' => $pembayaran->paginate(10),
+            'pembayaran' => $pembayaran->get(),
             'petugas' => User::where('level', 'petugas')->orWhere('level', 'admin')->get(),
         ]);
         

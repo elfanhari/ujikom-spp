@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'email' => 'yasrifan@gmail.com',
                 'username' => 'yasrifan',
                 'level' => 'petugas',
-                'password' => bcrypt('petugas'),
+                'password' => 'petugas',
             ],
             [   // 2 - PETUGAS
                 'name' => 'Dian Nugraha, S.Pd',
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
                 'email' => 'dian@gmail.com',
                 'username' => 'dian',
                 'level' => 'petugas',
-                'password' => bcrypt('petugas'),
+                'password' => 'petugas',
             ],
             [   // 3 - ADMIN
                 'name' => 'Maman Suparman, S.T',
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
                 'email' => 'maman@gmail.com',
                 'username' => 'maman',
                 'level' => 'admin',
-                'password' => bcrypt('admin'),
+                'password' => 'admin',
             ],
             [   // 4 - ADMIN
                 'name' => 'Wahyu Suryaman, S.T',
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
                 'email' => 'wahyu@gmail.com',
                 'username' => 'wahyu',
                 'level' => 'admin',
-                'password' => bcrypt('admin'),
+                'password' => 'admin',
             ],
             [   // 5 - SISWA
                 'name' => 'Elfan Hari Saputra',
@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
                 'email' => 'elfan@gmail.com',
                 'username' => 'elfan',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
             [   // 6 - SISWA
                 'name' => 'Alfitka Haerul Kurniawan',
@@ -87,7 +87,7 @@ class UserSeeder extends Seeder
                 'email' => 'alfitka@gmail.com',
                 'username' => 'alfitka',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
             [   // 7 - SISWA
                 'name' => 'Khikmal Kurniawan',
@@ -102,7 +102,7 @@ class UserSeeder extends Seeder
                 'email' => 'khikmal@gmail.com',
                 'username' => 'khikmal',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
             [   // 8 - SISWA
                 'name' => 'Dwi Utami',
@@ -117,7 +117,7 @@ class UserSeeder extends Seeder
                 'email' => 'dwi@gmail.com',
                 'username' => 'dwi',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
             [   // 9 - SISWA
                 'name' => 'Intan',
@@ -132,7 +132,7 @@ class UserSeeder extends Seeder
                 'email' => 'intan@gmail.com',
                 'username' => 'intan',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
             [   // 10 - SISWA
                 'name' => 'Cantika Aurelia April',
@@ -147,7 +147,7 @@ class UserSeeder extends Seeder
                 'email' => 'cantika@gmail.com',
                 'username' => 'cantika',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
             [   // 11 - SISWA
                 'name' => 'Delista',
@@ -162,7 +162,7 @@ class UserSeeder extends Seeder
                 'email' => 'delista@gmail.com',
                 'username' => 'delista',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
             [   // 12 - SISWA
                 'name' => 'Fera Asti Setiani',
@@ -177,7 +177,7 @@ class UserSeeder extends Seeder
                 'email' => 'fera@gmail.com',
                 'username' => 'fera',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
             [   // 13 - SISWA
                 'name' => 'Andre Daniswara Putra',
@@ -192,7 +192,7 @@ class UserSeeder extends Seeder
                 'email' => 'andre@gmail.com',
                 'username' => 'andre',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
             [   // 14 - SISWA
                 'name' => 'Teguh Afriansyah',
@@ -207,7 +207,7 @@ class UserSeeder extends Seeder
                 'email' => 'teguh@gmail.com',
                 'username' => 'teguh',
                 'level' => 'siswa',
-                'password' => bcrypt('siswa'),
+                'password' => 'siswa',
             ],
         ])->each(function($user){
             User::create($user);

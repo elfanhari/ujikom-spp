@@ -1,7 +1,14 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center poppins">Data siswa</h5>
+    <h5 class="mb-3 fw-bold poppins">
+        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi fw-bold bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </button> Data Siswa</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,21 +52,9 @@
                 <div class="card-body">
 
                     @if ($siswa->count() > 0)
-                        <form
-                            class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search w-xs-full">
-                            <div class="input-group mb-3 mt-0">
-                                <input type="text" name="search" id="search"
-                                    class="form-control bg-light border-0 small" placeholder="Cari..." aria-label="Search"
-                                    aria-describedby="basic-addon2" value="{{ request('search') }}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        
                         <div class="table-responsive">
-                            <table class="table table-sm table-hover fs-14 c-black">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
@@ -137,10 +132,6 @@
                                 </tbody>
                             </table>
                         </div>
-
-                            <div class="float-right">
-                                {{ $siswa->links() }}
-                            </div>
                     
                     @else
                         

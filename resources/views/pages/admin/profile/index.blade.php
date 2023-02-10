@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-hover fs-14 c-black">
+                        <table class="table table-sm table-hover fs-14 c-black" >
                             <tr class="border-bottom">
                                 <div class="text-center postion-relative">
 

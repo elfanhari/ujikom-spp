@@ -49,7 +49,7 @@
                     </form>
 
                     @if ($siswa->count()>0)
-                       <form action="" method="get" class="{{ !request('kelas_id') ? 'd-none' : '' }}">
+                       <form action="" method="get" class="{{ !request('kelas_id') ? 'd-none' : '' }} input-group-sm fs-14">
                         <div class="input-group mt-3">
                             <select name="siswa_id" id="siswa_id" value="{{ old('siswa_id') }}"
                                 class="text-black form form-control form-select mt-0  @error('siswa_id') is-invalid @enderror">
@@ -69,7 +69,7 @@
                     @endif
 
                     @if ($siswaCek->count() > 0)
-                        <form action="{{ route('pembayaran.store') }}" method="POST" class="input-group-sm">
+                        <form action="{{ route('pembayaran.store') }}" method="POST" class="input-group-sm fs-14">
 
                             @csrf
                             @include('pages.admin.entripembayaran._addform')

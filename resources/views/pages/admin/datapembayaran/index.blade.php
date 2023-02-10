@@ -25,21 +25,9 @@
                 <div class="card-body">
 
                     @if ($pembayaran->count() > 0)
-                        <form
-                            class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search w-xs-full">
-                            <div class="input-group mb-3 mt-0">
-                                <input type="text" name="search" id="search"
-                                    class="form-control bg-light border-0 small" placeholder="Cari..." aria-label="Search"
-                                    aria-describedby="basic-addon2" value="{{ request('search') }}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        
                         <div class="table-responsive">
-                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
@@ -123,11 +111,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        Sekarang di halaman: {{ $pembayaran->currentPage() }}<br>
-                        Jumlah Data: {{ $pembayaran->total() }}<br>
-                        Data perhalaman: {{ $pembayaran->perPage() }}<br>
-                        <br>
-                        {{ $pembayaran->links() }}
                     @else
                         
                       Data tidak ditemukan. <a href="{{ route('siswa.index') }}" class="">Refresh halaman</a>

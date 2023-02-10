@@ -20,7 +20,7 @@ class PembayaranController extends Controller
     public function index()
     {
         return view('pages.admin.datapembayaran.index', [
-            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->latest()->paginate('10'),
+            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->latest()->get(),
         ]);
     }
 

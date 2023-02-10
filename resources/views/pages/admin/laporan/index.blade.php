@@ -57,7 +57,7 @@
             <div class="card mt-4">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-primary">Laporan Transaksi</p>
-                    <form action="{{ route('laporan.create') }}" target="_blank" method="GET">
+                    <form action="{{ route('laporan.create') }}" target="_blank" method="GET" class="d-inline">
                     @csrf
                     <input type="hidden" name="petugas_id" id="petugas_id" value="{{ request('petugas_id') }}">
                     <input type="hidden" name="daritanggal" id="daritanggal" value="{{ request('daritanggal') }}">
@@ -74,7 +74,8 @@
                         @if ($pembayaran->count() < 1)
                             Data tidak ditemukan. <a href="{{ route('laporan.index') }}">Refresh halaman</a>
                         @else
-                            <table class="table table-sm table-hover fs-14 c-black">
+                        
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
@@ -113,10 +114,6 @@
                                 </tbody>
                             </table>
 
-                            <div class="float-right">
-                                {{ $pembayaran->links() }}
-                            </div>
-                            
                         @endif
 
                     </div>

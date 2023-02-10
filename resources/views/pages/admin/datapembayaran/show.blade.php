@@ -2,7 +2,14 @@
 
 @section('content')
 
-    <h5 class="mb-3 fw-bold text-xs-center poppins">Data Pembayaran</h5>
+    <h5 class="mb-3 fw-bold poppins">
+        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi fw-bold bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </button> Data Pembayaran</h5>
 
     <div class="row mb-3">
       
@@ -17,7 +24,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-sm table-hover fs-14 c-black">
+                    <table class="table table-sm table-hover fs-14 c-black" id="table1">
                           <tr class="border-bottom">
                             <td>Waktu Transaksi</td>
                             <td style="width: 1px;">:</td>
@@ -75,7 +82,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-sm table-hover fs-14 c-black">
+                    <table class="table table-sm table-hover fs-14 c-black" id="table1">
                           <tr class="border-bottom">
                             <div class="text-center">
                               <img src="/sb-admin/img/profil.png" class="mb-3 rounded-circle" alt="" style="width: 100px;">
@@ -133,7 +140,7 @@
                      <small> <a href="">{{ $pembayaran->userSiswa->name }}</a> belum memiliki riwayat pembayaran.</small>
                     @else
                     <table class="table table-sm table-hover fs-14 c-black">
-                      <tr class="border-bottom bg-dark text-white"">
+                      <tr class="border-bottom bg-dark text-white">
                         <td>#</td>
                         <td>Tanggal</td>
                         <td>Pembayaran untuk</td>

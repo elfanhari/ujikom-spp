@@ -1,5 +1,5 @@
 
-<label for="name" class="mt-2">Nama admin</label>
+<label for="name" class="mt-0">Nama admin</label>
 <input type="text" value="{{ old('name') }}" name="name" id="name" class="text-black input-sm form form-control mt-0  @error('name') is-invalid @enderror" placeholder="Masukkan nama admin">
 @error('name')
   <span class="invalid-feedback mt-1">{{ $message }}</span>

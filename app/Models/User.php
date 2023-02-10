@@ -77,7 +77,7 @@ class User extends Authenticatable
         return 'identifier';
     }
 
-    public function setPasswordAttribute($password)
+    public function setPasswordAttribute($password) // Bcrypt Otomatis
     {
         $this->attributes['password'] = bcrypt($password);
     }

@@ -41,7 +41,7 @@
         <hr />
 
         <div class="table-responsive fs-12">
-          <table class="table table-sm table-hover fs-14 c-black">
+          <table class="table table-sm table-hover fs-14 c-black" id="table1">
             <thead>
                 <tr class="bg-white text-black">
                     <th scope="col">#</th>

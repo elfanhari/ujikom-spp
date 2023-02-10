@@ -1,7 +1,15 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center poppins">Data Kompetensi Keahlian</h5>
+    <h5 class="mb-3 fw-bold poppins">
+        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi fw-bold bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </button> Data Kompetensi Keahlian
+    </h5>
 
 
 
@@ -24,7 +32,7 @@
                         <p class="m-0 font-weight-bold text-primary">Input Data Prodi</p>
                     </div>
                     <div class="card-body input-group-sm">
-                        <form action="{{ route('prodi.store') }}" method="POST">
+                        <form action="{{ route('prodi.store') }}" method="POST" class="input-group-sm">
                             @csrf
 
                             @include('pages.admin.dataprodi._addform')
@@ -42,7 +50,7 @@
                     <p class="m-0 font-weight-bold text-primary">Input Data Prodi</p>
                 </div>
                 <div class="card-body input-group-sm">
-                    <form action="{{ route('prodi.store') }}" method="POST">
+                    <form action="{{ route('prodi.store') }}" method="POST" class="input-group-sm fs-14">
                         @csrf
 
                         @include('pages.admin.dataprodi._addform')
@@ -57,15 +65,15 @@
             <div class="card fs-16 mb">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-primary">Data Prodi</p>
-                    <button class="float-right btn btn-sm btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse"
-                    aria-expanded="true" aria-controls="collapseExample">
-                    + Prodi
-                </button>
+                    <button class="float-right btn d-sm-none btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse" aria-expanded="true" aria-controls="collapseExample">
+                        + Prodi
+                    </button>
                 </div>
                 <div class="card-body">
 
                     @if ($prodi->count() > 0)
-                        <form
+                        {{-- <form
                             class="w-xs-full float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group mb-3 mt-0">
                                 <input type="text" name="search" id="search"
@@ -77,9 +85,9 @@
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                        </form> --}}
                         <div class="table-responsive">
-                            <table class="table table-sm table-hover fs-14 c-black">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
@@ -108,35 +116,41 @@
                                                     </svg>
                                                 </a>
 
-                                                <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2" data-bs-toggle="modal" data-bs-target="#modalDelete">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor"
-                                                        class="bi bi-trash3-fill pt-0" viewBox="0 0 16 16">
+                                                <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2"
+                                                    data-bs-toggle="modal" data-bs-target="#modalDelete">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash3-fill pt-0"
+                                                        viewBox="0 0 16 16">
                                                         <path
                                                             d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                                     </svg>
                                                 </button>
-                                                <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                  <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                      <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                      </div>
-                                                      <div class="modal-body">
-                                                        Apakah anda yakin data tersebut akan dihapus?
-                                                      </div>
-                                                      <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <form action="{{ route('prodi.destroy', $tampilkan) }}" method="POST"
-                                                            class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-primary">Iya</button>
-                                                        </form>
-                                                      </div>
+                                                <div class="modal fade" id="modalDelete" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Hapus Data
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Apakah anda yakin data tersebut akan dihapus?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Batal</button>
+                                                                <form action="{{ route('prodi.destroy', $tampilkan) }}"
+                                                                    method="POST" class="d-inline">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Iya</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                  </div>
                                                 </div>
 
                                             </td>
@@ -146,11 +160,8 @@
                                 </tbody>
                             </table>
                         </div>
-                    
                     @else
-                        
-                      Data tidak ditemukan. <a href="{{ route('prodi.index') }}" class="">Refresh halaman</a>
-                    
+                        Data tidak ditemukan. <a href="{{ route('prodi.index') }}" class="">Refresh halaman</a>
                     @endif
 
                 </div>

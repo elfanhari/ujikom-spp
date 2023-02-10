@@ -38,23 +38,11 @@
                                 <div class="mt-3">
                                     <p class="d-inline text-warning" style="font-size: 16px;">NB: History pembayaran diurutkan
                                         berdasarkan transaksi terbaru!</p>
-                                    <form
-                                        class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                        <div class="input-group mb-3 mt-0">
-                                            <input type="text" class="form-control bg-light border-0 small"
-                                                placeholder="Cari..." aria-label="Search" aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fas fa-search fa-sm"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
 
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover fs-14 transaction-table c-black active"
-                                        id="table-all">
+                                        id="table1">
                                         <thead>
                                             <tr class="bg-dark text-white">
                                                 <th scope="col">#</th>
@@ -106,23 +94,11 @@
                                 <div class="mt-3">
                                     <p class="d-inline text-warning" style="font-size: 16px;">NB: History pembayaran diurutkan
                                         berdasarkan transaksi terbaru!</p>
-                                    <form
-                                        class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                        <div class="input-group mb-3 mt-0">
-                                            <input type="text" class="form-control bg-light border-0 small"
-                                                placeholder="Cari..." aria-label="Search" aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fas fa-search fa-sm"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-
+                                
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover fs-14 transaction-table c-black"
-                                        id="table-success">
+                                        id="table2">
                                         <thead>
                                             <tr class="bg-dark text-white">
                                                 <th scope="col">#</th>

@@ -37,7 +37,7 @@ class ProfileController extends Controller
     public function updatePassword(UpdatePasswordRequest $request)
     {
         if(Hash::check($request->password_sebelumnya, auth()->user()->password)) {
-            auth()->user()->update(['password' => bcrypt($request->password)]);
+            auth()->user()->update(['password' => $request->password]);
             return redirect()->route('profile.index')->with('info', 'Password anda berhasil diperbarui!');
         }
     }

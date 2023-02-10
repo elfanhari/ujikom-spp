@@ -20,7 +20,7 @@ class SiswaController extends Controller
             return view('denied');
         }
 
-        $siswa = User::with('kelas')->where('level', 'siswa');
+        $siswa = User::with('kelas')->where('level', 'siswa')->latest();
 
         if(request('search')) {
             $siswa->where('name', 'like', '%' . request('search') . '%')
@@ -35,7 +35,7 @@ class SiswaController extends Controller
         }
 
         return view('pages.admin.datasiswa.index', [
-            'siswa' => $siswa->latest()->paginate(5),
+            'siswa' => $siswa->get(),
             'kelas' => Kelas::all(),
             'spp' => Spp::all(),
         ]);

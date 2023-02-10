@@ -9,6 +9,7 @@
 .dataTable-top,
 .dataTable-bottom {
 	padding: 4px 4px 4px 4px;
+	margin-bottom: 12px;
 }
 
 .dataTable-top > nav:first-child,
@@ -33,7 +34,7 @@
 
 .dataTable-input {
 	/* padding: 6px 12px;
-	border-radius: 10px; */
+	border-radius: 5px; */
 	display: block;
 	width: 100%;
 	padding: 0.360rem 0.75rem;
@@ -73,7 +74,7 @@
 	list-style: none;
 	float: left;
 	border: 1px solid transparent;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 .dataTable-pagination a {
@@ -84,13 +85,13 @@
 	position: relative;
 	text-decoration: none;
 	color: #333;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 .dataTable-pagination a:hover {
 	background-color: #e0f2fe;
 	border: 1px solid transparent;
-	border-radius: 10px; 
+	border-radius: 5px; 
 }
 
 .dataTable-pagination .active a,
@@ -98,7 +99,7 @@
 .dataTable-pagination .active a:hover {
 	background-color: #e0f2fe;
 	border: 1px solid #e0f2fe;
-	border-radius: 10px;
+	border-radius: 5px;
 	color: #000;
 	cursor: default;
 }
@@ -108,7 +109,7 @@
 .dataTable-pagination .disabled a:focus,
 .dataTable-pagination .disabled a:hover {
 	cursor: not-allowed;
-	border-radius: 10px;
+	border-radius: 5px;
 	background-color: #e0f2fe;
 }
 
@@ -117,13 +118,13 @@
 .dataTable-pagination .disabled a:hover {
 	cursor: not-allowed;
 	background-color: #e0f2fe;
-	border-radius: 10px;
+	border-radius: 5px;
 	opacity: 0.4;
 }
 
 .dataTable-pagination .pager a {
 	font-weight: bold;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 /* TABLE */

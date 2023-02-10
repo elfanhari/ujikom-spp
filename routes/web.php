@@ -35,25 +35,23 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// Route::post('/ceklogin', [AuthController::class, 'cekLogin'])->name('ceklogin');
-
 Route::get('/loginadmin', [AuthController::class, 'pageLoginAdmin'])->name('loginadmin.page')->middleware('guest');
 Route::post('/loginadmin', [AuthController::class, 'cekLoginAdmin'])->name('loginadmin.check')->middleware('guest');
 
 // ADMIN DAN PETUGAS
 Route::group(['middleware' => ['auth']], function(){
-
+    
     Route::view('/petugas', 'pages.petugas.dashboard.index')->name('petugas.dashboard'); // PETUGAS - Dashboard
     Route::view('/siswa', 'pages.siswa.dashboard.index')->name('siswa.dashboard'); // SISWA - Dashboard
-
+    
     Route::prefix('admin')->group(function () {
-
+        
         Route::get('/', DashboardController::class)->name('admin.dashboard');        
         Route::resource('/prodi', KompetensikeahlianController::class); // ADMIN - Kompetensi Keahlian
         Route::resource('/kelas', KelasController::class);
         Route::resource('/spp', SppController::class);
-        Route::resource('/siswa', SiswaController::class);
         Route::resource('/petugas', PetugasController::class);
+        Route::resource('/siswa', SiswaController::class);
         Route::resource('/admin', AdminController::class);
         Route::resource('/pembayaran', PembayaranController::class);
         Route::get('entri', [PembayaranController::class, 'create'])->name('entri.create');
@@ -88,7 +86,7 @@ Route::group(['middleware' => ['auth']], function(){
 
         Route::get('/riwayat', function() {
             return view('pages.siswa.history.index', [
-                'transaksi' => Pembayaran::where('siswa_id', auth()->user()->id)->get()
+                'transaksi' => Pembayaran::where('siswa_id', auth()->user()->id)->latest()->get()
             ]);
         });
 
