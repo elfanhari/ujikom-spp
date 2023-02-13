@@ -1,6 +1,6 @@
 <div class="form-floating mb-3">
   <input type="password" name="current_password"
-      value="{{ old('current_password') }}"class="form-control text-black @error('current_password') is-invalid @enderror"
+      value="{{ old('current_password') }}" class="form-control text-black @error('current_password') is-invalid @enderror"
       id="floatingInput" placeholder="Masukkan password sebelumnya">
   <label for="floatingInput" class="">Password Sebelumnya</label>
   @error('current_password')

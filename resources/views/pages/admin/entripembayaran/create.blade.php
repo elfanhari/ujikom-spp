@@ -38,7 +38,9 @@
                                 class="text-black disabled form form-control form-select mt-0  @error('kelas_id') is-invalid @enderror">
                                 <option value="" selected disabled>-- Pilih kelas --</option>
                                 @foreach ($kelas as $tampilkan)
-                                    <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == request('kelas_id') ? 'selected' : '' }}>{{ $tampilkan->name }}</option>
+                                    <option value="{{ $tampilkan->id }}"
+                                        {{ $tampilkan->id == request('kelas_id') ? 'selected' : '' }}>{{ $tampilkan->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('kelas_id')
@@ -48,24 +50,27 @@
                         </div>
                     </form>
 
-                    @if ($siswa->count()>0)
-                       <form action="" method="get" class="{{ !request('kelas_id') ? 'd-none' : '' }} input-group-sm fs-14">
-                        <div class="input-group mt-3">
-                            <select name="siswa_id" id="siswa_id" value="{{ old('siswa_id') }}"
-                                class="text-black form form-control form-select mt-0  @error('siswa_id') is-invalid @enderror">
-                                <option value="" selected disabled>-- Pilih siswa --</option>
-                                @foreach ($siswa as $tampilkan)
-                                    <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == request('siswa_id') ? 'selected' : '' }}>{{ $tampilkan->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('siswa_id')
-                                <span class="invalid-feedback mt-1">{{ $message }}</span>
-                            @enderror
-                            <button class="btn btn-outline-primary" type="submit">Cek</button>
-                        </div>
-                       </form>
+                    @if ($siswa->count() > 0)
+                        <form action="" method="get"
+                            class="{{ !request('kelas_id') ? 'd-none' : '' }} input-group-sm fs-14">
+                            <div class="input-group mt-3">
+                                <select name="siswa_id" id="siswa_id" value="{{ old('siswa_id') }}"
+                                    class="text-black form form-control form-select mt-0  @error('siswa_id') is-invalid @enderror">
+                                    <option value="" selected disabled>-- Pilih siswa --</option>
+                                    @foreach ($siswa as $tampilkan)
+                                        <option value="{{ $tampilkan->id }}"
+                                            {{ $tampilkan->id == request('siswa_id') ? 'selected' : '' }}>
+                                            {{ $tampilkan->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('siswa_id')
+                                    <span class="invalid-feedback mt-1">{{ $message }}</span>
+                                @enderror
+                                <button class="btn btn-outline-primary" type="submit">Cek</button>
+                            </div>
+                        </form>
                     @else
-                       <p class="mt-3">Siswa tidak ada.</p>
+                        <p class="mt-3">Siswa tidak ada.</p>
                     @endif
 
                     @if ($siswaCek->count() > 0)
@@ -93,8 +98,14 @@
                                 <table class="table table-sm table-hover fs-14 c-black">
                                     <tr class="border-bottom">
                                         <div class="text-center">
-                                            <img src="/img/profil.png" class="mb-3 rounded-circle" alt=""
-                                                style="width: 100px;">
+                                            @if ($userphoto->count() > 0)
+                                                <img src="/gallery/{{ $userphoto->first()->url }}"
+                                                    class="img-profile mb-3 rounded-circle" alt="{{ $tampilkan->name }}"
+                                                    style="width: 100px; height: auto; overflow: hidden;">
+                                            @else
+                                                <img src="/img/profil.png" class="img-profile mb-3 rounded-circle"
+                                                    alt="{{ $tampilkan->name }}" style="width: 100px;">
+                                            @endif
                                         </div>
                                     </tr>
                                     <tr class="border-bottom">

@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\UpdateAdminRequest;
+use App\Http\Requests\UpdatePetugasRequest;
 use App\Models\User;
+use App\Models\Userphoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
     public function index()
-    {
+    {   
         $admin = User::where('level', 'admin');
-
-        if(request('search')) {
-            $admin->where('name', 'like', '%' . request('search') . '%')
-                ->orWhere('telepon', 'like', '%' . request('search') . '%')
-                ->orWhere('username', 'like', '%' . request('search') . '%')
-                ->orWhere('email', 'like', '%' . request('search') . '%');
-        }
-
         return view('pages.admin.dataadmin.index', [
             'admin' => $admin->latest()->get(),
         ]);
@@ -44,6 +40,8 @@ class AdminController extends Controller
     {   
         return view('pages.admin.dataadmin.show', [
             'admin' => $admin,
+            'userphoto' => Userphoto::where('user_id', $admin->id)->get(),
+            'redirect' => '/admin/admin/' . $admin->identifier
         ] );
     }
 
@@ -54,7 +52,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function update(AdminRequest $request, User $admin)
+    public function update(UpdateAdminRequest $request, User $admin)
     {
         $admin->update($request->all());
         return redirect(route('admin.index'))->with('info', 'Data berhasil diubah!');

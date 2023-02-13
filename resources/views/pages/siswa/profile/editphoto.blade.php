@@ -1,4 +1,4 @@
-@extends('master.admin.main')
+@extends('master.siswa.main')
 
 @section('content')
 
@@ -9,7 +9,7 @@
           <path fill-rule="evenodd"
               d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
       </svg>
-  </button> Foto profil {{ $name }}</h5>
+  </button> Foto profil saya</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -36,10 +36,9 @@
                   <td style="text-align: center; vertical-align: middle;">
                   
                   <span>
-                    <form action="{{ route('photo-user.delete', $tampilkan->id) }}" method="POST">
+                    <form action="{{ route('photo-siswa.delete', $tampilkan->id) }}" method="POST">
                       @method('DELETE')
                       @csrf
-                      <input type="hidden" name="redirect" id="redirect" value="{{ $redirect }}">
                       <input type="hidden" name="user_id" value="{{ $tampilkan->user_id }}">
                       <input type="hidden" name="picture" value="{{ $tampilkan->url }}">
                       <button class="btn btn-danger btn-sm mx-2" onclick="return confirm('Apakah data tersebut akan dihapus?')">
@@ -55,9 +54,8 @@
             </table>
           </div>
           <small class="fs-12"> <i>Ganti foto user</i></small>
-          <form action="{{ route('photo-user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('photo-siswa.update', $user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="redirect" id="redirect" value="{{ $redirect }}">
             @method('PUT')
 
             <div class="">
@@ -79,9 +77,8 @@
           @else 
 
           <small class="fs-12"> <i>Upload foto user</i></small>
-          <form action="{{ route('photo-user.store') }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('photo-siswa.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="redirect" id="redirect" value="{{ $redirect }}">
             <div class="">
               <div class="my-2">
                 <img class="img-preview img-fluid mb-2 col-sm-6 rounded-circle" style="max-width: 200px">

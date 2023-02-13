@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PembayaranRequest;
 use App\Models\Kelas;
 use App\Models\Pembayaran;
@@ -13,6 +14,7 @@ use Illuminate\Support\Str;
 
 use App\Http\Controllers;
 use App\Models\Bulanbayar;
+use App\Models\Userphoto;
 use Illuminate\Support\Facades\Redis;
 
 class PembayaranController extends Controller
@@ -35,8 +37,9 @@ class PembayaranController extends Controller
             'siswaCek' => $siswaCek->get(),
             'spp' => Spp::all(),
             'bulanbayar' => Bulanbayar::all(),
-            'kelas' => Kelas::all()
-        ]);
+            'kelas' => Kelas::all(),
+            'userphoto' => Userphoto::where('user_id', $request->siswa_id)->get(),
+         ]);
     }
     
     

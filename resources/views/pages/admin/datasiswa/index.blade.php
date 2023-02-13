@@ -1,6 +1,7 @@
 @extends('master.admin.main')
 
 @section('content')
+
     <h5 class="mb-3 fw-bold poppins">
         <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi fw-bold bi-arrow-left"

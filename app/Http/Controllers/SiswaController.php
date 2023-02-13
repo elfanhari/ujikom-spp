@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SiswaRequest;
 use App\Models\Kelas;
 use App\Models\Pembayaran;
 use App\Models\Spp;
 use App\Models\User;
+use App\Models\Userphoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -20,22 +22,8 @@ class SiswaController extends Controller
             return view('denied');
         }
 
-        $siswa = User::with('kelas')->where('level', 'siswa')->latest();
-
-        if(request('search')) {
-            $siswa->where('name', 'like', '%' . request('search') . '%')
-                ->orWhere('kelas_id', 'like', '%' . request('search') . '%')
-                ->orWhere('spp_id', 'like', '%' . request('search') . '%')
-                ->orWhere('nisn', 'like', '%' . request('search') . '%')
-                ->orWhere('nis', 'like', '%' . request('search') . '%')
-                ->orWhere('telepon', 'like', '%' . request('search') . '%')
-                ->orWhere('alamat', 'like', '%' . request('search') . '%')
-                ->orWhere('username', 'like', '%' . request('search') . '%')
-                ->orWhere('email', 'like', '%' . request('search') . '%');
-        }
-
         return view('pages.admin.datasiswa.index', [
-            'siswa' => $siswa->get(),
+            'siswa' => User::where('level', 'siswa')->latest()->get(),
             'kelas' => Kelas::all(),
             'spp' => Spp::all(),
         ]);
@@ -58,13 +46,17 @@ class SiswaController extends Controller
         return redirect(route('siswa.index'))->with('info', 'Data berhasil ditambahkan!');
     }
 
-    // Siswa - Store
+    // Siswa - Show
     public function show(User $siswa)
     {   
+
         return view('pages.admin.datasiswa.show', [
             'siswa' => $siswa,
-            'historysiswa' => Pembayaran::where('siswa_id', $siswa->id)->latest()->get()
+            'historysiswa' => Pembayaran::where('siswa_id', $siswa->id)->latest()->get(),
+            'userphoto' => Userphoto::where('user_id', $siswa->id)->get(),
+            'redirect' => '/admin/siswa/' . $siswa->identifier
         ]);
+
     }
 
     // Siswa - Edit
@@ -84,7 +76,7 @@ class SiswaController extends Controller
         return redirect(route('siswa.index'))->with('info', 'Data berhasil diubah!');
     }
 
-    // Destroy - Delete
+    // Siswa - Delete
     public function destroy(User $siswa)
     {
         $siswa->delete();

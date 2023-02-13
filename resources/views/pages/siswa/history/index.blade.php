@@ -1,27 +1,25 @@
 @extends('master.siswa.main')
 
 @section('content')
-    
-<div class="d-flex justify-content-between align-items-center gap-3">
-  <h4 class="title-section-content">History</h4>
-  {{-- <a href="#" class="btn-link">View All Shoes</a> --}}
-</div>
+    <h5 class="mb-3 fw-bold poppins">
+       Riwayat Transaksi
+    </h5>
 
-@if ($transaksi->count() < 1)
-  Anda belum mempunyai transaksi.
-@else
-<div class="list-group row col-md-6">
-  @foreach ($transaksi as $tampilkan)
-      <div href="#" class="list-group-item list-group-item-action" aria-current="true">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1"><b>SPP</b></h5>
-          <small>{{ $tampilkan->created_at->diffForHumans() }}</small>
+    @if (session()->has('info'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @include('_success')
+            <strong>Berhasil.</strong> {{ session('info') }}
         </div>
-        <p class="mb-1"><b>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</b></p>
-        <p class="mb-1">{{ $tampilkan->bulanbayar->name }} | {{ $tampilkan->tahunbayar }}</p>
-      </div>
-      @endforeach
-    </div>
-@endif
+    @endif
 
+    <div class="row">
+      .
+    </div>
+
+    <script>
+        var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
+        var collapseList = collapseElementList.map(function(collapseEl) {
+            return new bootstrap.Collapse(collapseEl)
+        })
+    </script>
 @endsection

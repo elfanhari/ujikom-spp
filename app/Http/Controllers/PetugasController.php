@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PetugasRequest;
+use App\Http\Requests\UpdatePetugasRequest;
 use App\Models\User;
+use App\Models\Userphoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -41,7 +44,11 @@ class PetugasController extends Controller
 
     public function show(User $petuga)
     {   
-        return view('pages.admin.datapetugas.show', compact('petuga'));
+        return view('pages.admin.datapetugas.show',[
+            'petuga' => $petuga,
+            'userphoto' => Userphoto::where('user_id', $petuga->id)->get(),
+            'redirect' => '/admin/petugas/' . $petuga->identifier
+        ]);
     }
 
 
@@ -51,7 +58,7 @@ class PetugasController extends Controller
     }
 
 
-    public function update(PetugasRequest $request, User $petuga)
+    public function update(UpdatePetugasRequest $request, User $petuga)
     {
         $petuga->update($request->all());
         return redirect(route('petugas.index'))->withInfo('Data berhasil diubah!');

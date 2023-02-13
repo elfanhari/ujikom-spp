@@ -34,5 +34,5 @@
 @enderror
 
 <input type="hidden" value="{{ old('level', $petuga->level) }}" name="level" id="password" class="text-black input-sm form form-control mt-0" >
-<input type="hidden" value="{{ old('password', $petuga->password) }}" name="password" id="password" class="text-black input-sm form form-control mt-0" >
+{{-- <input type="hidden" value="{{ old('password', $petuga->password) }}" name="password" id="password" class="text-black input-sm form form-control mt-0" > --}}
 
