@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use App\Http\Controllers;
+use App\Models\Buktipembayaran;
 use App\Models\Bulanbayar;
 use App\Models\Userphoto;
 use Illuminate\Support\Facades\Redis;
@@ -57,6 +58,7 @@ class PembayaranController extends Controller
             'pembayaran' => $pembayaran,
             'historysiswa' => Pembayaran::where('siswa_id', $pembayaran->siswa_id)->latest()->get(),
             'userphoto' => Userphoto::where('user_id', $pembayaran->siswa_id)->get(),
+            'buktipembayaran' => Buktipembayaran::where('pembayaran_id', $pembayaran->id)->get(),
         ]);
     }
 

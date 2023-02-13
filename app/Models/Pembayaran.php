@@ -35,7 +35,17 @@ class Pembayaran extends Model
         return $this->belongsTo(Bulanbayar::class, 'bulanbayar_id', 'id');
     }
 
-    public function getRouteKeyName()
+    public function buktipembayaran() //relasi
+    {
+        return $this->hasOne(Buktipembayaran::class, 'pembayaran_id','id');
+    }
+
+    public function metodepembayaran() //relasiInverse
+    {
+        return $this->belongsTo(Metodepembayaran::class, 'metodepembayaran_id', 'id');
+    }
+
+    public function getRouteKeyName() // Route Model Bindings
     {
         return 'identifier';
     }

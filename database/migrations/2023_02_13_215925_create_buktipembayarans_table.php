@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserphotosTable extends Migration
+class CreateBuktipembayaransTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateUserphotosTable extends Migration
      */
     public function up()
     {
-        Schema::create('userphotos', function (Blueprint $table) {
+        Schema::create('buktipembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->string('identifier')->unique()->nullable();
+            $table->foreignId('pembayaran_id');
             $table->text('url');
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ class CreateUserphotosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userphotos');
+        Schema::dropIfExists('buktipembayarans');
     }
 }

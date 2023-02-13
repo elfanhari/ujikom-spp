@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserphotosTable extends Migration
+class CreateMetodepembayaransTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateUserphotosTable extends Migration
      */
     public function up()
     {
-        Schema::create('userphotos', function (Blueprint $table) {
+        Schema::create('metodepembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->text('url');
+            $table->string('identifier')->unique()->nullable();
+            $table->string('payment')->nullable();
+            $table->string('number')->nullable();
+            $table->string('atasnama')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateUserphotosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userphotos');
+        Schema::dropIfExists('metodepembayarans');
     }
 }

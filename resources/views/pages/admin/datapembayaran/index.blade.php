@@ -50,7 +50,10 @@
                                             <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                             <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
                                             <td> Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
-                                            <td>{{ $tampilkan->userPetugas->name }}</td>
+
+                                            <td>
+                                                {{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}
+                                            </td>
                                             <td class="">
 
                                             <a href="{{ route('pembayaran.show', $tampilkan) }}" type="button" class="btn btn-success pb-1 pt-0 px-2">

@@ -32,6 +32,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -41,6 +44,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -50,6 +56,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -59,6 +68,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -68,6 +80,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -77,6 +92,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -86,6 +104,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -95,6 +116,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -104,6 +128,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -113,6 +140,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -122,6 +152,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -131,6 +164,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
             [   //1
                 'petugas_id' => Arr::random($petugas_id),
@@ -140,6 +176,9 @@ class PembayaranSeeder extends Seeder
                 'tahunbayar' => '2023',
                 'jumlahbayar' => '120000',
                 'identifier' => 'i' . Str::random(9),
+                'metodepembayaran_id' => '8',
+                'jenistransaksi' => 'petugas',
+                'status' => 'sukses',
             ],  
         ])->each(function($pembayaran){
             Pembayaran::create($pembayaran);

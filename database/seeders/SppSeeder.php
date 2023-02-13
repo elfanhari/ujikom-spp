@@ -41,6 +41,6 @@ class SppSeeder extends Seeder
             ],
         ])->each(function($spp){
             Spp::create($spp);
-        });;
+        });
     }
 }

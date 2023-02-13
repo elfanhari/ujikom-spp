@@ -56,7 +56,7 @@
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->bulanbayar->name }} - {{ $pembayaran->tahunbayar }} </td>
                             </tr>
-                            <tr class="border-bottom">
+                            {{-- <tr class="border-bottom">
                                 <td>Tahun SPP</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->userSiswa->spp->tahun }}</td>
@@ -65,9 +65,38 @@
                                 <td>Nominal SPP</td>
                                 <td style="width: 1px;">:</td>
                                 <td>Rp{{ number_format($pembayaran->userSiswa->spp->nominal, 0, '.', '.') }}</td>
+                            </tr> --}}
+                            <tr class="border-bottom">
+                                <td>Jenis Pembayaran</td>
+                                <td style="width: 1px;">:</td>
+                                <td class="text-uppercase">{{ $pembayaran->jenistransaksi }}</td>
                             </tr>
+                            <tr class="border-bottom">
+                                <td>STATUS</td>
+                                <td style="width: 1px;">:</td>
+                                <td>
+                                    @if ($pembayaran->status == 'diproses')
+                                        <span class="badge bg-warning">{{ strtoupper($pembayaran->status) }}</span>
+                                    @elseif ($pembayaran->status == 'sukses')
+                                        <span class="badge bg-success">{{ strtoupper($pembayaran->status) }}</span>
+                                    @elseif ($pembayaran->status == 'gagal')
+                                        <span class="badge bg-danger">{{ strtoupper($pembayaran->status) }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            @if ($buktipembayaran->count() > 0)
+                            <tr class="border-bottom">
+                                <td>Bukti Pembayaran</td>
+                                <td style="width: 1px;">:</td>
+                                <td>
+                                    <img src="/buktipembayaran/{{ $buktipembayaran->first()->url }}" class="mb-3"
+                                    alt="{{ $pembayaran->userSiswa->name }}" style="width: 160px; height: auto; overflow: hidden;">
+                                </td>
+                            </tr>
+                            @endif
                         </table>
                     </div>
+                       
                 </div>
             </div>
         </div>
@@ -89,7 +118,8 @@
                                 <div class="text-center">
                                     @if ($userphoto->count() > 0)
                                         <img src="/gallery/{{ $userphoto->first()->url }}"
-                                            class="img-profile mb-3 rounded-circle" alt="{{ $pembayaran->userSiswa->name }}"
+                                            class="img-profile mb-3 rounded-circle"
+                                            alt="{{ $pembayaran->userSiswa->name }}"
                                             style="width: 100px; height: auto; overflow: hidden;">
                                     @else
                                         <img src="/img/profil.png" class="img-profile mb-3 rounded-circle"
@@ -138,6 +168,8 @@
                                 <td>{{ $pembayaran->userSiswa->spp->tahun }}</td>
                             </tr>
                         </table>
+
+
                     </div>
                     <div class="mt-3">
                         <div class="my-2 text-black text-xs-center fw-bold">

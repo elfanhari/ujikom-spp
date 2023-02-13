@@ -1,6 +1,5 @@
 <?php
 
-use UniSharp\LaravelFilemanager\Lfm;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;

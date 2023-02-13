@@ -31,6 +31,15 @@
                             </div>
                             <small class="text-secondary">{{ $tampilkan->created_at->diffForHumans() }}</small>
                             <div class="fs-14 mt-2 d-block">Pembayaran untuk <p class="text-primary d-inline mb-0">{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</p> </div>
+                            
+                            @if ($tampilkan->status == 'diproses')
+                                <span class="badge bg-warning">{{ strtoupper($tampilkan->status) }}</span>
+                            @elseif ($tampilkan->status == 'sukses')
+                                <span class="badge bg-success">{{ strtoupper($tampilkan->status) }}</span>
+                            @elseif ($tampilkan->status == 'gagal')
+                                <span class="badge bg-danger">{{ strtoupper($tampilkan->status) }}</span>
+                            @endif
+
                         </div>
                     </div>
                 @endforeach

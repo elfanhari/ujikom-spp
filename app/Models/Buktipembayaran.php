@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Userphoto extends Model
+class Buktipembayaran extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function user() {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+    public function pembayaran() //relasi Inverse
+    {
+        return $this->belongsTo(Buktipembayaran::class, 'id', 'pembayaran_id');
     }
-
 }
