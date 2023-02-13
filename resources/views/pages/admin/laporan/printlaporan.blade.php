@@ -82,7 +82,7 @@
         </div>
 
         <div class="row mt-5 fs-12">
-            <div class="col-4 offset-8 fs-14">
+            <div class="col-3 offset-9 fs-14">
                 <div>Mengetahui,</div>
                 <div class="mb-5 mt-0">Kepala SMK Negeri 3 Banjar,</div>
                 <div class="mt-5">Maman Sudirman, MM</div>

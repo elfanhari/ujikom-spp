@@ -12,7 +12,6 @@ class SiswaEntriController extends Controller
         return view('pages.siswa.entri.index');   
     }
 
-
     public function create()
     {
         //

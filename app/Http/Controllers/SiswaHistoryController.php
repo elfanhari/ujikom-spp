@@ -14,7 +14,7 @@ class SiswaHistoryController extends Controller
      */
     public function index()
     {
-        return view('pages.siswa.entri.index', [
+        return view('pages.siswa.history.index', [
             'transaksi' => Pembayaran::where('siswa_id', auth()->user()->id)->latest()->get()
         ]);
     }

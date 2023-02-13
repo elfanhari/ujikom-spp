@@ -15,6 +15,10 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaProfileController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SiswaDashboardController;
+use App\Http\Controllers\SiswaEntriController;
+use App\Http\Controllers\SiswaHistoryController;
+use App\Http\Controllers\SiswaNotifikasiController;
 use App\Http\Controllers\SiswaShowController;
 use App\Http\Controllers\SppController;
 use App\Http\Controllers\UserphotoController;
@@ -76,26 +80,11 @@ Route::group(['middleware' => ['auth']], function(){
     // SISWA
     Route::prefix('siswa')->group(function () {
 
-        Route::get('/beranda', function() {
-            if (auth()->user()->level !== 'siswa') { // Pembatasan Akses Selain Admin
-                return view('denied');
-            }
-            return view('pages.siswa.beranda.index');
-        })->name('siswa.beranda');
+        Route::resource('/beranda', SiswaDashboardController::class);
 
-        Route::get('/transaksi', function() {
-            return view('pages.siswa.transaksi.index');
-        });
-
-        Route::get('/riwayat', function() {
-            return view('pages.siswa.history.index', [
-                'transaksi' => Pembayaran::where('siswa_id', auth()->user()->id)->latest()->get()
-            ]);
-        });
-
-        Route::get('/notifikasi', function() {
-            return view('pages.siswa.notifikasi.index');
-        });
+        Route::resource('/entri', SiswaEntriController::class);
+        Route::resource('/riwayat', SiswaHistoryController::class);
+        Route::resource('/notifikasi', SiswaNotifikasiController::class);
 
         Route::get('/profile', [SiswaProfileController ::class, 'index'])->name('siswaprofile.index');
         Route::put('/profile', [SiswaProfileController::class, 'updateProfile'])->name('update-siswa.profile');
@@ -108,5 +97,4 @@ Route::group(['middleware' => ['auth']], function(){
 
     });
 });
-
 

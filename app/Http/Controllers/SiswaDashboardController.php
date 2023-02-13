@@ -17,7 +17,6 @@ class SiswaDashboardController extends Controller
             return view('denied');
         }
         
-        echo "berhasilll";
         return view('pages.siswa.beranda.index');
     }
 

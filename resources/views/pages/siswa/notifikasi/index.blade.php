@@ -13,7 +13,7 @@
     @endif
 
     <div class="row">
-      .
+      
     </div>
 
     <script>
