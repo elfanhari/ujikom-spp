@@ -67,7 +67,7 @@
                                 <span
                                     class="mr-2 d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
                                 @if (auth()->user()->userphoto)
-                                    <img class="img-profile rounded-circle"
+                                    <img class="img-profile rounded-circle" style="object-fit: cover"
                                         src="/gallery/{{ auth()->user()->userphoto->url }}">
                                 @else
                                     <img class="img-profile rounded-circle" src="/img/profil.png">

@@ -34,5 +34,4 @@
 
 <input type="hidden" name="jumlahbayar" value="{{ $pembayaran->jumlahbayar }}">
 <input type="hidden" value="{{ old('petugas_id', $pembayaran->petugas_id) }}" name="petugas_id" id="password" class="text-black input-sm form form-control mt-0" >
-<input type="hidden" value="{{ old('siswa_id', $pembayaran->siswa_id) }}" name="siswa_id" id="password" class="text-black input-sm form form-control mt-0" >
 

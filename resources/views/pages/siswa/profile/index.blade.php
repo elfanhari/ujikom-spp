@@ -26,7 +26,7 @@
                                     @if ($userphoto->count() > 0)
                                         <img src="/gallery/{{ $userphoto->first()->url }}"
                                             class="img-profile mb-3 rounded-circle" alt="{{ auth()->user()->name }}"
-                                            style="width: 100px; height: auto; overflow: hidden;">
+                                            style="width: 100px; object-fit: cover;">
                                     @else
                                         <img src="/img/profil.png" class="img-profile mb-3 rounded-circle"
                                             alt="{{ auth()->user()->name }}" style="width: 100px;">

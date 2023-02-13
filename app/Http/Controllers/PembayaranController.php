@@ -55,7 +55,8 @@ class PembayaranController extends Controller
     {
         return view('pages.admin.datapembayaran.show', [
             'pembayaran' => $pembayaran,
-            'historysiswa' => Pembayaran::where('siswa_id', $pembayaran->siswa_id)->latest()->get()
+            'historysiswa' => Pembayaran::where('siswa_id', $pembayaran->siswa_id)->latest()->get(),
+            'userphoto' => Userphoto::where('user_id', $pembayaran->siswa_id)->get(),
         ]);
     }
 
