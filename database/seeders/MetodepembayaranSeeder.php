@@ -16,25 +16,25 @@ class MetodepembayaranSeeder extends Seeder
         collect([
             [   //1
                 'identifier' => 'i' . Str::random(9),
-                'payment' => 'BCA',
+                'payment' => 'Transfer Bank - BCA',
                 'number' => $rand,
                 'atasnama' => 'SMK NEGERI 3 BANJAR'
             ],
             [   //2
                 'identifier' => 'i' . Str::random(9),
-                'payment' => 'MANDIRI',
+                'payment' => 'Transfer Bank - MANDIRI',
                 'number' => $rand,
                 'atasnama' => 'SMK NEGERI 3 BANJAR'
             ],
             [   //3
                 'identifier' => 'i' . Str::random(9),
-                'payment' => 'BRI',
+                'payment' => 'Transfer Bank - BRI',
                 'number' => $rand,
                 'atasnama' => 'SMK NEGERI 3 BANJAR'
             ],
             [   //4
                 'identifier' => 'i' . Str::random(9),
-                'payment' => 'BJB',
+                'payment' => 'Transfer Bank - BJB',
                 'number' => $rand,
                 'atasnama' => 'SMK NEGERI 3 BANJAR'
             ],

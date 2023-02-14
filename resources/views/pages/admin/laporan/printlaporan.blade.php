@@ -70,9 +70,14 @@
                         <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                         <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                         <td> 
-                          <a href="{{ route('petugas.show', $tampilkan->userPetugas->id) }}" class="text-decoration-none">
-                            {{ $tampilkan->userPetugas->name }}
-                          </a>
+                            @if ($tampilkan->jenistransaksi == 'petugas')
+                            <a href="{{ route('petugas.show', $tampilkan->userPetugas->identifier) }}"
+                                class="text-decoration-none">
+                                {{ $tampilkan->userPetugas->name }}
+                            </a>
+                        @else
+                            -
+                        @endif
                         </td>
                     </tr>
                 @endforeach

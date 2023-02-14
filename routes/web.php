@@ -60,6 +60,9 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('/siswa', SiswaController::class);
         Route::resource('/admin', AdminController::class);
         Route::resource('/pembayaran', PembayaranController::class);
+
+        Route::put('/updatestatuspembayaran/{pembayaran}', [PembayaranController::class, 'updateStatus'])->name('statuspembayaran.update');
+
         Route::get('entri', [PembayaranController::class, 'create'])->name('entri.create');
         Route::resource('/history', HistoryController::class);
         Route::resource('/laporan', LaporanController::class);

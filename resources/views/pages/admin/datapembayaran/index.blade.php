@@ -31,11 +31,13 @@
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
-                                        <th scope="col">Tanggal Pembayaran</th>
+                                        <th scope="col">Tanggal</th>
                                         <th scope="col">Nama Siswa</th>
                                         <th scope="col">Kelas</th>
                                         <th scope="col">Pembayaran untuk</th>
                                         <th scope="col">Jumlah Bayar</th>
+                                        <th scope="col">Status</th>
+                                        {{-- <th scope="col">Jenis</th> --}}
                                         <th scope="col">Petugas</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
@@ -50,6 +52,16 @@
                                             <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                             <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
                                             <td> Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                                            <td>
+                                                @if ($tampilkan->status == 'diproses')
+                                                    <span class="badge bg-warning">{{ strtoupper($tampilkan->status) }}</span>
+                                                    @elseif ($tampilkan->status == 'sukses')
+                                                    <span class="badge bg-success">{{ strtoupper($tampilkan->status) }}</span>
+                                                    @elseif ($tampilkan->status == 'gagal')
+                                                    <span class="badge bg-danger">{{ strtoupper($tampilkan->status) }}</span>
+                                                @endif
+                                            </td>
+                                            {{-- <td class="text-uppercase">{{ $tampilkan->jenistransaksi }}</td> --}}
 
                                             <td>
                                                 {{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}

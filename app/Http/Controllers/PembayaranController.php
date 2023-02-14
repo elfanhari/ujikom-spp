@@ -85,4 +85,10 @@ class PembayaranController extends Controller
         $pembayaran->delete();
         return redirect(route('pembayaran.index'))->withInfo('Data berhasil dihapus!');
     }
+
+    public function updateStatus(Request $request,Pembayaran $pembayaran) // Update Status Pembayaran
+    {
+        $pembayaran->update($request->all());
+        return back()->withInfo('Status pembayaran berhasil diubah!');
+    }
 }

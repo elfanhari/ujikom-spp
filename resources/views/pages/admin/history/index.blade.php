@@ -31,6 +31,10 @@
                             <button class="nav-link" id="success-tab" data-bs-toggle="tab" data-bs-target="#success"
                                 type="button" role="tab" aria-controls="success" aria-selected="false">Semua</button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="mandiri-tab" data-bs-toggle="tab" data-bs-target="#mandiri"
+                                type="button" role="tab" aria-controls="mandiri" aria-selected="false">Mandiri</button>
+                        </li>
                     </ul>
                     <div class="tab-content" id="tableTabContent">
 
@@ -68,10 +72,10 @@
                                                  <td>{{ $tampilkan->bulanbayar->name }}</td>
                                                  <td>{{ $tampilkan->tahunbayar }}</td>
                                                 <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
-                                                <td>{{ $tampilkan->userPetugas->name }}</td>
+                                                <td>{{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}</td>
                                                 <td class="">
 
-                                                    <a href="{{ route('pembayaran.show', $tampilkan->id) }}"
+                                                    <a href="{{ route('pembayaran.show', $tampilkan->identifier) }}"
                                                         type="button" class="btn btn-success btn-sm pb-1 pt-1 px-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor" class="bi bi-eye-fill"
@@ -124,10 +128,66 @@
                                                      <td>{{ $tampilkan->bulanbayar->name }}</td>
                                                      <td>{{ $tampilkan->tahunbayar }}</td>
                                                     <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
-                                                    <td>{{ $tampilkan->userPetugas->name }}</td>
+                                                    <td>{{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}</td>
                                                     <td class="">
 
-                                                        <a href="{{ route('pembayaran.show', $tampilkan->id) }}"
+                                                        <a href="{{ route('pembayaran.show', $tampilkan->identifier) }}"
+                                                            type="button" class="btn btn-success btn-sm pb-1 pt-1 px-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor" class="bi bi-eye-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                                                <path
+                                                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                                            </svg> Detail
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="mandiri" role="tabpanel" aria-labelledby="mandiri-tab">
+                                <div class="mt-3">
+                                    <p class="d-inline text-warning" style="font-size: 16px;">NB: History pembayaran diurutkan
+                                        berdasarkan transaksi terbaru!</p>
+                                
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-hover fs-14 transaction-table c-black"
+                                        id="table3">
+                                        <thead>
+                                            <tr class="bg-dark text-white">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Waktu Transaksi</th>
+                                                <th scope="col">Nama Siswa</th>
+                                                <th scope="col">Kelas</th>
+                                                {{-- <th scope="col">Tanggal Bayar</th> --}}
+                                                <th scope="col">Bulan Dibayar</th>
+                                                <th scope="col">Tahun Dibayar</th>
+                                                <th scope="col">Jumlah Bayar</th>
+                                                <th scope="col">Nama Petugas</th>
+                                                <th scope="col">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($mandiri as $tampilkan)
+                                                <tr class="border-bottom">
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $tampilkan->created_at->diffForHumans() }}</td>
+                                                    <td>{{ $tampilkan->userSiswa->name }}</td>
+                                                    <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
+                                                     {{-- <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td> --}}
+                                                     <td>{{ $tampilkan->bulanbayar->name }}</td>
+                                                     <td>{{ $tampilkan->tahunbayar }}</td>
+                                                    <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                                                    <td>-</td>
+                                                    <td class="">
+
+                                                        <a href="{{ route('pembayaran.show', $tampilkan->identifier) }}"
                                                             type="button" class="btn btn-success btn-sm pb-1 pt-1 px-2">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                 height="16" fill="currentColor" class="bi bi-eye-fill"

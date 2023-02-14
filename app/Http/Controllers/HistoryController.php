@@ -13,7 +13,8 @@ class HistoryController extends Controller
     {
         return view('pages.admin.history.index', [
             'my' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('petugas_id', auth()->user()->id)->latest()->get(),
-            'all' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->latest()->get()
+            'all' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->latest()->get(),
+            'mandiri' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('jenistransaksi', 'mandiri')->latest()->get()
         ]);
     }
 

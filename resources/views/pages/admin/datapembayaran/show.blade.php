@@ -12,6 +12,13 @@
         </button> Data Pembayaran
     </h5>
 
+    @if (session()->has('info'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @include('_success')
+            <strong>Berhasil.</strong> {{ session('info') }}
+        </div>
+    @endif
+
     <div class="row mb-3">
 
         <div class="col-md-6">
@@ -27,32 +34,37 @@
                     <div class="table-responsive">
                         <table class="table table-sm table-hover fs-14 c-black">
                             <tr class="border-bottom">
-                                <td>Waktu Transaksi</td>
+                                <td class="fw-bold">Kode Transaksi</td>
+                                <td style="width: 1px;">:</td>
+                                <td class="text-uppercase">{{ $pembayaran->identifier }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Waktu Transaksi</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->created_at }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Nama Siswa</td>
+                                <td class="fw-bold">Nama Siswa</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->userSiswa->name }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Kelas</td>
+                                <td class="fw-bold">Kelas</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->userSiswa->kelas->name }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Jumlah Bayar</td>
+                                <td class="fw-bold">Jumlah Bayar</td>
                                 <td style="width: 1px;">:</td>
                                 <td>Rp{{ number_format($pembayaran->jumlahbayar, 0, '.', '.') }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Tanggal Pembayaran</td>
+                                <td class="fw-bold">Tanggal Pembayaran</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ date('d-m-Y', strtotime($pembayaran->tanggalbayar)) }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Pembayaran untuk</td>
+                                <td class="fw-bold">Pembayaran untuk</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->bulanbayar->name }} - {{ $pembayaran->tahunbayar }} </td>
                             </tr>
@@ -67,12 +79,17 @@
                                 <td>Rp{{ number_format($pembayaran->userSiswa->spp->nominal, 0, '.', '.') }}</td>
                             </tr> --}}
                             <tr class="border-bottom">
-                                <td>Jenis Pembayaran</td>
+                                <td class="fw-bold">Jenis Pembayaran</td>
                                 <td style="width: 1px;">:</td>
                                 <td class="text-uppercase">{{ $pembayaran->jenistransaksi }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>STATUS</td>
+                                <td class="fw-bold">Metode Pembayaran</td>
+                                <td style="width: 1px;">:</td>
+                                <td class="text-uppercase">{{ $pembayaran->metodepembayaran->payment }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Status</td>
                                 <td style="width: 1px;">:</td>
                                 <td>
                                     @if ($pembayaran->status == 'diproses')
@@ -85,18 +102,38 @@
                                 </td>
                             </tr>
                             @if ($buktipembayaran->count() > 0)
-                            <tr class="border-bottom">
-                                <td>Bukti Pembayaran</td>
-                                <td style="width: 1px;">:</td>
-                                <td>
-                                    <img src="/buktipembayaran/{{ $buktipembayaran->first()->url }}" class="mb-3"
-                                    alt="{{ $pembayaran->userSiswa->name }}" style="width: 160px; height: auto; overflow: hidden;">
-                                </td>
-                            </tr>
+                                <tr class="border-bottom">
+                                    <td class="fw-bold">Bukti Pembayaran</td>
+                                    <td style="width: 1px;">:</td>
+                                    <td>
+                                        <img src="/buktipembayaran/{{ $buktipembayaran->first()->url }}" class="mb-3"
+                                            alt="{{ $pembayaran->userSiswa->name }}"
+                                            style="width: 160px; height: auto; overflow: hidden;">
+                                    </td>
+                                </tr>
                             @endif
+
                         </table>
+
+                        <form action="{{ route('statuspembayaran.update', $pembayaran) }}" method="post" class="mt-2">
+                            @method('PUT')
+                            @csrf
+
+                            <label for=""><small><i>Ubah status transaksi</i></small></label>
+                            <div class="input-group">
+                                <select name="status" class="form-select" id="inputGroupSelect04"
+                                    aria-label="Example select with button addon">
+                                    <option disabled>-- Pilih --</option>
+                                    <option value="sukses" {{ $pembayaran->status == 'sukses' ? 'selected' : '' }}>SUKSES</option>
+                                    <option value="diproses" {{ $pembayaran->status == 'diproses' ? 'selected' : '' }}>DIPROSES</option>
+                                </select>
+                                <button class="btn btn-primary" type="submit">Simpan</button>
+                            </div>
+
+                        </form>
+
                     </div>
-                       
+
                 </div>
             </div>
         </div>

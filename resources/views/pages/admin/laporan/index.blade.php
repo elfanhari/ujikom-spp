@@ -30,9 +30,12 @@
                                 <label for="petugas_id" class="mb-1">Pilih Petugas</label>
                                 <select name="petugas_id" id="petugas_id" class="form-select mb-1">
                                     <option value="" disabled selected>-- Pilih petugas --</option>
-                                    <option value="" {{ request('petugas_id') == '' ? 'selected' : '' }}>Semua</option>
+                                    <option value="" {{ request('petugas_id') == '' ? 'selected' : '' }}>Semua
+                                    </option>
                                     @foreach ($petugas as $tampilkan)
-                                        <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == request('petugas_id') ? 'selected' : '' }}>{{ $tampilkan->name }} - {{ $tampilkan->level }} </option>
+                                        <option value="{{ $tampilkan->id }}"
+                                            {{ $tampilkan->id == request('petugas_id') ? 'selected' : '' }}>
+                                            {{ $tampilkan->name }} - {{ $tampilkan->level }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -58,10 +61,11 @@
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-primary">Laporan Transaksi</p>
                     <form action="{{ route('laporan.create') }}" target="_blank" method="GET" class="d-inline">
-                    @csrf
-                    <input type="hidden" name="petugas_id" id="petugas_id" value="{{ request('petugas_id') }}">
-                    <input type="hidden" name="daritanggal" id="daritanggal" value="{{ request('daritanggal') }}">
-                    <input type="hidden" name="sampaitanggal" id="sampaitanggal" value="{{ request('sampaitanggal') }}">
+                        @csrf
+                        <input type="hidden" name="petugas_id" id="petugas_id" value="{{ request('petugas_id') }}">
+                        <input type="hidden" name="daritanggal" id="daritanggal" value="{{ request('daritanggal') }}">
+                        <input type="hidden" name="sampaitanggal" id="sampaitanggal"
+                            value="{{ request('sampaitanggal') }}">
                         <button type="submit" class="btn float-right btn btn-sm btn-outline-success">
                             Cetak Laporan
                         </button>
@@ -74,7 +78,6 @@
                         @if ($pembayaran->count() < 1)
                             Data tidak ditemukan. <a href="{{ route('laporan.index') }}">Refresh halaman</a>
                         @else
-                        
                             <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
@@ -95,25 +98,33 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->created_at }}</td>
                                             <td>
-                                              <a href="{{ route('siswa.show', $tampilkan->userSiswa->id) }}" class="text-decoration-none">
-                                                {{ $tampilkan->userSiswa->name }}
-                                              </a>
+                                                <a href="{{ route('siswa.show', $tampilkan->userSiswa->id) }}"
+                                                    class="text-decoration-none">
+                                                    {{ $tampilkan->userSiswa->name }}
+                                                </a>
                                             </td>
                                             <td>{{ $tampilkan->userSiswa->load('kelas')->kelas->name }}</td>
                                             <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
                                             <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                                             <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
-                                            <td> 
-                                              <a href="{{ route('petugas.show', $tampilkan->userPetugas->id) }}" class="text-decoration-none">
-                                                {{ $tampilkan->userPetugas->name }}
-                                              </a>
+                                            <td>
+                                                @if ($tampilkan->jenistransaksi == 'petugas')
+                                                    <a href="{{ route('petugas.show', $tampilkan->userPetugas->identifier) }}"
+                                                        class="text-decoration-none">
+                                                        {{ $tampilkan->userPetugas->name }}
+                                                    </a>
+                                                @else
+                                                    -
+                                                @endif
+
+
                                             </td>
+
                                         </tr>
                                     @endforeach
 
                                 </tbody>
                             </table>
-
                         @endif
 
                     </div>
