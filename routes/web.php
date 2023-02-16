@@ -37,8 +37,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//
+Route::get('/', function () { 
+    if (Auth::check()) {
+        if (Auth::user()->level == 'admin' || Auth::user()->level == 'petugas') {
+            return redirect('/admin');
+        }
+        elseif (Auth::user()->level == 'siswa') {
+            return redirect('/siswa/beranda');
+        }
+    } else {
+        return redirect('/loginadmin');
+    }
 })->name('home');
 
 Route::get('/loginadmin', [AuthController::class, 'pageLoginAdmin'])->name('loginadmin.page')->middleware('guest');
@@ -87,6 +97,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('/entri', SiswaEntriController::class);
         Route::resource('/riwayat', SiswaHistoryController::class);
         Route::resource('/notifikasi', SiswaNotifikasiController::class);
+        Route::put('/notifikasi/telahdibaca/{notifikasi}', [SiswaNotifikasiController::class, 'telahDibaca'])->name('notifikasi.telahdibaca');
 
         Route::get('/profile', [SiswaProfileController ::class, 'index'])->name('siswaprofile.index');
         Route::put('/profile', [SiswaProfileController::class, 'updateProfile'])->name('update-siswa.profile');

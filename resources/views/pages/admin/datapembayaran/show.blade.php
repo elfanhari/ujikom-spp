@@ -124,8 +124,9 @@
                                 <select name="status" class="form-select" id="inputGroupSelect04"
                                     aria-label="Example select with button addon">
                                     <option disabled>-- Pilih --</option>
-                                    <option value="sukses" {{ $pembayaran->status == 'sukses' ? 'selected' : '' }}>SUKSES</option>
                                     <option value="diproses" {{ $pembayaran->status == 'diproses' ? 'selected' : '' }}>DIPROSES</option>
+                                    <option value="sukses" {{ $pembayaran->status == 'sukses' ? 'selected' : '' }}>SUKSES</option>
+                                    <option value="gagal" {{ $pembayaran->status == 'gagal' ? 'selected' : '' }}>GAGAL</option>
                                 </select>
                                 <button class="btn btn-primary" type="submit">Simpan</button>
                             </div>
@@ -225,7 +226,7 @@
                                         <td>Pembayaran untuk</td>
                                         <td>Nominal bayar</td>
                                     </tr>
-                                    @foreach ($historysiswa as $tampilkan)
+                                    @foreach ($historysiswa->where('status', 'sukses') as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>

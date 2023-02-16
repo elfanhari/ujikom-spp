@@ -21,4 +21,8 @@ class Notifikasi extends Model
         return $this->belongsTo(User::class, 'penerima_id', 'id');
     }
     
+    public function getRouteKeyName()
+    {
+        return 'identifier';
+    }
 }

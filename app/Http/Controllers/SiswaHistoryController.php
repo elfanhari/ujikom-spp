@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buktipembayaran;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class SiswaHistoryController extends Controller
     public function index()
     {
         return view('pages.siswa.history.index', [
-            'transaksi' => Pembayaran::where('siswa_id', auth()->user()->id)->latest()->get()
+            'pembayaran' => Pembayaran::where('siswa_id', auth()->user()->id)->latest()->get()
         ]);
     }
 
@@ -46,9 +47,14 @@ class SiswaHistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($identifier)
     {
-        //
+        return view('pages.siswa.history.show', [
+            'pembayaran' => Pembayaran::where('identifier', $identifier)->first(),
+            // 'pembayaran' => $pembayaran
+            'buktipembayaran' => Buktipembayaran::where('pembayaran_id', $identifier)->get(),
+        ]);
+        
     }
 
     /**

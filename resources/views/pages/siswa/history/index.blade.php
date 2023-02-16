@@ -15,35 +15,39 @@
     <div class="row mb-3">
         <div class="col-md-6">
 
-            @if ($transaksi->count() < 1)
+            @if ($pembayaran->count() < 1)
                 Anda belum mempunyai transaksi.
             @else
-                @foreach ($transaksi as $tampilkan)
-                    <div class="card mb-2">
+                @foreach ($pembayaran as $tampilkan)
+                    <a href="{{ route('riwayat.show', $tampilkan) }}" class="card mb-2 text-decoration-none text-black">
                         <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h4 class="fw-bold">SPP</h4>
-                                <div class="">
-                                    <h4 class="mb-0">
+                            <div class=" justify-content-between">
+                                
+                                @if ($tampilkan->status == 'diproses')
+                                    <span class="badge rounded-pill px-2 bg-warning">{{ strtoupper($tampilkan->status) }}</span>
+                                @elseif ($tampilkan->status == 'sukses')
+                                    <span class="badge rounded-pill px-2 bg-success">{{ strtoupper($tampilkan->status) }}</span>
+                                @elseif ($tampilkan->status == 'gagal')
+                                    <span class="badge rounded-pill px-2 bg-danger">{{ strtoupper($tampilkan->status) }}</span>
+                                @endif
+                                <div class="float-right">
+                                    <h5 class="mb-0">
                                         <b>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</b>
-                                    </h4>
-                                </div>    
+                                    </h5>
+                                </div>
                             </div>
                             <small class="text-secondary">{{ $tampilkan->created_at->diffForHumans() }}</small>
-                            <div class="fs-14 mt-2 d-block">Pembayaran untuk <p class="text-primary d-inline mb-0">{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</p> </div>
-                            
-                            @if ($tampilkan->status == 'diproses')
-                                <span class="badge bg-warning">{{ strtoupper($tampilkan->status) }}</span>
-                            @elseif ($tampilkan->status == 'sukses')
-                                <span class="badge bg-success">{{ strtoupper($tampilkan->status) }}</span>
-                            @elseif ($tampilkan->status == 'gagal')
-                                <span class="badge bg-danger">{{ strtoupper($tampilkan->status) }}</span>
-                            @endif
+                            <div class="fs-14 d-block">Pembayaran untuk <p class="text-primary d-inline mb-0">
+                                    {{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</p>
+                            </div>
+                            <div class="fs-14 fs-italic">
+                                Kode Transaksi : <b class="text-uppercase">{{ $tampilkan->identifier }}</b>
+                            </div>
+
 
                         </div>
-                    </div>
+                    </a>
                 @endforeach
-
             @endif
         </div>
     </div>

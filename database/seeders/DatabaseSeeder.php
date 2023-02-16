@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             PembayaranSeeder::class,
             BulanbayarSeeder::class,
             MetodepembayaranSeeder::class,
-            NotifikasiSeeder::class,
+            // NotifikasiSeeder::class,
         ]);
     }
 }

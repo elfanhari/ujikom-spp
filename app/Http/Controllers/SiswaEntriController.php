@@ -6,6 +6,7 @@ use App\Http\Requests\SiswaEntripembayaranRequest;
 use App\Models\Buktipembayaran;
 use App\Models\Bulanbayar;
 use App\Models\Metodepembayaran;
+use App\Models\Notifikasi;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +46,7 @@ class SiswaEntriController extends Controller
 
         Pembayaran::create($pembayaran);
 
-        $getIdPembayaranTerakhir = Pembayaran::latest()->first();
+        $pembayaranTerakhir = Pembayaran::latest()->first();
         
         $files = $request->file('files');
         if ($request->hasFile('files')) {
@@ -57,11 +58,22 @@ class SiswaEntriController extends Controller
 
             Buktipembayaran::create([
                 'identifier'    => 'i' . Str::random(9),
-                'pembayaran_id' => $getIdPembayaranTerakhir->id,
+                'pembayaran_id' => $pembayaranTerakhir->id,
                 'url'           => $filenamesimpan,
                 'is_featured'   => 0
             ]);
         } 
+
+        $kodeTransaksi = Str::upper($pembayaranTerakhir->identifier);
+
+        Notifikasi::create([
+            'identifier' => 'i' . Str::random(9),
+            'pengirim_id' => '1',
+            'penerima_id' => $pembayaranTerakhir->userSiswa->id,
+            'pesan' => 'Transaksi anda dengan kode ' . $kodeTransaksi . ' sedang diproses!' . ' Tunggu konfirmasi selanjutnya dari petugas!',
+            'tipe' => 'info',
+            'dibaca' => false 
+        ]);
 
         return redirect(route('riwayat.index'))->withInfo('Transaksi anda sedang diproses! silahkan tunggu konfirmasi dari petugas.');
     }

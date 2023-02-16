@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notifikasi;
 use Illuminate\Http\Request;
 
 class SiswaNotifikasiController extends Controller
@@ -13,7 +14,9 @@ class SiswaNotifikasiController extends Controller
      */
     public function index()
     {
-        return view('pages.siswa.notifikasi.index');
+        return view('pages.siswa.notifikasi.index', [
+            'notifikasi' => Notifikasi::where('penerima_id', auth()->user()->id)->latest()->get(),
+        ]);
     }
 
     /**
@@ -43,9 +46,11 @@ class SiswaNotifikasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Notifikasi $notifikasi)
     {
-        //
+        return view('pages.siswa.notifikasi.show', [
+            'notifikasi' => $notifikasi
+        ]);
     }
 
     /**
@@ -66,9 +71,25 @@ class SiswaNotifikasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Notifikasi $notifikasi)
     {
-        //
+        $notifikasi->update($request->all());
+        return redirect(route('notifikasi.show', $notifikasi));
+    }
+
+    public function telahDibaca(Request $request, Notifikasi $notifikasi)
+    {
+        if ($request->untuk == 'satu') {
+            $notifikasi->update($request->all());
+            return redirect(route('notifikasi.index'));
+        }
+
+        if ($request->untuk == 'semua') {
+            Notifikasi::where('penerima_id', $notifikasi->penerima_id)->update([
+                'dibaca' => true
+            ]);
+            return back();
+        }
     }
 
     /**
@@ -77,8 +98,16 @@ class SiswaNotifikasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Notifikasi $notifikasi)
     {
-        //
+        if ($request->untuk == 'satu') {
+            $notifikasi->delete();
+            return redirect(route('notifikasi.index'));
+        }
+
+        if ($request->untuk == 'semua') {
+            Notifikasi::where('penerima_id', $notifikasi->penerima_id)->delete();
+            return back();
+        }
     }
 }

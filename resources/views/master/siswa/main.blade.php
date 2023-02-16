@@ -70,14 +70,16 @@
                                 @endif
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+
+                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
                                     Notifikasi
                                 </h6>
 
-                                @foreach (auth()->user()->notifikasiPenerima->where('dibaca', false) as $tampilkan)
-                                    <a class="dropdown-item d-flex align-items-center bg-grey" href="#">
+                                @foreach (auth()->user()->notifikasiPenerima as $tampilkan)
+                                    @if ($tampilkan->dibaca == 'false')
+                                    <a class="dropdown-item d-flex align-items-center bg-grey" href="{{ route('notifikasi.show', $tampilkan) }}">
                                         <div class="mr-3 fw-bold">
 
                                             @if ($tampilkan->tipe == 'sukses')
@@ -109,13 +111,11 @@
                                         </div>
                                         <div>
                                             <div class="small text-gray-500">{{ $tampilkan->created_at->diffForHumans() }}</div>
-                                            <span class="font-weight-bold">{{ $tampilkan->pesan }}</span>
+                                            <span class="font-weight-bold">{{ Str::limit($tampilkan->pesan, 50, '...')}}</span>
                                         </div>
                                     </a>
-                                @endforeach
-
-                                @foreach (auth()->user()->notifikasiPenerima->where('dibaca', true) as $tampilkan)
-                                    <a class=" dropdown-item d-flex align-items-center" href="#">
+                                    @else
+                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('notifikasi.show', $tampilkan) }}">
                                         <div class="mr-3">
                                             
                                             @if ($tampilkan->tipe == 'sukses')
@@ -135,13 +135,22 @@
                                         </div>
                                         <div>
                                             <div class="small text-gray-500">{{ $tampilkan->created_at->diffForHumans() }}</div>
-                                            {{ $tampilkan->pesan }}
+                                            {{ Str::limit($tampilkan->pesan, 50, '...') }}
                                         </div>
                                     </a>
+                                    @endif
+                                    
                                 @endforeach
 
+
+                                @if (auth()->user()->notifikasiPenerima->count() > 0)
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Tampilkan semua notifikasi</a>
+                                @else
+                                <p class="dropdown-item text-center small text-gray-500 my-0">Anda belum memiliki notifikasi.</p>
+                                @endif
+
                             </div>
+                    
                         </li>
 
                         <!-- Nav Item - Messages -->
@@ -228,7 +237,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown" style="width: 50%">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/siswa/profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>

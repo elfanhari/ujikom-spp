@@ -115,7 +115,7 @@
                         pembayaran</a>
                 </div>
                 <div class="card-body">
-                    @if ($historysiswa->count() < 1)
+                    @if ($historysiswa->where('status', 'sukses')->count() < 1)
                         <small> <b> {{ $siswa->name }} </b> Belum memiliki riwayat pembayaran.</small>
                     @else
                         <div class="table-responsive">
@@ -126,7 +126,7 @@
                                     <td>Pembayaran untuk</td>
                                     <td>Nominal bayar</td>
                                 </tr>
-                                @foreach ($historysiswa as $tampilkan)
+                                @foreach ($historysiswa->where('status', 'sukses') as $tampilkan)
                                     <tr class="border-bottom">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
