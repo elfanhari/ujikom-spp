@@ -9,7 +9,7 @@
           <path fill-rule="evenodd"
               d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
       </svg>
-  </button> Foto profil {{ $name }}</h5>
+  </button> Foto Profil {{ Str::before($name , ' ')}}</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -66,8 +66,11 @@
               </div>
                 <div class="input-group mb-3">
                   <input type="hidden" name="user_id" value="{{ $user->id }}">
-                  <input type="file" accept="image/*" class="form-control" name="files" id="gambar" onchange="previewImage()">
+                  <input type="file" accept="image/*" class="form-control @error('files') is-invalid @enderror" name="files" id="gambar" onchange="previewImage()">
                   <button type="submit" class="input-group-text btn-primary" for="inputGroupFile02" >Upload</button>
+                  @error('files')
+                    <span class="invalid-feedback mt-1">{{ $message }}</span>
+                  @enderror
                 </div>
             </div>
             @foreach ($userphoto as $tampilkan)
@@ -88,8 +91,11 @@
               </div>
                 <div class="input-group mb-3">
                   <input type="hidden" name="user_id" value="{{ $user->id }}">
-                  <input type="file" accept="image/*" class="form-control" name="files" id="gambar" onchange="previewImage()">
+                  <input type="file" accept="image/*" class="form-control @error('files') is-invalid @enderror" name="files" id="gambar" onchange="previewImage()">
                   <button type="submit" class="input-group-text btn-primary" for="inputGroupFile02" >Upload</button>
+                  @error('files')
+                    <span class="invalid-feedback mt-1">{{ $message }}</span>
+                  @enderror
                 </div>
             </div>
             </form>

@@ -13,6 +13,10 @@ use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
+
+    // Controller CRUD Data Admin
+
+
     public function index()
     {   
         $admin = User::where('level', 'admin');
@@ -21,10 +25,12 @@ class AdminController extends Controller
         ]);
     }
 
+
     public function create()
     {
         return view('pages.admin.dataadmin.create');
     }
+
 
     public function store(AdminRequest $request)
     {
@@ -36,6 +42,7 @@ class AdminController extends Controller
         return redirect(route('admin.index'))->with('info', 'Data berhasil ditambahkan!');
     }
 
+
     public function show(User $admin)
     {   
         return view('pages.admin.dataadmin.show', [
@@ -45,6 +52,7 @@ class AdminController extends Controller
         ] );
     }
 
+
     public function edit(User $admin)
     {
         return view('pages.admin.dataadmin.edit', [
@@ -52,12 +60,14 @@ class AdminController extends Controller
         ]);
     }
 
+
     public function update(UpdateAdminRequest $request, User $admin)
     {
         $admin->update($request->all());
         return redirect(route('admin.index'))->with('info', 'Data berhasil diubah!');
     }
 
+    
     public function destroy(User $admin)
     {
         $admin->delete();

@@ -47,11 +47,11 @@ Route::get('/', function () {
             return redirect('/siswa/beranda');
         }
     } else {
-        return redirect('/loginadmin');
+        return redirect('/login');
     }
 })->name('home');
 
-Route::get('/loginadmin', [AuthController::class, 'pageLoginAdmin'])->name('loginadmin.page')->middleware('guest');
+Route::get('/login', [AuthController::class, 'pageLoginAdmin'])->name('loginadmin.page')->middleware('guest');
 Route::post('/loginadmin', [AuthController::class, 'cekLoginAdmin'])->name('loginadmin.check')->middleware('guest');
 
 // ADMIN DAN PETUGAS

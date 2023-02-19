@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UserphotoRequest;
 use App\Models\User;
 use App\Models\Userphoto;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class SiswaProfileController extends Controller
         ]);
     }
 
-    public function storePhoto(Request $request)
+    public function storePhoto(UserphotoRequest $request)
     {
         $files = $request->file('files');
         if ($request->hasFile('files')) {
@@ -76,7 +77,7 @@ class SiswaProfileController extends Controller
         return redirect(route('siswaprofile.index'))->with('info', 'Foto profil anda berhasil ditambahkan!');
     }
 
-    public function updatePhoto(Request $request)
+    public function updatePhoto(UserphotoRequest $request)
     {
         $files = $request->file('files');
         if ($request->hasFile('files')) {

@@ -16,10 +16,23 @@
         <div class="col mb-xs-3">
             <div class="card fs-16 mb">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Data Pembayaran</p>
-                    <a href="{{ route('pembayaran.create') }}" class="btn btn-sm btn-primary float-right" type="button">
-                        Tambah Pembayaran
+                    <p class="m-0 d-sm-inline font-weight-bold text-primary d-xs-none">Data Pembayaran</p>
+                    {{-- Petunjuk Aksi --}}
+                    <button class="btn btn-info btn-sm btn-icon-split float-right ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#petunjukAksi">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                    </button>
+                    <a href="{{ route('pembayaran.create') }}" class="btn btn-sm float-end float-xs-start btn-primary btn-icon-split">
+                        <span class="icon text-white-30" style="padding-top: 0.20rem !important;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                              </svg>
+                        </span>
+                        <span class="text">Transaksi</span>
                     </a>
+
                 </div>
                 
                 <div class="card-body">
@@ -27,11 +40,12 @@
                     @if ($pembayaran->count() > 0)
                         
                         <div class="table-responsive">
-                            <table class="table table-sm table-hover fs-14 c-black" id="table1" id="table1">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
                                         <th scope="col">Tanggal</th>
+                                        <th scope="col">Kode</th>
                                         <th scope="col">Nama Siswa</th>
                                         <th scope="col">Kelas</th>
                                         <th scope="col">Pembayaran untuk</th>
@@ -48,6 +62,7 @@
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
+                                            <td class="text-uppercase">{{ $tampilkan->identifier }}</td>
                                             <td>{{ $tampilkan->userSiswa->name }}</td>
                                             <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                             <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
@@ -68,7 +83,7 @@
                                             </td>
                                             <td class="">
 
-                                            <a href="{{ route('pembayaran.show', $tampilkan) }}" type="button" class="btn btn-success pb-1 pt-0 px-2">
+                                                <a href="{{ route('pembayaran.show', $tampilkan) }}" type="button" class="btn btn-success pb-1 pt-0 px-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                                         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                                                         <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>

@@ -78,7 +78,7 @@
                                 </h6>
 
                                 @foreach (auth()->user()->notifikasiPenerima as $tampilkan)
-                                    @if ($tampilkan->dibaca == 'false')
+                                    @if ($tampilkan->dibaca == false)
                                     <a class="dropdown-item d-flex align-items-center bg-grey" href="{{ route('notifikasi.show', $tampilkan) }}">
                                         <div class="mr-3 fw-bold">
 
@@ -226,7 +226,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                    class="d-xs-none mr-2 d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
                                 @if (auth()->user()->userphoto)
                                     <img class="img-profile rounded-circle" style="object-fit: cover"
                                         src="/gallery/{{ auth()->user()->userphoto->url }}">

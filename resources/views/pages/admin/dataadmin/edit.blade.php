@@ -22,13 +22,18 @@
                         <p class="m-0 font-weight-bold text-primary">Edit Data admin</p>
                     </div>
                     <div class="card-body input-group-sm">
-                        <form action="{{ route('admin.update', $admin) }}" method="POST">
+                        <form action="{{ route('admin.update', $admin) }}" method="POST" class="input-group-sm fs-14">
                             @csrf
                             @method('PUT')
 
                             @include('pages.admin.dataadmin._editform')
 
-                            <button class="btn btn-sm btn-primary float-right mt-3">Simpan</button>
+                            <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                            <span class="icon text-white-50 m-0">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Simpan</span>
+                        </button>
 
                         </form>
                     </div>
@@ -47,7 +52,12 @@
 
                         @include('pages.admin.dataadmin._editform')
 
-                        <button class="btn btn-sm btn-primary float-right mt-2">Simpan</button>
+                        <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                            <span class="icon text-white-50 m-0">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Simpan</span>
+                        </button>
 
                     </form>
                 </div>

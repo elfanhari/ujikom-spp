@@ -10,6 +10,9 @@
   color: #252525;
 }
 
+.text-grey {
+  color: #5a5c69;
+}
 .grey {
   color: #91a7e9;
 }
@@ -30,9 +33,13 @@
   color: black;
 }
 
+.fw-semibold{
+  font-weight: 550!important;
+}
+
 @media (max-width: 576px) {
   .d-xs-none{
-      display: none;
+      display: none!important;
   }
 
   .d-xs{
@@ -54,11 +61,27 @@
   .w-xs-full{
     width: 100%;
   }
+
+  .fs-xs-12{
+    font-size: 12px;
+  }
+
+  .fs-xs-14{
+    font-size: 14px;
+  }
+
+  .float-xs-start {
+    float: left !important;
+  }
 }
 
 @media (min-width: 576px) {
   .d-inline{
     display: inline;
+  }
+
+  .d-sm-none{
+    display: none;
   }
 }
 

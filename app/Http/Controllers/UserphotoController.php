@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserphotoRequest;
 use App\Models\User;
 use App\Models\Userphoto;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class UserphotoController extends Controller
         ]);
     }
 
-    public function storePhoto(Request $request)
+    public function storePhoto(UserphotoRequest $request)
     {   
         $redirect = $request->redirect;
 
@@ -42,7 +43,7 @@ class UserphotoController extends Controller
         return redirect($redirect)->with('info', 'Foto profil berhasil ditambahkan!');
     }
 
-    public function updatePhoto(Request $request)
+    public function updatePhoto(UserphotoRequest $request)
     {
         $redirect = $request->redirect;
 
@@ -68,7 +69,7 @@ class UserphotoController extends Controller
         return redirect($redirect)->with('info', 'Foto profil berhasil diperbarui!');
     }
 
-    public function deletePhoto(Request $request)
+    public function deletePhoto(UserphotoRequest $request)
     {   
         $redirect = $request->redirect;
         

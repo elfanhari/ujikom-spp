@@ -18,9 +18,9 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
+        <!-- Custom styles for this template-->
+        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/my-css/style.css" rel="stylesheet">
     <link href="/extensions/simple-datatables/style.css" rel="stylesheet">
     <link href="/extensions/simple-datatables.css" rel="stylesheet">
@@ -46,7 +46,7 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 sticky-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-sm-none rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
                     
@@ -64,11 +64,20 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
                                 <span
-                                    class="mr-2 d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                    class="mr-2 d-inline d-sm-none text-gray-600 small">
+                                    {{ Str::before(auth()->user()->name , ' ')}}
+                                </span>
+
+                                <span
+                                    class="mr-2 d-xs-none text-gray-600 small">
+                                    {{ auth()->user()->name }}
+                                </span>
+
                                 @if (auth()->user()->userphoto)
                                     <img class="img-profile rounded-circle"
-                                        src="/gallery/{{ auth()->user()->userphoto->url }}">
+                                        src="/gallery/{{ auth()->user()->userphoto->url }}" style="max-height: 100px; overflow: hidden;">
                                 @else
                                     <img class="img-profile rounded-circle" src="/img/profil.png">
                                 @endif
@@ -95,11 +104,11 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid c-black">
+                <div class="container-fluid c-black position-relative">
 
                     {{-- Content --}}
                     @yield('content')
-
+                
                 </div>
                 <!-- /.container-fluid -->
 
@@ -121,6 +130,24 @@
 
     </div>
     <!-- End of Page Wrapper -->
+
+    {{-- Modal Petunjuk Aksi --}}
+    <div class="modal fade text-black" id="petunjukAksi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">Petunjuk Aksi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body fs-xs-14">
+                    @include('_crudaction')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Oke</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">

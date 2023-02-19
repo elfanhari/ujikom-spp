@@ -64,8 +64,11 @@
               </div>
                 <div class="input-group mb-3">
                   <input type="hidden" name="user_id" value="{{ $user->id }}">
-                  <input type="file" accept="image/*" class="form-control" name="files" id="gambar" onchange="previewImage()">
+                  <input type="file" accept="image/*" class="form-control @error('files') is-invalid @enderror" name="files" id="gambar" onchange="previewImage()">
                   <button type="submit" class="input-group-text btn-primary" for="inputGroupFile02" >Upload</button>
+                  @error('files')
+                    <span class="invalid-feedback mt-1">{{ $message }}</span>
+                  @enderror
                 </div>
             </div>
             @foreach ($userphoto as $tampilkan)
@@ -85,8 +88,11 @@
               </div>
                 <div class="input-group mb-3">
                   <input type="hidden" name="user_id" value="{{ $user->id }}">
-                  <input type="file" accept="image/*" class="form-control" name="files" id="gambar" onchange="previewImage()">
+                  <input type="file" accept="image/*" class="form-control @error('files') is-invalid @enderror" name="files" id="gambar" onchange="previewImage()">
                   <button type="submit" class="input-group-text btn-primary" for="inputGroupFile02" >Upload</button>
+                  @error('files')
+                    <span class="invalid-feedback mt-1">{{ $message }}</span>
+                  @enderror
                 </div>
             </div>
             </form>

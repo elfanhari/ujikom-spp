@@ -18,36 +18,11 @@
         </div>
     @endif
 
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md-6">
 
-            <!-- Input XS -->
-            <div class="d-sm-none">
-                <button class="btn btn-sm btn-primary mb-3" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapse" aria-expanded="true" aria-controls="collapseExample">
-                    Edit Kompetensi Keahlian
-                </button>
-                <div class="card mt-2 collapse mb-3 show" id="collapse">
-                    <div class="card-header fs-16">
-                      <button type="button" class="btn-close float-right d-inline" data-bs-toggle="collapse"
-                            data-bs-target="#collapse" aria-expanded="false" aria-controls="collapseExample"></button>
-                        <p class="m-0 font-weight-bold text-primary">Edit Data Prodi</p>
-                    </div>
-                    <div class="card-body input-group-sm">
-                        <form action="{{ route('prodi.update', $prodi) }}" method="POST">
-                            @csrf
-
-                            @include('pages.admin.dataprodi._editform')
-
-                            <button class="btn btn-sm btn-primary float-right mt-3">Simpan</button>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-
             <!-- Input MD -->
-            <div class="card d-xs-none mb-sm-3">
+            <div class="card mb-sm-3">
                 <div class="card-header fs-16">
                     <p class="m-0 font-weight-bold text-primary">Edit Data Prodi</p>
                 </div>
@@ -60,7 +35,12 @@
 
                         {{-- <input type="text" name="" id="" value="{{ $prodi->name }}"> --}}
 
-                        <button class="btn btn-sm btn-primary float-right mt-3">Simpan</button>
+                        <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                            <span class="icon text-white-50 m-0">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Simpan</span>
+                        </button>
 
                     </form>
                 </div>
