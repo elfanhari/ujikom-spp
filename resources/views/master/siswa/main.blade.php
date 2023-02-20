@@ -1,3 +1,13 @@
+@php
+    use App\Models\Notifikasi;
+    
+    $notifikasi = Notifikasi::where('penerima_id', auth()->user()->id)
+        ->limit(3)
+        ->latest()
+        ->get();
+    
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,9 +59,9 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-sm-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-                    
+
                     <div class="d-xs-none poppins text-center">
-                        <b>Aplikasi Pembayaran SPP</b> -  SMK NEGERI 3 BANJAR
+                        <b>Aplikasi Pembayaran SPP</b> - SMK NEGERI 3 BANJAR
                     </div>
 
                     <!-- Topbar Navbar -->
@@ -65,92 +75,98 @@
                                 <!-- Counter - Alerts -->
                                 @if (auth()->user()->notifikasiPenerima->where('dibaca', false)->count() > 0)
                                     <span class="badge badge-danger badge-counter">
-                                        {{ auth()->user()->notifikasiPenerima->where('dibaca', false)->count()}}
+                                        {{ auth()->user()->notifikasiPenerima->where('dibaca', false)->count() }}
                                     </span>
                                 @endif
                             </a>
                             <!-- Dropdown - Alerts -->
 
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
                                     Notifikasi
                                 </h6>
 
-                                @foreach (auth()->user()->notifikasiPenerima as $tampilkan)
+                                @foreach ($notifikasi as $tampilkan)
                                     @if ($tampilkan->dibaca == false)
-                                    <a class="dropdown-item d-flex align-items-center bg-grey" href="{{ route('notifikasi.show', $tampilkan) }}">
-                                        <div class="mr-3 fw-bold">
+                                        <a class="dropdown-item d-flex align-items-center bg-grey"
+                                            href="{{ route('notifikasi.show', $tampilkan) }}">
+                                            <div class="mr-3 fw-bold">
 
-                                            @if ($tampilkan->tipe == 'sukses')
-                                                <div class="icon-circle bg-success position-relative">
-                                                    <i class="fas fa-donate text-white"></i>
-                                                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
-                                                        <span class="visually-hidden">New alerts</span>
-                                                    </span>
-                                                </div>
-                                        
-                                            @elseif ($tampilkan->tipe == 'info')
-                                                <div class="icon-circle bg-primary position-relative">
-                                                    <i class="fas fa-file-alt text-white"></i>
-                                                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
-                                                        <span class="visually-hidden">New alerts</span>
-                                                    </span>
-                                                </div>
-                                        
-                                            @elseif ($tampilkan->tipe == 'peringatan')
-                                                <div class="icon-circle bg-warning position-relative">
-                                                    <i class="fas fa-exclamation-triangle text-white"></i>
-                                                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
-                                                        <span class="visually-hidden">New alerts</span>
-                                                    </span>
-                                                </div>
-                                                
-                                            @endif
+                                                @if ($tampilkan->tipe == 'sukses')
+                                                    <div class="icon-circle bg-success position-relative">
+                                                        <i class="fas fa-donate text-white"></i>
+                                                        <span
+                                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
+                                                            <span class="visually-hidden">New alerts</span>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'info')
+                                                    <div class="icon-circle bg-primary position-relative">
+                                                        <i class="fas fa-file-alt text-white"></i>
+                                                        <span
+                                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
+                                                            <span class="visually-hidden">New alerts</span>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'peringatan')
+                                                    <div class="icon-circle bg-warning position-relative">
+                                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                                        <span
+                                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
+                                                            <span class="visually-hidden">New alerts</span>
+                                                        </span>
+                                                    </div>
+                                                @endif
 
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">{{ $tampilkan->created_at->diffForHumans() }}</div>
-                                            <span class="font-weight-bold">{{ Str::limit($tampilkan->pesan, 50, '...')}}</span>
-                                        </div>
-                                    </a>
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">
+                                                    {{ $tampilkan->created_at->diffForHumans() }}</div>
+                                                <span
+                                                    class="font-weight-bold">{{ Str::limit($tampilkan->pesan, 50, '...') }}</span>
+                                            </div>
+                                        </a>
                                     @else
-                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('notifikasi.show', $tampilkan) }}">
-                                        <div class="mr-3">
-                                            
-                                            @if ($tampilkan->tipe == 'sukses')
-                                                <div class="icon-circle bg-success">
-                                                    <i class="fas fa-donate text-white"></i>
-                                                </div>
-                                            @elseif ($tampilkan->tipe == 'info')
-                                                <div class="icon-circle bg-primary">
-                                                    <i class="fas fa-file-alt text-white"></i>
-                                                </div>
-                                            @elseif ($tampilkan->tipe == 'peringatan')
-                                                <div class="icon-circle bg-warning">
-                                                    <i class="fas fa-exclamation-triangle text-white"></i>
-                                                </div>
-                                            @endif
+                                        <a class="dropdown-item d-flex align-items-center"
+                                            href="{{ route('notifikasi.show', $tampilkan) }}">
+                                            <div class="mr-3">
 
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">{{ $tampilkan->created_at->diffForHumans() }}</div>
-                                            {{ Str::limit($tampilkan->pesan, 50, '...') }}
-                                        </div>
-                                    </a>
+                                                @if ($tampilkan->tipe == 'sukses')
+                                                    <div class="icon-circle bg-success">
+                                                        <i class="fas fa-donate text-white"></i>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'info')
+                                                    <div class="icon-circle bg-primary">
+                                                        <i class="fas fa-file-alt text-white"></i>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'peringatan')
+                                                    <div class="icon-circle bg-warning">
+                                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                                    </div>
+                                                @endif
+
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">
+                                                    {{ $tampilkan->created_at->diffForHumans() }}</div>
+                                                {{ Str::limit($tampilkan->pesan, 50, '...') }}
+                                            </div>
+                                        </a>
                                     @endif
-                                    
                                 @endforeach
 
-
                                 @if (auth()->user()->notifikasiPenerima->count() > 0)
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Tampilkan semua notifikasi</a>
+                                    <a class="dropdown-item text-center small text-gray-500"
+                                        href="/siswa/notifikasi">Tampilkan
+                                        semua notifikasi</a>
                                 @else
-                                <p class="dropdown-item text-center small text-gray-500 my-0">Anda belum memiliki notifikasi.</p>
+                                    <p class="dropdown-item text-center small text-gray-500 my-0">Anda belum memiliki
+                                        notifikasi.</p>
                                 @endif
 
                             </div>
-                    
+
                         </li>
 
                         <!-- Nav Item - Messages -->
@@ -225,8 +241,15 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span
-                                    class="d-xs-none mr-2 d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+
+                                <span class="mr-2 d-inline d-sm-none text-gray-600 small">
+                                    {{ Str::before(auth()->user()->name, ' ') }}
+                                </span>
+
+                                <span class="mr-2 d-xs-none text-gray-600 small">
+                                    {{ auth()->user()->name }}
+                                </span>
+
                                 @if (auth()->user()->userphoto)
                                     <img class="img-profile rounded-circle" style="object-fit: cover"
                                         src="/gallery/{{ auth()->user()->userphoto->url }}">
@@ -243,7 +266,8 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
 
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>

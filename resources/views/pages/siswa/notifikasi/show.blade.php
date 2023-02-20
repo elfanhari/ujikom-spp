@@ -26,11 +26,11 @@
                 <div class="card-header">
 
                    
-                    <div class="text-end text-secondary d-inline float-right">
+                    <div class="text-end text-secondary d-inline float-right fs-14">
                         {{ $notifikasi->created_at->diffForHumans() }}
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body fs-14">
                     @if ($notifikasi->tipe == 'sukses')
                         <div class="icon-circle bg-success">
                             <i class="fas fa-donate text-white"></i>
@@ -44,9 +44,7 @@
                             <i class="fas fa-exclamation-triangle text-white"></i>
                         </div>
                     @endif
-                    <p class="mt-3"> <b>Pengirim:</b> {{ $notifikasi->userPengirim->name }}</p>
-                    <div class="border-bottom my-2"></div>
-                    <p class="mb-0 fw-bold">Pesan:</p>
+                   
                     <p class="mt-2">
                         {{ $notifikasi->pesan }}
                     </p>

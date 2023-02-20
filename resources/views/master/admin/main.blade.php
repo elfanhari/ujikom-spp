@@ -1,3 +1,11 @@
+@php
+use App\Models\Notifikasi;    
+
+$notifikasi = Notifikasi::where('penerima_id', null)->latest()->get();
+$notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca', false)->get();
+
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,6 +65,106 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                @if ($notifikasiBelumDibaca->count() > 0)
+                                    <span class="badge badge-danger badge-counter">
+                                        {{ $notifikasiBelumDibaca->count() }}
+                                    </span>
+                                @endif
+                            </a>
+                            <!-- Dropdown - Alerts -->
+
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Notifikasi
+                                </h6>
+
+                                @foreach ($notifikasi as $tampilkan)
+                                    @if ($tampilkan->dibaca == false)
+                                        <a class="dropdown-item d-flex align-items-center bg-grey"
+                                            href="{{ route('notifikasi.show', $tampilkan) }}">
+                                            <div class="mr-3 fw-bold">
+
+                                                @if ($tampilkan->tipe == 'sukses')
+                                                    <div class="icon-circle bg-success position-relative">
+                                                        <i class="fas fa-donate text-white"></i>
+                                                        <span
+                                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
+                                                            <span class="visually-hidden">New alerts</span>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'info')
+                                                    <div class="icon-circle bg-primary position-relative">
+                                                        <i class="fas fa-file-alt text-white"></i>
+                                                        <span
+                                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
+                                                            <span class="visually-hidden">New alerts</span>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'peringatan')
+                                                    <div class="icon-circle bg-warning position-relative">
+                                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                                        <span
+                                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
+                                                            <span class="visually-hidden">New alerts</span>
+                                                        </span>
+                                                    </div>
+                                                @endif
+
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">
+                                                    {{ $tampilkan->created_at->diffForHumans() }}</div>
+                                                <span
+                                                    class="font-weight-bold">{{ Str::limit($tampilkan->pesan, 50, '...') }}</span>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <a class="dropdown-item d-flex align-items-center"
+                                            href="{{ route('notifikasi.show', $tampilkan) }}">
+                                            <div class="mr-3">
+
+                                                @if ($tampilkan->tipe == 'sukses')
+                                                    <div class="icon-circle bg-success">
+                                                        <i class="fas fa-donate text-white"></i>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'info')
+                                                    <div class="icon-circle bg-primary">
+                                                        <i class="fas fa-file-alt text-white"></i>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'peringatan')
+                                                    <div class="icon-circle bg-warning">
+                                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                                    </div>
+                                                @endif
+
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">
+                                                    {{ $tampilkan->created_at->diffForHumans() }}</div>
+                                                {{ Str::limit($tampilkan->pesan, 50, '...') }}
+                                            </div>
+                                        </a>
+                                    @endif
+                                @endforeach
+
+
+                                @if ($notifikasi->count() > 0)
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Lihat
+                                        semua notifikasi</a>
+                                @else
+                                    <p class="dropdown-item text-center small text-gray-500 my-0">Anda belum memiliki
+                                        notifikasi.</p>
+                                @endif
+
+                            </div>
+
+                        </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -64,7 +172,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
+                            
                                 <span
                                     class="mr-2 d-inline d-sm-none text-gray-600 small">
                                     {{ Str::before(auth()->user()->name , ' ')}}
@@ -177,15 +285,21 @@
         </div>
     </div>
 
-    <script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/sb-admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript">
         /* Tanpa Rupiah */
-        var tanpa_rupiah = document.getElementById('tanpa-rupiah');
+        var tanpa_rupiah = document.getElementById('tanpa_rupiah');
         tanpa_rupiah.addEventListener('keyup', function(e) {
             tanpa_rupiah.value = formatRupiah(this.value);
         });
 
         /* Dengan Rupiah */
-        var dengan_rupiah = document.getElementById('dengan-rupiah');
+        var dengan_rupiah = document.getElementById('dengan_rupiah');
         dengan_rupiah.addEventListener('keyup', function(e) {
             dengan_rupiah.value = formatRupiah(this.value, 'Rp. ');
         });
@@ -207,12 +321,6 @@
             return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
         }
     </script>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/bootstrap/js/popper.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/sb-admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="/sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>

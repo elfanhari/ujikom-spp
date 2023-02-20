@@ -66,14 +66,26 @@ class SiswaEntriController extends Controller
 
         $kodeTransaksi = Str::upper($pembayaranTerakhir->identifier);
 
-        Notifikasi::create([
+        $notifikasiForSiswa = [
             'identifier' => 'i' . Str::random(9),
             'pengirim_id' => '1',
             'penerima_id' => $pembayaranTerakhir->userSiswa->id,
             'pesan' => 'Transaksi anda dengan kode ' . $kodeTransaksi . ' sedang diproses!' . ' Tunggu konfirmasi selanjutnya dari petugas!',
             'tipe' => 'info',
             'dibaca' => false 
-        ]);
+        ];
+
+        $notifikasiForPetugas = [
+            'identifier' => 'i' . Str::random(9),
+            'pengirim_id' => $pembayaranTerakhir->userSiswa->id,
+            'penerima_id' => null,
+            'pesan' => $pembayaranTerakhir->userSiswa->name . ' - ' . $pembayaranTerakhir->userSiswa->kelas->name . ' melakukan pembayaran mandiri untuk ' . $pembayaranTerakhir->bulanbayar->name . ' ' .$pembayaranTerakhir->tahunbayar . ' dengan kode transaksi ' . $kodeTransaksi . ' pada ' . $pembayaranTerakhir->created_at . '.',
+            'tipe' => 'info',
+            'dibaca' => false 
+        ];
+
+        Notifikasi::create($notifikasiForSiswa);
+        Notifikasi::create($notifikasiForPetugas);
 
         return redirect(route('riwayat.index'))->withInfo('Transaksi anda sedang diproses! silahkan tunggu konfirmasi dari petugas.');
     }

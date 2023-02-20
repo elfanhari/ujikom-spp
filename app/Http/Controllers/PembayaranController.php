@@ -42,6 +42,7 @@ class PembayaranController extends Controller
             'bulanbayar' => Bulanbayar::all(),
             'kelas' => Kelas::all(),
             'userphoto' => Userphoto::where('user_id', $request->siswa_id)->get(),
+            'historysiswa' => Pembayaran::where('siswa_id', $request->siswa_id)->where('status', 'sukses')->latest()->get(),
          ]);
     }
     

@@ -22,6 +22,7 @@ use App\Http\Controllers\SiswaShowController;
 use App\Http\Controllers\SppController;
 use App\Http\Controllers\UserphotoController;
 use App\Models\Pembayaran;
+use App\Models\Notifikasi;
 use App\Models\Userphoto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;

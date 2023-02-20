@@ -17,7 +17,7 @@ class CreateNotifikasisTable extends Migration
             $table->id();
             $table->string('identifier')->unique();
             $table->foreignId('pengirim_id');
-            $table->foreignId('penerima_id');
+            $table->foreignId('penerima_id')->nullable();
             $table->text('pesan');
             $table->enum('tipe', ['info', 'sukses', 'peringatan']);
             $table->boolean('dibaca')->default(false);
