@@ -54,10 +54,13 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/login', [AuthController::class, 'pageLoginAdmin'])->name('loginadmin.page')->middleware('guest');
-Route::post('/loginadmin', [AuthController::class, 'cekLoginAdmin'])->name('loginadmin.check')->middleware('guest');
+Route::post('/login', [AuthController::class, 'cekLoginAdmin'])->name('loginadmin.check')->middleware('guest');
 
 Route::get('/lupapassword', [AuthController::class, 'pageLupaPassword'])->name('auth.lupapassword');
 Route::post('/lupapassword', [AuthController::class, 'storeLupaPassword'])->name('auth.lupapassword');
+
+Route::get('/verifikasiemail', [AuthController::class, 'pageVerifikasiEmail'])->name('auth.verifikasiemail');
+Route::post('/verifikasiemail', [AuthController::class, 'storeVerifikasiEmail'])->name('auth.verifikasiemail');
 
 // ADMIN DAN PETUGAS
 Route::group(['middleware' => ['auth']], function(){

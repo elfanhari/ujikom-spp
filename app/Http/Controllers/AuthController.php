@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LoginVerification;
 use App\Mail\SendEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,8 +14,7 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     public function pageLoginAdmin()
-    {
-        
+    {   
         return view('pages.auth.login.index');
     }   
 
@@ -27,6 +27,37 @@ class AuthController extends Controller
         ]); 
 
         if (Auth::attempt($input)) {
+
+            $user = User::where('id', auth()->user()->id)->get(); // get User sesuai auth
+            // $kodeverifikasi = random_int(100000, 999999);  // kode verifikasi
+            $kodeverifikasi = 954723;
+    
+            $dataEmail = [
+                'subjek' => '[E-SPP SMK REKAYASA] - Verifikasi Masuk',
+                'kodeverifikasi' => $kodeverifikasi,
+                'name' => $user[0]->name,
+            ];
+    
+            Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
+            
+            return redirect('/verifikasiemail');
+        }
+            
+        else {
+            return back()->with('info', 'Email atau password salah!');
+        }
+    }
+
+    public function pageVerifikasiEmail()
+    {
+        return view('pages.auth.login.verifikasi', [
+            'email' => auth()->user()->email,
+        ]);   
+    }
+
+    public function storeVerifikasiEmail(Request $request)
+    {
+        if ($request->kodeverifikasi == 954723) {
             $level = auth()->user()->level;
             
             if ($level == 'admin') {
@@ -40,12 +71,13 @@ class AuthController extends Controller
             } 
             else {
                 Auth::logout(); //Hapus Session
-                return back()->with('info', 'Email atau password salah!');
+                return redirect('/login')->with('info', 'Email atau password salah!');
             }
-        }
+        } else {
             
-        else {
-            return back()->with('info', 'Email atau password salah!');
+            throw ValidationException::withMessages([
+                'kodeverifikasi' => 'Kode verifikasi yang anda masukkan tidak sesuai!',
+            ]);
         }
     }
 
@@ -69,7 +101,7 @@ class AuthController extends Controller
             $user[0]->update(['password' => $passwordBaru]);  // reset password
 
             $dataEmail = [
-                'subjek' => 'E-SPP SMK REKAYASA - Lupa Password',
+                'subjek' => '[E-SPP SMK REKAYASA] - Lupa Password',
                 'passwordbaru' => $passwordBaru,
                 'name' => $user[0]->name,
             ];
