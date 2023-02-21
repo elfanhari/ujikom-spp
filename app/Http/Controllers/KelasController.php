@@ -15,7 +15,6 @@ class KelasController extends Controller
 
     public function index()
     {
-        
 
         $kela = Kelas::latest();
 

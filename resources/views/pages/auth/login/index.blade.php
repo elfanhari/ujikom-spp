@@ -3,7 +3,7 @@
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Login - Admin</title>
+      <title>Login - E-SPP SMK REKAYASA</title>
       <link rel="stylesheet" href="/css/bootstrap.min.css">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     </head>
@@ -244,7 +244,7 @@
               </div>
             </div>
             <div class="d-flex justify-content-end" style="margin-top: 0.75rem">
-              <a href="#" class="forgot-password fst-italic">Lupa password?</a>
+              <a href="/lupapassword" class="forgot-password fst-italic">Lupa password?</a>
             </div>
             <button class="btn btn-fill text-white d-block w-100" type="submit">
               Login

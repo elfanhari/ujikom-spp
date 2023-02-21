@@ -56,6 +56,9 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'pageLoginAdmin'])->name('loginadmin.page')->middleware('guest');
 Route::post('/loginadmin', [AuthController::class, 'cekLoginAdmin'])->name('loginadmin.check')->middleware('guest');
 
+Route::get('/lupapassword', [AuthController::class, 'pageLupaPassword'])->name('auth.lupapassword');
+Route::post('/lupapassword', [AuthController::class, 'storeLupaPassword'])->name('auth.lupapassword');
+
 // ADMIN DAN PETUGAS
 Route::group(['middleware' => ['auth']], function(){
     
