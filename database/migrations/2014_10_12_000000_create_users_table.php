@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('nis')->unique()->nullable();    // Wajib bagi siswa
             $table->string('telepon');                      //WAJIB
             $table->text('alamat')->nullable();             // Wajib bagi siswa
-            $table->string('email')->unique();              //WAJIB
+            $table->string('email');              //WAJIB
             $table->string('username')->unique();           //WAJIB
             $table->timestamp('email_verified_at')->nullable();
             $table->text('password');   //WAJIB

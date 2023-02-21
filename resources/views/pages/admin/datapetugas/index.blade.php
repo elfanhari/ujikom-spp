@@ -1,7 +1,14 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center poppins">Data petugas</h5>
+    <h5 class="mb-3 fw-bold poppins">
+        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi fw-bold bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </button> Data Petugas</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -13,17 +20,10 @@
     <div class="row">
         <div class="col-md-4">
 
-            <!-- Input XS -->
-            <div class="d-sm-none">
-                <a href="{{ route('petugas.create') }}" class="btn btn-sm btn-primary mb-3" type="button" style="width: 100%;">
-                    Tambah petugas
-                </a>
-            </div>
-
             <!-- Input MD -->
             <div class="card d-xs-none mb-sm-3">
                 <div class="card-header fs-16">
-                    <p class="m-0 font-weight-bold text-primary">Input Data petugas</p>
+                    <p class="m-0 font-weight-bold text-primary">Input Data Petugas</p>
                 </div>
                 <div class="card-body input-group-sm">
                     <form action="{{ route('petugas.store') }}" method="POST" class="input-group-sm fs-14">
@@ -31,7 +31,12 @@
 
                         @include('pages.admin.datapetugas._addform')
 
-                        <button class="btn btn-sm btn-primary float-right mt-3">Simpan</button>
+                        <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                            <span class="icon text-white-50 m-0">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Simpan</span>
+                        </button>
 
                     </form>
                 </div>
@@ -40,26 +45,36 @@
         <div class="col-md-8 mb-xs-3">
             <div class="card fs-16 mb">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Data petugas</p>
+                    <p class="m-0 font-weight-bold d-inline text-primary d-xs-none mt-3">Data Petugas</p>
+                    
+                    {{-- Petunjuk Aksi --}}
+                    <button class="btn btn-info d-inline btn-sm btn-icon-split float-right ms-2 rounded-circle"
+                        data-bs-toggle="modal" data-bs-target="#petunjukAksi">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                    </button>
+
+                    <a href="{{ route('petugas.create') }}"  class="btn btn-sm float-left btn-primary d-sm-none btn-icon-split">
+                        <span class="icon text-white-30" style="padding-top: 0.20rem !important;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                        </span>
+                        <span class="text">Petugas</span>
+                    </a>
+
                 </div>
                 <div class="card-body">
 
                     @if ($petuga->count() > 0)
-                        <form
-                            class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search w-xs-full">
-                            <div class="input-group mb-3 mt-0">
-                                <input type="text" name="search" id="search"
-                                    class="form-control bg-light border-0 small" placeholder="Cari..." aria-label="Search"
-                                    aria-describedby="basic-addon2" value="{{ old('search', request('search')) }}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        
                         <div class="table-responsive">
-                            <table class="table table-sm table-hover fs-14 c-black">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
 
                                 <thead>
                                     <tr class="bg-dark text-white">

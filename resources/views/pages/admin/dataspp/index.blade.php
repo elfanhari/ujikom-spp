@@ -1,7 +1,14 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center poppins">Data SPP</h5>
+    <h5 class="mb-3 fw-bold poppins">
+        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi fw-bold bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </button> Data SPP</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -15,11 +22,7 @@
 
             <!-- Input XS -->
             <div class="d-sm-none">
-                <button class="btn btn-sm btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse"
-                    aria-expanded="true" aria-controls="collapseExample">
-                    Tambah SPP
-                </button>
-                <div class="card mt-2 collapse mb-3 show" id="collapse">
+                <div class="card mt-2 collapse @error(request('')) show @enderror mb-3" id="collapse">
                     <div class="card-header fs-16">
                         <button type="button" class="btn-close float-right d-inline" data-bs-toggle="collapse"
                             data-bs-target="#collapse" aria-expanded="false" aria-controls="collapseExample"></button>
@@ -31,7 +34,12 @@
 
                             @include('pages.admin.dataspp._addform')
 
-                            <button class="btn btn-sm btn-primary float-right mt-3">Simpan</button>
+                            <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                                <span class="icon text-white-50 m-0">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="text">Simpan</span>
+                            </button>
 
                         </form>
                     </div>
@@ -40,8 +48,9 @@
 
             <!-- Input MD -->
             <div class="card d-xs-none mb-sm-3">
-                <div class="card-header fs-16">
-                    <p class="m-0 font-weight-bold text-primary">Input Data SPP</p>
+                <div class="card-header">
+                    <p class="m-0 font-weight-bold d-inline text-primary d-xs-none mt-3">Input Data SPP</p>
+
                 </div>
                 <div class="card-body input-group-sm">
                     <form action="{{ route('spp.store') }}" method="POST" class="input-group-sm fs-14">
@@ -49,7 +58,12 @@
 
                         @include('pages.admin.dataspp._addform')
 
-                        <button class="btn btn-sm btn-primary float-right mt-3">Simpan</button>
+                        <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                                <span class="icon text-white-50 m-0">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="text">Simpan</span>
+                            </button>
 
                     </form>
                 </div>
@@ -58,26 +72,37 @@
         <div class="col-md-8 mb-xs-3">
             <div class="card fs-16 mb">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Data SPP</p>
+                    <p class="m-0 font-weight-bold d-inline text-primary d-xs-none mt-3">Data SPP</p>
+                    
+                    {{-- Petunjuk Aksi --}}
+                    <button class="btn btn-info d-inline btn-sm btn-icon-split float-right ms-2 rounded-circle"
+                        data-bs-toggle="modal" data-bs-target="#petunjukAksi">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                    </button>
+
+                    <button class="btn btn-sm float-left btn-primary d-sm-none btn-icon-split" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse" aria-expanded="true" aria-controls="collapseExample">
+                        <span class="icon text-white-30" style="padding-top: 0.20rem !important;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                        </span>
+                        <span class="text">SPP</span>
+                    </button>
+
                 </div>
                 <div class="card-body">
 
                     @if ($spp->count() > 0)
-                        <form
-                            class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group mb-3 mt-0">
-                                <input type="text" name="search" id="search"
-                                    class="form-control bg-light border-0 small" placeholder="Cari..." aria-label="Search"
-                                    aria-describedby="basic-addon2" value="{{ request('search') }}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        
                         <div class="table-responsive">
-                            <table class="table table-sm table-hover fs-14 c-black">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
@@ -92,7 +117,7 @@
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->tahun }}</td>
-                                            <td>{{ $tampilkan->nominal }}</td>
+                                            <td>Rp{{ number_format($tampilkan->nominal, 0, '.', '.') }}</td>
                                             <td class="">
 
                                                 <a href="{{ route('spp.edit', $tampilkan) }}" type="button"
@@ -103,7 +128,7 @@
                                                             d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                         <path fill-rule="evenodd"
                                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                                    </svg> <small>Edit</small>
+                                                    </svg>
                                                 </a>
 
                                                 <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2" data-bs-toggle="modal" data-bs-target="#modalDelete">
@@ -112,7 +137,7 @@
                                                         class="bi bi-trash3-fill pt-0" viewBox="0 0 16 16">
                                                         <path
                                                             d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                                    </svg> <small>Hapus</small>
+                                                    </svg>
                                                 </button>
                                                 <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">

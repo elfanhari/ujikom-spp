@@ -1,27 +1,61 @@
 @extends('master.siswa.main')
 
 @section('content')
-    
-<div class="d-flex justify-content-between align-items-center gap-3">
-  <h4 class="title-section-content">History</h4>
-  {{-- <a href="#" class="btn-link">View All Shoes</a> --}}
-</div>
+    <h5 class="mb-3 fw-bold poppins text-xs-center">
+        Riwayat Transaksi
+    </h5>
 
-@if ($transaksi->count() < 1)
-  Anda belum mempunyai transaksi.
-@else
-<div class="list-group row col-md-6">
-  @foreach ($transaksi as $tampilkan)
-      <div href="#" class="list-group-item list-group-item-action" aria-current="true">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1"><b>SPP</b></h5>
-          <p class="mb-1"><b>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</b> | <a href="" class="text-decoration-none">Detail</a></p>
+    @if (session()->has('info'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @include('_success')
+            <strong>Berhasil.</strong> {{ session('info') }}
         </div>
-        <small>{{ $tampilkan->created_at->diffForHumans() }}</small>
-        <p class="mb-1">{{ $tampilkan->bulanbayar->name }} | {{ $tampilkan->tahunbayar }}</p>
-      </div>
-      @endforeach
-    </div>
-@endif
+    @endif
 
+    <div class="row mb-3">
+        <div class="col-md-6">
+
+            @if ($pembayaran->count() < 1)
+                Anda belum mempunyai transaksi.
+            @else
+                @foreach ($pembayaran as $tampilkan)
+                    <a href="{{ route('riwayat.show', $tampilkan) }}" class="card mb-2 text-decoration-none text-black">
+                        <div class="card-body">
+                            <div class=" justify-content-between">
+                                
+                                @if ($tampilkan->status == 'diproses')
+                                    <span class="badge rounded-pill px-2 bg-warning">{{ strtoupper($tampilkan->status) }}</span>
+                                @elseif ($tampilkan->status == 'sukses')
+                                    <span class="badge rounded-pill px-2 bg-success">{{ strtoupper($tampilkan->status) }}</span>
+                                @elseif ($tampilkan->status == 'gagal')
+                                    <span class="badge rounded-pill px-2 bg-danger">{{ strtoupper($tampilkan->status) }}</span>
+                                @endif
+                                <div class="float-right">
+                                    <h5 class="mb-0">
+                                        <b>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</b>
+                                    </h5>
+                                </div>
+                            </div>
+                            <small class="text-secondary">{{ $tampilkan->created_at->diffForHumans() }}</small>
+                            <div class="fs-14 d-block">Pembayaran untuk <p class="text-primary d-inline mb-0">
+                                    {{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</p>
+                            </div>
+                            <div class="fs-14 fs-italic">
+                                Kode Transaksi : <b class="text-uppercase">{{ $tampilkan->identifier }}</b>
+                            </div>
+
+
+                        </div>
+                    </a>
+                @endforeach
+            @endif
+        </div>
+    </div>
+
+    <script>
+        var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
+        var collapseList = collapseElementList.map(function(collapseEl) {
+            return new bootstrap.Collapse(collapseEl)
+        })
+    </script>
 @endsection

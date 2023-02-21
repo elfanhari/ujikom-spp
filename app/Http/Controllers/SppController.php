@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SppRequest;
 use App\Models\Spp;
 use Illuminate\Http\Request;
@@ -12,15 +13,10 @@ class SppController extends Controller
     
     public function index()
     {
-        $spp = Spp::latest();
-
-        if(request('search')) {
-            $spp->where('tahun', 'like', '%' . request('search') . '%')
-                ->orWhere('nominal', 'like', '%' . request('search') . '%');
-        }
+        $spp = Spp::latest()->get();
 
         return view('pages.admin.dataspp.index', [
-            'spp' => $spp->get(),
+            'spp' => $spp
         ]);
     }
 

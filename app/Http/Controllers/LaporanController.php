@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Pembayaran;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,44 +23,64 @@ class LaporanController extends Controller
         $sampaitanggal = $request->sampaitanggal;
         $petugas_id = $request->petugas_id;
 
-        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->latest();
+        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->latest();
 
         if(request('petugas_id')){
-            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->where('petugas_id', $petugas_id)->latest();
+            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('petugas_id', $petugas_id)->latest();
         }
-
+        
         if(request('daritanggal')){
-            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas'])->whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->where('petugas_id', $petugas_id)->latest();
+            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->where('petugas_id', $petugas_id)->latest();
         }
 
         return view('pages.admin.laporan.index', [
-            'pembayaran' => $pembayaran->paginate(10),
+            'pembayaran' => $pembayaran->get(),
             'petugas' => User::where('level', 'petugas')->orWhere('level', 'admin')->get(),
         ]);
         
     }
 
    
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $daritanggal = $request->daritanggal;
+        $sampaitanggal = $request->sampaitanggal;
+        $petugas_id = $request->petugas_id;
+
+        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->latest();
+
+        if(request('petugas_id')){
+            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('petugas_id', $petugas_id)->latest();
+        }
+
+        if(request('daritanggal')){
+            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->where('petugas_id', $petugas_id)->latest();
+        }
+        
+        return view('pages.admin.laporan.printlaporan', [
+            'pembayaran' => $pembayaran->get(),
+            'petugas_id' => $petugas_id,
+            'daritanggal' => $daritanggal,
+            'sampaitanggal' => $sampaitanggal,
+            'petugas' => User::where('level', 'petugas')->orWhere('level', 'admin')->get(),
+        ]);   
     }
 
     
     public function store(Request $request)
     {
-        $daritanggal = $request->daritanggal;
-        $sampaitanggal = $request->sampaitanggal;
-        $pick = Pembayaran::whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->get();
-        return route('laporan.show', [
-            'pick' => $pick
-        ]);
+        // $daritanggal = $request->daritanggal;
+        // $sampaitanggal = $request->sampaitanggal;
+        // $pick = Pembayaran::whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->get();
+        // return route('laporan.show', [
+        //     'pick' => $pick
+        // ]);
     }
 
     
-    public function show(Pembayaran $pembayaran)
+    public function show(Request $request)
     {
-        //
+        
     }
 
 

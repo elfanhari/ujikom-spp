@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SiswaRequest;
 use App\Models\Kelas;
+use App\Models\Pembayaran;
 use App\Models\Spp;
 use App\Models\User;
+use App\Models\Userphoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Imports\SiswaImport;
+use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
@@ -19,22 +25,8 @@ class SiswaController extends Controller
             return view('denied');
         }
 
-        $siswa = User::with('kelas')->where('level', 'siswa');
-
-        if(request('search')) {
-            $siswa->where('name', 'like', '%' . request('search') . '%')
-                ->orWhere('kelas_id', 'like', '%' . request('search') . '%')
-                ->orWhere('spp_id', 'like', '%' . request('search') . '%')
-                ->orWhere('nisn', 'like', '%' . request('search') . '%')
-                ->orWhere('nis', 'like', '%' . request('search') . '%')
-                ->orWhere('telepon', 'like', '%' . request('search') . '%')
-                ->orWhere('alamat', 'like', '%' . request('search') . '%')
-                ->orWhere('username', 'like', '%' . request('search') . '%')
-                ->orWhere('email', 'like', '%' . request('search') . '%');
-        }
-
         return view('pages.admin.datasiswa.index', [
-            'siswa' => $siswa->latest()->paginate(5),
+            'siswa' => User::where('level', 'siswa')->latest()->get(),
             'kelas' => Kelas::all(),
             'spp' => Spp::all(),
         ]);
@@ -52,16 +44,22 @@ class SiswaController extends Controller
     // Siswa - Store
     public function store(SiswaRequest $request)
     {
+        $request['identifier'] = 'i' . Str::random(9);
         User::create($request->all());
         return redirect(route('siswa.index'))->with('info', 'Data berhasil ditambahkan!');
     }
 
-    // Siswa - Store
+    // Siswa - Show
     public function show(User $siswa)
     {   
+
         return view('pages.admin.datasiswa.show', [
             'siswa' => $siswa,
+            'historysiswa' => Pembayaran::where('siswa_id', $siswa->id)->latest()->get(),
+            'userphoto' => Userphoto::where('user_id', $siswa->id)->get(),
+            'redirect' => '/admin/siswa/' . $siswa->identifier
         ]);
+
     }
 
     // Siswa - Edit
@@ -81,10 +79,21 @@ class SiswaController extends Controller
         return redirect(route('siswa.index'))->with('info', 'Data berhasil diubah!');
     }
 
-    // Destroy - Delete
+    // Siswa - Delete
     public function destroy(User $siswa)
     {
         $siswa->delete();
         return redirect(route('siswa.index'))->with('info', 'Data berhasil dihapus!');
+    }
+
+    // Siswa - Import Data Siswa
+    public function import(Request $request)
+    {
+         $file = $request->file('file');
+         $namaFile = $file->getClientOriginalName();
+         $file->move('datasiswa', $namaFile);
+
+         Excel::import(new SiswaImport, public_path('/datasiswa/' . $namaFile));
+         return back()->withInfo('Data siswa berhasil di import!');
     }
 }

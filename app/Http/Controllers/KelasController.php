@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\KelasRequest;
 use App\Models\Kelas;
+use App\Models\User;
 use App\Models\Kompetensikeahlian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class KelasController extends Controller
 {
+
     public function index()
     {
-        if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
-            return view('denied');
-        }
+        
 
         $kela = Kelas::latest();
 
@@ -39,6 +40,7 @@ class KelasController extends Controller
 
     public function edit(Kelas $kela)
     {
+        
         return view('pages.admin.datakelas.edit', [
             'kela' => $kela,
             'kompetensikeahlian' => Kompetensikeahlian::all()

@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             SppSeeder::class,
             PembayaranSeeder::class,
             BulanbayarSeeder::class,
+            MetodepembayaranSeeder::class,
+            // NotifikasiSeeder::class,
         ]);
     }
 }

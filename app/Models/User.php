@@ -72,12 +72,22 @@ class User extends Authenticatable
         return $this->hasOne(Userphoto::class, 'user_id','id');
     }
 
+    public function notifikasiPengirim() //relasi
+    {
+        return $this->hasMany(Notifikasi::class, 'pengirim_id', 'id');
+    }
+
+    public function notifikasiPenerima() //relasi
+    {
+        return $this->hasMany(Notifikasi::class, 'penerima_id', 'id');
+    }   
+
     public function getRouteKeyName()
     {
         return 'identifier';
     }
 
-    public function setPasswordAttribute($password)
+    public function setPasswordAttribute($password) // Bcrypt Otomatis
     {
         $this->attributes['password'] = bcrypt($password);
     }

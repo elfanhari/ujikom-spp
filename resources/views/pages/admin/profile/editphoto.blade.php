@@ -2,7 +2,14 @@
 
 @section('content')
 
-    <h5 class="mb-3 fw-bold text-xs-center poppins">Profile</h5>
+<h5 class="mb-3 fw-bold poppins">
+  <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi fw-bold bi-arrow-left"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+      </svg>
+  </button> Foto Profil {{ Str::before($name , ' ')}}</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -32,6 +39,7 @@
                     <form action="{{ route('photo-user.delete', $tampilkan->id) }}" method="POST">
                       @method('DELETE')
                       @csrf
+                      <input type="hidden" name="redirect" id="redirect" value="{{ $redirect }}">
                       <input type="hidden" name="user_id" value="{{ $tampilkan->user_id }}">
                       <input type="hidden" name="picture" value="{{ $tampilkan->url }}">
                       <button class="btn btn-danger btn-sm mx-2" onclick="return confirm('Apakah data tersebut akan dihapus?')">
@@ -49,6 +57,7 @@
           <small class="fs-12"> <i>Ganti foto user</i></small>
           <form action="{{ route('photo-user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="redirect" id="redirect" value="{{ $redirect }}">
             @method('PUT')
 
             <div class="">
@@ -57,13 +66,17 @@
               </div>
                 <div class="input-group mb-3">
                   <input type="hidden" name="user_id" value="{{ $user->id }}">
-                  <input type="file" accept="image/*" class="form-control" name="files" id="gambar" onchange="previewImage()">
+                  <input type="file" accept="image/*" class="form-control @error('files') is-invalid @enderror" name="files" id="gambar" onchange="previewImage()">
                   <button type="submit" class="input-group-text btn-primary" for="inputGroupFile02" >Upload</button>
+                  @error('files')
+                    <span class="invalid-feedback mt-1">{{ $message }}</span>
+                  @enderror
                 </div>
             </div>
             @foreach ($userphoto as $tampilkan)
               <input type="hidden" name="picture" value="{{ $tampilkan->url }}">
             @endforeach
+
             </form>
           
           @else 
@@ -71,14 +84,18 @@
           <small class="fs-12"> <i>Upload foto user</i></small>
           <form action="{{ route('photo-user.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="redirect" id="redirect" value="{{ $redirect }}">
             <div class="">
               <div class="my-2">
                 <img class="img-preview img-fluid mb-2 col-sm-6 rounded-circle" style="max-width: 200px">
               </div>
                 <div class="input-group mb-3">
                   <input type="hidden" name="user_id" value="{{ $user->id }}">
-                  <input type="file" accept="image/*" class="form-control" name="files" id="gambar" onchange="previewImage()">
+                  <input type="file" accept="image/*" class="form-control @error('files') is-invalid @enderror" name="files" id="gambar" onchange="previewImage()">
                   <button type="submit" class="input-group-text btn-primary" for="inputGroupFile02" >Upload</button>
+                  @error('files')
+                    <span class="invalid-feedback mt-1">{{ $message }}</span>
+                  @enderror
                 </div>
             </div>
             </form>

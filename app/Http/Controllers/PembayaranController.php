@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PembayaranRequest;
 use App\Models\Kelas;
 use App\Models\Pembayaran;
@@ -12,7 +13,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use App\Http\Controllers;
+use App\Models\Buktipembayaran;
 use App\Models\Bulanbayar;
+use App\Models\Notifikasi;
+use App\Models\Userphoto;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
 class PembayaranController extends Controller
@@ -20,7 +25,7 @@ class PembayaranController extends Controller
     public function index()
     {
         return view('pages.admin.datapembayaran.index', [
-            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa'])->latest()->paginate('10'),
+            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->latest()->get(),
         ]);
     }
 
@@ -35,8 +40,10 @@ class PembayaranController extends Controller
             'siswaCek' => $siswaCek->get(),
             'spp' => Spp::all(),
             'bulanbayar' => Bulanbayar::all(),
-            'kelas' => Kelas::all()
-        ]);
+            'kelas' => Kelas::all(),
+            'userphoto' => Userphoto::where('user_id', $request->siswa_id)->get(),
+            'historysiswa' => Pembayaran::where('siswa_id', $request->siswa_id)->where('status', 'sukses')->latest()->get(),
+         ]);
     }
     
     
@@ -44,13 +51,30 @@ class PembayaranController extends Controller
     {   
         $request['identifier'] = 'i' . Str::random(9);
         Pembayaran::create($request->all());
+
+        $pembayaranTerakhir = Pembayaran::latest()->first();
+        $kodeTransaksi = Str::upper($pembayaranTerakhir->identifier);
+        $notifikasiSukses = [
+            'identifier' => 'i' . Str::random(9),
+            'pengirim_id' => Auth::id(),
+            'penerima_id' => $pembayaranTerakhir->siswa_id,
+            'pesan' => 'Transaksi anda dengan kode transaksi ' . $kodeTransaksi . ' telah berhasil! ' . ' Terimakasih telah melakukan pembayaran untuk ' . $pembayaranTerakhir->bulanbayar->name . ' ' . $pembayaranTerakhir->tahunbayar . '.',
+            'tipe' => 'sukses',
+            'dibaca' => false 
+        ];
+        Notifikasi::create($notifikasiSukses);
         return redirect(route('pembayaran.index'))->with('info', 'Data berhasil ditambahkan!');
     }
 
     
     public function show(Pembayaran $pembayaran)
     {
-        return view('pages.admin.datapembayaran.show', compact('pembayaran'));
+        return view('pages.admin.datapembayaran.show', [
+            'pembayaran' => $pembayaran,
+            'historysiswa' => Pembayaran::where('siswa_id', $pembayaran->siswa_id)->latest()->get(),
+            'userphoto' => Userphoto::where('user_id', $pembayaran->siswa_id)->get(),
+            'buktipembayaran' => Buktipembayaran::where('pembayaran_id', $pembayaran->id)->get(),
+        ]);
     }
 
     
@@ -59,6 +83,7 @@ class PembayaranController extends Controller
         return view('pages.admin.datapembayaran.edit', [
             'pembayaran' => $pembayaran,
             'siswa' => User::whereLevel('siswa')->get(),
+            'bulanbayar' => Bulanbayar::all(),
         ]);
     }
 
@@ -74,5 +99,51 @@ class PembayaranController extends Controller
     {
         $pembayaran->delete();
         return redirect(route('pembayaran.index'))->withInfo('Data berhasil dihapus!');
+    }
+
+    public function updateStatus(Request $request,Pembayaran $pembayaran) // Update Status Pembayaran
+    {
+        $pembayaran->update($request->all());
+
+        $kodeTransaksi = Str::upper($pembayaran->identifier);
+        
+        $notifikasiSukses = [
+            'identifier' => 'i' . Str::random(9),
+            'pengirim_id' => Auth::id(),
+            'penerima_id' => $pembayaran->siswa_id,
+            'pesan' => 'Transaksi anda dengan kode ' . $kodeTransaksi . ' telah berhasil diproses! ' . ' Terimakasih telah melakukan pembayaran untuk ' . $pembayaran->bulanbayar->name . ' ' . $pembayaran->tahunbayar . '.',
+            'tipe' => 'sukses',
+            'dibaca' => false 
+        ];
+
+        $notifikasiInfo = [
+            'identifier' => 'i' . Str::random(9),
+            'pengirim_id' => Auth::id(),
+            'penerima_id' => $pembayaran->siswa_id,
+            'pesan' => 'Transaksi anda dengan kode ' . $kodeTransaksi . ' sedang diproses!' . ' Tunggu konfirmasi selanjutnya dari petugas!',
+            'tipe' => 'info',
+            'dibaca' => false 
+        ];
+
+        $notifikasiPeringatan = [
+            'identifier' => 'i' . Str::random(9),
+            'pengirim_id' => Auth::id(),
+            'penerima_id' => $pembayaran->siswa_id,
+            'pesan' => 'Transaksi anda dengan kode ' . $kodeTransaksi . ' gagal diproses!' . ' Silahkan lakukan pembayaran ulang dengan melampirkan bukti transfer yang valid atau melakukan pembayaran melalui petugas di Ruang Tata Usaha. Terima kasih',
+            'tipe' => 'peringatan',
+            'dibaca' => false 
+        ];
+        
+        if ($pembayaran->status == 'sukses') {
+            Notifikasi::create($notifikasiSukses);
+        }
+        if ($pembayaran->status == 'diproses') {
+            Notifikasi::create($notifikasiInfo);
+        }
+        if ($pembayaran->status == 'gagal') {
+            Notifikasi::create($notifikasiPeringatan);
+        }
+
+        return back()->withInfo('Status pembayaran berhasil diubah!');
     }
 }

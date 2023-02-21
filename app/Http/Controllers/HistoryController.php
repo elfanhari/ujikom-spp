@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
@@ -10,8 +12,9 @@ class HistoryController extends Controller
     public function index()
     {
         return view('pages.admin.history.index', [
-            'my' => Pembayaran::with(['userSiswa', 'userPetugas'])->where('petugas_id', auth()->user()->id)->latest()->get(),
-            'all' => Pembayaran::with(['userSiswa', 'userPetugas'])->latest()->get()
+            'my' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('petugas_id', auth()->user()->id)->latest()->get(),
+            'all' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->latest()->get(),
+            'mandiri' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('jenistransaksi', 'mandiri')->latest()->get()
         ]);
     }
 

@@ -1,3 +1,11 @@
+@php
+use App\Models\Notifikasi;    
+
+$notifikasi = Notifikasi::where('penerima_id', null)->latest()->get();
+$notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca', false)->get();
+
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +26,14 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
+        <!-- Custom styles for this template-->
+        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/my-css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="/my-css/select2.css" rel="stylesheet">
+    <link href="/extensions/simple-datatables/style.css" rel="stylesheet">
+    <link href="/extensions/simple-datatables.css" rel="stylesheet">
 
 </head>
 
@@ -44,7 +56,7 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 sticky-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-sm-none rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
                     
@@ -55,6 +67,106 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                @if ($notifikasiBelumDibaca->count() > 0)
+                                    <span class="badge badge-danger badge-counter">
+                                        {{ $notifikasiBelumDibaca->count() }}
+                                    </span>
+                                @endif
+                            </a>
+                            <!-- Dropdown - Alerts -->
+
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Notifikasi
+                                </h6>
+
+                                @foreach ($notifikasi as $tampilkan)
+                                    @if ($tampilkan->dibaca == false)
+                                        <a class="dropdown-item d-flex align-items-center bg-grey"
+                                            href="{{ route('admin.notifikasi.show', $tampilkan) }}">
+                                            <div class="mr-3 fw-bold">
+
+                                                @if ($tampilkan->tipe == 'sukses')
+                                                    <div class="icon-circle bg-success position-relative">
+                                                        <i class="fas fa-donate text-white"></i>
+                                                        <span
+                                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
+                                                            <span class="visually-hidden">New alerts</span>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'info')
+                                                    <div class="icon-circle bg-primary position-relative">
+                                                        <i class="fas fa-file-alt text-white"></i>
+                                                        <span
+                                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
+                                                            <span class="visually-hidden">New alerts</span>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'peringatan')
+                                                    <div class="icon-circle bg-warning position-relative">
+                                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                                        <span
+                                                            class="position-absolute top-0 start-100 translate-middle p-2 bg-warning border border-light rounded-circle">
+                                                            <span class="visually-hidden">New alerts</span>
+                                                        </span>
+                                                    </div>
+                                                @endif
+
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">
+                                                    {{ $tampilkan->created_at->diffForHumans() }}</div>
+                                                <span
+                                                    class="font-weight-bold">{{ Str::limit($tampilkan->pesan, 50, '...') }}</span>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <a class="dropdown-item d-flex align-items-center"
+                                            href="{{ route('notifikasi.show', $tampilkan) }}">
+                                            <div class="mr-3">
+
+                                                @if ($tampilkan->tipe == 'sukses')
+                                                    <div class="icon-circle bg-success">
+                                                        <i class="fas fa-donate text-white"></i>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'info')
+                                                    <div class="icon-circle bg-primary">
+                                                        <i class="fas fa-file-alt text-white"></i>
+                                                    </div>
+                                                @elseif ($tampilkan->tipe == 'peringatan')
+                                                    <div class="icon-circle bg-warning">
+                                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                                    </div>
+                                                @endif
+
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">
+                                                    {{ $tampilkan->created_at->diffForHumans() }}</div>
+                                                {{ Str::limit($tampilkan->pesan, 50, '...') }}
+                                            </div>
+                                        </a>
+                                    @endif
+                                @endforeach
+
+
+                                @if ($notifikasi->count() > 0)
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Lihat
+                                        semua notifikasi</a>
+                                @else
+                                    <p class="dropdown-item text-center small text-gray-500 my-0">Anda belum memiliki
+                                        notifikasi.</p>
+                                @endif
+
+                            </div>
+
+                        </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -62,11 +174,20 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
                                 <span
-                                    class="mr-2 d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                    class="mr-2 d-inline d-sm-none text-gray-600 small">
+                                    {{ Str::before(auth()->user()->name , ' ')}}
+                                </span>
+
+                                <span
+                                    class="mr-2 d-xs-none text-gray-600 small">
+                                    {{ auth()->user()->name }}
+                                </span>
+
                                 @if (auth()->user()->userphoto)
                                     <img class="img-profile rounded-circle"
-                                        src="/gallery/{{ auth()->user()->userphoto->url }}">
+                                        src="/gallery/{{ auth()->user()->userphoto->url }}" style="max-height: 100px; overflow: hidden;">
                                 @else
                                     <img class="img-profile rounded-circle" src="/img/profil.png">
                                 @endif
@@ -74,7 +195,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown" style="width: 50%">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/admin/profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -93,11 +214,11 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid c-black">
+                <div class="container-fluid c-black position-relative">
 
                     {{-- Content --}}
                     @yield('content')
-
+                
                 </div>
                 <!-- /.container-fluid -->
 
@@ -119,6 +240,24 @@
 
     </div>
     <!-- End of Page Wrapper -->
+
+    {{-- Modal Petunjuk Aksi --}}
+    <div class="modal fade text-black" id="petunjukAksi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">Petunjuk Aksi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body fs-xs-14">
+                    @include('_crudaction')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Oke</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -148,15 +287,29 @@
         </div>
     </div>
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/sb-admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/my-js/select2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
+        $(document).ready(function() {
+            $('#penerima_id').select2();
+        });
+    </script>
+
+    <script type="text/javascript">
         /* Tanpa Rupiah */
-        var tanpa_rupiah = document.getElementById('tanpa-rupiah');
+        var tanpa_rupiah = document.getElementById('tanpa_rupiah');
         tanpa_rupiah.addEventListener('keyup', function(e) {
             tanpa_rupiah.value = formatRupiah(this.value);
         });
 
         /* Dengan Rupiah */
-        var dengan_rupiah = document.getElementById('dengan-rupiah');
+        var dengan_rupiah = document.getElementById('dengan_rupiah');
         dengan_rupiah.addEventListener('keyup', function(e) {
             dengan_rupiah.value = formatRupiah(this.value, 'Rp. ');
         });
@@ -178,12 +331,6 @@
             return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
         }
     </script>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/bootstrap/js/popper.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/sb-admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="/sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -215,6 +362,9 @@
             trigger: 'focus'
         })
     </script>
+
+    <script src="/extensions/simple-datatables/umd/simple-datatables.js"></script>
+    <script src="/extensions/simple-datatables.js"></script>
 
 </body>
 

@@ -26,8 +26,9 @@
 <label for="jumlahbayar" class="mt-3">Jumlah Bayar</label>
 <input type="text" value="Rp{{ number_format($siswaCek[0]->spp->nominal, 0, '.', '.') }}" name="" class="text-black input-sm form form-control mt-0  @error('siswa_id') is-invalid @enderror" placeholder="Masukkan siswa_id siswa" readonly disabled>
 
-
-
 <input type="hidden" name="petugas_id" value="{{ auth()->user()->id }}">
 <input type="hidden" name="siswa_id" value="{{ $siswaCek[0]->id }}">
 <input type="hidden" name="jumlahbayar" value="{{ $siswaCek[0]->spp->nominal }}">
+<input type="hidden" name="metodepembayaran_id" value="8">
+<input type="hidden" name="status" value="sukses">
+<input type="hidden" name="jenistransaksi" value="petugas">

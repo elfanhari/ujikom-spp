@@ -62,9 +62,9 @@ class KompetensikeahlianController extends Controller
     }
 
     
-    public function destroy(Kompetensikeahlian $prodi)
+    public function destroy(Kompetensikeahlian $prodi, Request $request)
     {
-        $prodi->delete(); 
+        Kompetensikeahlian::where('identifier', $request->identifier)->delete(); 
         return back()->withInfo('Data berhasil dihapus!');
     }
 }

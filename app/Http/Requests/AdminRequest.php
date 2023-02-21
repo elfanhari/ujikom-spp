@@ -28,6 +28,7 @@ class AdminRequest extends FormRequest
 
         return [
             'name'      => ['required'],
+            'jk'        => ['required'],
             'level'     => ['required'],
             'telepon'   => ['required', 'numeric'],
             'email'     => ['required', 'email', $unique],

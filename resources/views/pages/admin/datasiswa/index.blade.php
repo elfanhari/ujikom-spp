@@ -1,7 +1,16 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center poppins">Data siswa</h5>
+
+    <h5 class="mb-3 fw-bold poppins">
+        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi fw-bold bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+        </button> Data Siswa
+    </h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -10,15 +19,8 @@
         </div>
     @endif
 
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md-4">
-
-            <!-- Input XS -->
-            <div class="d-sm-none">
-                <a href="{{ route('siswa.create') }}" class="btn btn-sm btn-primary mb-3" type="button" style="width: 100%;">
-                    Tambah Siswa
-                </a>
-            </div>
 
             <!-- Input MD -->
             <div class="card d-xs-none mb-sm-3">
@@ -31,7 +33,12 @@
 
                         @include('pages.admin.datasiswa._addform')
 
-                        <button class="btn btn-sm btn-primary float-right mt-3">Simpan</button>
+                        <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                            <span class="icon text-white-50 m-0">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Simpan</span>
+                        </button>
 
                     </form>
                 </div>
@@ -40,26 +47,49 @@
         <div class="col-md-8 mb-xs-3">
             <div class="card fs-16 mb">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Data siswa</p>
+                    <p class="m-0 font-weight-bold d-inline text-primary d-xs-none mt-3">Data Siswa</p>
+
+
+                    {{-- Petunjuk Aksi --}}
+                    <button class="btn btn-info d-inline btn-sm btn-icon-split float-right ms-2 rounded-circle"
+                        data-bs-toggle="modal" data-bs-target="#petunjukAksi">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                    </button>
+
+                    <a href="{{ route('siswa.create') }}"
+                        class="btn btn-sm float-left btn-primary d-sm-none btn-icon-split">
+                        <span class="icon text-white-30" style="padding-top: 0.20rem !important;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                        </span>
+                        <span class="text">Siswa</span>
+                    </a>
+
+                    <button class="btn btn-warning btn-sm float-right d-inline btn-icon-split p-0 fs-14"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <span class="icon text-white-50 m-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z" />
+                            </svg>
+                        </span>
+                        <span class="text">Import Data</span>
+                    </button>
+
                 </div>
                 <div class="card-body">
 
                     @if ($siswa->count() > 0)
-                        <form
-                            class="float-right d-sm-inline-block form-inline input-group-sm mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search w-xs-full">
-                            <div class="input-group mb-3 mt-0">
-                                <input type="text" name="search" id="search"
-                                    class="form-control bg-light border-0 small" placeholder="Cari..." aria-label="Search"
-                                    aria-describedby="basic-addon2" value="{{ request('search') }}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
                         <div class="table-responsive">
-                            <table class="table table-sm table-hover fs-14 c-black">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
@@ -81,10 +111,13 @@
                                             <td>{{ $tampilkan->email }}</td>
                                             <td class="">
 
-                                                <a href="{{ route('siswa.show', $tampilkan) }}" type="button" class="btn btn-success pb-1 pt-0 px-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                <a href="{{ route('siswa.show', $tampilkan) }}" type="button"
+                                                    class="btn btn-success pb-1 pt-0 px-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                                        <path
+                                                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                                                     </svg>
                                                 </a>
 
@@ -99,58 +132,90 @@
                                                     </svg>
                                                 </a>
 
-                                                <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2 d-inline" data-bs-toggle="modal" data-bs-target="#modalDelete">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor"
-                                                        class="bi bi-trash3-fill pt-0" viewBox="0 0 16 16">
+                                                <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2 d-inline"
+                                                    data-bs-toggle="modal" data-bs-target="#modalDelete">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash3-fill pt-0"
+                                                        viewBox="0 0 16 16">
                                                         <path
                                                             d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                                     </svg>
                                                 </button>
-                                                <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                  <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                      <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                      </div>
-                                                      <div class="modal-body">
-                                                        Apakah anda yakin data tersebut akan dihapus?
-                                                      </div>
-                                                      <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <form action="{{ route('siswa.destroy', $tampilkan) }}" method="POST"
-                                                            class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-primary">Iya</button>
-                                                        </form>
-                                                      </div>
+                                                <div class="modal fade" id="modalDelete" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Hapus Data
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Apakah anda yakin data tersebut akan dihapus?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Batal</button>
+                                                                <form action="{{ route('siswa.destroy', $tampilkan) }}"
+                                                                    method="POST" class="d-inline">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Iya</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                  </div>
                                                 </div>
 
                                             </td>
                                         </tr>
                                     @endforeach
-                                        
+
                                 </tbody>
                             </table>
                         </div>
-
-                            <div class="float-right">
-                                {{ $siswa->links() }}
-                            </div>
-                    
                     @else
-                        
-                      Data tidak ditemukan. <a href="{{ route('siswa.index') }}" class="">Refresh halaman</a>
-                    
+                        Data tidak ditemukan. <a href="{{ route('siswa.index') }}" class="">Refresh halaman</a>
                     @endif
 
                 </div>
 
             </div>
+        </div>
+    </div>
+
+    {{-- Modal Import Data --}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            
+            <form action="{{ route('siswa.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Import Data Siswa</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>Penting!</strong> File yang diunggah harus berupa dokumen Microsoft Excel dengan ekstensi
+                            .xlsx
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="file" name="file" class="form-control" id="inputGroupFile01" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Unggah</button>
+                    </div>
+                </div>
+            
+            </form>
+
         </div>
     </div>
 

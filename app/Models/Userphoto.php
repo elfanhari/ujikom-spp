@@ -9,7 +9,7 @@ class Userphoto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'url'];
+    protected $guarded = ['id'];
 
     public function user() {
         return $this->belongsTo(User::class, 'id', 'user_id');
