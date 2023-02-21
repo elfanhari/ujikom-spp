@@ -30,6 +30,8 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
         <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/my-css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="/my-css/select2.css" rel="stylesheet">
     <link href="/extensions/simple-datatables/style.css" rel="stylesheet">
     <link href="/extensions/simple-datatables.css" rel="stylesheet">
 
@@ -87,7 +89,7 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
                                 @foreach ($notifikasi as $tampilkan)
                                     @if ($tampilkan->dibaca == false)
                                         <a class="dropdown-item d-flex align-items-center bg-grey"
-                                            href="{{ route('notifikasi.show', $tampilkan) }}">
+                                            href="{{ route('admin.notifikasi.show', $tampilkan) }}">
                                             <div class="mr-3 fw-bold">
 
                                                 @if ($tampilkan->tipe == 'sukses')
@@ -290,6 +292,14 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/sb-admin/vendor/jquery/jquery.min.js"></script>
     <script src="/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/my-js/select2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#penerima_id').select2();
+        });
+    </script>
 
     <script type="text/javascript">
         /* Tanpa Rupiah */

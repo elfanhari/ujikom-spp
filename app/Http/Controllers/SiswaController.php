@@ -11,6 +11,9 @@ use App\Models\User;
 use App\Models\Userphoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Imports\SiswaImport;
+use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
@@ -81,5 +84,16 @@ class SiswaController extends Controller
     {
         $siswa->delete();
         return redirect(route('siswa.index'))->with('info', 'Data berhasil dihapus!');
+    }
+
+    // Siswa - Import Data Siswa
+    public function import(Request $request)
+    {
+         $file = $request->file('file');
+         $namaFile = $file->getClientOriginalName();
+         $file->move('datasiswa', $namaFile);
+
+         Excel::import(new SiswaImport, public_path('/datasiswa/' . $namaFile));
+         return back()->withInfo('Data siswa berhasil di import!');
     }
 }

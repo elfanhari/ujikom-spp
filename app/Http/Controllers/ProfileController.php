@@ -49,7 +49,7 @@ class ProfileController extends Controller
         }
 
         // Jika password sebelumnya salah, berikan pesan validasi
-        throw ValidationException   ::withMessages([
+        throw ValidationException::withMessages([
             'current_password' => 'Password anda sebelumnya tidak sesuai',
         ]);
     }

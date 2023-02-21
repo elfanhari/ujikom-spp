@@ -149,14 +149,16 @@
                     @else
                         Data tidak ditemukan.
                     @endif
+
+                    @if (request('siswa_id'))
                     <div class="mt-3">
                         <div class="my-2 text-black text-xs-center fw-bold">
                             History Pembayaran Siswa
                         </div>
                         <div class="table-responsive">
-
+                            
                             @if ($historysiswa->count() < 1)
-                                <small> <a href="">{{ $siswaCek[0]->name }}</a> belum memiliki riwayat
+                                <small> <a href="">{{ $siswaCek->name }}</a> belum memiliki riwayat
                                     pembayaran.</small>
                             @else
                                 <table class="table table-sm table-hover fs-14 c-black">
@@ -178,6 +180,7 @@
                             @endif
                         </div>
                     </div>
+                    @endif
                 </div>
                 
             </div>

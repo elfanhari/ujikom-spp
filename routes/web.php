@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminNotifikasiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CekController;
 use App\Http\Controllers\DashboardController;
@@ -69,8 +70,18 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('/spp', SppController::class);
         Route::resource('/petugas', PetugasController::class);
         Route::resource('/siswa', SiswaController::class);
+        Route::post('/siswa/import', [SiswaController::class, 'import'])->name('siswa.import');
         Route::resource('/admin', AdminController::class);
         Route::resource('/pembayaran', PembayaranController::class);
+
+        // Route::resource('/notifikasi', AdminNotifikasiController::class);
+
+        Route::get('/notifikasi', [AdminNotifikasiController::class, 'index'])->name('admin.notifikasi.index');
+        Route::post('/notifikasi', [AdminNotifikasiController::class, 'store'])->name('admin.notifikasi.store');
+        Route::get('/notifikasi/{notifikasis:identifier}', [AdminNotifikasiController::class, 'show'])->name('admin.notifikasi.show');
+        Route::put('/notifikasi/{notifikasis:identifier}', [AdminNotifikasiController::class, 'update'])->name('admin.notifikasi.update');
+        Route::delete('/notifikasi/{notifikasis:identifier}', [AdminNotifikasiController::class, 'destroy'])->name('admin.notifikasi.destroy');
+        Route::put('/notifikasi/telahdibaca/{notifikasi}', [SiswaNotifikasiController::class, 'telahDibaca'])->name('admin.notifikasi.telahdibaca');
 
         Route::put('/updatestatuspembayaran/{pembayaran}', [PembayaranController::class, 'updateStatus'])->name('statuspembayaran.update');
 
