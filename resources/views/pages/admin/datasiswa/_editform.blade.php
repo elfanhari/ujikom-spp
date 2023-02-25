@@ -1,78 +1,116 @@
+<div class="form-floating mb-3">
+    <input type="text" value="{{ old('name', $siswa->name) }}" name="name"
+        class="form-control text-black @error('name') is-invalid @enderror" id="floatingInput"
+        placeholder="name">
+    <label for="floatingInput" class="">Nama Siswa</label>
+    @error('name')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="name" class="mt-3">Nama Siswa</label>
-<input type="text" value="{{ old('name', $siswa->name) }}" name="name" id="name" class="text-black input-sm form form-control mt-0  @error('name') is-invalid @enderror" placeholder="Masukkan nama iswa">
-@error('name')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+    <div class="form-floating mb-3">
+    <select name="jk"
+        class="form-select @error('jk') is-invalid @enderror" id="floatingSelect"
+        aria-label="Floating label select example">
+        <option disabled selected>-- Pilih --</option>
+        <option value="laki-laki" {{ $siswa->jk == 'laki-laki' ? 'selected' : '' }}> Laki-laki </option>
+        <option value="perempuan" {{ $siswa->jk == 'perempuan' ? 'selected' : '' }}> Perempuan </option>
+    </select>
+    <label for="floatingSelect">Jenis Kelamin</label>
+    @error('jk')
+        <span class="invalid-feedback mt-1">{{ $message }}</span>
+    @enderror
+    </div>
 
-<label for="jk" class="mb-1 mt-3">Jenis Kelamin</label>
-<select name="jk" id="jk" class="text-black form form-control form-select mt-0 @error('jk') is-invalid @enderror" >
-  <option value="" selected disabled>-- Pilih Jenis Kelamin --</option>
-  <option value="laki-laki" {{ $siswa->jk == 'laki-laki' ? 'selected' : '' }}> Laki-laki </option>
-  <option value="perempuan" {{ $siswa->jk == 'perempuan' ? 'selected' : '' }}> Perempuan </option>
-</select>
-@error('jk')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+  <select name="kelas_id"
+      class="form-select @error('kelas_id') is-invalid @enderror" id="floatingSelect"
+      aria-label="Floating label select example">
+      <option disabled selected>-- Pilih --</option>
+      @foreach ($kelas as $tampilkan)
+          <option value=" {{ $tampilkan->id }} "
+              {{ $tampilkan->id == $siswa->kelas_id ? 'selected' : '' }}> {{ $tampilkan->name }}</option>
+      @endforeach
+  </select>
+  <label for="floatingSelect">Kelas</label>
+  @error('kelas_id')
+      <span class="invalid-feedback mt-1">{{ $message }}</span>
+  @enderror
+</div>
 
-<label for="kelas_id" class="mb-1 mt-3">Kelas</label>
-<select name="kelas_id" id="kelas_id" class="text-black form form-control form-select mt-0   @error('kelas_id') is-invalid @enderror" >
-  <option value="" selected disabled>-- Pilih Kelas --</option>
-  @foreach ($kelas as $tampilkan)
-    <option value=" {{ $tampilkan->id }} " {{ $tampilkan->id == $siswa->kelas_id ? 'selected' : '' }}> {{ $tampilkan->name }}</option>
-  @endforeach
-</select>
-@error('kelas_id')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+  <select name="spp_id"
+      class="form-select @error('spp_id') is-invalid @enderror" id="floatingSelect"
+      aria-label="Floating label select example">
+      <option disabled selected>-- Pilih --</option>
+      @foreach ($spp as $tampilkan)
+          <option value=" {{ $tampilkan->id }} "
+              {{ $tampilkan->id == $siswa->spp_id ? 'selected' : '' }}> {{ $tampilkan->tahun }}</option>
+      @endforeach
+  </select>
+  <label for="floatingSelect">SPP</label>
+  @error('spp_id')
+      <span class="invalid-feedback mt-1">{{ $message }}</span>
+  @enderror
+</div>
 
-<label for="spp_id" class="mb-1 mt-3">SPP</label>
-<select name="spp_id" id="spp_id" class="text-black form form-control form-select mt-0   @error('spp_id') is-invalid @enderror" >
-  <option value="" selected disabled>-- Pilih SPP --</option>
-  @foreach ($spp as $tampilkan)
-  <option value=" {{ $tampilkan->id }} " {{ $tampilkan->id == $siswa->spp_id ? 'selected' : '' }}> {{ $tampilkan->tahun }}</option>
-@endforeach
-</select>
-@error('spp_id')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <input type="text" value="{{ old('nisn', $siswa->nisn) }}" name="nisn"
+        class="form-control text-black @error('nisn') is-invalid @enderror" id="floatingInput"
+        placeholder="nisn">
+    <label for="floatingInput" class="">NISN</label>
+    @error('nisn')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="nisn" class="mt-3">NISN</label>
-<input type="text" value="{{ old('nisn', $siswa->nisn) }}" name="nisn" id="nisn" class="text-black input-sm form form-control mt-0  @error('nisn') is-invalid @enderror" placeholder="Masukkan nisn siswa">
-@error('nisn')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <input type="text" value="{{ old('nis', $siswa->nis) }}" name="nis"
+        class="form-control text-black @error('nis') is-invalid @enderror" id="floatingInput"
+        placeholder="nis">
+    <label for="floatingInput" class="">NIS</label>
+    @error('nis')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="nis" class="mt-3">NIS</label>
-<input type="text" value="{{ old('nis', $siswa->nis) }}" name="nis" id="nis" class="text-black input-sm form form-control mt-0  @error('nis') is-invalid @enderror" placeholder="Masukkan nis siswa">
-@error('nis')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <input type="text" value="{{ old('telepon', $siswa->telepon) }}" name="telepon"
+        class="form-control text-black @error('telepon') is-invalid @enderror" id="floatingInput"
+        placeholder="telepon">
+    <label for="floatingInput" class="">Telepon</label>
+    @error('telepon')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="telepon" class="mt-3">Telepon</label>
-<input type="text" value="{{ old('telepon', $siswa->telepon) }}" name="telepon" id="telepon" class="text-black input-sm form form-control mt-0  @error('telepon') is-invalid @enderror" placeholder="Masukkan telepon siswa">
-@error('telepon')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <textarea name="alamat" class="form-control text-black @error('alamat') is-invalid @enderror" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{ $siswa->alamat }}</textarea>
+    <label for="floatingTextarea2">Alamat</label>
+    @error('alamat')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="alamat" class="mt-3">Alamat</label>
-<input type="text" value="{{ old('alamat', $siswa->alamat) }}" name="alamat" id="alamat" class="text-black input-sm form form-control mt-0  @error('alamat') is-invalid @enderror" placeholder="Masukkan alamat siswa">
-@error('alamat')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <input type="text" value="{{ old('email', $siswa->email) }}" name="email"
+        class="form-control text-black @error('email') is-invalid @enderror" id="floatingInput"
+        placeholder="email">
+    <label for="floatingInput" class="">Email</label>
+    @error('email')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="email" class="mt-3">Email</label>
-<input type="text" value="{{ old('email', $siswa->email) }}" name="email" id="email" class="text-black input-sm form form-control mt-0  @error('email') is-invalid @enderror" placeholder="Masukkan email siswa">
-@error('email')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
-
-<label for="username" class="mt-3">Username</label>
-<input type="text" value="{{ old('username', $siswa->username) }}" name="username" id="username" class="text-black input-sm form form-control mt-0  @error('username') is-invalid @enderror" placeholder="Masukkan username siswa">
-@error('username')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <input type="text" value="{{ old('username', $siswa->username) }}" name="username"
+        class="form-control text-black @error('username') is-invalid @enderror" id="floatingInput"
+        placeholder="username">
+    <label for="floatingInput" class="">Username</label>
+    @error('username')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
 <input type="hidden" value="{{ old('level', $siswa->level) }}" name="level" id="password" class="text-black input-sm form form-control mt-0" >
 <input type="hidden" value="{{ old('password', $siswa->password) }}" name="password" id="password" class="text-black input-sm form form-control mt-0" >
-

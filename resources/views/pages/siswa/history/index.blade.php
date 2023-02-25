@@ -16,7 +16,9 @@
         <div class="col-md-6">
 
             @if ($pembayaran->count() < 1)
-                Anda belum mempunyai transaksi.
+            <div class="text-xs-center">
+                Anda belum mempunyai riwayat pembayaran.
+            </div>
             @else
                 @foreach ($pembayaran as $tampilkan)
                     <a href="{{ route('riwayat.show', $tampilkan) }}" class="card mb-2 text-decoration-none text-black">

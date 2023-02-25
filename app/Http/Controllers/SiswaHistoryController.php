@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buktipembayaran;
+use App\Models\Notifikasi;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
@@ -47,12 +48,12 @@ class SiswaHistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($identifier)
+    public function show(Pembayaran $riwayat)
     {
         return view('pages.siswa.history.show', [
-            'pembayaran' => Pembayaran::where('identifier', $identifier)->first(),
+            'pembayaran' => $riwayat,
             // 'pembayaran' => $pembayaran
-            'buktipembayaran' => Buktipembayaran::where('pembayaran_id', $identifier)->get(),
+            'buktipembayaran' => Buktipembayaran::where('pembayaran_id', $riwayat->id)->get(),
         ]);
         
     }

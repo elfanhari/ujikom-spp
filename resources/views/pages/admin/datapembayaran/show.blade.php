@@ -3,8 +3,8 @@
 @section('content')
 
     <h5 class="mb-3 fw-bold poppins">
-        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        <button class="btn btn-sm btn-link p-0 me-2" onclick="history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                 class="bi fw-bold bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
                     d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
@@ -21,11 +21,11 @@
 
     <div class="row mb-3">
 
-        <div class="col-md-6">
+        <div class="col-md-6 mb-xs-3">
 
             <div class="card">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Detail Pembayaran</p>
+                    <p class="m-0 d-inline font-weight-bold text-grey">Detail Pembayaran</p>
                     @can('admin')
                         <a href="{{ route('pembayaran.edit', $pembayaran) }}" class="float-right">Edit pembayaran</a>
                     @endcan
@@ -79,7 +79,7 @@
                                 <td>Rp{{ number_format($pembayaran->userSiswa->spp->nominal, 0, '.', '.') }}</td>
                             </tr> --}}
                             <tr class="border-bottom">
-                                <td class="fw-bold">Jenis Pembayaran</td>
+                                <td class="fw-bold">Jenis Transaksi</td>
                                 <td style="width: 1px;">:</td>
                                 <td class="text-uppercase">{{ $pembayaran->jenistransaksi }}</td>
                             </tr>
@@ -143,7 +143,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Detail Siswa</p>
+                    <p class="m-0 d-inline font-weight-bold text-grey">Detail Siswa</p>
                     @can('admin')
                         <a href="{{ route('siswa.edit', $pembayaran->userSiswa->username) }}" class="float-right">Edit
                             siswa</a>
@@ -166,44 +166,24 @@
                                 </div>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Nama siswa</td>
+                                <td class="fw-bold">Nama</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->userSiswa->name }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>NISN</td>
-                                <td style="width: 1px;">:</td>
-                                <td>{{ $pembayaran->userSiswa->nisn }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td>NIS</td>
-                                <td style="width: 1px;">:</td>
-                                <td>{{ $pembayaran->userSiswa->nis }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td>Kelas</td>
+                                <td class="fw-bold">Kelas</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->userSiswa->kelas->name }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Alamat</td>
-                                <td style="width: 1px;">:</td>
-                                <td>{{ $pembayaran->userSiswa->alamat }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td>Telepon</td>
-                                <td style="width: 1px;">:</td>
-                                <td>{{ $pembayaran->userSiswa->telepon }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td>Email</td>
+                                <td class="fw-bold">Email</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->userSiswa->email }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Tahun SPP</td>
+                                <td class="fw-bold">Tahun SPP</td>
                                 <td style="width: 1px;">:</td>
-                                <td>{{ $pembayaran->userSiswa->spp->tahun }}</td>
+                                <td>{{ $pembayaran->userSiswa->spp->tahun }} - Rp{{ number_format($pembayaran->userSiswa->spp->nominal, 0, '.', '.') }}</td>
                             </tr>
                         </table>
 
@@ -211,7 +191,7 @@
                     </div>
                     <div class="mt-3">
                         <div class="my-2 text-black text-xs-center fw-bold">
-                            History Pembayaran Siswa
+                            History Pembayaran
                         </div>
                         <div class="table-responsive">
 
@@ -224,14 +204,14 @@
                                         <td>#</td>
                                         <td>Tanggal</td>
                                         <td>Pembayaran untuk</td>
-                                        <td>Nominal bayar</td>
+                                        <td class="d-xs-none">Nominal bayar</td>
                                     </tr>
                                     @foreach ($historysiswa->where('status', 'sukses') as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                                             <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
-                                            <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                                            <td class="d-xs-none">Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                                         </tr>
                                     @endforeach
                                 </table>

@@ -2,7 +2,7 @@
 
 @can('admin')
     
-  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     
@@ -196,6 +196,14 @@
         Data
     </div>
 
+    <li class="nav-item {{ Request::is('admin/siswa*') ? 'active' : '' }}">
+      <a class="nav-link px-3 py-2" href="/admin/siswa">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fas fa-fw bi grey bi-people-fill" viewBox="0 0 16 16">
+          <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+        </svg>
+        <span>Data Siswa</span></a>
+    </li>
+
     <li class="nav-item {{ Request::is('admin/pembayaran*') ? 'active' : '' }}">
       <a class="nav-link px-3 py-2" href="/admin/pembayaran">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fas fa-fw grey bi bi-card-checklist" viewBox="0 0 16 16">
@@ -231,12 +239,28 @@
         <span>History Pembayaran</span>
       </a>
     </li>
+    <li class="nav-item {{ Request::is('admin/laporan*') ? 'active' : '' }}">
+      <a class="nav-link px-3 py-2" href="/admin/laporan">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fas fa-fw grey bi bi-file-earmark-bar-graph-fill" viewBox="0 0 16 16">
+          <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm.5 10v-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-1z"/>
+        </svg>
+        <span>Laporan</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
     <div class="sidebar-heading">
         Pengaturan
     </div>
 
+    <li class="nav-item {{ Request::is('admin/notifikasi*') ? 'active' : '' }}">
+      <a class="nav-link px-3 py-2 " href="/admin/notifikasi">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fas fa-fw grey bi bi-bell-fill" viewBox="0 0 16 16">
+          <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+        </svg>
+        <span>Notifikasi</span></a>
+    </li>
+    
     <li class="nav-item {{ Request::is('admin/profile*') ? 'active' : '' }}">
       <a class="nav-link px-3 py-2 " href="/admin/profile">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fas fa-fw grey bi bi-person-circle" viewBox="0 0 16 16">

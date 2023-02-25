@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImportSiswaRequest;
 use App\Http\Requests\SiswaRequest;
 use App\Models\Kelas;
 use App\Models\Pembayaran;
@@ -21,9 +22,9 @@ class SiswaController extends Controller
     // Siswa - Index
     public function index()
     {
-        if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
-            return view('denied');
-        }
+        // if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
+        //     return view('denied');
+        // }
 
         return view('pages.admin.datasiswa.index', [
             'siswa' => User::where('level', 'siswa')->latest()->get(),
@@ -38,7 +39,7 @@ class SiswaController extends Controller
         return view('pages.admin.datasiswa.create', [
             'kelas' => Kelas::all(),
             'spp' => Spp::all(),
-        ]); 
+        ]);
     }
 
     // Siswa - Store
@@ -51,7 +52,7 @@ class SiswaController extends Controller
 
     // Siswa - Show
     public function show(User $siswa)
-    {   
+    {
 
         return view('pages.admin.datasiswa.show', [
             'siswa' => $siswa,
@@ -59,7 +60,6 @@ class SiswaController extends Controller
             'userphoto' => Userphoto::where('user_id', $siswa->id)->get(),
             'redirect' => '/admin/siswa/' . $siswa->identifier
         ]);
-
     }
 
     // Siswa - Edit
@@ -87,13 +87,13 @@ class SiswaController extends Controller
     }
 
     // Siswa - Import Data Siswa
-    public function import(Request $request)
+    public function import(ImportSiswaRequest $request)
     {
-         $file = $request->file('file');
-         $namaFile = $file->getClientOriginalName();
-         $file->move('datasiswa', $namaFile);
+        $file = $request->file('file');
+        $namaFile = $file->getClientOriginalName();
+        $file->move('datasiswa', $namaFile);
 
-         Excel::import(new SiswaImport, public_path('/datasiswa/' . $namaFile));
-         return back()->withInfo('Data siswa berhasil di import!');
+        Excel::import(new SiswaImport, public_path('/datasiswa/' . $namaFile));
+        return back()->withInfo('Data siswa berhasil di import!');
     }
 }

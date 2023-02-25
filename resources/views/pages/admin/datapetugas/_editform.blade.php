@@ -1,38 +1,55 @@
+<div class="form-floating mb-3">
+  <input type="text" value="{{ old('name', $petuga->name) }}" name="name"
+      class="form-control text-black @error('name') is-invalid @enderror" id="floatingInput"
+      placeholder="name">
+  <label for="floatingInput" class="">Nama Petugas</label>
+  @error('name')
+      <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+  @enderror
+</div>
 
-<label for="name" class="mt-3">Nama Siswa</label>
-<input type="text" value="{{ old('name', $petuga->name) }}" name="name" id="name" class="text-black input-sm form form-control mt-0  @error('name') is-invalid @enderror" placeholder="Masukkan nama iswa">
-@error('name')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
-
-<label for="jk" class="mb-1 mt-3">Jenis Kelamin</label>
-<select name="jk" id="jk" class="text-black form form-control form-select mt-0 @error('jk') is-invalid @enderror" >
-  <option value="" selected disabled>-- Pilih Jenis Kelamin --</option>
-  <option value="laki-laki" {{ $petuga->jk == 'laki-laki' ? 'selected' : '' }}> Laki-laki </option>
-  <option value="perempuan" {{ $petuga->jk == 'perempuan' ? 'selected' : '' }}> Perempuan </option>
+<div class="form-floating mb-3">
+<select name="jk"
+    class="form-select @error('jk') is-invalid @enderror" id="floatingSelect"
+    aria-label="Floating label select example">
+    <option disabled selected>-- Pilih --</option>
+    <option value="laki-laki" {{ $petuga->jk == 'laki-laki' ? 'selected' : '' }}> Laki-laki </option>
+    <option value="perempuan" {{ $petuga->jk == 'perempuan' ? 'selected' : '' }}> Perempuan </option>
 </select>
+<label for="floatingSelect">Jenis Kelamin</label>
 @error('jk')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
+    <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
+</div>
 
-<label for="telepon" class="mt-3">Telepon</label>
-<input type="text" value="{{ old('telepon', $petuga->telepon) }}" name="telepon" id="telepon" class="text-black input-sm form form-control mt-0  @error('telepon') is-invalid @enderror" placeholder="Masukkan telepon petugas">
-@error('telepon')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+  <input type="text" value="{{ old('telepon', $petuga->telepon) }}" name="telepon"
+      class="form-control text-black @error('telepon') is-invalid @enderror" id="floatingInput"
+      placeholder="telepon">
+  <label for="floatingInput" class="">Telepon</label>
+  @error('telepon')
+      <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+  @enderror
+</div>
 
-<label for="email" class="mt-3">Email</label>
-<input type="text" value="{{ old('email', $petuga->email) }}" name="email" id="email" class="text-black input-sm form form-control mt-0  @error('email') is-invalid @enderror" placeholder="Masukkan email petugas">
-@error('email')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+  <input type="text" value="{{ old('email', $petuga->email) }}" name="email"
+      class="form-control text-black @error('email') is-invalid @enderror" id="floatingInput"
+      placeholder="email">
+  <label for="floatingInput" class="">Email</label>
+  @error('email')
+      <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+  @enderror
+</div>
 
-<label for="username" class="mt-3">Username</label>
-<input type="text" value="{{ old('username', $petuga->username) }}" name="username" id="username" class="text-black input-sm form form-control mt-0  @error('username') is-invalid @enderror" placeholder="Masukkan username petugas">
-@error('username')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating">
+  <input type="text" value="{{ old('username', $petuga->username) }}" name="username"
+      class="form-control text-black @error('username') is-invalid @enderror" id="floatingInput"
+      placeholder="username">
+  <label for="floatingInput" class="">Username</label>
+  @error('username')
+      <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+  @enderror
+</div>
 
-<input type="hidden" value="{{ old('level', $petuga->level) }}" name="level" id="password" class="text-black input-sm form form-control mt-0" >
-{{-- <input type="hidden" value="{{ old('password', $petuga->password) }}" name="password" id="password" class="text-black input-sm form form-control mt-0" > --}}
-
+<input type="hidden" value="{{ old('level', $petuga->level) }}" name="level" id="level" class="text-black input-sm form form-control mt-0" >

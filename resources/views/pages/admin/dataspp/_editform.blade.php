@@ -1,11 +1,17 @@
-<label for="tahun" class="mb-1">Tahun SPP</label>
-<input type="text" value="{{ old('tahun', $spp->tahun) }}" name="tahun" id="tahun" class="text-black input-sm form form-control mt-0  @error('tahun') is-invalid @enderror" placeholder="Masukkan tahun SPP">
-@error('tahun')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+  <input type="text" name="tahun" value="{{ old('tahun', $spp->tahun) }}" class="form-control fw-semibold text-black  @error('tahun') is-invalid @enderror"
+      id="floatingInput" placeholder="Masukkan nama spp">
+  <label for="floatingInput">Tahun SPP</label>
+  @error('tahun')
+      <span class="invalid-feedback mt-1">{{ $message }}</span>
+  @enderror
+</div>
 
-<label for="nominal" class="mt-3">Nominal</label>
-<input type="text" value="{{ old('nominal', $spp->nominal) }}" name="nominal" id="nominal" class="text-black input-sm form form-control mt-0  @error('nominal') is-invalid @enderror" placeholder="Masukkan nominal SPP">
-@error('nominal')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mt-3">
+  <input type="text" name="nominal" value="{{ old('nominal', $spp->nominal) }}" class="form-control fw-semibold text-black @error('nominal') is-invalid @enderror "
+      id="floatingInput" placeholder="Masukkan nominal spp">
+  <label for="floatingInput">nominal</label>
+  @error('nominal')
+      <span class="invalid-feedback mt-1">{{ $message }}</span>
+  @enderror
+</div>

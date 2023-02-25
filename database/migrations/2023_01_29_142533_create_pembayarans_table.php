@@ -20,8 +20,8 @@ class CreatePembayaransTable extends Migration
             $table->foreignId('siswa_id');
             $table->foreignId('bulanbayar_id');
             $table->foreignId('metodepembayaran_id')->nullable();
-            $table->string('tahunbayar');
             $table->date('tanggalbayar');
+            $table->string('tahunbayar');
             $table->bigInteger('jumlahbayar');
             $table->enum('jenistransaksi', ['mandiri', 'petugas'])->nullable();
             $table->enum('status', ['diproses', 'sukses', 'gagal'])->nullable();

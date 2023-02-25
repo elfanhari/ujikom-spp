@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body style="background-color: #f8f9fc; font-family: 'Poppins';" >
 
     <div class="container">
 
@@ -32,18 +32,18 @@
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card o-hidden border-0 shadow my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block justify-content-center" style="padding-top: 50px;">
-                                <img class="d-flex my-auto mx-auto" src="/img/aplikasi-pembayaran-spp.png"
+                            <div class="col-lg-6 d-none d-lg-block justify-content-center" style="padding-top: 50px;  background-color: #f5f5f5">
+                                <img class="d-flex my-auto mx-auto rounded-circle" src="/img/e-spp-smk-rekayasa.png"
                                     alt="" style="width: 200px; margin-top: 200px;" />
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Verifikasi</h1>
+                                        <h1 class="h4 text-gray-900 mb-2 fw-bold">Verifikasi</h1>
                                         <p class="mb-4">Masukkan kode verifikasi yang telah dikirim ke email {{ $email }}
                                         </p>
                                     </div>
@@ -52,15 +52,15 @@
 
                                         <div class="form-group">
                                             <input type="text" name="kodeverifikasi" value="{{ old('kodeverifikasi') }}"
-                                                class=" @error('kodeverifikasi') is-invalid @enderror form-control form-control-user"
+                                                class=" @error('kodeverifikasi') is-invalid @enderror form-control text-black"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Masukkan kode verifikasi...">
+                                                placeholder="Masukkan kode verifikasi..." style="border-radius: 10px;">
                                                 @error('kodeverifikasi')
                                                 <span class="invalid-feedback mt-1">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-block" style="border-radius: 10px;">
                                             Kirim
                                         </button>
                                     </form>

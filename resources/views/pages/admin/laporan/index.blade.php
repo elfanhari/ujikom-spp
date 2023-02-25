@@ -19,35 +19,39 @@
 
 
             <!-- Input MD -->
-            <div class="card fs-14">
+            <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('laporan.index') }}" class="float-right">Refresh halaman</a>
-                    <p class="m-0 font-weight-bold text-primary">Generate Laporan</p>
+                    <a href="{{ route('laporan.index') }}" class="fs-14 float-right">Refresh halaman</a>
+                    <p class="m-0 font-weight-bold text-dark">Generate Laporan</p>
                 </div>
                 <div class="card-body ">
-                    <form action="{{ route('laporan.index') }}" method="get">
+                    <form action="{{ route('laporan.index') }}" method="GET" class="input-group-sm fs-14">
                         @csrf
                         <div class="row mb-3">
-                            <div class="col-md-4 d-block input-group-sm">
-                                <label for="petugas_id" class="mb-1">Pilih Petugas</label>
+                            
+                            <div class="col-md-4 d-block input-group-sm pb-3">
+                                <label for="petugas_id" class="mb-1  fw-semibold">Pilih Petugas</label>
                                 <select name="petugas_id" id="petugas_id" class="form-select mb-1">
                                     <option value="" disabled selected>-- Pilih petugas --</option>
                                     <option value="" {{ request('petugas_id') == '' ? 'selected' : '' }}>Semua
                                     </option>
                                     @foreach ($petugas as $tampilkan)
-                                        <option value="{{ $tampilkan->id }}"
+                                        <option 
+                                            value="{{ $tampilkan->id }}"
                                             {{ $tampilkan->id == request('petugas_id') ? 'selected' : '' }}>
-                                            {{ $tampilkan->name }} - {{ $tampilkan->level }} </option>
+                                            {{ $tampilkan->name }} - {{ $tampilkan->level }} 
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
+                            
                             <div class="col-md-4 input-group-sm">
-                                <label for="daritanggal" class="mb-1">Dari Tanggal</label>
+                                <label for="daritanggal" class="mb-1 fw-semibold">Dari Tanggal</label>
                                 <input type="date" name="daritanggal" id="daritanggal"
                                     class="form form-control mb-3 mt-0" placeholder="daritanggal">
                             </div>
                             <div class="col-md-4 input-group-sm">
-                                <label for="sampaitanggal" class="mb-1">Sampai Tanggal</label>
+                                <label for="sampaitanggal" class="mb-1 fw-semibold">Sampai Tanggal</label>
                                 <input value="{{ old('sampaitanggal') }}" type="date" name="sampaitanggal"
                                     id="sampaitanggal" class="form form-control mb-3 mt-0" placeholder="sampaitanggal">
                             </div>
@@ -61,7 +65,7 @@
         <div class="col-12 fs">
             <div class="card mt-4">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Laporan Transaksi</p>
+                    <p class="m-0 d-inline font-weight-bold text-dark">Laporan Transaksi</p>
                     <form action="{{ route('laporan.create') }}" target="_blank" method="GET" class="d-inline">
                         @csrf
                         <input type="hidden" name="petugas_id" id="petugas_id" value="{{ request('petugas_id') }}">

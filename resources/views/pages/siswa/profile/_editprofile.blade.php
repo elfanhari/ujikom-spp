@@ -1,7 +1,7 @@
 <div class="form-floating mb-3">
   <input type="text" name="name"
       value="{{ old('name', $user->name) }}"class="form-control text-black @error('name') is-invalid @enderror"
-      id="floatingInput" placeholder="Masukkan name">
+      id="floatingInput" placeholder="Masukkan name" readonly>
   <label for="floatingInput" class="">Name</label>
   @error('name')
       <span class="invalid-feedback mt-1">{{ $message }}</span>
@@ -28,7 +28,7 @@
   @enderror
 </div>
 
-<div class="form-floating mb-3">
+<div class="form-floating">
   <input type="text" name="username"
       value="{{ old('username', $user->username) }}"class="form-control text-black @error('username') is-invalid @enderror"
       id="floatingInput" placeholder="Masukkan username">

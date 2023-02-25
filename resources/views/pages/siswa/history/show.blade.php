@@ -1,16 +1,9 @@
 @extends('master.siswa.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold poppins text-xs-center">
-        <a href="{{ route('riwayat.index') }}" class="btn btn-sm btn-outline-dark me-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi fw-bold bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-            </svg>
-        </a>
-        Riwayat Transaksi
-    </h5>
+<h5 class="mb-3 fw-bold poppins text-xs-center">
+    Detail Transaksi
+</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -22,8 +15,8 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Detail Pembayaran</p>
+                <div class="card-header fs-16">
+                    <button class="text-decoration-none poppins btn-link m-0 p-0 btn" onclick="history.back()">< Kembali</button>
                 </div>
                     <div class="card-body">
                         <div class="table-responsive">

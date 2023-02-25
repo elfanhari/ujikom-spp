@@ -45,7 +45,7 @@ class ProfileController extends Controller
     {
         if (Hash::check($request->current_password, auth()->user()->password)) {
             auth()->user()->update(['password' => $request->password]);
-            return redirect()->route('siswaprofile.index')->with('info', 'Password anda berhasil diperbarui!');
+            return redirect()->route('profile.index')->with('info', 'Password anda berhasil diperbarui!');
         }
 
         // Jika password sebelumnya salah, berikan pesan validasi

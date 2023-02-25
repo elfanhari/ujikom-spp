@@ -12,6 +12,7 @@ use function PHPUnit\Framework\returnSelf;
 class KompetensikeahlianController extends Controller
 {
    
+    // Prodi - Index
     public function index()
     {   
         if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
@@ -28,13 +29,15 @@ class KompetensikeahlianController extends Controller
         return view('pages.admin.dataprodi.index', compact('prodi'));
     }
 
-   
+
+   // Prodi - Create
     public function create()
     {
         // Sudah ada di Page Index.
     }
 
-   
+
+   // Prodi - Store
     public function store(KompetensikeahlianRequest $request)
     {   
         $request['identifier'] = 'i' . Str::random(9);
@@ -42,29 +45,34 @@ class KompetensikeahlianController extends Controller
         return redirect(route('prodi.index'))->withInfo('Data berhasil ditambahkan!');
     }
 
-   
+
+   // Prodi - Show
     public function show($id)
     {
         //
     }
 
-  
+
+    // Prodi - Edit
     public function edit(Kompetensikeahlian $prodi)
     {
         return view('pages.admin.dataprodi.edit', compact('prodi'));
     }
 
     
+    // Prodi - Update
     public function update(KompetensikeahlianRequest $request, Kompetensikeahlian $prodi)
     {
         $prodi->update($request->all()); 
         return redirect(route('prodi.index'))->withInfo('Data berhasil diperbarui!');
     }
 
-    
-    public function destroy(Kompetensikeahlian $prodi, Request $request)
+
+    // Prodi - Destroy
+    public function destroy(Kompetensikeahlian $prodi)
     {
-        Kompetensikeahlian::where('identifier', $request->identifier)->delete(); 
+        $prodi->delete(); 
         return back()->withInfo('Data berhasil dihapus!');
     }
+
 }

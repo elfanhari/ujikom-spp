@@ -69,7 +69,7 @@ class UserphotoController extends Controller
         return redirect($redirect)->with('info', 'Foto profil berhasil diperbarui!');
     }
 
-    public function deletePhoto(UserphotoRequest $request)
+    public function deletePhoto(Request $request)
     {   
         $redirect = $request->redirect;
         

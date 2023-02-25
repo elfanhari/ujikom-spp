@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-header">
 
-                   
+
                     <div class="text-end text-secondary d-inline float-right fs-14">
                         {{ $notifikasi->created_at->diffForHumans() }}
                     </div>
@@ -44,22 +44,24 @@
                             <i class="fas fa-exclamation-triangle text-white"></i>
                         </div>
                     @endif
-                   
+
                     <p class="mt-2">
-                        {{ $notifikasi->pesan }}
+                        {!! $notifikasi->pesan !!}
                     </p>
                     @if ($notifikasi->dibaca == false)
-                    <form action="{{ route('admin.notifikasi.telahdibaca', $notifikasi) }}" method="POST" class="d-inline">
-                        @method('PUT')
-                        @csrf
+                        <form action="{{ route('admin.notifikasi.telahdibaca', $notifikasi) }}" method="POST"
+                            class="d-inline">
+                            @method('PUT')
+                            @csrf
 
-                        <input type="hidden" name="dibaca" id="" value="1">
-                        <input type="hidden" name="untuk" id="" value="satu">
+                            <input type="hidden" name="dibaca" id="" value="1">
+                            <input type="hidden" name="untuk" id="" value="satu">
 
-                        <button type="submit" class="btn btn-md btn-primary px-5 rounded-pill w-100">OK</button>
-                      </form>
+                            <button type="submit" class="btn btn-md btn-primary px-5 rounded-pill w-100">OK</button>
+                        </form>
                     @else
-                      <a href="{{ route('admin.notifikasi.index') }}" class="btn btn-md btn-primary px-5 rounded-pill w-100">OK</a>
+                        <a href="/admin/notifikasi"
+                            class="btn btn-md btn-primary px-5 rounded-pill w-100">OK</a>
                     @endif
                 </div>
             </div>

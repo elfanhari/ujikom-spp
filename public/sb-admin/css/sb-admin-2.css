@@ -11279,3 +11279,10 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+@media (max-width: 576px) { 
+  .sidebar.d-xs-toggled {
+      width: 0 !important;
+      overflow: hidden;
+    }
+ }

@@ -1,11 +1,11 @@
 
 <label for="name" class="mt-0 fw-semibold">Nama Petugas</label>
-<input type="text" value="{{ old('name') }}" name="name" id="name" class="text-black input-sm form form-control mt-0  @error('name') is-invalid @enderror" placeholder="Masukkan nama siswa">
+<input type="text" value="{{ old('name') }}" name="name" id="name" class="text-black input-sm form form-control mt-0  @error('name') is-invalid @enderror" placeholder="Masukkan nama petugas">
 @error('name')
 <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="jk" class="mb-1 fw-semibold mt-3">Jenis Kelamin</label>
+<label for="jk" class="mb-1 fw-semibold mb-1 mt-3">Jenis Kelamin</label>
 <select name="jk" id="jk" class="text-black form form-control form-select mt-0 @error('jk') is-invalid @enderror" >
   <option value="" selected disabled>-- Pilih Jenis Kelamin --</option>
     <option value="laki-laki" {{ 'laki-laki' == old('jk') ? 'selected' : '' }}> Laki-laki </option>
@@ -15,26 +15,26 @@
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="telepon" class="fw-semibold mt-3">Telepon</label>
-<input type="text" value="{{ old('telepon') }}" name="telepon" id="telepon" class="text-black input-sm form form-control mt-0  @error('telepon') is-invalid @enderror" placeholder="Masukkan nomor telepon siswa">
+<label for="telepon" class="fw-semibold mb-1 mt-3">Telepon</label>
+<input type="text" value="{{ old('telepon') }}" name="telepon" id="telepon" class="text-black input-sm form form-control mt-0  @error('telepon') is-invalid @enderror" placeholder="Masukkan nomor telepon petugas">
 @error('telepon')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="email" class="fw-semibold mt-3">Email</label>
-<input type="text" value="{{ old('email') }}" name="email" id="email" class="text-black input-sm form form-control mt-0  @error('email') is-invalid @enderror" placeholder="Masukkan email siswa">
+<label for="email" class="fw-semibold mb-1 mt-3">Email</label>
+<input type="text" value="{{ old('email') }}" name="email" id="email" class="text-black input-sm form form-control mt-0  @error('email') is-invalid @enderror" placeholder="Masukkan email petugas">
 @error('email')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
 
-<label for="username" class="fw-semibold mt-3">Username</label>
-<input type="text" value="{{ old('username') }}" name="username" id="username" class="text-black input-sm form form-control mt-0  @error('username') is-invalid @enderror" placeholder="Masukkan username siswa">
+<label for="username" class="fw-semibold mb-1 mt-3">Username</label>
+<input type="text" value="{{ old('username') }}" name="username" id="username" class="text-black input-sm form form-control mt-0  @error('username') is-invalid @enderror" placeholder="Masukkan username petugas">
 @error('username')
 <span class="invalid-feedback mt-1 float-right">{{ $message }}</span>
 @enderror
 
-<label for="password" class="fw-semibold mt-3">Password</label>
-<input type="password" value="{{ old('password') }}" name="password" id="password" class="text-black input-sm form form-control mt-0  @error('password') is-invalid @enderror" placeholder="Masukkan password siswa">
+<label for="password" class="fw-semibold mb-1 mt-3">Password</label>
+<input type="password" value="{{ old('password') }}" name="password" id="password" class="text-black input-sm form form-control mt-0  @error('password') is-invalid @enderror" placeholder="Masukkan password petugas">
 @error('password')
   <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror

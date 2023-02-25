@@ -24,7 +24,7 @@
             class="text-start position-absolute" />
         <div class="text-center">
             <h3>APLIKASI PEMBAYARAN SPP</h3>
-            <h3 class="fw-bold" >SMK NEGERI 3 BANJAR</h3>
+            <h3 class="fw-bold" >SMK REKAYASA</h3>
             <hr />
         </div>
         <div class="my-3 fs-12">
@@ -89,7 +89,7 @@
         <div class="row mt-5 fs-12">
             <div class="col-3 offset-9 fs-14">
                 <div>Mengetahui,</div>
-                <div class="mb-5 mt-0">Kepala SMK Negeri 3 Banjar,</div>
+                <div class="mb-5 mt-0">Kepala SMK REKAYASA,</div>
                 <div class="mt-5">Maman Sudirman, MM</div>
                 <div class="mt-0">NIP. 01412478478174</div>
             </div>

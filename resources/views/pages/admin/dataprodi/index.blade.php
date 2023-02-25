@@ -1,14 +1,8 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold poppins">
-        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi fw-bold bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-            </svg>
-        </button> Data Prodi
+    <h5 class="mb-3 fw-bold text-xs-center poppins">
+        Data Prodi
     </h5>
 
     @if (session()->has('info'))
@@ -27,7 +21,7 @@
                     <div class="card-header fs-16">
                         <button type="button" class="btn-close float-right d-inline" data-bs-toggle="collapse"
                             data-bs-target="#collapse" aria-expanded="false" aria-controls="collapseExample"></button>
-                        <p class="m-0 font-weight-bold text-primary">Input Data Prodi</p>
+                        <p class="m-0 font-weight-bold text-dark">Input Data Prodi</p>
                     </div>
 
                     <div class="card-body input-group-sm">
@@ -51,7 +45,7 @@
             <!-- Input MD -->
             <div class="card d-xs-none mb-sm-3">
                 <div class="card-header fs-16">
-                    <p class="m-0 font-weight-bold text-primary">Input Data Prodi</p>
+                    <p class="m-0 font-weight-bold text-dark">Input Data Prodi</p>
                 </div>
 
                 <div class="card-body input-group-sm">
@@ -74,10 +68,11 @@
         <div class="col-md-8 mb-xs-3">
             <div class="card fs-16 mb">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Data Prodi</p>
+                    <p class="m-0 d-inline font-weight-bold text-dark">Data Prodi</p>
 
                     {{-- Petunjuk Aksi --}}
-                    <button class="btn btn-info btn-sm btn-icon-split float-right ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#petunjukAksi">
+                    <button class="btn btn-info btn-sm btn-icon-split float-right ms-2 rounded-circle"
+                        data-bs-toggle="modal" data-bs-target="#petunjukAksi">
                         <span class="icon text-white-50">
                             <i class="fas fa-info-circle"></i>
                         </span>
@@ -146,17 +141,12 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Batal</button>
-                                                                <form
-                                                                    action="{{ route('prodi.destroy', $tampilkan->identifier) }}"
+                                                                <form action="{{ route('prodi.destroy', $tampilkan) }}"
                                                                     method="POST" class="d-inline">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit"
                                                                         class="btn btn-primary">Iya</button>
-
-                                                                    <input type="text" name="identifier"
-                                                                        id=""
-                                                                        value="{{ $tampilkan->identifier }}">
                                                                 </form>
                                                             </div>
                                                         </div>

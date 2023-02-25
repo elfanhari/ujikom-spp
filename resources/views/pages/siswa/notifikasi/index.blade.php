@@ -31,10 +31,12 @@
                     <button class="btn fs-14 btn-link p-0 text-decoration-none float-right" type="submit">Hapus
                         semua</button>
                 </form>
-            @endif
+                @endif
             </div>
             @if ($notifikasi->count() < 1)
-                Anda belum mempunyai notifikasi.
+            <div class="text-xs-center">
+                Tidak ada notifikasi kepada anda.
+            </div>
             @else
                 @foreach ($notifikasi as $tampilkan)
                     @if ($tampilkan->dibaca == false)

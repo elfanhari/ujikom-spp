@@ -18,19 +18,10 @@
 
             <!-- Input MD -->
             <div class="card mb-4">
-                <div class="card-header">
-                    <p class="m-0 font-weight-bold text-primary">Input Pembayaran</p>
-                </div>
+                <div class="card-header fs-16">
+                    <button class="text-decoration-none poppins btn-link m-0 p-0 btn" onclick="history.back()">< Kembali</button>
+                  </div>
                 <div class="fs-14 card-body input-group-sm">
-
-                    {{-- <form action="" method="GET">
-                        <div class="input-group">
-                            <input type="text" name="nisn" value="{{ request('nisn') }}" class="form-control"
-                                placeholder="Masukkan NISN" aria-label="Recipient's username with two button addons"
-                                required>
-                            <button class="btn btn-outline-primary" type="submit">Cek</button>
-                        </div>
-                    </form> --}}
 
                     <form action="" method="GET" class="{{ request('siswa_id') ? 'd-none' : '' }}">
                         <div class="input-group">
@@ -79,7 +70,12 @@
                             @csrf
                             @include('pages.admin.entripembayaran._addform')
 
-                            <button class="btn btn-sm mt-3 btn-primary float-right" type="submit">Simpan</button>
+                            <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                                <span class="icon text-white-50 m-0">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="text">Simpan</span>
+                            </button>
                         </form>
                     @endif
 
@@ -89,7 +85,7 @@
         <div class="col-md-7">
             <div class="card">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Detail Siswa</p>
+                    <p class="m-0 d-inline font-weight-bold text-grey">Detail Siswa</p>
                 </div>
                 <div class="card-body">
                     @if ($siswaCek->count() > 0)
@@ -109,16 +105,6 @@
                                         </div>
                                     </tr>
                                     <tr class="border-bottom">
-                                        <td>NISN</td>
-                                        <td style="width: 1px;">:</td>
-                                        <td>{{ $tampilkan->nisn }}</td>
-                                    </tr>
-                                    <tr class="border-bottom">
-                                        <td>NIS</td>
-                                        <td style="width: 1px;">:</td>
-                                        <td>{{ $tampilkan->nis }}</td>
-                                    </tr>
-                                    <tr class="border-bottom">
                                         <td>Nama Siswa</td>
                                         <td style="width: 1px;">:</td>
                                         <td>{{ $tampilkan->name }}</td>
@@ -129,11 +115,6 @@
                                         <td>{{ $tampilkan->kelas->name }}</td>
                                     </tr>
                                     <tr class="border-bottom">
-                                        <td>Alamat</td>
-                                        <td style="width: 1px;">:</td>
-                                        <td>{{ $tampilkan->alamat }}</td>
-                                    </tr>
-                                    <tr class="border-bottom">
                                         <td>Telepon</td>
                                         <td style="width: 1px;">:</td>
                                         <td>{{ $tampilkan->telepon }}</td>
@@ -141,7 +122,7 @@
                                     <tr class="border-bottom">
                                         <td>Tahun SPP</td>
                                         <td style="width: 1px;">:</td>
-                                        <td>{{ $tampilkan->spp->tahun }}</td>
+                                        <td>{{ $tampilkan->spp->tahun }} </td>
                                     </tr>
                                 </table>
                             </div>
@@ -158,7 +139,7 @@
                         <div class="table-responsive">
                             
                             @if ($historysiswa->count() < 1)
-                                <small> <a href="">{{ $siswaCek->name }}</a> belum memiliki riwayat
+                                <small> <a href="">{{ $siswaCek[0]->name }}</a> belum memiliki riwayat
                                     pembayaran.</small>
                             @else
                                 <table class="table table-sm table-hover fs-14 c-black">
@@ -166,14 +147,12 @@
                                         <td>#</td>
                                         <td>Tanggal</td>
                                         <td>Pembayaran untuk</td>
-                                        <td>Nominal bayar</td>
                                     </tr>
                                     @foreach ($historysiswa->where('status', 'sukses') as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                                             <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
-                                            <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                                         </tr>
                                     @endforeach
                                 </table>

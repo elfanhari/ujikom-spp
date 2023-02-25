@@ -1,14 +1,9 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold poppins">
-        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi fw-bold bi-arrow-left"
-                viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-            </svg>
-        </button> Data Petugas</h5>
+<h5 class="mb-3 fw-bold text-xs-center poppins">
+    Data Petugas 
+</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -23,7 +18,7 @@
             <!-- Input MD -->
             <div class="card d-xs-none mb-sm-3">
                 <div class="card-header fs-16">
-                    <p class="m-0 font-weight-bold text-primary">Input Data Petugas</p>
+                    <p class="m-0 d-inline font-weight-bold text-grey">Input Data Petugas</p>
                 </div>
                 <div class="card-body input-group-sm">
                     <form action="{{ route('petugas.store') }}" method="POST" class="input-group-sm fs-14">
@@ -45,7 +40,7 @@
         <div class="col-md-8 mb-xs-3">
             <div class="card fs-16 mb">
                 <div class="card-header">
-                    <p class="m-0 font-weight-bold d-inline text-primary d-xs-none mt-3">Data Petugas</p>
+                    <p class="m-0 font-weight-bold d-inline text-grey d-xs-none mt-3">Data Petugas</p>
                     
                     {{-- Petunjuk Aksi --}}
                     <button class="btn btn-info d-inline btn-sm btn-icon-split float-right ms-2 rounded-circle"
@@ -80,9 +75,9 @@
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
                                         <th scope="col">Nama Petugas</th>
-                                        <th scope="col">Role</th>
-                                        <th scope="col">Telepon</th>
-                                        <th scope="col">Email</th>
+                                        <th scope="col" class="d-xs-none">Role</th>
+                                        <th scope="col" class="d-xs-none">Telepon</th>
+                                        <th scope="col" class="d-xs-none">Email</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -92,9 +87,9 @@
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->name }}</td>
-                                            <td>{{ $tampilkan->level }}</td>
-                                            <td>{{ $tampilkan->telepon }}</td>
-                                            <td>{{ $tampilkan->email }}</td>
+                                            <td class="d-xs-none">{{ $tampilkan->level }}</td>
+                                            <td class="d-xs-none">{{ $tampilkan->telepon }}</td>
+                                            <td class="d-xs-none">{{ $tampilkan->email }}</td>
                                             <td class="">
 
                                                 <a href="{{ route('petugas.show', $tampilkan) }}" type="button" class="btn btn-success pb-1 pt-0 px-2">

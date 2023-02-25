@@ -21,6 +21,7 @@ use App\Http\Controllers\SiswaHistoryController;
 use App\Http\Controllers\SiswaNotifikasiController;
 use App\Http\Controllers\SiswaShowController;
 use App\Http\Controllers\SppController;
+use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Controllers\UserphotoController;
 use App\Models\Pembayaran;
 use App\Models\Notifikasi;
@@ -80,6 +81,9 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('/admin', AdminController::class);
         Route::resource('/pembayaran', PembayaranController::class);
 
+        Route::get('/editpassword/{users:identifier}', [UpdatePasswordController::class, 'edit'])->name('updatepassword.edit');
+        Route::put('/editpassword/{users:identifier}', [UpdatePasswordController::class, 'update'])->name('updatepassword.update');
+        
         // Route::resource('/notifikasi', AdminNotifikasiController::class);
 
         Route::get('/notifikasi', [AdminNotifikasiController::class, 'index'])->name('admin.notifikasi.index');
@@ -87,7 +91,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/notifikasi/{notifikasis:identifier}', [AdminNotifikasiController::class, 'show'])->name('admin.notifikasi.show');
         Route::put('/notifikasi/{notifikasis:identifier}', [AdminNotifikasiController::class, 'update'])->name('admin.notifikasi.update');
         Route::delete('/notifikasi/{notifikasis:identifier}', [AdminNotifikasiController::class, 'destroy'])->name('admin.notifikasi.destroy');
-        Route::put('/notifikasi/telahdibaca/{notifikasi}', [SiswaNotifikasiController::class, 'telahDibaca'])->name('admin.notifikasi.telahdibaca');
+        Route::put('/notifikasi/telahdibaca/{notifikasi}', [AdminNotifikasiController::class, 'telahDibaca'])->name('admin.notifikasi.telahdibaca');
 
         Route::put('/updatestatuspembayaran/{pembayaran}', [PembayaranController::class, 'updateStatus'])->name('statuspembayaran.update');
 

@@ -1,59 +1,75 @@
-<label for="siswa_id" class="mb-1 mt-0">Siswa</label>
-<select name="siswa_id" id="siswa_id"
-    class="text-black form form-control form-select mt-0   @error('siswa_id') is-invalid @enderror">
-    <option value="" selected disabled>-- Pilih siswa --</option>
-    @foreach ($siswa as $tampilkan)
-        <option value=" {{ $tampilkan->id }} " {{ $tampilkan->id == $pembayaran->siswa_id ? 'selected' : '' }}>
-            {{ $tampilkan->name }}</option>
-    @endforeach
-</select>
-@error('siswa_id')
-    <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <input type="text"
+        value="{{ old('name', $pembayaran->userSiswa->name) }} - {{ $pembayaran->userSiswa->kelas->name }}"
+        class="form-control text-black @error('name') is-invalid @enderror fw-semibold" id="floatingInput"
+        placeholder="name" readonly disabled>
+    <label for="floatingInput" class="">Nama Siswa</label>
+    @error('name')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="tanggalbayar" class="mt-3">Tanggal Bayar</label>
-<input type="date" value="{{ old('tanggalbayar', $pembayaran->tanggalbayar) }}" name="tanggalbayar" id="tanggalbayar"
-    class="text-black input-sm form form-control mt-0  @error('tanggalbayar') is-invalid @enderror"
-    placeholder="Masukkan tanggalbayar siswa">
-@error('tanggalbayar')
-    <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <input type="date" value="{{ old('tanggalbayar', $pembayaran->tanggalbayar) }}" name="tanggalbayar"
+        class="form-control text-black @error('tanggalbayar') is-invalid @enderror fw-semibold" id="floatingInput"
+        placeholder="tanggalbayar">
+    <label for="floatingInput" class="">Tanggal Bayar</label>
+    @error('tanggalbayar')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="bulanbayar_id" class="mb-1 mt-3">Bulan dibayar</label>
-<select name="bulanbayar_id" id="bulanbayar_id"
-    class="text-black form form-control form-select mt-0   @error('bulanbayar_id') is-invalid @enderror">
-    <option value="" selected disabled>-- Pilih pembayaran untuk bulan --</option>
-    @foreach ($bulanbayar as $tampilkan)
-        <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == $pembayaran->bulanbayar_id ? 'selected' : '' }}>
-            {{ $tampilkan->name }}</option>
-    @endforeach
-</select>
-@error('bulanbayar_id')
-    <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <select name="bulanbayar_id" class="form-select fw-semibold @error('bulanbayar_id') is-invalid @enderror" id="floatingSelect"
+        aria-label="Floating label select example">
+        <option value="" selected disabled>-- Pilih --</option>
+        @foreach ($bulanbayar as $tampilkan)
+            <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == $pembayaran->bulanbayar_id ? 'selected' : '' }}>
+                {{ $tampilkan->name }}</option>
+        @endforeach
+    </select>
+    <label for="floatingSelect">Pembayaran untuk bulan</label>
+    @error('bulanbayar_id')
+        <span class="invalid-feedback mt-1">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="tahunbayar" class="mt-3">Tahun Bayar</label>
-<input type="text" value="{{ old('tahunbayar', $pembayaran->tahunbayar) }}" name="tahunbayar" id="tahunbayar"
-    class="text-black input-sm form form-control mt-0  @error('tahunbayar') is-invalid @enderror"
-    placeholder="Masukkan tahunbayar siswa">
-@error('tahunbayar')
-    <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mt-3 mb-3">
+    <input type="text" value="{{ old('jumlahbayar', $pembayaran->tahunbayar) }}" name="tahunbayar"
+        class="form-control text-black @error('tahunbayar') is-invalid @enderror fw-semibold" id="floatingInput"
+        placeholder="tahunbayar">
+    <label for="floatingInput" class="">Pembayaran untuk tahun</label>
+    @error('tahunbayar')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="status" class="mb-1 mt-3">Status Pembayaran</label>
-<select name="status" id="status"
-    class="text-black form form-control form-select mt-0   @error('status') is-invalid @enderror">
-    <option disabled>-- Pilih --</option>
-    <option value="sukses" {{ $pembayaran->status == 'sukses' ? 'selected' : '' }}>SUKSES</option>
-    <option value="diproses" {{ $pembayaran->status == 'diproses' ? 'selected' : '' }}>DIPROSES</option>
-</select>
-@error('status')
-    <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mt-3 mb-3">
+    <input type="text" value="Rp{{ number_format($pembayaran->jumlahbayar, 0, '.', '.') }}"
+        class="form-control text-black @error('jumlahbayar') is-invalid @enderror fw-semibold" id="floatingInput"
+        placeholder="jumlahbayar" readonly>
+    <label for="floatingInput" class="">Nominal bayar</label>
+    @error('jumlahbayar')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+</div>
 
+
+<div class="form-floating">
+    <select name="status" class="form-select fw-semibold @error('status') is-invalid @enderror" id="floatingSelect"
+        aria-label="Floating label select example">
+        <option value="" disabled>-- Pilih --</option>
+        <option value="sukses" {{ $pembayaran->status == 'sukses' ? 'selected' : '' }}>SUKSES</option>
+        <option value="diproses" {{ $pembayaran->status == 'diproses' ? 'selected' : '' }}>DIPROSES</option>
+        <option value="gagal" {{ $pembayaran->status == 'gagal' ? 'selected' : '' }}>GAGAL</option>
+    </select>
+    <label for="floatingSelect">Status Pembayaran</label>
+    @error('status')
+        <span class="invalid-feedback mt-1">{{ $message }}</span>
+    @enderror
+</div>
+
+<input type="hidden" name="petugas_id" value="{{ $pembayaran->userPetugas->id }}">
+<input type="hidden" name="siswa_id" value="{{ $pembayaran->userSiswa->id }}">
+<input type="hidden" name="identifier" value="{{ $pembayaran->identifier }}">
 <input type="hidden" name="jumlahbayar" value="{{ $pembayaran->jumlahbayar }}">
-<input type="hidden" value="{{ old('petugas_id', $pembayaran->petugas_id) }}" name="petugas_id" id="password"
-    class="text-black input-sm form form-control mt-0">
-
-<input type="hidden" name="metodepembayaran_id" value="8">
-<input type="hidden" name="jenistransaksi" value="petugas">

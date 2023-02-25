@@ -85,11 +85,12 @@ class PembayaranController extends Controller
             'siswa' => User::whereLevel('siswa')->get(),
             'bulanbayar' => Bulanbayar::all(),
         ]);
+
     }
 
     
     public function update(PembayaranRequest $request, Pembayaran $pembayaran)
-    {
+    {   
         $pembayaran->update($request->all());
         return redirect(route('pembayaran.index'))->withInfo('Data berhasil diubah!');
     }

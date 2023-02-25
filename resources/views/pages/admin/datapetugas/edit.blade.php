@@ -2,14 +2,9 @@
 
 @section('content')
 
-    <h5 class="mb-3 fw-bold poppins">
-        <button class="btn btn-sm btn-outline-dark me-2" onclick="history.back()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi fw-bold bi-arrow-left"
-                viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-            </svg>
-        </button> Data Petugas</h5>
+<h5 class="mb-3 fw-bold text-xs-center poppins">
+    Edit Data Petugas
+</h5>
 
     <div class="row">
         <div class="col-md-6">
@@ -19,7 +14,8 @@
                
                 <div class="card mt-2 mb-3" id="">
                     <div class="card-header fs-16">
-                        <p class="m-0 font-weight-bold text-primary">Edit Data petugas</p>
+                        <button class="text-decoration-none poppins d-inline btn-link m-0 p-0 btn" onclick="history.back()">< Kembali</button>
+                        <a href="{{ route('updatepassword.edit', $petuga) }}" class="float-right text-warning fs-16">Edit password</a>
                     </div>
                     <div class="card-body input-group-sm">
                         <form action="{{ route('petugas.update', $petuga) }}" method="POST" class="input-group-sm fs-14">
@@ -43,7 +39,8 @@
             <!-- Input MD -->
             <div class="card d-xs-none mb-sm-3">
                 <div class="card-header fs-16">
-                    <p class="m-0 font-weight-bold text-primary">Edit Data petugas</p>
+                    <button class="text-decoration-none poppins d-inline btn-link m-0 p-0 btn" onclick="history.back()">< Kembali</button>
+                    <a href="{{ route('updatepassword.edit', $petuga) }}" class="float-right text-warning fs-16">Edit password</a>
                 </div>
                 <div class="card-body input-group-sm">
                     <form action="{{ route('petugas.update', $petuga) }}" method="POST">

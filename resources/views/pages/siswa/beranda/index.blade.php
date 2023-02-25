@@ -8,32 +8,10 @@
         </div>
     @endif
 
-    <h5 class="mb-3 fw-bold poppins">
-        Beranda
-    </h5>
+    <h5 class="mb-3 fw-bold text-xs-center poppins">Beranda</h5>
 
 
     <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header text-center">Transaksi</div>
-                <div class="card-body text-white bg-primary">
-                    <h1 class="fw-bold  text-center">1</h1>
-                </div>
-                <div class=" card-footer text-center">
-                    <a href="" class="text-decoration-none">Kunjungi >></a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header text-center">Riwayat</div>
-                <div class="card-body text-white bg-warning">
-                    <h1 class="fw-bold  text-center">4</h1>
-                </div>
-                <div class=" card-footer text-center">
-                    <a href="" class="text-decoration-none">Kunjungi >></a>
-                </div>
-            </div>
-        </div>
         <div class="col-md-6">
           <div class="accordion mb-5" id="accordionExample">
             <div class="accordion-item">

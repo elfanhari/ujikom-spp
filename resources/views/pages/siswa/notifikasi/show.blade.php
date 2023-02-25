@@ -46,7 +46,7 @@
                     @endif
                    
                     <p class="mt-2">
-                        {{ $notifikasi->pesan }}
+                        {!! $notifikasi->pesan !!}
                     </p>
                     @if ($notifikasi->dibaca == false)
                     <form action="{{ route('notifikasi.telahdibaca', $notifikasi) }}" method="POST" class="d-inline">

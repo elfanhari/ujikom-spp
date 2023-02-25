@@ -17,9 +17,6 @@
 
             <div class="card">
 
-                <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">History Pembayaran</p>
-                </div>
                 <div class="card-body">
 
                     <ul class="nav nav-tabs d-flex justify-content-start align-items-center" id="tableTab" role="tablist">
@@ -40,9 +37,6 @@
 
                             <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                                 <div class="mt-3">
-                                    <p class="d-inline text-warning" style="font-size: 16px;">NB: History pembayaran diurutkan
-                                        berdasarkan transaksi terbaru!</p>
-
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover fs-14 transaction-table c-black active"
@@ -53,11 +47,9 @@
                                                 <th scope="col">Waktu Transaksi</th>
                                                 <th scope="col">Nama Siswa</th>
                                                 <th scope="col">Kelas</th>
-                                                {{-- <th scope="col">Tanggal Bayar</th> --}}
-                                                <th scope="col">Bulan Dibayar</th>
-                                                <th scope="col">Tahun Dibayar</th>
-                                                <th scope="col">Jumlah Bayar</th>
+                                                <th scope="col">Pembayaran untuk</th>
                                                 <th scope="col">Nama Petugas</th>
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
@@ -68,11 +60,17 @@
                                                 <td>{{ $tampilkan->created_at->diffForHumans() }}</td>
                                                 <td>{{ $tampilkan->userSiswa->name }}</td>
                                                 <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
-                                                 {{-- <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td> --}}
-                                                 <td>{{ $tampilkan->bulanbayar->name }}</td>
-                                                 <td>{{ $tampilkan->tahunbayar }}</td>
-                                                <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                                                <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
                                                 <td>{{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}</td>
+                                                <td>
+                                                    @if ($tampilkan->status == 'diproses')
+                                                        <span class="badge bg-warning">{{ strtoupper($tampilkan->status) }}</span>
+                                                        @elseif ($tampilkan->status == 'sukses')
+                                                        <span class="badge bg-success">{{ strtoupper($tampilkan->status) }}</span>
+                                                        @elseif ($tampilkan->status == 'gagal')
+                                                        <span class="badge bg-danger">{{ strtoupper($tampilkan->status) }}</span>
+                                                    @endif
+                                                </td>
                                                 <td class="">
 
                                                     <a href="{{ route('pembayaran.show', $tampilkan->identifier) }}"
@@ -96,9 +94,6 @@
 
                             <div class="tab-pane fade" id="success" role="tabpanel" aria-labelledby="success-tab">
                                 <div class="mt-3">
-                                    <p class="d-inline text-warning" style="font-size: 16px;">NB: History pembayaran diurutkan
-                                        berdasarkan transaksi terbaru!</p>
-                                
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover fs-14 transaction-table c-black"
@@ -109,11 +104,9 @@
                                                 <th scope="col">Waktu Transaksi</th>
                                                 <th scope="col">Nama Siswa</th>
                                                 <th scope="col">Kelas</th>
-                                                {{-- <th scope="col">Tanggal Bayar</th> --}}
-                                                <th scope="col">Bulan Dibayar</th>
-                                                <th scope="col">Tahun Dibayar</th>
-                                                <th scope="col">Jumlah Bayar</th>
+                                                <th scope="col">Pembayaran untuk</th>
                                                 <th scope="col">Nama Petugas</th>
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
@@ -124,11 +117,17 @@
                                                     <td>{{ $tampilkan->created_at->diffForHumans() }}</td>
                                                     <td>{{ $tampilkan->userSiswa->name }}</td>
                                                     <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
-                                                     {{-- <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td> --}}
-                                                     <td>{{ $tampilkan->bulanbayar->name }}</td>
-                                                     <td>{{ $tampilkan->tahunbayar }}</td>
-                                                    <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                                                     <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
                                                     <td>{{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}</td>
+                                                    <td>
+                                                    @if ($tampilkan->status == 'diproses')
+                                                        <span class="badge bg-warning">{{ strtoupper($tampilkan->status) }}</span>
+                                                        @elseif ($tampilkan->status == 'sukses')
+                                                        <span class="badge bg-success">{{ strtoupper($tampilkan->status) }}</span>
+                                                        @elseif ($tampilkan->status == 'gagal')
+                                                        <span class="badge bg-danger">{{ strtoupper($tampilkan->status) }}</span>
+                                                    @endif
+                                                </td>
                                                     <td class="">
 
                                                         <a href="{{ route('pembayaran.show', $tampilkan->identifier) }}"
@@ -152,9 +151,6 @@
 
                             <div class="tab-pane fade" id="mandiri" role="tabpanel" aria-labelledby="mandiri-tab">
                                 <div class="mt-3">
-                                    <p class="d-inline text-warning" style="font-size: 16px;">NB: History pembayaran diurutkan
-                                        berdasarkan transaksi terbaru!</p>
-                                
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover fs-14 transaction-table c-black"
@@ -165,11 +161,8 @@
                                                 <th scope="col">Waktu Transaksi</th>
                                                 <th scope="col">Nama Siswa</th>
                                                 <th scope="col">Kelas</th>
-                                                {{-- <th scope="col">Tanggal Bayar</th> --}}
-                                                <th scope="col">Bulan Dibayar</th>
-                                                <th scope="col">Tahun Dibayar</th>
-                                                <th scope="col">Jumlah Bayar</th>
-                                                <th scope="col">Nama Petugas</th>
+                                                <th scope="col">Pembayaran untuk</th>
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
@@ -180,11 +173,16 @@
                                                     <td>{{ $tampilkan->created_at->diffForHumans() }}</td>
                                                     <td>{{ $tampilkan->userSiswa->name }}</td>
                                                     <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
-                                                     {{-- <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td> --}}
-                                                     <td>{{ $tampilkan->bulanbayar->name }}</td>
-                                                     <td>{{ $tampilkan->tahunbayar }}</td>
-                                                    <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
-                                                    <td>-</td>
+                                                     <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
+                                                    <td>
+                                                        @if ($tampilkan->status == 'diproses')
+                                                            <span class="badge bg-warning">{{ strtoupper($tampilkan->status) }}</span>
+                                                            @elseif ($tampilkan->status == 'sukses')
+                                                            <span class="badge bg-success">{{ strtoupper($tampilkan->status) }}</span>
+                                                            @elseif ($tampilkan->status == 'gagal')
+                                                            <span class="badge bg-danger">{{ strtoupper($tampilkan->status) }}</span>
+                                                        @endif
+                                                    </td>
                                                     <td class="">
 
                                                         <a href="{{ route('pembayaran.show', $tampilkan->identifier) }}"

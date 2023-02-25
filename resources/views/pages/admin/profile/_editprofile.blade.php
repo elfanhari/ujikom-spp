@@ -28,7 +28,7 @@
   @enderror
 </div>
 
-<div class="form-floating mb-3">
+<div class="form-floating">
   <input type="text" name="username"
       value="{{ old('username', $user->username) }}"class="form-control text-black @error('username') is-invalid @enderror"
       id="floatingInput" placeholder="Masukkan username">

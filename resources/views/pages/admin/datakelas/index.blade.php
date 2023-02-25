@@ -1,14 +1,10 @@
 @extends('master.admin.main')
 
 @section('content')
-    <button class="float-left position-absolute btn btn-sm btn-outline-dark me-2" onclick="history.back()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi fw-bold bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-        </svg>
-    </button>
-    <h5 class="mb-3 fw-bold poppins text-center">Data Kelas</h5>
+
+<h5 class="mb-3 fw-bold text-xs-center poppins">
+    Data Kelas 
+</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -27,10 +23,10 @@
                     <div class="card-header fs-16">
                         <button type="button" class="btn-close float-right d-inline" data-bs-toggle="collapse"
                             data-bs-target="#collapse" aria-expanded="false" aria-controls="collapseExample"></button>
-                        <p class="m-0 font-weight-bold text-primary">Input Data Kelas</p>
+                        <p class="m-0 font-weight-bold text-grey">Input Data Kelas</p>
                     </div>
                     <div class="card-body input-group-sm">
-                        <form action="{{ route('kelas.store') }}" method="POST">
+                        <form action="{{ route('kelas.store') }}" method="POST" class="input-group-sm fs-14">
                             @csrf
 
                             @include('pages.admin.datakelas._addform')
@@ -51,7 +47,7 @@
             <!-- Input MD -->
             <div class="card d-xs-none mb-sm-3">
                 <div class="card-header fs-16">
-                    <p class="m-0 font-weight-bold text-primary">Input Data Kelas</p>
+                    <p class="m-0 font-weight-bold text-grey">Input Data Kelas</p>
                 </div>
                 <div class="card-body input-group-sm">
                     <form action="{{ route('kelas.store') }}" method="POST" class="input-group-sm fs-14">
@@ -73,7 +69,7 @@
         <div class="col-md-8 mb-xs-3">
             <div class="card fs-16 mb">
                 <div class="card-header">
-                    <p class="m-0 font-weight-bold d-inline text-primary d-xs-none mt-3">Data Kelas</p>
+                    <p class="m-0 font-weight-bold d-inline text-grey d-xs-none mt-3">Data Kelas</p>
                     
                     {{-- Petunjuk Aksi --}}
                     <button class="btn btn-info d-inline btn-sm btn-icon-split float-right ms-2 rounded-circle"

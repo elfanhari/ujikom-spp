@@ -12,10 +12,10 @@
 
     <div class="row mb-3">
 
-        <div class="col-md-6">
+        <div class="col-md-6 mb-xs-3">
             <div class="card">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-primary">Profil Saya</p>
+                    <p class="m-0 d-inline font-weight-bold text-grey">Profil Saya</p>
                     <a href="{{ route('password-siswa.edit') }}" class="float-right fs-14 text-warning">Edit password</a>
                 </div>
                 <div class="card-body">
@@ -101,7 +101,7 @@
             <!-- Input MD -->
             <div class="card">
                 <div class="card-header">
-                    <p class="m-0 font-weight-bold text-primary">Edit profil</p>
+                    <p class="m-0 font-weight-bold text-grey">Edit profil</p>
                 </div>
                 <div class="card-body input-group-sm fs-14">
 
@@ -111,7 +111,13 @@
                     
                       @include('pages.siswa.profile._editprofile')
 
-                      <button class="btn btn-sm btn-primary float-right">Simpan</button>
+                      <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                        <span class="icon text-white-50 m-0">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Simpan</span>
+                    </button>
+
                     </form>
                 </div>
             </div>

@@ -40,10 +40,10 @@ class AdminNotifikasiController extends Controller
         return back()->withInfo('Notifikasi berhasil dikirim!');
     }
 
-    public function show(Notifikasi $notifikasi)
+    public function show(Notifikasi $notifikasis)
     {
         return view('pages.admin.notifikasi.show', [
-            'notifikasi' => $notifikasi
+            'notifikasi' => $notifikasis
         ]);
     }
 
@@ -57,7 +57,7 @@ class AdminNotifikasiController extends Controller
     public function update(Request $request, Notifikasi $notifikasi)
     {
         $notifikasi->update($request->all());
-        return redirect(route('notifikasi.show', $notifikasi));
+        return redirect(route('admin.notifikasi.show', $notifikasi));
     }
 
 
@@ -65,7 +65,7 @@ class AdminNotifikasiController extends Controller
     {
         if ($request->untuk == 'satu') {
             $notifikasi->update($request->all());
-            return redirect(route('notifikasi.index'));
+            return redirect(route('admin.notifikasi.index'));
         }
 
         if ($request->untuk == 'semua') {
@@ -81,7 +81,7 @@ class AdminNotifikasiController extends Controller
     {
         if ($request->untuk == 'satu') {
             $notifikasi->delete();
-            return redirect(route('notifikasi.index'));
+            return redirect(route('admin.notifikasi.index'));
         }
 
         if ($request->untuk == 'semua') {

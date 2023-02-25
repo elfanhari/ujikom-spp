@@ -22,7 +22,7 @@
                         <p class="m-0 font-weight-bold text-primary">Tambah Data Siswa</p>
                     </div>
                     <div class="card-body input-group-sm">
-                        <form action="{{ route('siswa.store') }}" method="POST">
+                        <form action="{{ route('siswa.store') }}" method="POST" class="input-group-sm fs-14">
                             @csrf
 
                             @include('pages.admin.datasiswa._addform')

@@ -17,23 +17,23 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SPP - SMKN 3 Banjar</title>
+    <title>SPP - SMK REKAYASA</title>
 
     <!-- Custom fonts for this template-->
-    <link rel="shortcut icon" href="/img/smk3-circle.png" type="image/x-icon">
     <link href="/sb-admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-        <!-- Custom styles for this template-->
-        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+    
+    <!-- Custom styles for this template-->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/sb-admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/my-css/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="/my-css/select2.css" rel="stylesheet">
     <link href="/extensions/simple-datatables/style.css" rel="stylesheet">
     <link href="/extensions/simple-datatables.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/logo-smk-rekayasa.png" class="rounded-circle" type="image/x-icon">
 
 </head>
 
@@ -61,7 +61,7 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
                     </button>
                     
                     <div class="d-xs-none poppins text-center">
-                        <b>Aplikasi Pembayaran SPP</b> -  SMK NEGERI 3 BANJAR
+                        <b>Aplikasi Pembayaran SPP</b> -  SMK REKAYASA
                     </div>
 
                     <!-- Topbar Navbar -->
@@ -128,7 +128,7 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
                                         </a>
                                     @else
                                         <a class="dropdown-item d-flex align-items-center"
-                                            href="{{ route('notifikasi.show', $tampilkan) }}">
+                                            href="{{ route('admin.notifikasi.show', $tampilkan) }}">
                                             <div class="mr-3">
 
                                                 @if ($tampilkan->tipe == 'sukses')
@@ -270,14 +270,14 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title poppins fw-semibold text-black" id="exampleModalLabel">Logout</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Apakah anda yakin.</div>
+                <div class="modal-body">Apakah anda yakin untuk keluar dari aplikasi?</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button class="btn btn-primary" href="login.html">Logout</button>

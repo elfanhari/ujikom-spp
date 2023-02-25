@@ -1,9 +1,7 @@
 @extends('master.siswa.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold poppins">
-        Entri Pembayaran
-    </h5>
+<h5 class="mb-3 fw-bold text-xs-center poppins">Entri Pembayaran</h5>
 
     @include('pages.siswa.entri._petunjukpengisian')
 
@@ -18,7 +16,6 @@
         <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-header">
-                    <p class="m-0 font-weight-bold text-primary d-inline">Input Pembayaran</p>
                     <a class="text-info float-right d-inline" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
                     aria-controls="offcanvasTop">Petunjuk pengisian</a>
                 </div>
@@ -29,7 +26,12 @@
                         @csrf
                         @include('pages.siswa.entri._addform')
 
-                        <button class="btn btn-sm mt-3 btn-primary float-right" type="submit">Simpan</button>
+                        <button class="mt-3 btn btn-success btn-sm btn-icon-split p-0 float-right fs-14">
+                            <span class="icon text-white-50 m-0">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Simpan</span>
+                        </button>
                     </form>
 
                 </div>

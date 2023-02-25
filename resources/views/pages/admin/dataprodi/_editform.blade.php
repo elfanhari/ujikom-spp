@@ -1,11 +1,17 @@
-<label for="name" class="mb-1">Nama Prodi</label>
-<input type="text" value="{{ old('name', $prodi->name) }}" name="name" id="name" class="text-black input-sm form form-control mt-0   @error('name') is-invalid @enderror" placeholder="Masukkan nama Prodi">
-@error('name')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mb-3">
+    <input type="text" name="name" value="{{ old('name', $prodi->name) }}" class="form-control fw-semibold text-black  @error('name') is-invalid @enderror"
+        id="floatingInput" placeholder="Masukkan nama Prodi">
+    <label for="floatingInput">Nama Prodi</label>
+    @error('name')
+        <span class="invalid-feedback mt-1">{{ $message }}</span>
+    @enderror
+</div>
 
-<label for="singkatan" class="mb-1 mt-3">Singkatan</label>
-<input type="text" value="{{ old('singkatan', $prodi->singkatan) }}" name="singkatan" id="singkatan" class="text-black input-sm form form-control mt-0   @error('singkatan') is-invalid @enderror" placeholder="Masukkan singkatan Prodi" >
-@error('singkatan')
-  <span class="invalid-feedback mt-1">{{ $message }}</span>
-@enderror
+<div class="form-floating mt-3">
+    <input type="text" name="singkatan" value="{{ old('singkatan', $prodi->singkatan) }}" class="form-control fw-semibold text-black @error('singkatan') is-invalid @enderror "
+        id="floatingInput" placeholder="Masukkan singkatan prodi">
+    <label for="floatingInput">Singkatan</label>
+    @error('singkatan')
+        <span class="invalid-feedback mt-1">{{ $message }}</span>
+    @enderror
+</div>

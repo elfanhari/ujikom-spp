@@ -7,6 +7,8 @@ use App\Models\Pembayaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -69,12 +71,7 @@ class LaporanController extends Controller
     
     public function store(Request $request)
     {
-        // $daritanggal = $request->daritanggal;
-        // $sampaitanggal = $request->sampaitanggal;
-        // $pick = Pembayaran::whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->get();
-        // return route('laporan.show', [
-        //     'pick' => $pick
-        // ]);
+        
     }
 
     

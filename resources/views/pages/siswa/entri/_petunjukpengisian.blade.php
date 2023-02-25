@@ -3,9 +3,9 @@
     <h5 id="offcanvasTopLabel">Petunjuk Pengisian</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body fs-12">
+  <div class="offcanvas-body">
     <ol>
-      <li>Pastikan anda memiliki akun pada e-SPP SMKN 3 Banjar</li>
+      <li>Pastikan anda memiliki akun pada e-SPP SMK REKAYASA</li>
       <li>Login menggunakan akun anda</li>
       <li>Pastikan data diri anda sudah sesuai dan benar.</li>
       <li>Pergi ke menu Entri Pembayaran</li>
