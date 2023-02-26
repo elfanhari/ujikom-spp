@@ -17,7 +17,7 @@
 
         @can('petugas')
         <a href="{{ route('pembayaran.index') }}" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
-            <div class="card border-left-info shadow h-100 py-2">
+            <div class="card shadow border-left-info shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -32,11 +32,66 @@
                 </div>
             </div>
           </a>
+          <a href="{{ route('siswa.index') }}" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
+            <div class="card shadow border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-lg font-weight-bold text-danger mb-1">
+                                Siswa</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">{{ $siswa->count() }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="fas text-secondary" width="25" height="25" fill="currentColor" class="fas fa-fw bi grey bi-people-fill" viewBox="0 0 16 16">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </a>
+          <a href="/admin/laporan" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
+            <div class="card shadow border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-lg font-weight-bold text-warning mb-1">
+                                Laporan</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">3</div>
+                        </div>
+                        <div class="col-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="fas text-secondary" width="25" height="25" fill="currentColor" class="fas fa-fw grey bi bi-file-earmark-bar-graph-fill" viewBox="0 0 16 16">
+                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm.5 10v-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-1z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </a>
+          <a href="/admin/notifikasi" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
+            <div class="card shadow border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-lg font-weight-bold text-success mb-1">
+                                Notifikasi</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">{{ $notifikasiPetugas->count() }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="fas text-secondary fas fa-fw grey bi bi-bell-fill" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                              </svg>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+          </a>
         @endcan
 
         @can('admin')
         <a href="{{ route('prodi.index') }}" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
-            <div class="card border-left-info shadow h-100 py-2">
+            <div class="card shadow border-left-info shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -54,7 +109,7 @@
             </div>
           </a>
           <a href="{{ route('kelas.index') }}" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
-            <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card shadow border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -72,7 +127,7 @@
             </div>
           </a>
           <a href="{{ route('siswa.index') }}" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
-            <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card shadow border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -90,7 +145,7 @@
             </div>
           </a>
           <a href="{{ route('spp.index') }}" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
-            <div class="card border-left-success shadow h-100 py-2">
+            <div class="card shadow border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -111,7 +166,7 @@
             </div>
           </a>
           <a href="{{ route('petugas.index') }}" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
-            <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card shadow border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -130,7 +185,7 @@
             </div>
           </a>
           <a href="{{ route('admin.index') }}" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
-            <div class="card border-left-success shadow h-100 py-2">
+            <div class="card shadow border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -150,7 +205,7 @@
           </a>
 
           <a href="{{ route('pembayaran.index') }}" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
-            <div class="card border-left-info shadow h-100 py-2">
+            <div class="card shadow border-left-info shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -169,14 +224,14 @@
             </div>
           </a>
 
-          <a href="" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
-            <div class="card border-left-warning shadow h-100 py-2">
+          <a href="/admin/laporan" class="col-xl-3 col-md-6 mb-4 text-decoration-none">
+            <div class="card shadow border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-lg font-weight-bold text-warning mb-1">
                                 Laporan</div>
-                            <div class="h3 mb-0 font-weight-bold text-gray-800">2</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">3</div>
                         </div>
                         <div class="col-auto">
                             <svg xmlns="http://www.w3.org/2000/svg" class="fas text-secondary" width="25" height="25" fill="currentColor" class="fas fa-fw grey bi bi-file-earmark-bar-graph-fill" viewBox="0 0 16 16">

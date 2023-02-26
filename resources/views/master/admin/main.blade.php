@@ -1,7 +1,7 @@
 @php
 use App\Models\Notifikasi;    
 
-$notifikasi = Notifikasi::where('penerima_id', null)->latest()->get();
+$notifikasi = Notifikasi::where('penerima_id', null)->limit(3)->latest()->get();
 $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca', false)->get();
 
 @endphp
@@ -157,7 +157,7 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
 
 
                                 @if ($notifikasi->count() > 0)
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Lihat
+                                    <a class="dropdown-item text-center small text-gray-500" href="/admin/notifikasi">Lihat
                                         semua notifikasi</a>
                                 @else
                                     <p class="dropdown-item text-center small text-gray-500 my-0">Anda belum memiliki
@@ -263,6 +263,7 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

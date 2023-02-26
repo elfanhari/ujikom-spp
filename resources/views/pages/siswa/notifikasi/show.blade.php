@@ -22,7 +22,7 @@
     <div class="row mb-3">
         <div class="col-md-6">
 
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
 
                    

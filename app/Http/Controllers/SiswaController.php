@@ -22,9 +22,9 @@ class SiswaController extends Controller
     // Siswa - Index
     public function index()
     {
-        // if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
-        //     return view('denied');
-        // }
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
 
         return view('pages.admin.datasiswa.index', [
             'siswa' => User::where('level', 'siswa')->latest()->get(),
@@ -36,6 +36,10 @@ class SiswaController extends Controller
     // Siswa - Create
     public function create()
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+
         return view('pages.admin.datasiswa.create', [
             'kelas' => Kelas::all(),
             'spp' => Spp::all(),
@@ -53,6 +57,9 @@ class SiswaController extends Controller
     // Siswa - Show
     public function show(User $siswa)
     {
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
 
         return view('pages.admin.datasiswa.show', [
             'siswa' => $siswa,
@@ -65,6 +72,10 @@ class SiswaController extends Controller
     // Siswa - Edit
     public function edit(User $siswa)
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+
         return view('pages.admin.datasiswa.edit', [
             'siswa' => $siswa,
             'kelas' => Kelas::all(),
@@ -89,6 +100,10 @@ class SiswaController extends Controller
     // Siswa - Import Data Siswa
     public function import(ImportSiswaRequest $request)
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+        
         $file = $request->file('file');
         $namaFile = $file->getClientOriginalName();
         $file->move('datasiswa', $namaFile);

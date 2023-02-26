@@ -24,14 +24,25 @@ class PembayaranController extends Controller
 {  
     public function index()
     {
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         return view('pages.admin.datapembayaran.index', [
-            'pembayaran' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->latest()->get(),
+            'semua' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->latest()->get(),
+            'sukses' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->where('status', 'sukses')->latest()->get(),
+            'diproses' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->where('status', 'diproses')->latest()->get(),
+            'gagal' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->where('status', 'gagal')->latest()->get(),
         ]);
     }
 
     
     public function create(Request $request)
     {   
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         $siswa = User::where('kelas_id', $request->kelas_id);
         $siswaCek = User::where('id', $request->siswa_id);
         return view('pages.admin.entripembayaran.create', [
@@ -69,6 +80,10 @@ class PembayaranController extends Controller
     
     public function show(Pembayaran $pembayaran)
     {
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         return view('pages.admin.datapembayaran.show', [
             'pembayaran' => $pembayaran,
             'historysiswa' => Pembayaran::where('siswa_id', $pembayaran->siswa_id)->latest()->get(),
@@ -80,6 +95,10 @@ class PembayaranController extends Controller
     
     public function edit(Pembayaran $pembayaran)
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+        
         return view('pages.admin.datapembayaran.edit', [
             'pembayaran' => $pembayaran,
             'siswa' => User::whereLevel('siswa')->get(),

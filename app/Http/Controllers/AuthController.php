@@ -50,7 +50,7 @@ class AuthController extends Controller
     public function cekLoginAdmin(Request $request)
     {   
         $input = $request->validate([
-            'username' => ['required'],
+            'email' => ['required'],
             'password' => ['required'],
         ]); 
 

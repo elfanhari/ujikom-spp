@@ -13,9 +13,7 @@ class SiswaDashboardController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->level !== 'siswa') { // Pembatasan Akses Selain Admin
-            return view('denied');
-        }
+        if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
         
         return view('pages.siswa.beranda.index');
     }

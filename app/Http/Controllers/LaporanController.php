@@ -21,11 +21,15 @@ class LaporanController extends Controller
      */
     public function index(Request $request)
     {   
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         $daritanggal = $request->daritanggal;
         $sampaitanggal = $request->sampaitanggal;
         $petugas_id = $request->petugas_id;
 
-        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->latest();
+        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('status', 'sukses')->latest();
 
         if(request('petugas_id')){
             $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('petugas_id', $petugas_id)->latest();
@@ -45,11 +49,15 @@ class LaporanController extends Controller
    
     public function create(Request $request)
     {
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+        
         $daritanggal = $request->daritanggal;
         $sampaitanggal = $request->sampaitanggal;
         $petugas_id = $request->petugas_id;
 
-        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->latest();
+        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('status', 'sukses')->latest();
 
         if(request('petugas_id')){
             $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('petugas_id', $petugas_id)->latest();
@@ -59,6 +67,10 @@ class LaporanController extends Controller
             $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->where('petugas_id', $petugas_id)->latest();
         }
         
+        if ($pembayaran->count()<1) {
+            return back()->with('gagal', 'Data yang ingin di cetak tidak ada!');
+        }
+
         return view('pages.admin.laporan.printlaporan', [
             'pembayaran' => $pembayaran->get(),
             'petugas_id' => $petugas_id,

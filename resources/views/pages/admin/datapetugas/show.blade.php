@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Detail Petugas</p>
                     <a href="{{ route('petugas.edit', $petuga) }}" class="float-right">Edit profil</a>

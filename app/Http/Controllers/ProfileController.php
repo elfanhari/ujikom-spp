@@ -20,6 +20,10 @@ class ProfileController extends Controller
 
     public function index()
     {
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         return view('pages.admin.profile.index', [
             'user' => auth()->user(),
             'redirect' => '/admin/profile',
@@ -37,6 +41,10 @@ class ProfileController extends Controller
     
     public function editPassword()
     {
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+        
         return view('pages.admin.profile.editpassword');
     }
 

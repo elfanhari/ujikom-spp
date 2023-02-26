@@ -21,7 +21,7 @@
             </div>
             @else
                 @foreach ($pembayaran as $tampilkan)
-                    <a href="{{ route('riwayat.show', $tampilkan) }}" class="card mb-2 text-decoration-none text-black">
+                    <a href="{{ route('riwayat.show', $tampilkan) }}" class="card shadow mb-2 text-decoration-none text-black">
                         <div class="card-body">
                             <div class=" justify-content-between">
                                 

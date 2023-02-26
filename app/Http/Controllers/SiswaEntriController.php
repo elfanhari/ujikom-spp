@@ -17,6 +17,8 @@ class SiswaEntriController extends Controller
     
     public function index()
     {
+        if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
+        
         return view('pages.siswa.entri.index', [
             'siswa' => Auth::user(),
             'bulanbayar' => Bulanbayar::get(),
@@ -79,7 +81,7 @@ class SiswaEntriController extends Controller
             'identifier' => 'i' . Str::random(9),
             'pengirim_id' => $pembayaranTerakhir->userSiswa->id,
             'penerima_id' => null,
-            'pesan' => $pembayaranTerakhir->userSiswa->name . ' - ' . $pembayaranTerakhir->userSiswa->kelas->name . ' melakukan pembayaran mandiri untuk ' . $pembayaranTerakhir->bulanbayar->name . ' ' .$pembayaranTerakhir->tahunbayar . ' dengan kode transaksi ' . $kodeTransaksi . ' pada ' . $pembayaranTerakhir->created_at . '.',
+            'pesan' => $pembayaranTerakhir->userSiswa->name . ' - ' . $pembayaranTerakhir->userSiswa->kelas->name . ' melakukan pembayaran mandiri untuk ' . $pembayaranTerakhir->bulanbayar->name . ' ' .$pembayaranTerakhir->tahunbayar . ' dengan kode transaksi ' . $kodeTransaksi . ' pada tanggal ' .  Str::before(date('d-m-Y', strtotime($pembayaranTerakhir->created_at)), ' ') . ' pukul ' . Str::after($pembayaranTerakhir->created_at, ' ') . ' WIB.',
             'tipe' => 'info',
             'dibaca' => false 
         ];

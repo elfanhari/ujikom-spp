@@ -18,7 +18,7 @@
             <!-- Input XS -->
             <div class="d-sm-none">
                
-                <div class="card mt-2 mb-3" id="">
+                <div class="card shadow mt-2 mb-3" id="">
                     <div class="card-header fs-16">
                         <p class="m-0 font-weight-bold text-grey">Tambah Data Petugas</p>
                     </div>
@@ -41,7 +41,7 @@
             </div>
 
             <!-- Input MD -->
-            <div class="card d-xs-none mb-sm-3">
+            <div class="card shadow d-xs-none mb-sm-3">
                 <div class="card-header fs-16">
                     <p class="m-0 font-weight-bold text-primary">Tambah Data petugas</p>
                 </div>

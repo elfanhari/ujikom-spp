@@ -18,7 +18,7 @@
         <div class="col-md-4">
 
             <!-- Input MD -->
-            <div class="card d-xs-none mb-sm-3 shadow">
+            <div class="card shadow d-xs-none mb-sm-3 shadow">
                 <div class="card-header fs-16">
                     <p class="m-0 font-weight-bold text-grey">Input Data Siswa</p>
                 </div>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="col-md-8 mb-xs-3">
-            <div class="card fs-16 shadow-sm">
+            <div class="card shadow fs-16 shadow-sm">
                 <div class="card-header">
                     <p class="m-0 font-weight-bold d-inline text-grey d-xs-none mt-3">Data Siswa</p>
 
@@ -108,12 +108,9 @@
 
                                                 <a href="{{ route('siswa.show', $tampilkan) }}" type="button"
                                                     class="btn btn-success pb-1 pt-0 px-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                                        <path
-                                                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                                    </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-columns-reverse" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5Zm-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Z"/>
+                                                      </svg>
                                                 </a>
 
                                                 <a href="{{ route('siswa.edit', $tampilkan) }}" type="button"
@@ -128,7 +125,7 @@
                                                 </a>
 
                                                 <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2 d-inline"
-                                                    data-bs-toggle="modal" data-bs-target="#modalDelete">
+                                                    data-bs-toggle="modal" data-bs-target="#modalDelete/{{ $tampilkan->identifier }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-trash3-fill pt-0"
                                                         viewBox="0 0 16 16">
@@ -136,17 +133,18 @@
                                                             d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                                     </svg>
                                                 </button>
-                                                <div class="modal fade" id="modalDelete" tabindex="-1"
+                                                <div class="modal fade" id="modalDelete/{{ $tampilkan->identifier }}" tabindex="-1"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Hapus Data
+                                                                <h5 class="modal-title fw-semibold poppins" id="exampleModalLabel">Hapus Data
                                                                 </h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
+                                                                Data: <p class="text-primary fw-bold">{{ $tampilkan->name . ' - ' . $tampilkan->kelas->name }}</p>
                                                                 Apakah anda yakin data tersebut akan dihapus?
                                                             </div>
                                                             <div class="modal-footer">
@@ -185,7 +183,7 @@
     @can('petugas')
         <div class="row mb-3">
             <div class="col-12">
-                <div class="card fs-16 shadow-sm">
+                <div class="card shadow fs-16 shadow-sm">
                     <div class="card-header">
                         <p class="m-0 font-weight-bold d-inline text-grey d-xs-none mt-3">Data Siswa</p>
     

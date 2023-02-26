@@ -14,6 +14,8 @@ class SiswaNotifikasiController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
+
         return view('pages.siswa.notifikasi.index', [
             'notifikasi' => Notifikasi::where('penerima_id', auth()->user()->id)->latest()->get(),
         ]);
@@ -48,6 +50,8 @@ class SiswaNotifikasiController extends Controller
      */
     public function show(Notifikasi $notifikasi)
     {
+        if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
+
         return view('pages.siswa.notifikasi.show', [
             'notifikasi' => $notifikasi
         ]);
@@ -79,6 +83,7 @@ class SiswaNotifikasiController extends Controller
 
     public function telahDibaca(Request $request, Notifikasi $notifikasi)
     {
+        
         if ($request->untuk == 'satu') {
             $notifikasi->update($request->all());
             return redirect(route('notifikasi.index'));

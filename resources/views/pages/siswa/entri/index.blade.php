@@ -14,7 +14,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="card mb-4">
+            <div class="card shadow mb-4">
                 <div class="card-header">
                     <a class="text-info float-right d-inline" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
                     aria-controls="offcanvasTop">Petunjuk pengisian</a>

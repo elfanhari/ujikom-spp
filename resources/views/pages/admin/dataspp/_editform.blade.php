@@ -10,7 +10,7 @@
 <div class="form-floating mt-3">
   <input type="text" name="nominal" value="{{ old('nominal', $spp->nominal) }}" class="form-control fw-semibold text-black @error('nominal') is-invalid @enderror "
       id="floatingInput" placeholder="Masukkan nominal spp">
-  <label for="floatingInput">nominal</label>
+  <label for="floatingInput">Nominal</label>
   @error('nominal')
       <span class="invalid-feedback mt-1">{{ $message }}</span>
   @enderror

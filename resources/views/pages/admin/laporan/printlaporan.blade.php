@@ -18,13 +18,14 @@
     </style>
 </head>
 
-<body style="font-family: Mulish">
+<body style="font-family: Times New Roman">
     <div class="container mt-3">
-        <img src="/img/aplikasi-pembayaran-spp.png" alt="" style="width: 70px"
-            class="text-start position-absolute" />
+        <img src="/img/e-spp-smk-rekayasa.png" alt="" style="width: 70px"
+            class="text-start position-absolute rounded-circle" />
         <div class="text-center">
-            <h3>APLIKASI PEMBAYARAN SPP</h3>
+            <h3 class="fw-bold mb-1">APLIKASI PEMBAYARAN SPP</h3>
             <h3 class="fw-bold" >SMK REKAYASA</h3>
+            <p>Jl. Raya Indonesia No.17, Kota Banjar</p>
             <hr />
         </div>
         <div class="my-3 fs-12">
@@ -34,8 +35,14 @@
             @else
             <p class="my-0"><b> Petugas:</b> {{ $pembayaran[0]->userPetugas->name }}</p>
             @endif
-            <p class="my-0"><b> Tanggal:</b> {{ ($daritanggal) }} -
-                {{ ($sampaitanggal) }}</p>
+
+            @if ($daritanggal == null)
+            <p class="my-0"> <b> Tanggal: </b> - </p>    
+            @else
+
+            <p class="my-0"><b> Tanggal:</b> {{ date('d-m-Y', strtotime($daritanggal)) }} -
+                {{ date('d-m-Y', strtotime($sampaitanggal)) }}</p>
+            @endif
         </div>
 
         <hr />
@@ -90,8 +97,8 @@
             <div class="col-3 offset-9 fs-14">
                 <div>Mengetahui,</div>
                 <div class="mb-5 mt-0">Kepala SMK REKAYASA,</div>
-                <div class="mt-5">Maman Sudirman, MM</div>
-                <div class="mt-0">NIP. 01412478478174</div>
+                <div class="mt-5">Suhandi Ramdani, M.Kom</div>
+                <div class="mt-0">NIP. 028323422223</div>
             </div>
         </div>
 

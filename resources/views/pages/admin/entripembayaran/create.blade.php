@@ -17,7 +17,7 @@
 
 
             <!-- Input MD -->
-            <div class="card mb-4">
+            <div class="card shadow mb-4">
                 <div class="card-header fs-16">
                     <button class="text-decoration-none poppins btn-link m-0 p-0 btn" onclick="history.back()">< Kembali</button>
                   </div>
@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="col-md-7">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Detail Siswa</p>
                 </div>
@@ -105,24 +105,24 @@
                                         </div>
                                     </tr>
                                     <tr class="border-bottom">
-                                        <td>Nama Siswa</td>
+                                        <td class="fw-bold">Nama</td>
                                         <td style="width: 1px;">:</td>
                                         <td>{{ $tampilkan->name }}</td>
                                     </tr>
                                     <tr class="border-bottom">
-                                        <td>Kelas</td>
+                                        <td class="fw-bold">Kelas</td>
                                         <td style="width: 1px;">:</td>
                                         <td>{{ $tampilkan->kelas->name }}</td>
                                     </tr>
                                     <tr class="border-bottom">
-                                        <td>Telepon</td>
+                                        <td class="fw-bold">Email</td>
                                         <td style="width: 1px;">:</td>
-                                        <td>{{ $tampilkan->telepon }}</td>
+                                        <td>{{ $tampilkan->email }}</td>
                                     </tr>
                                     <tr class="border-bottom">
-                                        <td>Tahun SPP</td>
+                                        <td class="fw-bold">Tahun SPP</td>
                                         <td style="width: 1px;">:</td>
-                                        <td>{{ $tampilkan->spp->tahun }} </td>
+                                        <td>{{ $tampilkan->spp->tahun }} - Rp{{ number_format($tampilkan->spp->nominal, 0, '.', '.') }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -134,7 +134,7 @@
                     @if (request('siswa_id'))
                     <div class="mt-3">
                         <div class="my-2 text-black text-xs-center fw-bold">
-                            History Pembayaran Siswa
+                            History Pembayaran {{ Str::before($siswaCek[0]->name , ' ') }}
                         </div>
                         <div class="table-responsive">
                             
@@ -147,12 +147,14 @@
                                         <td>#</td>
                                         <td>Tanggal</td>
                                         <td>Pembayaran untuk</td>
+                                        <td class="d-xs-none">Nominal bayar</td>
                                     </tr>
                                     @foreach ($historysiswa->where('status', 'sukses') as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                                             <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
+                                            <td class="d-xs-none">Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                                         </tr>
                                     @endforeach
                                 </table>

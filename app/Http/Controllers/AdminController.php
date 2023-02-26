@@ -16,18 +16,24 @@ class AdminController extends Controller
 
     // Controller CRUD Data Admin
 
-
     public function index()
     {   
-        $admin = User::where('level', 'admin');
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+
         return view('pages.admin.dataadmin.index', [
-            'admin' => $admin->latest()->get(),
+            'admin' => User::where('level', 'admin')->latest()->get(),
         ]);
     }
 
 
     public function create()
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+
         return view('pages.admin.dataadmin.create');
     }
 
@@ -45,6 +51,10 @@ class AdminController extends Controller
 
     public function show(User $admin)
     {   
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+
         return view('pages.admin.dataadmin.show', [
             'admin' => $admin,
             'userphoto' => Userphoto::where('user_id', $admin->id)->get(),
@@ -55,6 +65,10 @@ class AdminController extends Controller
 
     public function edit(User $admin)
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+
         return view('pages.admin.dataadmin.edit', [
             'admin' => $admin,
         ]);

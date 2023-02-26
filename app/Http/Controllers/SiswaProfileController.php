@@ -18,6 +18,8 @@ class SiswaProfileController extends Controller
 
     public function index()
     {
+        if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
+
         return view('pages.siswa.profile.index', [
             'user' => auth()->user(),
             'redirect' => '/siswa/profile',
@@ -33,6 +35,8 @@ class SiswaProfileController extends Controller
 
     public function editPassword()
     {
+        if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
+
         return view('pages.siswa.profile.editpassword');
     }
 
@@ -52,6 +56,8 @@ class SiswaProfileController extends Controller
 
     public function editPhoto(Request $request)
     {
+        if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
+
         return view('pages.siswa.profile.editphoto', [
             'user' => User::where('id', auth()->user()->id)->first(),
             'userphoto' => Userphoto::where('user_id', auth()->user()->id)->get(),

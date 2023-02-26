@@ -12,7 +12,7 @@
             <!-- Input XS -->
             <div class="d-sm-none">
                
-                <div class="card mt-2 mb-3" id="">
+                <div class="card shadow mt-2 mb-3" id="">
                     <div class="card-header fs-16">
                         <button class="text-decoration-none poppins d-inline btn-link m-0 p-0 btn" onclick="history.back()">< Kembali</button>
                         <a href="{{ route('updatepassword.edit', $petuga) }}" class="float-right text-warning fs-16">Edit password</a>
@@ -37,7 +37,7 @@
             </div>
 
             <!-- Input MD -->
-            <div class="card d-xs-none mb-sm-3">
+            <div class="card shadow d-xs-none mb-sm-3">
                 <div class="card-header fs-16">
                     <button class="text-decoration-none poppins d-inline btn-link m-0 p-0 btn" onclick="history.back()">< Kembali</button>
                     <a href="{{ route('updatepassword.edit', $petuga) }}" class="float-right text-warning fs-16">Edit password</a>

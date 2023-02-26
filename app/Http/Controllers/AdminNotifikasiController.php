@@ -14,6 +14,10 @@ class AdminNotifikasiController extends Controller
    
     public function index()
     {
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         return view('pages.admin.notifikasi.index', [
             'notifikasi' => Notifikasi::where('penerima_id', null)->latest()->get(),
             'siswa' => User::where('level', 'siswa')->get(),
@@ -42,6 +46,11 @@ class AdminNotifikasiController extends Controller
 
     public function show(Notifikasi $notifikasis)
     {
+        
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         return view('pages.admin.notifikasi.show', [
             'notifikasi' => $notifikasis
         ]);

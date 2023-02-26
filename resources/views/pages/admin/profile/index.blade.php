@@ -13,7 +13,7 @@
     <div class="row mb-3">
 
         <div class="col-md-6">
-            <div class="card mb-xs-3 shadow">
+            <div class="card shadow mb-xs-3 shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Profil Saya</p>
                     <a href="{{ route('password-user.edit') }}" class="float-right fs-14 text-warning">Edit password</a>
@@ -99,7 +99,7 @@
 
 
             <!-- Input MD -->
-            <div class="card shadow">
+            <div class="card shadow shadow">
                 <div class="card-header">
                     <p class="m-0 font-weight-bold text-grey">Edit profil</p>
                 </div>

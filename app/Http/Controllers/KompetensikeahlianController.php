@@ -15,7 +15,7 @@ class KompetensikeahlianController extends Controller
     // Prodi - Index
     public function index()
     {   
-        if (auth()->user()->level !== 'admin') { // Pembatasan Akses Selain Admin
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
             return view('denied');
         }
         
@@ -33,7 +33,7 @@ class KompetensikeahlianController extends Controller
    // Prodi - Create
     public function create()
     {
-        // Sudah ada di Page Index.
+        // sudah ada di page index.
     }
 
 
@@ -56,6 +56,10 @@ class KompetensikeahlianController extends Controller
     // Prodi - Edit
     public function edit(Kompetensikeahlian $prodi)
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+        
         return view('pages.admin.dataprodi.edit', compact('prodi'));
     }
 

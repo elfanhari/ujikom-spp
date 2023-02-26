@@ -15,21 +15,22 @@ class PetugasController extends Controller
     
     public function index()
     {
-        $petuga = User::where('level', 'petugas')->get();
-
-        if(request('search')) {
-            $petuga->where('name', 'like', '%' . request('search') . '%')
-                ->orWhere('telepon', 'like', '%' . request('search') . '%')
-                ->orWhere('username', 'like', '%' . request('search') . '%')
-                ->orWhere('email', 'like', '%' . request('search') . '%')->get();
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
         }
 
-        return view('pages.admin.datapetugas.index', compact('petuga'));
+        return view('pages.admin.datapetugas.index', [
+            'petuga' => User::where('level', 'petugas')->latest()->get(),
+        ]);
     }
 
 
     public function create()
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+
         return view('pages.admin.datapetugas.create');
     }
 
@@ -44,6 +45,10 @@ class PetugasController extends Controller
 
     public function show(User $petuga)
     {   
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+
         return view('pages.admin.datapetugas.show',[
             'petuga' => $petuga,
             'userphoto' => Userphoto::where('user_id', $petuga->id)->get(),
@@ -54,6 +59,10 @@ class PetugasController extends Controller
 
     public function edit(User $petuga)
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+        
         return view('pages.admin.datapetugas.edit', compact('petuga'));
     }
 

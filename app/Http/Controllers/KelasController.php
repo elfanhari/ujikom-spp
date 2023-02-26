@@ -14,7 +14,11 @@ class KelasController extends Controller
 {
     // Kelas - Index
     public function index()
-    {
+    {   
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+
         return view('pages.admin.datakelas.index', [
             'kela' => Kelas::with('kompetensikeahlian')->latest()->get(),
             'prodi' => Kompetensikeahlian::with('kelas')->get()
@@ -32,6 +36,9 @@ class KelasController extends Controller
     // Kelas - Edit
     public function edit(Kelas $kela)
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
         
         return view('pages.admin.datakelas.edit', [
             'kela' => $kela,

@@ -16,6 +16,8 @@ class SiswaHistoryController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
+
         return view('pages.siswa.history.index', [
             'pembayaran' => Pembayaran::where('siswa_id', auth()->user()->id)->latest()->get()
         ]);
@@ -50,6 +52,8 @@ class SiswaHistoryController extends Controller
      */
     public function show(Pembayaran $riwayat)
     {
+        if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
+
         return view('pages.siswa.history.show', [
             'pembayaran' => $riwayat,
             // 'pembayaran' => $pembayaran

@@ -15,7 +15,7 @@
 </div>
 <div class="row">
   <div class="col-6">
-      <div class="card">
+      <div class="card shadow">
           <div class="card-header text-center">Transaksi</div>
           <div class="card-body text-white bg-primary">
               <h1 class="fw-bold  text-center">1</h1>
@@ -26,7 +26,7 @@
       </div>
   </div>
   <div class="col-6">
-      <div class="card">
+      <div class="card shadow">
           <div class="card-header text-center">Riwayat</div>
           <div class="card-body text-white bg-warning">
               <h1 class="fw-bold  text-center">4</h1>

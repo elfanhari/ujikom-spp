@@ -23,7 +23,7 @@
 
         <div class="col-md-6 mb-xs-3">
 
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Detail Pembayaran</p>
                     @can('admin')
@@ -41,7 +41,11 @@
                             <tr class="border-bottom">
                                 <td class="fw-bold">Waktu Transaksi</td>
                                 <td style="width: 1px;">:</td>
-                                <td>{{ $pembayaran->created_at }}</td>
+                                <td>
+                                    {{ Str::before(date('d-m-Y', strtotime($pembayaran->created_at)), ' ')}} 
+                                    |
+                                    {{ Str::after($pembayaran->created_at, ' ') }}
+                                </td>
                             </tr>
                             <tr class="border-bottom">
                                 <td class="fw-bold">Nama Siswa</td>
@@ -68,16 +72,6 @@
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $pembayaran->bulanbayar->name }} - {{ $pembayaran->tahunbayar }} </td>
                             </tr>
-                            {{-- <tr class="border-bottom">
-                                <td>Tahun SPP</td>
-                                <td style="width: 1px;">:</td>
-                                <td>{{ $pembayaran->userSiswa->spp->tahun }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td>Nominal SPP</td>
-                                <td style="width: 1px;">:</td>
-                                <td>Rp{{ number_format($pembayaran->userSiswa->spp->nominal, 0, '.', '.') }}</td>
-                            </tr> --}}
                             <tr class="border-bottom">
                                 <td class="fw-bold">Jenis Transaksi</td>
                                 <td style="width: 1px;">:</td>
@@ -141,7 +135,7 @@
 
         <div class="col-md-6">
 
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Detail Siswa</p>
                     @can('admin')
@@ -195,8 +189,8 @@
                         </div>
                         <div class="table-responsive">
 
-                            @if ($historysiswa->count() < 1)
-                                <small> <a href="">{{ $pembayaran->userSiswa->name }}</a> belum memiliki riwayat
+                            @if ($historysiswa->where('status', 'sukses')->count() < 1)
+                                <small> <a href="{{ route('siswa.show', $pembayaran->userSiswa->identifier) }}">{{ $pembayaran->userSiswa->name }}</a> belum memiliki riwayat
                                     pembayaran.</small>
                             @else
                                 <table class="table table-sm table-hover fs-14 c-black">

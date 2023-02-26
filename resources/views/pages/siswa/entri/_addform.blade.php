@@ -11,7 +11,7 @@
 <select name="bulanbayar_id" id="bulanbayar_id" class="text-black form form-control form-select mt-0   @error('bulanbayar_id') is-invalid @enderror" >
   <option value="" selected disabled>-- Pilih --</option>
   @foreach ($bulanbayar as $tampilkan)
-    <option value="{{ $tampilkan->id }}">{{ $tampilkan->name }}</option>
+    <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == old('bulanbayar_id') ? 'selected' : '' }}>{{ $tampilkan->name }}</option>
   @endforeach
 </select>
 @error('bulanbayar_id')
@@ -32,7 +32,7 @@
 <select name="metodepembayaran_id" id="metodepembayaran_id" class="text-black form form-control form-select mt-0   @error('metodepembayaran_id') is-invalid @enderror" >
   <option value="" selected disabled>-- Pilih --</option>
   @foreach ($metodepembayaran as $tampilkan)
-    <option value="{{ $tampilkan->id }}">{{ $tampilkan->payment }}</option>
+    <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == old('metodepembayaran_id') ? 'selected' : '' }}>{{ $tampilkan->payment }}</option>
   @endforeach
 </select>
 @error('metodepembayaran_id')

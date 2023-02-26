@@ -20,22 +20,22 @@ class SppSeeder extends Seeder
         
         collect([
             [   //1
-                'tahun' => '2021',
+                'tahun' => '2020',
                 'nominal' => '100000',
                 'identifier' => 'i' . Str::random(9),
             ],
             [   //2
-                'tahun' => '2022',
+                'tahun' => '2021',
                 'nominal' => '110000',
                 'identifier' => 'i' . Str::random(9),
             ],
             [   //3
-                'tahun' => '2023',
+                'tahun' => '2022',
                 'nominal' => '120000',
                 'identifier' => 'i' . Str::random(9),
             ],
             [   //4
-                'tahun' => '2024',
+                'tahun' => '2023',
                 'nominal' => '130000',
                 'identifier' => 'i' . Str::random(9),
             ],

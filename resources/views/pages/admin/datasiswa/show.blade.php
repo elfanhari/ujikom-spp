@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="col-md-6 mb-xs-3">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Detail Siswa</p>
                     @can('admin')
@@ -113,7 +113,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">History Pembayaran</p>
                     <a href="/admin/entri?siswa_id={{ $siswa->id }}" class="float-right text-primary">Entri

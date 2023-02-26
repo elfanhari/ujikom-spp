@@ -10,6 +10,13 @@
         </div>
     @endif
 
+    @if (session()->has('gagal'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Gagal!</strong> {{ session('gagal') }}
+            @include('_closebutton')
+        </div>
+    @endif
+
     
 
     <div class="row mb-3">
@@ -19,7 +26,7 @@
 
 
             <!-- Input MD -->
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     <a href="{{ route('laporan.index') }}" class="fs-14 float-right">Refresh halaman</a>
                     <p class="m-0 font-weight-bold text-dark">Generate Laporan</p>
@@ -38,8 +45,8 @@
                                     @foreach ($petugas as $tampilkan)
                                         <option 
                                             value="{{ $tampilkan->id }}"
-                                            {{ $tampilkan->id == request('petugas_id') ? 'selected' : '' }}>
-                                            {{ $tampilkan->name }} - {{ $tampilkan->level }} 
+                                             {{ $tampilkan->id == request('petugas_id') ? 'selected' : '' }}>
+                                             {{ $tampilkan->name }} - {{ strtoupper($tampilkan->level) }} 
                                         </option>
                                     @endforeach
                                 </select>
@@ -63,9 +70,9 @@
             </div>
         </div>
         <div class="col-12 fs">
-            <div class="card mt-4">
+            <div class="card shadow mt-4">
                 <div class="card-header">
-                    <p class="m-0 d-inline font-weight-bold text-dark">Laporan Transaksi</p>
+                    <p class="m-0 d-inline font-weight-bold text-dark">Pratinjau Laporan</p>
                     <form action="{{ route('laporan.create') }}" target="_blank" method="GET" class="d-inline">
                         @csrf
                         <input type="hidden" name="petugas_id" id="petugas_id" value="{{ request('petugas_id') }}">
@@ -84,7 +91,7 @@
                         @if ($pembayaran->count() < 1)
                             Data tidak ditemukan. <a href="{{ route('laporan.index') }}">Refresh halaman</a>
                         @else
-                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
+                            <table class="table table-sm table-hover fs-14 c-black">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
@@ -102,9 +109,13 @@
                                     @foreach ($pembayaran as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $tampilkan->created_at }}</td>
                                             <td>
-                                                <a href="{{ route('siswa.show', $tampilkan->userSiswa->id) }}"
+                                                {{ Str::before(date('d-m-Y', strtotime($tampilkan->created_at)), ' ')}} 
+                                                |
+                                                {{ Str::after($tampilkan->created_at, ' ') }}
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('siswa.show', $tampilkan->userSiswa->identifier) }}"
                                                     class="text-decoration-none">
                                                     {{ $tampilkan->userSiswa->name }}
                                                 </a>

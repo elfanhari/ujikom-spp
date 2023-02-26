@@ -11,13 +11,16 @@ class HistoryController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         return view('pages.admin.history.index', [
             'my' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('petugas_id', auth()->user()->id)->latest()->get(),
             'all' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->latest()->get(),
             'mandiri' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('jenistransaksi', 'mandiri')->latest()->get()
         ]);
     }
-
     
     public function create()
     {

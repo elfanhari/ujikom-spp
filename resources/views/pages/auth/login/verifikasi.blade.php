@@ -32,7 +32,7 @@
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow my-5">
+                <div class="card shadow o-hidden border-0 shadow my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
@@ -61,7 +61,7 @@
                                         </div>
                                     
                                         <button type="submit" class="btn btn-primary btn-block" style="border-radius: 10px;">
-                                            Kirim
+                                            Konfirmasikan
                                         </button>
                                     </form>
                                 

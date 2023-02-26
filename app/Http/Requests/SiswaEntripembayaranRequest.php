@@ -25,7 +25,7 @@ class SiswaEntripembayaranRequest extends FormRequest
             'metodepembayaran_id'    => ['required'],
             'tahunbayar'             => ['required', 'numeric'],
             'jumlahbayar'            => ['required', 'numeric'],
-            'files'                  => ['required'],
+            'files'                  => ['required', 'image'],
             'identifier'             => [$unique],
         ];
     }

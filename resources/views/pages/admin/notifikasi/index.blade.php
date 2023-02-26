@@ -59,7 +59,7 @@
                 @foreach ($notifikasi as $tampilkan)
                     @if ($tampilkan->dibaca == false)
                         <div class="text-decoration-none">
-                            <div class="card mb-2 bg-grey">
+                            <div class="card shadow mb-2 bg-grey">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <span
@@ -108,7 +108,7 @@
                             </div>
                         @else
                             <div class="text-decoration-none">
-                                <div class="card mb-2">
+                                <div class="card shadow mb-2">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
 
@@ -224,18 +224,6 @@
         </div>
 
     </div>
-
-    {{-- <script src="/bootstrap/js/popper.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/sb-admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/my-js/select2.js"></script>
-
-    @if (request(''))
-    <script>
-        $('#kirimNotifikasi').modal('show')
-    </script>
-    @endif --}}
-
     <script>
         var modalToggle = document.getElementById('kirimNotifikasi') // relatedTarget
         kirimNotifikassi.show(modalToggle)

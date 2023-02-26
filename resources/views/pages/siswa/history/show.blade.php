@@ -14,7 +14,7 @@
 
     <div class="row mb-3">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header fs-16">
                     <button class="text-decoration-none poppins btn-link m-0 p-0 btn" onclick="history.back()">< Kembali</button>
                 </div>

@@ -13,10 +13,12 @@ class SppController extends Controller
     
     public function index()
     {
-        $spp = Spp::latest()->get();
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
 
         return view('pages.admin.dataspp.index', [
-            'spp' => $spp
+            'spp' => Spp::latest()->get(),
         ]);
     }
 
@@ -39,6 +41,10 @@ class SppController extends Controller
 
     public function edit(Spp $spp)
     {
+        if (auth()->user()->level !== 'admin') { // pembatasan akses selain admin
+            return view('denied');
+        }
+        
         return view('pages.admin.dataspp.edit', [
             'spp' => $spp,
         ]);

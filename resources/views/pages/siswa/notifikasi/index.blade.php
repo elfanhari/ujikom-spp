@@ -20,8 +20,7 @@
                     @method('PUT')
                     @csrf
                     <input type="hidden" name="untuk" id="untuk" value="semua">
-                    <button class="btn fs-14 btn-link p-0 text-decoration-none" type="submit">Tandai semua telah
-                        dibaca</button>
+                    <button class="btn fs-14 btn-link p-0 text-decoration-none" type="submit">Telah dibaca semua</button>
                 </form>
 
                 <form action="{{ route('notifikasi.destroy', $notifikasi[0]) }}" method="post" class="d-inline">
@@ -41,7 +40,7 @@
                 @foreach ($notifikasi as $tampilkan)
                     @if ($tampilkan->dibaca == false)
                         <div class="text-decoration-none">
-                            <div class="card mb-2 bg-grey">
+                            <div class="card shadow mb-2 bg-grey">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <span
@@ -90,7 +89,7 @@
                             </div>
                         @else
                             <div class="text-decoration-none">
-                                <div class="card mb-2">
+                                <div class="card shadow mb-2">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
 

@@ -18,7 +18,7 @@
   @enderror
 </div>
 
-<div class="form-floating mb-3">
+<div class="form-floating">
   <input type="password" name="password_confirmation"
       value="{{ old('password_confirmation') }}"class="form-control text-black @error('password_confirmation') is-invalid @enderror"
       id="floatingInput" placeholder="Ketik ulang password baru">

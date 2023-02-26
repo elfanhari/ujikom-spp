@@ -15,7 +15,7 @@
         <div class="col-md-6">
 
             <!-- Input MD -->
-            <div class="card mb-sm-3">
+            <div class="card shadow mb-sm-3">
                 <div class="card-header fs-16">
                   <button class="text-decoration-none poppins btn-link m-0 p-0 btn" onclick="history.back()">< Kembali</button>
                 </div>

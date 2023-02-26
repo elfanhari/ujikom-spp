@@ -14,6 +14,10 @@ class UserphotoController extends Controller
 {
     public function editPhoto(Request $request, $id)
     {   
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+        
         return view('pages.admin.profile.editphoto', [
             'user' => User::find($id),
             'userphoto' => Userphoto::where('user_id', $id)->get(),
