@@ -104,7 +104,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}
+                                                    {{ $tampilkan->petugas_id != null ? $tampilkan->userPetugas->name : '-' }}
                                                 </td>
                                                 <td class="">
 
@@ -230,7 +230,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}
+                                                    {{ $tampilkan->petugas_id != null ? $tampilkan->userPetugas->name : '-' }}
                                                 </td>
                                                 <td class="">
 
@@ -357,7 +357,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}
+                                                    {{ $tampilkan->petugas_id != null ? $tampilkan->userPetugas->name : '-' }}
                                                 </td>
                                                 <td class="">
 
@@ -484,7 +484,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                {{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}
+                                                {{ $tampilkan->petugas_id != null ? $tampilkan->userPetugas->name : '-' }}
                                             </td>
                                             <td class="">
 

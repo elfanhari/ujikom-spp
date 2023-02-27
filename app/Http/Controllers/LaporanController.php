@@ -29,14 +29,15 @@ class LaporanController extends Controller
         $sampaitanggal = $request->sampaitanggal;
         $petugas_id = $request->petugas_id;
 
-        $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('status', 'sukses')->latest();
+        $with = ['userSiswa', 'userPetugas', 'bulanbayar'];
+        $pembayaran = Pembayaran::with($with)->where('status', 'sukses')->latest();
 
         if(request('petugas_id')){
-            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('petugas_id', $petugas_id)->latest();
+            $pembayaran = Pembayaran::with($with)->where('petugas_id', $petugas_id)->latest();
         }
         
         if(request('daritanggal')){
-            $pembayaran = Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->where('petugas_id', $petugas_id)->latest();
+            $pembayaran = Pembayaran::with($with)->whereBetween('tanggalbayar', [$daritanggal, $sampaitanggal])->where('petugas_id', $petugas_id)->latest();
         }
 
         return view('pages.admin.laporan.index', [

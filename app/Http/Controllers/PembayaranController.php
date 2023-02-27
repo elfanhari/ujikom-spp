@@ -13,11 +13,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use App\Http\Controllers;
+use App\Mail\StrukPembayaran;
 use App\Models\Buktipembayaran;
 use App\Models\Bulanbayar;
 use App\Models\Notifikasi;
 use App\Models\Userphoto;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 
 class PembayaranController extends Controller
@@ -28,11 +30,12 @@ class PembayaranController extends Controller
             return view('denied');
         }
 
+        $with = ['userPetugas', 'userSiswa', 'bulanbayar'];
         return view('pages.admin.datapembayaran.index', [
-            'semua' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->latest()->get(),
-            'sukses' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->where('status', 'sukses')->latest()->get(),
-            'diproses' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->where('status', 'diproses')->latest()->get(),
-            'gagal' => Pembayaran::with(['userPetugas', 'userSiswa', 'bulanbayar'])->where('status', 'gagal')->latest()->get(),
+            'semua' => Pembayaran::withOnly($with)->latest()->get(),
+            'sukses' => Pembayaran::withOnly($with)->where('status', 'sukses')->latest()->get(),
+            'diproses' => Pembayaran::withOnly($with)->where('status', 'diproses')->latest()->get(),
+            'gagal' => Pembayaran::withOnly($with)->where('status', 'gagal')->latest()->get(),
         ]);
     }
 
@@ -43,8 +46,8 @@ class PembayaranController extends Controller
             return view('denied');
         }
 
-        $siswa = User::where('kelas_id', $request->kelas_id);
-        $siswaCek = User::where('id', $request->siswa_id);
+        $siswa = User::with('kelas')->where('kelas_id', $request->kelas_id);
+        $siswaCek = User::with('kelas', 'spp', 'notifikasiPenerima')->where('id', $request->siswa_id);
         return view('pages.admin.entripembayaran.create', [
             'kelas' => Kelas::all(),
             'siswa' => $siswa->get(),
@@ -74,7 +77,7 @@ class PembayaranController extends Controller
             'dibaca' => false 
         ];
         Notifikasi::create($notifikasiSukses);
-        return redirect(route('pembayaran.index'))->with('info', 'Data berhasil ditambahkan!');
+        return redirect(route('pembayaran.show', $pembayaranTerakhir->identifier))->with('info', 'Pembayaran berhasil dibuat!');
     }
 
     
@@ -165,5 +168,33 @@ class PembayaranController extends Controller
         }
 
         return back()->withInfo('Status pembayaran berhasil diubah!');
+    }
+
+    public function printStruk(Pembayaran $pembayaran)
+    {
+        return view('pages.admin.datapembayaran.printstruk', compact('pembayaran'));
+    }
+
+    public function kirimStruk(Pembayaran $pembayaran)
+    {
+        $emailSiswa = $pembayaran->userSiswa->email;
+
+        $dataEmail = [
+            'subjek' => '[E-SPP SMK REKAYASA] - Rincian Pembayaran',
+            'kode' => strtoupper($pembayaran->identifier),
+            'waktu' => Str::before(date('d-m-Y', strtotime($pembayaran->created_at)), ' ') . ' | ' . Str::after($pembayaran->created_at, ' '),
+            'siswa' => $pembayaran->userSiswa->name,
+            'kelas' => $pembayaran->userSiswa->kelas->name,
+            'pembayaranuntuk' => $pembayaran->bulanbayar->name . ' - ' . $pembayaran->tahunbayar,
+            'jumlahbayar' => 'Rp' . number_format($pembayaran->jumlahbayar, 0, '.', '.'),
+            'jenistransaksi' => strtoupper($pembayaran->jenistransaksi),
+            'metodepembayaran' => strtoupper($pembayaran->metodepembayaran->payment),
+            'petugas' => $pembayaran->userPetugas->name,
+            'status' => strtoupper($pembayaran->status),
+        ];
+
+        Mail::to('elfanhari88@gmail.com')->send(new StrukPembayaran($dataEmail));  // kirim password ke email user tersebut
+        return back()->with('info', 'Rincian pembayaran telah dikirim ke email ' . $emailSiswa . '.');
+
     }
 }

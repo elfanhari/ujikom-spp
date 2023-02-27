@@ -11,6 +11,8 @@ class Notifikasi extends Model
 
     protected $guarded = ['id'];
 
+    // protected $with = ['userPengirim', 'userPenerima'];
+
     public function userPengirim() //relasiInverse
     {
         return $this->belongsTo(User::class, 'pengirim_id', 'id');

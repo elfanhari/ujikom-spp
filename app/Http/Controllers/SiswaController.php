@@ -27,7 +27,7 @@ class SiswaController extends Controller
         }
 
         return view('pages.admin.datasiswa.index', [
-            'siswa' => User::where('level', 'siswa')->latest()->get(),
+            'siswa' => User::with('kelas')->where('level', 'siswa')->latest()->get(),
             'kelas' => Kelas::all(),
             'spp' => Spp::all(),
         ]);

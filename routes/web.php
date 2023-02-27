@@ -27,6 +27,7 @@ use App\Models\Pembayaran;
 use App\Models\Notifikasi;
 use App\Models\Userphoto;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -80,6 +81,8 @@ Route::group(['middleware' => ['auth']], function(){
         Route::post('/siswa/import', [SiswaController::class, 'import'])->name('siswa.import');
         Route::resource('/admin', AdminController::class);
         Route::resource('/pembayaran', PembayaranController::class);
+        Route::get('/pembayaran/print/{pembayaran}', [PembayaranController::class, 'printStruk'])->name('pembayaran.print');
+        Route::post('/pembayaran/kirimstruk/{pembayaran}', [PembayaranController::class, 'kirimStruk'])->name('pembayaran.kirimstruk');
 
         Route::get('/editpassword/{users:identifier}', [UpdatePasswordController::class, 'edit'])->name('updatepassword.edit');
         Route::put('/editpassword/{users:identifier}', [UpdatePasswordController::class, 'update'])->name('updatepassword.update');

@@ -15,10 +15,13 @@ class HistoryController extends Controller
             return view('denied');
         }
 
+        $with = ['userSiswa', 'userPetugas', 'bulanbayar'];
+        
         return view('pages.admin.history.index', [
-            'my' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('petugas_id', auth()->user()->id)->latest()->get(),
-            'all' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->latest()->get(),
-            'mandiri' => Pembayaran::with(['userSiswa', 'userPetugas', 'bulanbayar'])->where('jenistransaksi', 'mandiri')->latest()->get()
+            
+            'my' => Pembayaran::with($with)->where('petugas_id', auth()->user()->id)->latest()->get(),
+            'all' => Pembayaran::with($with)->latest()->get(),
+            'mandiri' => Pembayaran::with($with)->where('jenistransaksi', 'mandiri')->latest()->get()
         ]);
     }
     

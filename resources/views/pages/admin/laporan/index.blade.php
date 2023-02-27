@@ -120,7 +120,7 @@
                                                     {{ $tampilkan->userSiswa->name }}
                                                 </a>
                                             </td>
-                                            <td>{{ $tampilkan->userSiswa->load('kelas')->kelas->name }}</td>
+                                            <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                             <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
                                             <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                                             <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>

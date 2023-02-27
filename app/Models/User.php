@@ -46,7 +46,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // protected $with = ['kelas', 'spp'];
+    protected $with = ['kelas'];
 
     public function pembayaranPetugas() //relasi
     {

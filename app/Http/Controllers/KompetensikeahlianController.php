@@ -20,12 +20,6 @@ class KompetensikeahlianController extends Controller
         }
         
         $prodi = Kompetensikeahlian::latest()->get();
-
-        if(request('search')) {
-            $prodi->where('name', 'like', '%' . request('search') . '%')
-            ->orWhere('singkatan', 'like', '%' . request('search') . '%')->get();
-        }
-
         return view('pages.admin.dataprodi.index', compact('prodi'));
     }
 
