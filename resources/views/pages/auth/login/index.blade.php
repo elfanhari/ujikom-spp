@@ -104,7 +104,7 @@
 
             .content-4-1 .forgot-password {
                 font: 400 0.875rem/1.25rem Poppins, sans-serif;
-                color: #cacbce;
+                color: #abaec3;
                 transition: 0.3s;
                 text-decoration: none;
             }
@@ -220,8 +220,8 @@
                                         d="M5 5C3.34315 5 2 6.34315 2 8V16C2 17.6569 3.34315 19 5 19H19C20.6569 19 22 17.6569 22 16V8C22 6.34315 20.6569 5 19 5H5ZM5.49607 7.13174C5.01655 6.85773 4.40569 7.02433 4.13168 7.50385C3.85767 7.98337 4.02427 8.59422 4.50379 8.86823L11.5038 12.8682C11.8112 13.0439 12.1886 13.0439 12.4961 12.8682L19.4961 8.86823C19.9756 8.59422 20.1422 7.98337 19.8682 7.50385C19.5942 7.02433 18.9833 6.85773 18.5038 7.13174L11.9999 10.8482L5.49607 7.13174Z"
                                         fill="#CACBCE" />
                                 </svg>
-                                <input class="input-field border-0" type="text" name="email" id="email"
-                                    placeholder="Masukkan email" autocomplete="off" autofocus required />
+                                <input class="input-field border-0" value="{{ old('email') }}" type="text" name="email" id="email"
+                                    placeholder="Masukkan email" autofocus required />
                             </div>
                         </div>
                         <div style="margin-top: 1rem">
@@ -246,7 +246,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end" style="margin-top: 0.75rem">
-                            <a href="/lupapassword" class="forgot-password fst-italic">Lupa password?</a>
+                            <a href="/lupapassword" class="forgot-password">Lupa password?</a>
                         </div>
                         <button class="btn btn-fill text-white d-block w-100" type="submit">
                             Login

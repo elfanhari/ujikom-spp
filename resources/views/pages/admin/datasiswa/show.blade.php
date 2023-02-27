@@ -63,49 +63,49 @@
                                 </div>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Nama Siswa</td>
+                                <td class="fw-bold">Nama Siswa</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $siswa->name }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>NISN</td>
+                                <td class="fw-bold">NISN</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $siswa->nisn }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>NIS</td>
+                                <td class="fw-bold">NIS</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $siswa->nis }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Jenis Kelamin</td>
+                                <td class="fw-bold">Jenis Kelamin</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $siswa->jk == 'laki-laki' ? 'Laki-laki' : 'Perempuan' }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Kelas</td>
+                                <td class="fw-bold">Kelas</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $siswa->kelas->name }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Alamat</td>
+                                <td class="fw-bold">Alamat</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $siswa->alamat }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Telepon</td>
+                                <td class="fw-bold">Telepon</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $siswa->telepon }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Email</td>
+                                <td class="fw-bold">Email</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $siswa->email }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Tahun SPP</td>
+                                <td class="fw-bold">Tahun SPP</td>
                                 <td style="width: 1px;">:</td>
-                                <td>{{ $siswa->spp->tahun }}</td>
+                                <td>{{ $siswa->spp->tahun }} - Rp{{ number_format($siswa->spp->nominal, 0, '.', '.') }}</td>
                             </tr>
                         </table>
                     </div>
@@ -129,14 +129,14 @@
                                     <td>#</td>
                                     <td>Tanggal</td>
                                     <td>Pembayaran untuk</td>
-                                    <td>Nominal bayar</td>
+                                    <td class="d-xs-none">Nominal bayar</td>
                                 </tr>
                                 @foreach ($historysiswa->where('status', 'sukses') as $tampilkan)
                                     <tr class="border-bottom">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                                         <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
-                                        <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                                        <td class="d-xs-none">Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                                     </tr>
                                 @endforeach
                             </table>

@@ -16,7 +16,7 @@
             <div class="card shadow mb-xs-3 shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Profil Saya</p>
-                    <a href="{{ route('password-user.edit') }}" class="float-right fs-14 text-warning">Edit password</a>
+                    <a href="#editprofile" class="float-right fs-14 text-primary d-md-none">Edit profile</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -50,32 +50,17 @@
                                 </div>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Nama</td>
+                                <td class="fw-bold">Nama</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $user->name }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Level</td>
+                                <td class="fw-bold">Jenis Kelamin</td>
                                 <td style="width: 1px;">:</td>
-                                <td class="text-capitalize">{{ $user->level }}</td>
+                                <td class="text-capitalize">{{ $user->jk }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Telepon</td>
-                                <td style="width: 1px;">:</td>
-                                <td>{{ $user->telepon }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td>Username</td>
-                                <td style="width: 1px;">:</td>
-                                <td>{{ $user->username }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td>Email</td>
-                                <td style="width: 1px;">:</td>
-                                <td>{{ $user->email }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td>Alamat</td>
+                                <td class="fw-bold">Alamat</td>
                                 <td style="width: 1px;">:</td>
                                 @if ($user->alamat)
                                     <td>
@@ -86,6 +71,26 @@
                                         -
                                     </td>
                                 @endif
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Telepon</td>
+                                <td style="width: 1px;">:</td>
+                                <td>{{ $user->telepon }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Email</td>
+                                <td style="width: 1px;">:</td>
+                                <td>{{ $user->email }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Username</td>
+                                <td style="width: 1px;">:</td>
+                                <td>{{ $user->username }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Level</td>
+                                <td style="width: 1px;">:</td>
+                                <td class="text-uppercase">{{ $user->level }}</td>
                             </tr>
                         </table>
                     </div>
@@ -99,9 +104,10 @@
 
 
             <!-- Input MD -->
-            <div class="card shadow shadow">
+            <div class="card shadow shadow" id="editprofile">
                 <div class="card-header">
-                    <p class="m-0 font-weight-bold text-grey">Edit profil</p>
+                    <p class="m-0 font-weight-bold text-grey d-inline">Edit profil</p>
+                    <a href="{{ route('password-user.edit') }}" class="float-right fs-14 text-primary">Edit password</a>
                 </div>
                 <div class="card-body input-group-sm fs-14">
 

@@ -1,12 +1,35 @@
 <div class="form-floating mb-3">
-  <input type="text" name="name"
-      value="{{ old('name', $user->name) }}"class="form-control text-black @error('name') is-invalid @enderror"
+  <input type="text" name=""
+      value="{{ old('name', $user->name) }} - {{ $user->kelas->name }}"class="form-control text-black @error('name') is-invalid @enderror"
       id="floatingInput" placeholder="Masukkan name" readonly>
-  <label for="floatingInput" class="">Name</label>
+  <label for="floatingInput" class="">Nama - Kelas</label>
   @error('name')
       <span class="invalid-feedback mt-1">{{ $message }}</span>
   @enderror
 </div>
+
+<div class="form-floating mb-3">
+  <select name="jk"
+      class="form-select @error('jk') is-invalid @enderror" id="floatingSelect"
+      aria-label="Floating label select example">
+      <option disabled selected>-- Pilih --</option>
+      <option value="laki-laki" {{ $user->jk == 'laki-laki' ? 'selected' : '' }}> Laki-Laki </option>
+      <option value="perempuan" {{ $user->jk == 'perempuan' ? 'selected' : '' }}> Perempuan </option>
+  </select>
+  <label for="floatingSelect">Jenis Kelamin</label>
+  @error('jk')
+      <span class="invalid-feedback mt-1">{{ $message }}</span>
+  @enderror
+  </div>
+
+
+  <div class="form-floating mb-3">
+    <textarea name="alamat" class="form-control text-black @error('alamat') is-invalid @enderror" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 70px">{{ old('alamat', $user->alamat) }}</textarea>
+    <label for="floatingTextarea2">Alamat</label>
+    @error('alamat')
+        <span class="invalid-feedback mt-1 ">{{ $message }}</span>
+    @enderror
+  </div>
 
 <div class="form-floating mb-3">
   <input type="text" name="telepon"

@@ -51,15 +51,17 @@
                                         @csrf
 
                                         <div class="form-group">
-                                            <input type="text" name="kodeverifikasi" value="{{ old('kodeverifikasi') }}"
-                                                class=" @error('kodeverifikasi') is-invalid @enderror form-control text-black"
+                                            <input type="text" name="inputverifikasi" value="{{ old('inputverifikasi') }}"
+                                                class=" @error('inputverifikasi') is-invalid @enderror form-control text-black"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Masukkan kode verifikasi..." style="border-radius: 10px;">
-                                                @error('kodeverifikasi')
+                                                @error('inputverifikasi')
                                                 <span class="invalid-feedback mt-1">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     
+                                        <input type="hidden" name="kodeverifikasi" id="" value="{{ $kodeverifikasi }}">
+
                                         <button type="submit" class="btn btn-primary btn-block" style="border-radius: 10px;">
                                             Konfirmasikan
                                         </button>

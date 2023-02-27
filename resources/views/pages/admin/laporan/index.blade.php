@@ -45,7 +45,7 @@
                                     @foreach ($petugas as $tampilkan)
                                         <option 
                                             value="{{ $tampilkan->id }}"
-                                             {{ $tampilkan->id == request('petugas_id') ? 'selected' : '' }}>
+                                             {{ $tampilkan->id == request('petugas_id') ? 'selected' : '' }} {{ $tampilkan->id == auth()->user()->id ? 'selected' : '' }}>
                                              {{ $tampilkan->name }} - {{ strtoupper($tampilkan->level) }} 
                                         </option>
                                     @endforeach

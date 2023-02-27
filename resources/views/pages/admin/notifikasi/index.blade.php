@@ -106,52 +106,52 @@
 
                                 </div>
                             </div>
-                        @else
-                            <div class="text-decoration-none">
-                                <div class="card shadow mb-2">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
+                        </div>
+                    @else
+                        <div class="text-decoration-none">
+                            <div class="card shadow mb-2">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
 
-                                            <div class="mb-2">
+                                        <div class="mb-2">
 
-                                                @if ($tampilkan->tipe == 'sukses')
-                                                    <div class="icon-circle bg-success">
-                                                        <i class="fas fa-donate text-white"></i>
-                                                    </div>
-                                                @elseif ($tampilkan->tipe == 'info')
-                                                    <div class="icon-circle bg-primary">
-                                                        <i class="fas fa-file-alt text-white"></i>
-                                                    </div>
-                                                @elseif ($tampilkan->tipe == 'peringatan')
-                                                    <div class="icon-circle bg-warning">
-                                                        <i class="fas fa-exclamation-triangle text-white"></i>
-                                                    </div>
-                                                @endif
+                                            @if ($tampilkan->tipe == 'sukses')
+                                                <div class="icon-circle bg-success">
+                                                    <i class="fas fa-donate text-white"></i>
+                                                </div>
+                                            @elseif ($tampilkan->tipe == 'info')
+                                                <div class="icon-circle bg-primary">
+                                                    <i class="fas fa-file-alt text-white"></i>
+                                                </div>
+                                            @elseif ($tampilkan->tipe == 'peringatan')
+                                                <div class="icon-circle bg-warning">
+                                                    <i class="fas fa-exclamation-triangle text-white"></i>
+                                                </div>
+                                            @endif
 
-                                            </div>
-                                            <div class="">
-                                                <small
-                                                    class="text-secondary">{{ $tampilkan->created_at->diffForHumans() }}</small>
-                                            </div>
                                         </div>
-                                        <b></b>
-                                        <div class="fs-14 mt-2 d-block"> {{ Str::limit($tampilkan->pesan, 80, '...') }}
+                                        <div class="">
+                                            <small
+                                                class="text-secondary">{{ $tampilkan->created_at->diffForHumans() }}</small>
                                         </div>
-                                        <a href="{{ route('admin.notifikasi.show', $tampilkan) }}"
-                                            class="btn btn-sm btn-outline-primary rounded-pill mt-2 px-3">Lihat
-                                            detail</a>
-
-                                        <form action="{{ route('admin.notifikasi.destroy', $tampilkan) }}" method="post"
-                                            class="d-inline">
-                                            @method('DELETE')
-                                            @csrf
-                                            <input type="hidden" name="untuk" id="untuk" value="satu">
-                                            <button
-                                                class="btn btn-sm btn-outline-danger rounded-pill mt-2 px-3">Hapus</button>
-                                        </form>
                                     </div>
+                                    <b></b>
+                                    <div class="fs-14 mt-2 d-block"> {{ Str::limit($tampilkan->pesan, 80, '...') }}
+                                    </div>
+                                    <a href="{{ route('admin.notifikasi.show', $tampilkan) }}"
+                                        class="btn btn-sm btn-outline-primary rounded-pill mt-2 px-3">Lihat
+                                        detail</a>
+
+                                    <form action="{{ route('admin.notifikasi.destroy', $tampilkan) }}" method="post"
+                                        class="d-inline">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="untuk" id="untuk" value="satu">
+                                        <button class="btn btn-sm btn-outline-danger rounded-pill mt-2 px-3">Hapus</button>
+                                    </form>
                                 </div>
                             </div>
+                        </div>
                     @endif
                 @endforeach
             @endif

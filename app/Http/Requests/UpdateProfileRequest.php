@@ -27,7 +27,7 @@ class UpdateProfileRequest extends FormRequest
         $unique = Rule::unique('users')->ignore(auth()->user()->id); // Pengeculian Unique Saat Update
 
         return [
-            'name'      => ['required'],
+            // 'name'      => ['required'],
             'telepon'   => ['required', 'numeric'],
             'email'     => ['required', 'email', $unique],
             'username'  => ['required', 'min:8', 'max:20', $unique],

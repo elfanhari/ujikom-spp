@@ -58,22 +58,22 @@
                                 </div>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Nama petugas</td>
+                                <td class="fw-bold">Nama Petugas</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $petuga->name }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Telepon</td>
+                                <td class="fw-bold">Telepon</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $petuga->telepon }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Email</td>
+                                <td class="fw-bold">Email</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $petuga->email }}</td>
                             </tr>
                             <tr class="border-bottom">
-                                <td>Username</td>
+                                <td class="fw-bold">Username</td>
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $petuga->username }}</td>
                             </tr>

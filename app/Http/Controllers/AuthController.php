@@ -57,8 +57,8 @@ class AuthController extends Controller
         if (Auth::attempt($input)) {
 
             $user = User::where('id', auth()->user()->id)->get(); // get User sesuai auth
-            // $kodeverifikasi = random_int(100000, 999999);  // kode verifikasi
-            $kodeverifikasi = 954723;
+            $kodeverifikasi = random_int(100000, 999999);  // kode verifikasi
+            // $kodeverifikasi = 954723;
     
             $dataEmail = [
                 'subjek' => '[E-SPP SMK REKAYASA] - Verifikasi Masuk',
@@ -68,7 +68,7 @@ class AuthController extends Controller
     
             Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
             
-            return redirect('/verifikasiemail');
+            return redirect('/verifikasiemail')->with('kodeverifikasi', $kodeverifikasi);
         }
             
         else {
@@ -78,14 +78,26 @@ class AuthController extends Controller
 
     public function pageVerifikasiEmail()
     {
+        $kode = session('kodeverifikasi');
+        $kodeverifikasi = session()->flash('kodeverifikasi', $kode);
+        $kodeverifikasi = session()->get('kodeverifikasi');
+        $kodeverifikasi = $kodeverifikasi;
+
+        if (session()->has('info')){
+            $kodeverifikasi = session('info');
+        }
+
         return view('pages.auth.login.verifikasi', [
             'email' => auth()->user()->email,
+            'kodeverifikasi' => $kodeverifikasi,
         ]);   
     }
 
     public function storeVerifikasiEmail(Request $request)
-    {
-        if ($request->kodeverifikasi == 954723) {
+    {   
+        $kodeverifikasi = $request->kodeverifikasi;
+        
+        if ($request->inputverifikasi == $kodeverifikasi) {
             $level = auth()->user()->level;
             
             if ($level == 'admin') {
@@ -102,9 +114,9 @@ class AuthController extends Controller
                 return redirect('/login')->with('info', 'Email atau password salah!');
             }
         } else {
-            
+            return back()->with('kodeverifikasi', $kodeverifikasi);
             throw ValidationException::withMessages([
-                'kodeverifikasi' => 'Kode verifikasi yang anda masukkan tidak sesuai!',
+                'inputverifikasi' => 'Kode verifikasi yang anda masukkan tidak sesuai!',
             ]);
         }
     }

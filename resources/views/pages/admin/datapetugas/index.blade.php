@@ -82,12 +82,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($petuga as $tampilkan)
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->name }}</td>
-                                            <td class="d-xs-none">{{ $tampilkan->level }}</td>
+                                            <td class="d-xs-none text-uppercase">{{ $tampilkan->level }}</td>
                                             <td class="d-xs-none">{{ $tampilkan->telepon }}</td>
                                             <td class="d-xs-none">{{ $tampilkan->email }}</td>
                                             <td class="">

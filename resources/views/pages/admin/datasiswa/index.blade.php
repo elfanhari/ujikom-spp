@@ -155,7 +155,7 @@
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit"
-                                                                        class="btn btn-primary">Iya</button>
+                                                                        class="btn btn-primary">Hapus</button>
                                                                 </form>
                                                             </div>
                                                         </div>
