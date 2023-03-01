@@ -17,32 +17,32 @@ class KompetensikeahlianSeeder extends Seeder
             [   //1
                 'name' => 'Rekayasa Perangkat Lunak', 
                 'singkatan' => 'RPL',
-                 'identifier' => 'i' . Str::random(9),
+                 'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
             [   //2
                 'name' => 'Akuntansi dan Keuangan Lembaga', 
                 'singkatan' => 'AKL',
-                 'identifier' => 'i' . Str::random(9),
+                 'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
             [   //3
                 'name' => 'Teknik Bisnis Sepeda Motor', 
                 'singkatan' => 'TBSM',
-                 'identifier' => 'i' . Str::random(9),
+                 'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
             [   //4
                 'name' => 'Teknik Kendaraan Ringan Otomotif', 
                 'singkatan' => 'TKRO',
-                 'identifier' => 'i' . Str::random(9),
+                 'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
             [   //5
                 'name' => 'Agribisnis Pengolahan Hasil Pertanian', 
                 'singkatan' => 'APHP',
-                 'identifier' => 'i' . Str::random(9),
+                 'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
             [   //6
                 'name' => 'Agribisnis Pengolahan Air Tawar', 
                 'singkatan' => 'APAT',
-                 'identifier' => 'i' . Str::random(9),
+                 'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
         ])->each(function($kompetensikeahlian){
             Kompetensikeahlian::create($kompetensikeahlian);

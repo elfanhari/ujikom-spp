@@ -37,7 +37,7 @@ class PetugasController extends Controller
 
     public function store(PetugasRequest $request)
     {
-        $request['identifier'] = 'i' . Str::random(9);
+        $request['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
         User::create($request->all());
         return redirect(route('petugas.index'))->with('info', 'Data berhasil ditambahkan!');
     }

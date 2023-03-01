@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    // HALAMAN LOGIN
     public function pageLoginAdmin()
     {   
         return view('pages.auth.login.index');
@@ -54,11 +55,12 @@ class AuthController extends Controller
             'password' => ['required'],
         ]); 
 
+        $email = $request->email;
+
         if (Auth::attempt($input)) {
 
             $user = User::where('id', auth()->user()->id)->get(); // get User sesuai auth
             $kodeverifikasi = random_int(100000, 999999);  // kode verifikasi
-            // $kodeverifikasi = 954723;
     
             $dataEmail = [
                 'subjek' => '[E-SPP SMK REKAYASA] - Verifikasi Masuk',
@@ -66,6 +68,7 @@ class AuthController extends Controller
                 'name' => $user[0]->name,
             ];
     
+            // Mail::to($email)->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
             Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
             
             return redirect('/verifikasiemail')->with('kodeverifikasi', $kodeverifikasi);
@@ -76,6 +79,7 @@ class AuthController extends Controller
         }
     }
 
+    // HALAMAN KODE VERIFIKASI EMAIL
     public function pageVerifikasiEmail()
     {
         $kode = session('kodeverifikasi');
@@ -93,6 +97,7 @@ class AuthController extends Controller
         ]);   
     }
 
+    // KONFIRMASI VERIFIKASI EMAIL
     public function storeVerifikasiEmail(Request $request)
     {   
         $kodeverifikasi = $request->kodeverifikasi;
@@ -102,7 +107,7 @@ class AuthController extends Controller
             
             if ($level == 'admin') {
                 return redirect('/admin')->withInfo('Admin');
-            }
+            } 
             elseif ($level == 'petugas') {
                 return redirect('/admin')->withInfo('Petugas');
             } 
@@ -118,14 +123,19 @@ class AuthController extends Controller
             throw ValidationException::withMessages([
                 'inputverifikasi' => 'Kode verifikasi yang anda masukkan tidak sesuai!',
             ]);
+
         }
     }
 
+
+    // HALAMAN LUPA PASSWORD
     public function pageLupaPassword()
     {
         return view('pages.auth.lupapassword.index');
     }
 
+
+    // STORE EMAIL LUPA PASSWORD
     public function storeLupaPassword(Request $request)
     {
         $request->validate(['email' => 'required|email']);
@@ -141,6 +151,7 @@ class AuthController extends Controller
                 'name' => $user[0]->name,
             ];
 
+            // Mail::to($user[0]->email)->send(new SendEmail($dataEmail));  // kirim password ke email user tersebut
             Mail::to('elfanhari88@gmail.com')->send(new SendEmail($dataEmail));  // kirim password ke email user tersebut
 
             return view('pages.auth.lupapassword.success', [
@@ -154,6 +165,7 @@ class AuthController extends Controller
         }
     }
     
+    // LOGOUT
     public function logout() {
         Auth::logout();
         return redirect(route('home'));

@@ -24,7 +24,7 @@ class Spp extends Model
 
     public function setIdentifierAttribute($identifier)
     {
-        $this->attributes['identifier'] = 'i' . Str::random(9);
+        $this->attributes['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
     }
 
 }

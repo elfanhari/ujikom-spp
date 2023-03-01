@@ -40,7 +40,7 @@ class AdminController extends Controller
 
     public function store(AdminRequest $request)
     {
-        $request['identifier'] = 'i' . Str::random(9);
+        $request['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
         $request['password'] = bcrypt($request->password);
         User::create(
             $request->all()

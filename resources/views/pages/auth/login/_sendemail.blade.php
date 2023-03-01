@@ -13,5 +13,3 @@ Jika anda memiliki kendala, silahkan hubungi petugas melalui <a href="https://wa
 <small>Hormat Kami,</small> <br>
 <small>TIM SPP SMK REKAYASA</small>
 
-
-

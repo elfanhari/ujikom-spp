@@ -28,7 +28,7 @@ class KelasController extends Controller
     // Kelas - Store
     public function store(KelasRequest $request)
     {
-        $request['identifier'] = 'i' . Str::random(9);
+        $request['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
         Kelas::create($request->all());
         return redirect(route('kelas.index'))->withInfo('Data berhasil ditambahkan!');
     }

@@ -49,7 +49,7 @@ class SiswaController extends Controller
     // Siswa - Store
     public function store(SiswaRequest $request)
     {
-        $request['identifier'] = 'i' . Str::random(9);
+        $request['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
         User::create($request->all());
         return redirect(route('siswa.index'))->with('info', 'Data berhasil ditambahkan!');
     }

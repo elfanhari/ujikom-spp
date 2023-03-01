@@ -15,53 +15,53 @@ class MetodepembayaranSeeder extends Seeder
 
         collect([
             [   //1
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
                 'payment' => 'Transfer Bank - BCA',
                 'number' => $rand,
                 'atasnama' => 'SMK REKAYASA'
             ],
             [   //2
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
                 'payment' => 'Transfer Bank - MANDIRI',
                 'number' => $rand,
                 'atasnama' => 'SMK REKAYASA'
             ],
             [   //3
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
                 'payment' => 'Transfer Bank - BRI',
                 'number' => $rand,
                 'atasnama' => 'SMK REKAYASA'
             ],
             [   //4
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
                 'payment' => 'Transfer Bank - BJB',
                 'number' => $rand,
                 'atasnama' => 'SMK REKAYASA'
             ],
             [   //5
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
                 'payment' => 'GOPAY',
                 'number' => '085315755352',
                 'atasnama' => 'SMK REKAYASA'
             ],
             [   //6
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
                 'payment' => 'DANA',
                 'number' => '085315755352',
                 'atasnama' => 'SMK REKAYASA'
             ],
             [   //7
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
                 'payment' => 'SHOPEEPAY',
                 'number' => '085315755352',
                 'atasnama' => 'SMK REKAYASA'
             ],
             [   //8
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
                 'payment' => 'CASH',
             ],
             [   //9
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
                 'payment' => 'Lainnya',
             ],
         ])->each(function($metodepembayaran){

@@ -32,7 +32,7 @@ class AdminNotifikasiController extends Controller
     public function store(NotifikasiRequest $request)
     {
         $notifikasi = [
-            'identifier' => 'i' . Str::random(9),
+            'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             'pengirim_id' => Auth::user()->id,
             'penerima_id' => $request->penerima_id,
             'pesan' => $request->pesan,

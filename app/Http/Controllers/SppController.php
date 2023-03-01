@@ -29,7 +29,7 @@ class SppController extends Controller
 
     public function store(SppRequest $request)
     {
-        $request['identifier'] = 'i' . Str::random(9);
+        $request['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
         Spp::create($request->all());
         return redirect(route('spp.index'))->with('info', 'Data berhasil ditambahkan!');
     }

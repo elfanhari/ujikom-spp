@@ -192,7 +192,7 @@
                 <img class="position-absolute img-fluid centered rounded-circle" src="/img/e-spp-smk-rekayasa.png"
                     alt="" style="width: 300px;" />
             </div>
-            <div class="d-flex mx-0 align-items-left justify-content-left width-right mx-lg-0">
+            <div id="page" class="d-flex mx-0 align-items-left justify-content-left width-right mx-lg-0">
                 <div class="right mx-lg-0 mx-auto">
                     <div class="align-items-center justify-content-center mb-3 pb-3 d-lg-none d-flex">
                         <img class="img-fluid rounded-circle" src="/img/e-spp-smk-rekayasa.png" alt=""

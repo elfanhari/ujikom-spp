@@ -63,13 +63,13 @@ class PembayaranController extends Controller
     
     public function store(PembayaranRequest $request)
     {   
-        $request['identifier'] = 'i' . Str::random(9);
+        $request['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
         Pembayaran::create($request->all());
 
         $pembayaranTerakhir = Pembayaran::latest()->first();
         $kodeTransaksi = Str::upper($pembayaranTerakhir->identifier);
         $notifikasiSukses = [
-            'identifier' => 'i' . Str::random(9),
+            'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             'pengirim_id' => Auth::id(),
             'penerima_id' => $pembayaranTerakhir->siswa_id,
             'pesan' => 'Transaksi anda dengan kode transaksi ' . $kodeTransaksi . ' telah berhasil! ' . ' Terimakasih telah melakukan pembayaran untuk ' . $pembayaranTerakhir->bulanbayar->name . ' ' . $pembayaranTerakhir->tahunbayar . '.',
@@ -131,7 +131,7 @@ class PembayaranController extends Controller
         $kodeTransaksi = Str::upper($pembayaran->identifier);
         
         $notifikasiSukses = [
-            'identifier' => 'i' . Str::random(9),
+            'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             'pengirim_id' => Auth::id(),
             'penerima_id' => $pembayaran->siswa_id,
             'pesan' => 'Transaksi anda dengan kode ' . $kodeTransaksi . ' telah berhasil diproses! ' . ' Terimakasih telah melakukan pembayaran untuk ' . $pembayaran->bulanbayar->name . ' ' . $pembayaran->tahunbayar . '.',
@@ -140,7 +140,7 @@ class PembayaranController extends Controller
         ];
 
         $notifikasiInfo = [
-            'identifier' => 'i' . Str::random(9),
+            'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             'pengirim_id' => Auth::id(),
             'penerima_id' => $pembayaran->siswa_id,
             'pesan' => 'Transaksi anda dengan kode ' . $kodeTransaksi . ' sedang diproses!' . ' Tunggu konfirmasi selanjutnya dari petugas!',
@@ -149,7 +149,7 @@ class PembayaranController extends Controller
         ];
 
         $notifikasiPeringatan = [
-            'identifier' => 'i' . Str::random(9),
+            'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             'pengirim_id' => Auth::id(),
             'penerima_id' => $pembayaran->siswa_id,
             'pesan' => 'Transaksi anda dengan kode ' . $kodeTransaksi . ' gagal diproses!' . ' Silahkan lakukan pembayaran ulang dengan melampirkan bukti transfer yang valid atau melakukan pembayaran melalui petugas di Ruang Tata Usaha. Terima kasih',

@@ -22,22 +22,22 @@ class SppSeeder extends Seeder
             [   //1
                 'tahun' => '2020',
                 'nominal' => '100000',
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
             [   //2
                 'tahun' => '2021',
                 'nominal' => '110000',
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
             [   //3
                 'tahun' => '2022',
                 'nominal' => '120000',
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
             [   //4
                 'tahun' => '2023',
                 'nominal' => '130000',
-                'identifier' => 'i' . Str::random(9),
+                'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             ],
         ])->each(function($spp){
             Spp::create($spp);

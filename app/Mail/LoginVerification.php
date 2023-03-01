@@ -16,6 +16,7 @@ class LoginVerification extends Mailable
      *
      * @return void
      */
+    
     public $dataEmail;
 
     public function __construct($dataEmail)
