@@ -62,7 +62,7 @@
                                                 <td>{{ $tampilkan->userSiswa->name }}</td>
                                                 <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                                 <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
-                                                <td>{{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}
+                                                <td>{{ $tampilkan->petugas_id != null ? $tampilkan->userPetugas->name : '-' }}
                                                 </td>
                                                 <td>
                                                     @if ($tampilkan->status == 'diproses')
@@ -122,7 +122,7 @@
                                                 <td>{{ $tampilkan->userSiswa->name }}</td>
                                                 <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                                 <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
-                                                <td>{{ $tampilkan->jenistransaksi == 'petugas' ? $tampilkan->userPetugas->name : '-' }}
+                                                <td>{{ $tampilkan->petugas_id != null ? $tampilkan->userPetugas->name : '-' }}
                                                 </td>
                                                 <td>
                                                     @if ($tampilkan->status == 'diproses')

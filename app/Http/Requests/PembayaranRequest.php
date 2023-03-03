@@ -22,8 +22,8 @@ class PembayaranRequest extends FormRequest
             'petugas_id'    => ['required', 'numeric'],
             'siswa_id'      => ['required', 'numeric'],
             'tanggalbayar'  => ['required', 'date'],
-            'bulanbayar_id' => ['required'],
-            'tahunbayar'    => ['required', 'numeric'],
+            // 'bulanbayar_id' => ['required'],
+            // 'tahunbayar'    => ['required', 'numeric'],
             'jumlahbayar'   => ['required', 'numeric'],
             'identifier' => [$unique],
         ];

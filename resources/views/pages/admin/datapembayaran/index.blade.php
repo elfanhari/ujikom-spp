@@ -86,7 +86,7 @@
                                             <tr class="border-bottom">
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
-                                                <td class="text-uppercase">{{ $tampilkan->identifier }}</td>
+                                                <td class="text-uppercase">{{ Str::limit($tampilkan->identifier, 5, '...') }}</td>
                                                 <td>{{ $tampilkan->userSiswa->name }}</td>
                                                 <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                                 <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
@@ -213,7 +213,7 @@
                                             <tr class="border-bottom">
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
-                                                <td class="text-uppercase">{{ $tampilkan->identifier }}</td>
+                                                <td class="text-uppercase">{{ Str::limit($tampilkan->identifier, 5, '...') }}</td>
                                                 <td>{{ $tampilkan->userSiswa->name }}</td>
                                                 <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                                 <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
@@ -340,7 +340,7 @@
                                             <tr class="border-bottom">
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
-                                                <td class="text-uppercase">{{ $tampilkan->identifier }}</td>
+                                                <td class="text-uppercase">{{ Str::limit($tampilkan->identifier, 5, '...') }}</td>
                                                 <td>{{ $tampilkan->userSiswa->name }}</td>
                                                 <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                                 <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
@@ -467,7 +467,7 @@
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td> {{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
-                                            <td class="text-uppercase">{{ $tampilkan->identifier }}</td>
+                                            <td class="text-uppercase">{{ Str::limit($tampilkan->identifier, 5, '...') }}</td>
                                             <td>{{ $tampilkan->userSiswa->name }}</td>
                                             <td>{{ $tampilkan->userSiswa->kelas->name }}</td>
                                             <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>

@@ -298,7 +298,7 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
 
     <script>
         $(document).ready(function() {
-            $('#penerima_id').select2();
+            $('#penerima_id').select1();
         });
     </script>
 

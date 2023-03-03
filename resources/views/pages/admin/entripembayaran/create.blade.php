@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-md-5">
 
             <!-- Input XS -->

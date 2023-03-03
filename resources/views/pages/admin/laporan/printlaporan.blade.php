@@ -20,6 +20,7 @@
 
 <body style="font-family: Times New Roman">
     <div class="container mt-3">
+        
         <img src="/img/e-spp-smk-rekayasa.png" alt="" style="width: 70px"
             class="text-start position-absolute rounded-circle" />
         <div class="text-center">

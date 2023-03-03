@@ -89,7 +89,7 @@ class UserSeeder extends Seeder
                 'nis' => '10.2021.334',
                 'telepon' => '081234567890',
                 'alamat' => 'Jl. Raya Lakbok',
-                'email' => 'elfansiswa@gmail.com',
+                'email' => 'elfanhari88@gmail.com',
                 'username' => 'elfansiswa',
                 'level' => 'siswa',
                 'password' => 'password',

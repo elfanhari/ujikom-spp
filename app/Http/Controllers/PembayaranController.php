@@ -48,12 +48,13 @@ class PembayaranController extends Controller
 
         $siswa = User::with('kelas')->where('kelas_id', $request->kelas_id);
         $siswaCek = User::with('kelas', 'spp', 'notifikasiPenerima')->where('id', $request->siswa_id);
-        return view('pages.admin.entripembayaran.create', [
+        $bulanbayar = Bulanbayar::get();
+        return view('pages.admin.entripembayaran.create', 
+        [
             'kelas' => Kelas::all(),
             'siswa' => $siswa->get(),
             'siswaCek' => $siswaCek->get(),
             'spp' => Spp::all(),
-            'bulanbayar' => Bulanbayar::all(),
             'kelas' => Kelas::all(),
             'userphoto' => Userphoto::where('user_id', $request->siswa_id)->get(),
             'historysiswa' => Pembayaran::where('siswa_id', $request->siswa_id)->where('status', 'sukses')->latest()->get(),
@@ -62,7 +63,12 @@ class PembayaranController extends Controller
     
     
     public function store(PembayaranRequest $request)
-    {   
+    {       
+        $bulanbayar = Str::before($request->pembayaranuntuk, '-');
+        $tahunbayar = Str::after($request->pembayaranuntuk, '-');
+
+        $request['bulanbayar_id'] = $bulanbayar;
+        $request['tahunbayar'] = $tahunbayar;
         $request['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
         Pembayaran::create($request->all());
 
@@ -114,7 +120,7 @@ class PembayaranController extends Controller
     public function update(PembayaranRequest $request, Pembayaran $pembayaran)
     {   
         $pembayaran->update($request->all());
-        return redirect(route('pembayaran.index'))->withInfo('Data berhasil diubah!');
+        return redirect(route('pembayaran.show', $pembayaran->identifier))->withInfo('Data berhasil diubah!');
     }
 
     

@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-md-6">
             <div class="card shadow mb-4">
                 <div class="card-header">
@@ -34,6 +34,37 @@
                         </button>
                     </form>
 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header">
+                    <p class="m-0 d-inline text-xs-center font-weight-bold text-grey">History Pembayaran Saya</p>
+                </div>
+                <div class="card-body">
+                    @if ($historysiswa->where('status', 'sukses')->count() < 1)
+                        <small> <b> {{ $siswa->name }} </b> Belum memiliki riwayat pembayaran.</small>
+                    @else
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover fs-14 c-black">
+                                <tr class="border-bottom bg-dark text-white">
+                                    <td>#</td>
+                                    <td>Tanggal</td>
+                                    <td>Pembayaran untuk</td>
+                                    <td class="d-xs-none">Nominal bayar</td>
+                                </tr>
+                                @foreach ($historysiswa->where('status', 'sukses') as $tampilkan)
+                                    <tr class="border-bottom">
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
+                                        <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
+                                        <td class="d-xs-none">Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

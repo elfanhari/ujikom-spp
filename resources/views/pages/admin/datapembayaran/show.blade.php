@@ -178,8 +178,8 @@
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Detail Siswa</p>
                     @can('admin')
-                        <a href="{{ route('siswa.edit', $pembayaran->userSiswa->username) }}" class="float-right">Edit
-                            siswa</a>
+                        <a href="/admin/entri?siswa_id={{ $pembayaran->userSiswa->id }}" class="float-right">Entri
+                            pembayaran</a>
                     @endcan
                 </div>
                 <div class="card-body">

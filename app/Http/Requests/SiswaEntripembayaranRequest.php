@@ -21,9 +21,9 @@ class SiswaEntripembayaranRequest extends FormRequest
         return [
             'siswa_id'               => ['required', 'numeric'],
             'tanggalbayar'           => ['required', 'date'],
-            'bulanbayar_id'          => ['required'],
+            // 'bulanbayar_id'          => ['required'],
             'metodepembayaran_id'    => ['required'],
-            'tahunbayar'             => ['required', 'numeric'],
+            // 'tahunbayar'             => ['required', 'numeric'],
             'jumlahbayar'            => ['required', 'numeric'],
             'files'                  => ['required', 'image'],
             'identifier'             => [$unique],

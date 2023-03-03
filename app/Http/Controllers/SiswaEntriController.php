@@ -21,6 +21,7 @@ class SiswaEntriController extends Controller
         
         return view('pages.siswa.entri.index', [
             'siswa' => Auth::user(),
+            'historysiswa' => Pembayaran::with('userSiswa')->where('siswa_id', auth()->user()->id)->latest()->get(),
             'bulanbayar' => Bulanbayar::get(),
             'metodepembayaran' => Metodepembayaran::get(),
         ]);   
@@ -37,9 +38,9 @@ class SiswaEntriController extends Controller
         $pembayaran = [
             'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             'siswa_id' => $request->siswa_id,
-            'bulanbayar_id' => $request->bulanbayar_id,
+            'bulanbayar_id' => Str::before($request->pembayaranuntuk, '-'),
             'metodepembayaran_id' => $request->metodepembayaran_id,
-            'tahunbayar' => $request->tahunbayar,
+            'tahunbayar' => Str::after($request->pembayaranuntuk, '-'),
             'tanggalbayar' => $request->tanggalbayar,
             'jumlahbayar' => $request->jumlahbayar,
             'jenistransaksi' => 'mandiri',
