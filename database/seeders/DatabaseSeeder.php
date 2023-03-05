@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Buktipembayaran;
 use App\Models\User;
+use App\Models\Userphoto;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,13 +20,15 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
+            UserphotoSeeder::class,
             KelasSeeder::class,
             KompetensikeahlianSeeder::class,
             SppSeeder::class,
             PembayaranSeeder::class,
             BulanbayarSeeder::class,
             MetodepembayaranSeeder::class,
-            // NotifikasiSeeder::class,
+            NotifikasiSeeder::class,
+            BuktipembayaranSeeder::class,
         ]);
     }
 }

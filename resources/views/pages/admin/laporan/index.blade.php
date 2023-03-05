@@ -91,7 +91,7 @@
                         @if ($pembayaran->count() < 1)
                             Data tidak ditemukan. <a href="{{ route('laporan.index') }}">Refresh halaman</a>
                         @else
-                            <table class="table table-sm table-hover fs-14 c-black">
+                            <table class="table table-sm table-hover fs-14 c-black" id="table1">
                                 <thead>
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>

@@ -18,8 +18,7 @@ use Illuminate\Validation\ValidationException;
 class ProfileController extends Controller
 {
 
-    public function 
-    ()
+    public function index()
     {
         if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
             return view('denied');

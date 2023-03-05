@@ -92,4 +92,11 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function routeNotificationForNexmo($notification)
+    {
+        // $telepon = Str::replaceFirst('0', '62', $this->telepon);
+        // return $this->telepon;
+        return '6285315755352';
+    }
+
 }

@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//
+// apabila sudah punya session, pindahkan ke halaman sesuai role. jika belum, harus login dulu
 Route::get('/', function () { 
     if (Auth::check()) {
         if (Auth::user()->level == 'admin' || Auth::user()->level == 'petugas') {
@@ -55,24 +55,19 @@ Route::get('/', function () {
     }
 })->name('home');
 
+// AUTH
 Route::get('/login', [AuthController::class, 'pageLoginAdmin'])->name('loginadmin.page')->middleware('guest');
 Route::post('/login', [AuthController::class, 'cekLoginAdmin'])->name('loginadmin.check')->middleware('guest');
-
 Route::get('/lupapassword', [AuthController::class, 'pageLupaPassword'])->name('auth.lupapassword');
 Route::post('/lupapassword', [AuthController::class, 'storeLupaPassword'])->name('auth.lupapassword');
-
 Route::get('/verifikasiemail', [AuthController::class, 'pageVerifikasiEmail'])->name('auth.verifikasiemail');
 Route::post('/verifikasiemail', [AuthController::class, 'storeVerifikasiEmail'])->name('auth.verifikasiemail');
 
-// ADMIN DAN PETUGAS
 Route::group(['middleware' => ['auth']], function(){
     
-    Route::view('/petugas', 'pages.petugas.dashboard.index')->name('petugas.dashboard'); // PETUGAS - Dashboard
-    Route::view('/siswa', 'pages.siswa.dashboard.index')->name('siswa.dashboard'); // SISWA - Dashboard
-    
+    // ADMIN DAN PETUGAS
     Route::prefix('admin')->group(function () {
-        
-        Route::get('/', DashboardController::class)->name('admin.dashboard');        
+        Route::get('/', DashboardController::class)->name('admin.dashboard'); // ADMIN - Dashboard        
         Route::resource('/prodi', KompetensikeahlianController::class); // ADMIN - Kompetensi Keahlian
         Route::resource('/kelas', KelasController::class);
         Route::resource('/spp', SppController::class);
@@ -83,11 +78,14 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('/pembayaran', PembayaranController::class);
         Route::get('/pembayaran/print/{pembayaran}', [PembayaranController::class, 'printStruk'])->name('pembayaran.print');
         Route::post('/pembayaran/kirimstruk/{pembayaran}', [PembayaranController::class, 'kirimStruk'])->name('pembayaran.kirimstruk');
+        Route::put('/updatestatuspembayaran/{pembayaran}', [PembayaranController::class, 'updateStatus'])->name('statuspembayaran.update');
 
         Route::get('/editpassword/{users:identifier}', [UpdatePasswordController::class, 'edit'])->name('updatepassword.edit');
         Route::put('/editpassword/{users:identifier}', [UpdatePasswordController::class, 'update'])->name('updatepassword.update');
-        
-        // Route::resource('/notifikasi', AdminNotifikasiController::class);
+
+        Route::get('entri', [PembayaranController::class, 'create'])->name('entri.create');
+        Route::resource('/history', HistoryController::class);
+        Route::resource('/laporan', LaporanController::class);
 
         Route::get('/notifikasi', [AdminNotifikasiController::class, 'index'])->name('admin.notifikasi.index');
         Route::post('/notifikasi', [AdminNotifikasiController::class, 'store'])->name('admin.notifikasi.store');
@@ -96,34 +94,25 @@ Route::group(['middleware' => ['auth']], function(){
         Route::delete('/notifikasi/{notifikasis:identifier}', [AdminNotifikasiController::class, 'destroy'])->name('admin.notifikasi.destroy');
         Route::put('/notifikasi/telahdibaca/{notifikasi}', [AdminNotifikasiController::class, 'telahDibaca'])->name('admin.notifikasi.telahdibaca');
 
-        Route::put('/updatestatuspembayaran/{pembayaran}', [PembayaranController::class, 'updateStatus'])->name('statuspembayaran.update');
-
-        Route::get('entri', [PembayaranController::class, 'create'])->name('entri.create');
-        Route::resource('/history', HistoryController::class);
-        Route::resource('/laporan', LaporanController::class);
-
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('update.profile');
         Route::get('/profile/password-edit', [ProfileController::class, 'editPassword'])->name('password-user.edit');
         Route::put('/profile/password-update', [ProfileController::class, 'updatePassword'])->name('password-user.update');
+
         Route::get('/photo-edit/{users:id}', [UserphotoController::class, 'editPhoto'])->name('photo-user.edit');
         Route::post('/photo-store', [UserphotoController::class, 'storePhoto'])->name('photo-user.store');
         Route::put('/photo-update', [UserphotoController::class, 'updatePhoto'])->name('photo-user.update');
         Route::delete('/photo-delete', [UserphotoController::class, 'deletePhoto'])->name('photo-user.delete');
 
-        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
 
     // SISWA
     Route::prefix('siswa')->group(function () {
-
         Route::resource('/beranda', SiswaDashboardController::class);
-
         Route::resource('/entri', SiswaEntriController::class);
         Route::resource('/riwayat', SiswaHistoryController::class);
         Route::resource('/notifikasi', SiswaNotifikasiController::class);
         Route::put('/notifikasi/telahdibaca/{notifikasi}', [SiswaNotifikasiController::class, 'telahDibaca'])->name('notifikasi.telahdibaca');
-
         Route::get('/profile', [SiswaProfileController ::class, 'index'])->name('siswaprofile.index');
         Route::put('/profile', [SiswaProfileController::class, 'updateProfile'])->name('update-siswa.profile');
         Route::get('/profile/password-edit', [SiswaProfileController::class, 'editPassword'])->name('password-siswa.edit');
@@ -132,7 +121,9 @@ Route::group(['middleware' => ['auth']], function(){
         Route::post('/photo-store', [SiswaProfileController::class, 'storePhoto'])->name('photo-siswa.store');
         Route::put('/photo-update', [SiswaProfileController::class, 'updatePhoto'])->name('photo-siswa.update');
         Route::delete('/photo-delete', [SiswaProfileController::class, 'deletePhoto'])->name('photo-siswa.delete');
-
     });
+
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout'); // logout
+
 });
 

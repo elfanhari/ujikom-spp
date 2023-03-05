@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notifikasi;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
 class SiswaDashboardController extends Controller
@@ -15,7 +17,10 @@ class SiswaDashboardController extends Controller
     {
         if (auth()->user()->level !== 'siswa') {return view('denied');} // Pembatasan Akses Selain Siswa
         
-        return view('pages.siswa.beranda.index');
+        return view('pages.siswa.beranda.index', [
+            'riwayat' => Pembayaran::where('siswa_id', auth()->user()->id)->get()->count(),
+            'notifikasi' => Notifikasi::where('penerima_id', auth()->user()->id)->count(),
+        ]);
     }
 
     /**

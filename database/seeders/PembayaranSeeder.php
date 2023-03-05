@@ -428,6 +428,32 @@ class PembayaranSeeder extends Seeder
                 'status' => 'sukses',
                 'created_at' => '2023-02-27 10:43:2' . Arr::random($i),
             ],  
+            [   //1
+                'petugas_id' => null,
+                'siswa_id' => '7',
+                'tanggalbayar' => '2023-03-05',
+                'bulanbayar_id' => '1',
+                'tahunbayar' => '2022',
+                'jumlahbayar' => '100000',
+                'identifier' => 'i0lwQ1678025608mRu4H',
+                'metodepembayaran_id' => '3',
+                'jenistransaksi' => 'mandiri',
+                'status' => 'diproses',
+                'created_at' => '2023-03-05 21:13:29',
+            ],  
+            [   //1
+                'petugas_id' => '4',
+                'siswa_id' => '8',
+                'tanggalbayar' => '2023-03-05',
+                'bulanbayar_id' => '9',
+                'tahunbayar' => '2020',
+                'jumlahbayar' => '100000',
+                'identifier' => 'iWvcm16780283129PuE3',
+                'metodepembayaran_id' => '4',
+                'jenistransaksi' => 'mandiri',
+                'status' => 'gagal',
+                'created_at' => '2023-03-05 21:58:32',
+            ],  
             
         ])->each(function($pembayaran){
             Pembayaran::create($pembayaran);

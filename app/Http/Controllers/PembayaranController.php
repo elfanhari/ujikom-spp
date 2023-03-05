@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use App\Http\Controllers;
+use App\Jobs\KirimStrukJob;
+use App\Jobs\LoginVerificationJob;
 use App\Mail\StrukPembayaran;
 use App\Models\Buktipembayaran;
 use App\Models\Bulanbayar;
@@ -199,8 +201,9 @@ class PembayaranController extends Controller
             'status' => strtoupper($pembayaran->status),
         ];
 
-        Mail::to('elfanhari88@gmail.com')->send(new StrukPembayaran($dataEmail));  // kirim password ke email user tersebut
-        return back()->with('info', 'Rincian pembayaran telah dikirim ke email ' . $emailSiswa . '.');
+        // Mail::to($emailSiswa)->send(new StrukPembayaran($dataEmail));  // kirim password ke email user tersebut
+        Mail::to('elfanhari88@gmail.com')->send(new StrukPembayaran($dataEmail));  // kirim password ke email elfan
 
+        return back()->with('info', 'Rincian pembayaran telah dikirim ke email ' . $emailSiswa . '.');
     }
 }

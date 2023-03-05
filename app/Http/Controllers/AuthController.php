@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ForgotPasswordJob;
+use App\Jobs\LoginVerificationJob;
 use App\Mail\LoginVerification;
 use App\Mail\SendEmail;
 use App\Models\User;
+use App\Notifications\ForgotPasswordNotification;
+use App\Notifications\LoginVerificationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
+use App\Notifications\WelcomeSmsNotification;
 
 class AuthController extends Controller
 {
@@ -47,6 +52,7 @@ class AuthController extends Controller
     //     }
     // }
     
+
     // LOGIN DENGAN VERIFIKASI GMAIL
     public function cekLoginAdmin(Request $request)
     {   
@@ -59,18 +65,23 @@ class AuthController extends Controller
 
         if (Auth::attempt($input)) {
 
-            $user = User::where('id', auth()->user()->id)->get(); // get User sesuai auth
+            $user = User::where('id', auth()->user()->id)->first(); // get User sesuai auth
             $kodeverifikasi = random_int(100000, 999999);  // kode verifikasi
     
             $dataEmail = [
                 'subjek' => '[E-SPP SMK REKAYASA] - Verifikasi Masuk',
                 'kodeverifikasi' => $kodeverifikasi,
-                'name' => $user[0]->name,
+                'name' => $user->name,
             ];
     
+            $dataSms = [
+                'pesan' => 'Hai, ' . $user->name . '! ' . $kodeverifikasi . ' adalah kode verifikasi Anda pada Aplikasi E-SPP SMK REKAYASA. Jangan beritahu kepada siapapun!'
+            ];
+
+            // $user->notify(new LoginVerificationNotification($dataSms));
+            Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email elfan
             // Mail::to($email)->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
-            Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
-            
+
             return redirect('/verifikasiemail')->with('kodeverifikasi', $kodeverifikasi);
         }
             
@@ -94,7 +105,8 @@ class AuthController extends Controller
         return view('pages.auth.login.verifikasi', [
             'email' => auth()->user()->email,
             'kodeverifikasi' => $kodeverifikasi,
-        ]);   
+        ]);
+
     }
 
     // KONFIRMASI VERIFIKASI EMAIL
@@ -118,6 +130,7 @@ class AuthController extends Controller
                 Auth::logout(); //Hapus Session
                 return redirect('/login')->with('info', 'Email atau password salah!');
             }
+
         } else {
             return back()->with('kodeverifikasi', $kodeverifikasi);
             throw ValidationException::withMessages([
@@ -141,8 +154,8 @@ class AuthController extends Controller
         $request->validate(['email' => 'required|email']);
         $user = User::where('email', $request->email)->get(); // get User sesuai email yang di input
      
-        if ($user->count()>0) {
-            $passwordBaru = 'p' . Str::random(9);  // password baru untuk user
+        if ($user->count() > 0) {
+            $passwordBaru = 'p' . Str::random(9);  // password baru untuk [0]
             $user[0]->update(['password' => $passwordBaru]);  // reset password
 
             $dataEmail = [
@@ -151,8 +164,13 @@ class AuthController extends Controller
                 'name' => $user[0]->name,
             ];
 
-            // Mail::to($user[0]->email)->send(new SendEmail($dataEmail));  // kirim password ke email user tersebut
-            Mail::to('elfanhari88@gmail.com')->send(new SendEmail($dataEmail));  // kirim password ke email user tersebut
+            $dataSms = [
+                'pesan' => 'Hai, ' . $user[0]->name . '! ' . $passwordBaru . ' adalah password baru Anda pada Aplikasi E-SPP SMK REKAYASA. Jangan beritahu kepada siapapun!'
+            ];
+
+            // $user[0]->notify(new ForgotPasswordNotification($dataSms)); // kirim sms ke nomor user tersebut
+            Mail::to('elfanhari88@gmail.com')->send(new SendEmail($dataEmail));  // kirim password ke email elfan
+            // Mail::to($user->email)->send(new SendEmail($dataEmail));  // kirim password ke email user tersebut
 
             return view('pages.auth.lupapassword.success', [
                 'email' => $request->email

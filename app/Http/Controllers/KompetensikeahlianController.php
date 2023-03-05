@@ -34,7 +34,7 @@ class KompetensikeahlianController extends Controller
    // Prodi - Store
     public function store(KompetensikeahlianRequest $request)
     {   
-        // $request['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
+        $request['identifier'] = 'i' . Str::random(4) . time(). Str::random(5);
         Kompetensikeahlian::create($request->all()); 
         return redirect(route('prodi.index'))->withInfo('Data berhasil ditambahkan!');
     }
