@@ -42,7 +42,7 @@ class LaporanController extends Controller
 
         return view('pages.admin.laporan.index', [
             'pembayaran' => $pembayaran->get(),
-            'petugas' => User::where('level', 'petugas')->orWhere('level', 'admin')->get(),
+            'petugas' => User::where('level', 'petugas')->orWhere('level', 'admin')->orderBy('name', 'asc')->get(),
         ]);
         
     }

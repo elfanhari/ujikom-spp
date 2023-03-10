@@ -27,9 +27,10 @@ class SiswaController extends Controller
         }
 
         return view('pages.admin.datasiswa.index', [
-            'siswa' => User::with('kelas')->where('level', 'siswa')->latest()->get(),
-            'kelas' => Kelas::all(),
-            'spp' => Spp::all(),
+            'siswa' => User::with('kelas')->where('level', 'siswa')->latest()->orderBy('name', 'asc')->get(),
+            'kelas' => Kelas::orderBy('name', 'asc')->get(),
+            'spp' => Spp::orderBy('tahun', 'asc')->get(),
+            'pembayaran' => Pembayaran::all()
         ]);
     }
 
@@ -93,8 +94,13 @@ class SiswaController extends Controller
     // Siswa - Delete
     public function destroy(User $siswa)
     {
-        $siswa->delete();
-        return redirect(route('siswa.index'))->with('info', 'Data berhasil dihapus!');
+        if (Pembayaran::where('siswa_id', $siswa->id)->count() < 1) {
+            $siswa->delete();
+            return redirect(route('siswa.index'))->with('info', 'Data berhasil dihapus!');
+        } else {
+            return redirect(route('siswa.index'))->withGagal('Data tidak dapat dihapus! Karena <b>' . $siswa->name . ' - ' . $siswa->kelas->name . '</b> Telah melakukan beberapa transaksi!');
+        }
+        
     }
 
     // Siswa - Import Data Siswa

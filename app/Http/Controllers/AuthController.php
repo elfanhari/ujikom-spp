@@ -79,7 +79,7 @@ class AuthController extends Controller
             ];
 
             // $user->notify(new LoginVerificationNotification($dataSms));
-            Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email elfan
+            // Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email elfan
             // Mail::to($email)->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
 
             return redirect('/verifikasiemail')->with('kodeverifikasi', $kodeverifikasi);

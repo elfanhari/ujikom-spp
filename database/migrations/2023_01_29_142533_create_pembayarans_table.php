@@ -15,7 +15,7 @@ class CreatePembayaransTable extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->string('identifier')->unique()->nullable();
+            $table->string('identifier')->unique();
             $table->foreignId('petugas_id')->nullable();
             $table->foreignId('siswa_id');
             $table->foreignId('bulanbayar_id');

@@ -20,8 +20,9 @@ class KelasController extends Controller
         }
 
         return view('pages.admin.datakelas.index', [
-            'kela' => Kelas::with('kompetensikeahlian')->latest()->get(),
-            'prodi' => Kompetensikeahlian::with('kelas')->get()
+            'kela' => Kelas::with('kompetensikeahlian')->latest()->orderBy('name', 'asc')->get(),
+            'prodi' => Kompetensikeahlian::with('kelas')->latest()->orderBy('name', 'asc')->get(),
+            'user' => User::all()
         ]);
     }
     
@@ -56,8 +57,13 @@ class KelasController extends Controller
     // Kelas - Destroy
     public function destroy(Kelas $kela)
     {
-        $kela->delete();
-        return redirect(route('kelas.index'))->withInfo('Data berhasil dihapus!');
+        if (User::where('kelas_id', $kela->id)->count() < 1) {
+            $kela->delete();
+            return redirect(route('kelas.index'))->withInfo('Data berhasil dihapus!');
+        } else {
+            return redirect(route('kelas.index'))->withGagal('Data tidak dapat dihapus! Karena ada beberapa siswa dengan <b> Kelas - ' . $kela->name . '</b>!');
+        }
+       
     }
 
 }

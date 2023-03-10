@@ -15,7 +15,7 @@ class CreateBuktipembayaransTable extends Migration
     {
         Schema::create('buktipembayarans', function (Blueprint $table) {
             $table->id();
-            $table->string('identifier')->unique()->nullable();
+            $table->string('identifier')->unique();
             $table->foreignId('pembayaran_id');
             $table->text('url');
             $table->timestamps();

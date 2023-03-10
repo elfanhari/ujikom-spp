@@ -16,7 +16,14 @@
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @include('_success')
-            <strong>Berhasil.</strong> {{ session('info') }}
+             {{ session('info') }}
+        </div>
+    @endif
+
+    @if (session()->has('gagal'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @include('_failed')
+             {!! session('gagal') !!}
         </div>
     @endif
 

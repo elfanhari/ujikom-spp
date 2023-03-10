@@ -2,14 +2,21 @@
 
 @section('content')
 
-<h5 class="mb-3 fw-bold text-xs-center poppins">
-    Data Kelas 
-</h5>
+    <h5 class="mb-3 fw-bold text-xs-center poppins">
+        Data Kelas
+    </h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @include('_success')
-            <strong>Berhasil.</strong> {{ session('info') }}
+            {{ session('info') }}
+        </div>
+    @endif
+
+    @if (session()->has('gagal'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @include('_failed')
+            {!! session('gagal') !!}
         </div>
     @endif
 
@@ -70,7 +77,7 @@
             <div class="card shadow fs-16 mb">
                 <div class="card-header">
                     <p class="m-0 font-weight-bold d-inline text-grey d-xs-none mt-3">Data Kelas</p>
-                    
+
                     {{-- Petunjuk Aksi --}}
                     <button class="btn btn-info d-inline btn-sm btn-icon-split float-right ms-2 rounded-circle"
                         data-bs-toggle="modal" data-bs-target="#petunjukAksi">
@@ -79,8 +86,9 @@
                         </span>
                     </button>
 
-                    <button class="btn btn-sm float-left btn-primary d-sm-none btn-icon-split" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapse" aria-expanded="true" aria-controls="collapseExample">
+                    <button class="btn btn-sm float-left btn-primary d-sm-none btn-icon-split" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="true"
+                        aria-controls="collapseExample">
                         <span class="icon text-white-30" style="padding-top: 0.20rem !important;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -103,7 +111,7 @@
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
                                         <th scope="col">Nama Kelas</th>
-                                        <th scope="col">Kompetensi Keahlian</th>
+                                        <th scope="col" class="d-xs-none">Kompetensi Keahlian</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -113,7 +121,7 @@
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->name }}</td>
-                                            <td>{{ $tampilkan->Kompetensikeahlian->name }}</td>
+                                            <td class="d-xs-none">{{ $tampilkan->Kompetensikeahlian->name }}</td>
                                             <td class="">
 
                                                 <a href="{{ route('kelas.edit', $tampilkan) }}" type="button"
@@ -127,40 +135,85 @@
                                                     </svg>
                                                 </a>
 
-                                                <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2"
-                                                    data-bs-toggle="modal" data-bs-target="#modalDelete/{{ $tampilkan->identifier }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-trash3-fill pt-0"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                                    </svg>
-                                                </button>
+                                                @if ($user->where('kelas_id', $tampilkan->id)->count() < 1)
+                                                    <button type="submit" class="btn btn-danger pb-1 pt-0 px-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalDelete/{{ $tampilkan->identifier }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-trash3-fill pt-0" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                        </svg>
+                                                    </button>
+                                                @else
+                                                    <button type="submit" class="btn btn-danger pb-1 pt-0 px-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalGagalDelete/{{ $tampilkan->identifier }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-trash3-fill pt-0" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                        </svg>
+                                                    </button>
+                                                @endif
 
-                                                <div class="modal fade" id="modalDelete/{{ $tampilkan->identifier }}" tabindex="-1"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="modalDelete/{{ $tampilkan->identifier }}"
+                                                    tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title poppins fw-semibold text-black" id="exampleModalLabel">Hapus Data
+                                                                <h5 class="modal-title poppins fw-semibold text-black"
+                                                                    id="exampleModalLabel">Hapus Data
                                                                 </h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                Data: <p class="text-primary fw-bold">{{ $tampilkan->name . ' - ' . $tampilkan->Kompetensikeahlian->name}}</p>
+                                                                Data: <p class="text-primary fw-bold">
+                                                                    {{ $tampilkan->name . ' - ' . $tampilkan->Kompetensikeahlian->name }}
+                                                                </p>
                                                                 Apakah anda yakin data tersebut akan dihapus? <br>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Batal</button>
-                                                                <form action="{{ route('kelas.destroy', $tampilkan->identifier) }}"
+                                                                <form
+                                                                    action="{{ route('kelas.destroy', $tampilkan->identifier) }}"
                                                                     method="POST" class="d-inline">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit"
                                                                         class="btn btn-primary">Iya</button>
                                                                 </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal fade" id="modalGagalDelete/{{ $tampilkan->identifier }}"
+                                                    tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title poppins fw-semibold text-black"
+                                                                    id="exampleModalLabel">Peringatan
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Data: <p class="text-primary fw-bold">
+                                                                    {{ $tampilkan->name . ' - ' . $tampilkan->Kompetensikeahlian->name }}
+                                                                </p>
+                                                               Data tersebut tidak dapat dihapus! Karena terdapat beberapa siswa di <b>Kelas - {{ $tampilkan->name }}</b>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    data-bs-dismiss="modal">Oke</button>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -36,7 +36,8 @@ class UserphotoController extends Controller
             $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
             $extension                  = $files->getClientOriginalExtension();
             $filenamesimpan             = 'gallery' . time() . '.' . $extension;
-            $files->move('gallery', $filenamesimpan);
+            $files->move('gallery', 
+            $filenamesimpan);
 
             Userphoto::create([
                 'user_id'       => $request->user_id,

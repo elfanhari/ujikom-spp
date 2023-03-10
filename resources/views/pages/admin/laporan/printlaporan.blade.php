@@ -78,7 +78,7 @@
                         <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                         <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                         <td> 
-                            @if ($tampilkan->jenistransaksi == 'petugas')
+                            @if ($tampilkan->petugas_id != null)
                             <a href="{{ route('petugas.show', $tampilkan->userPetugas->identifier) }}"
                                 class="text-decoration-none">
                                 {{ $tampilkan->userPetugas->name }}

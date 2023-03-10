@@ -14,7 +14,14 @@
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @include('_success')
-            <strong>Berhasil.</strong> {{ session('info') }}
+             {{ session('info') }}
+        </div>
+    @endif
+
+    @if (session()->has('gagal'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @include('_failed')
+             {!! session('gagal') !!}
         </div>
     @endif
 
@@ -46,6 +53,10 @@
 
                     <p class="mt-2">
                         {!! $notifikasi->pesan !!}
+                        @php
+                            $identifier = Str::after($notifikasi->pesan, 'kode transaksi ');
+                            $identifierPembayaran = Str::before($identifier, ' pada tanggal');
+                        @endphp
                     </p>
                     @if ($notifikasi->dibaca == false)
                         <form action="{{ route('admin.notifikasi.telahdibaca', $notifikasi) }}" method="POST"
@@ -55,12 +66,13 @@
 
                             <input type="hidden" name="dibaca" id="" value="1">
                             <input type="hidden" name="untuk" id="" value="satu">
+                            <input type="hidden" name="identifierPembayaran" id="" value="{{ $identifierPembayaran }}">
 
-                            <button type="submit" class="btn btn-md btn-primary px-5 rounded-pill w-100">OK</button>
+                            <button type="submit" class="btn btn-md btn-primary px-5 rounded-pill w-100">Lihat transaksi</button>
                         </form>
                     @else
-                        <a href="/admin/notifikasi"
-                            class="btn btn-md btn-primary px-5 rounded-pill w-100">OK</a>
+                        <a href="/admin/pembayaran/{{ $identifierPembayaran }}"
+                            class="btn btn-md btn-primary px-5 rounded-pill w-100">Lihat transaksi</a>
                     @endif
                 </div>
             </div>

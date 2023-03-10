@@ -9,7 +9,14 @@
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @include('_success')
-            <strong>Berhasil.</strong> {{ session('info') }}
+             {{ session('info') }}
+        </div>
+    @endif
+
+    @if (session()->has('gagal'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @include('_failed')
+             {!! session('gagal') !!}
         </div>
     @endif
 
@@ -89,9 +96,9 @@
                                     <tr class="bg-dark text-white">
                                         <th scope="col">#</th>
                                         <th scope="col">Nama Siswa</th>
-                                        <th scope="col">NISN</th>
+                                        <th scope="col" class="d-xs-none">NISN</th>
                                         <th scope="col">Kelas</th>
-                                        <th scope="col">Email</th>
+                                        <th scope="col" class="d-xs-none">Email</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -101,9 +108,9 @@
                                         <tr class="border-bottom">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->name }}</td>
-                                            <td>{{ $tampilkan->nisn }}</td>
+                                            <td class="d-xs-none">{{ $tampilkan->nisn }}</td>
                                             <td>{{ $tampilkan->kelas->name }}</td>
-                                            <td>{{ $tampilkan->email }}</td>
+                                            <td class="d-xs-none">{{ $tampilkan->email }}</td>
                                             <td class="">
 
                                                 <a href="{{ route('siswa.show', $tampilkan) }}" type="button"
@@ -124,15 +131,28 @@
                                                     </svg>
                                                 </a>
 
-                                                <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2 d-inline"
-                                                    data-bs-toggle="modal" data-bs-target="#modalDelete/{{ $tampilkan->identifier }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-trash3-fill pt-0"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                                    </svg>
-                                                </button>
+                                                @if ($pembayaran->where('siswa_id', $tampilkan->id)->count() < 1)
+                                                    <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2 d-inline"
+                                                        data-bs-toggle="modal" data-bs-target="#modalDelete/{{ $tampilkan->identifier }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-trash3-fill pt-0"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                        </svg>
+                                                    </button>
+                                                @else
+                                                    <button type="submit" class=" btn btn-danger pb-1 pt-0 px-2 d-inline"
+                                                        data-bs-toggle="modal" data-bs-target="#modalGagalDelete/{{ $tampilkan->identifier }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-trash3-fill pt-0"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                        </svg>
+                                                    </button>
+                                                @endif
+
                                                 <div class="modal fade" id="modalDelete/{{ $tampilkan->identifier }}" tabindex="-1"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -157,6 +177,27 @@
                                                                     <button type="submit"
                                                                         class="btn btn-primary">Hapus</button>
                                                                 </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="modalGagalDelete/{{ $tampilkan->identifier }}" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title fw-semibold poppins" id="exampleModalLabel">Peringatan
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Data: <p class="text-primary fw-bold">{{ $tampilkan->name . ' - ' . $tampilkan->kelas->name }}</p>
+                                                                Data tersebut tidak dapat dihapus karena <b> {{ $tampilkan->name . ' - ' . $tampilkan->kelas->name }} </b> telah melakukan beberapa transaksi!
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    data-bs-dismiss="modal">Oke</button>
                                                             </div>
                                                         </div>
                                                     </div>

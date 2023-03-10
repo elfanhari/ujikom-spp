@@ -8,7 +8,14 @@
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @include('_success')
-            <strong>Berhasil.</strong> {{ session('info') }}
+             {{ session('info') }}
+        </div>
+    @endif
+
+    @if (session()->has('gagal'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @include('_failed')
+             {!! session('gagal') !!}
         </div>
     @endif
 
@@ -18,7 +25,7 @@
             <!-- Input MD -->
             <div class="card shadow d-xs-none mb-sm-3">
                 <div class="card-header fs-16">
-                    <p class="m-0 font-weight-bold text-grey">Input Data admin</p>
+                    <p class="m-0 font-weight-bold text-grey">Input Data Admin</p>
                 </div>
                 <div class="card-body input-group-sm">
                     <form action="{{ route('admin.store') }}" method="POST" class="input-group-sm fs-14">
@@ -135,7 +142,7 @@
                                                             class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-primary">Iya</button>
+                                                            <button type="submit" class="btn btn-primary">Hapus</button>
                                                         </form>
                                                       </div>
                                                     </div>

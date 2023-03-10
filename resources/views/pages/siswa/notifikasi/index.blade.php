@@ -8,7 +8,14 @@
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @include('_success')
-            <strong>Berhasil.</strong> {{ session('info') }}
+             {{ session('info') }}
+        </div>
+    @endif
+
+    @if (session()->has('gagal'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @include('_failed')
+             {!! session('gagal') !!}
         </div>
     @endif
 
@@ -16,26 +23,27 @@
         <div class="col-md-6">
             <div class="my-2">
                 @if ($notifikasi->count() > 0)
-                <form action="{{ route('notifikasi.telahdibaca', $notifikasi[0]) }}" method="post" class="d-inline ">
-                    @method('PUT')
-                    @csrf
-                    <input type="hidden" name="untuk" id="untuk" value="semua">
-                    <button class="btn fs-14 btn-link p-0 text-decoration-none" type="submit">Telah dibaca semua</button>
-                </form>
+                    <form action="{{ route('notifikasi.telahdibaca', $notifikasi[0]) }}" method="post" class="d-inline ">
+                        @method('PUT')
+                        @csrf
+                        <input type="hidden" name="untuk" id="untuk" value="semua">
+                        <button class="btn fs-14 btn-link p-0 text-decoration-none" type="submit">Telah dibaca
+                            semua</button>
+                    </form>
 
-                <form action="{{ route('notifikasi.destroy', $notifikasi[0]) }}" method="post" class="d-inline">
-                    @method('DELETE')
-                    @csrf
-                    <input type="hidden" name="untuk" id="untuk" value="semua">
-                    <button class="btn fs-14 btn-link p-0 text-decoration-none float-right" type="submit">Hapus
-                        semua</button>
-                </form>
+                    <form action="{{ route('notifikasi.destroy', $notifikasi[0]) }}" method="post" class="d-inline">
+                        @method('DELETE')
+                        @csrf
+                        <input type="hidden" name="untuk" id="untuk" value="semua">
+                        <button class="btn fs-14 btn-link p-0 text-decoration-none float-right" type="submit">Hapus
+                            semua</button>
+                    </form>
                 @endif
             </div>
             @if ($notifikasi->count() < 1)
-            <div class="text-xs-center">
-                Tidak ada notifikasi kepada anda.
-            </div>
+                <div class="text-xs-center">
+                    Tidak ada notifikasi kepada anda.
+                </div>
             @else
                 @foreach ($notifikasi as $tampilkan)
                     @if ($tampilkan->dibaca == false)
@@ -87,6 +95,7 @@
 
                                 </div>
                             </div>
+                        </div>
                         @else
                             <div class="text-decoration-none">
                                 <div class="card shadow mb-2">

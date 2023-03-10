@@ -67,7 +67,8 @@ Route::group(['middleware' => ['auth']], function(){
     
     // ADMIN DAN PETUGAS
     Route::prefix('admin')->group(function () {
-        Route::get('/', DashboardController::class)->name('admin.dashboard'); // ADMIN - Dashboard        
+        Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard'); // ADMIN - Dashboard        
+        Route::get('/log/{id}', [DashboardController::class, 'show'])->name('admin.log.show'); // ADMIN - Dashboard        
         Route::resource('/prodi', KompetensikeahlianController::class); // ADMIN - Kompetensi Keahlian
         Route::resource('/kelas', KelasController::class);
         Route::resource('/spp', SppController::class);

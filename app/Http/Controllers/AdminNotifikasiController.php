@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NotifikasiRequest;
 use App\Models\Notifikasi;
 use App\Models\User;
+use App\Notifications\PeringatanBayarNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -31,6 +32,7 @@ class AdminNotifikasiController extends Controller
 
     public function store(NotifikasiRequest $request)
     {
+        $user = User::where('id', $request->penerima_id)->get();
         $notifikasi = [
             'identifier' => 'i' . Str::random(4) . time(). Str::random(5),
             'pengirim_id' => Auth::user()->id,
@@ -40,6 +42,12 @@ class AdminNotifikasiController extends Controller
             'dibaca' => false,
         ];
 
+        $dataSms = [
+            'pesan' => $request->pesan,
+        ];
+
+        $user[0]->notify(new PeringatanBayarNotification($dataSms));
+        // dd('berhasil');
         Notifikasi::create($notifikasi);
         return back()->withInfo('Notifikasi berhasil dikirim!');
     }
@@ -74,7 +82,7 @@ class AdminNotifikasiController extends Controller
     {
         if ($request->untuk == 'satu') {
             $notifikasi->update($request->all());
-            return redirect(route('admin.notifikasi.index'));
+            return redirect(route('pembayaran.show', $request->identifierPembayaran));
         }
 
         if ($request->untuk == 'semua') {

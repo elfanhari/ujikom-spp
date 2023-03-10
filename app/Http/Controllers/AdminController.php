@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Http\Requests\UpdatePetugasRequest;
+use App\Models\Pembayaran;
 use App\Models\User;
 use App\Models\Userphoto;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ class AdminController extends Controller
 
         return view('pages.admin.dataadmin.index', [
             'admin' => User::where('level', 'admin')->latest()->get(),
+            'pembayaran' => Pembayaran::all()
         ]);
     }
 
@@ -84,7 +86,11 @@ class AdminController extends Controller
     
     public function destroy(User $admin)
     {
-        $admin->delete();
-        return redirect(route('admin.index'))->with('info', 'Data berhasil dihapus!');
+        if (Pembayaran::where('petugas_id', $admin->id)->count() < 1) {
+            $admin->delete();
+            return redirect(route('admin.index'))->withInfo('Data berhasil dihapus!');
+        } else {
+            return redirect(route('admin.index'))->withGagal('Data tidak dapat dihapus   karena <b> Administrator - ' . $admin->name . '</b> telah menangani beberapa transaksi!');
+        }
     }
 }

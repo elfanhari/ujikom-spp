@@ -54,10 +54,10 @@ class PembayaranController extends Controller
         return view('pages.admin.entripembayaran.create', 
         [
             'kelas' => Kelas::all(),
-            'siswa' => $siswa->get(),
+            'siswa' => $siswa->orderBy('name', 'asc')->get(),
             'siswaCek' => $siswaCek->get(),
             'spp' => Spp::all(),
-            'kelas' => Kelas::all(),
+            'kelas' => Kelas::orderBy('name', 'asc')->get(),
             'userphoto' => Userphoto::where('user_id', $request->siswa_id)->get(),
             'historysiswa' => Pembayaran::where('siswa_id', $request->siswa_id)->where('status', 'sukses')->latest()->get(),
          ]);
@@ -94,12 +94,12 @@ class PembayaranController extends Controller
         if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
             return view('denied');
         }
-
         return view('pages.admin.datapembayaran.show', [
             'pembayaran' => $pembayaran,
             'historysiswa' => Pembayaran::where('siswa_id', $pembayaran->siswa_id)->latest()->get(),
             'userphoto' => Userphoto::where('user_id', $pembayaran->siswa_id)->get(),
             'buktipembayaran' => Buktipembayaran::where('pembayaran_id', $pembayaran->id)->get(),
+            
         ]);
     }
 

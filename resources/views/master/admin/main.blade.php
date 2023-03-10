@@ -35,9 +35,13 @@ $notifikasiBelumDibaca = Notifikasi::where('penerima_id', null)->where('dibaca',
     <link href="/extensions/simple-datatables.css" rel="stylesheet">
     <link rel="shortcut icon" href="/img/logo-smk-rekayasa.png" class="rounded-circle" type="image/x-icon">
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;500;700&family=Poppins:wght@300;400;500;700;800&display=swap');
+    </style>
+
 </head>
 
-<body id="page-top" style="font-family: 'Mulish';">
+<body id="page-top" style="font-family: 'Mulish', sans-serif;">
 
     <!-- Page Wrapper -->
     <div id="wrapper">

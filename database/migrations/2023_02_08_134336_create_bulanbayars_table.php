@@ -11,7 +11,7 @@ class CreateBulanbayarsTable extends Migration
     {
         Schema::create('bulanbayars', function (Blueprint $table) {
             $table->id();
-            $table->string('identifier')->unique()->nullable();
+            $table->string('identifier')->unique();
             $table->string('name');
             $table->timestamps();
         });

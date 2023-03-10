@@ -15,7 +15,14 @@
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @include('_success')
-            <strong>Berhasil.</strong> {{ session('info') }}
+             {{ session('info') }}
+        </div>
+    @endif
+
+    @if (session()->has('gagal'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @include('_failed')
+             {!! session('gagal') !!}
         </div>
     @endif
 
@@ -26,9 +33,9 @@
             <div class="card shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Detail Pembayaran</p>
-                    @can('admin')
+                    {{-- @can('admin')
                         <a href="{{ route('pembayaran.edit', $pembayaran) }}" class="float-right">Edit pembayaran</a>
-                    @endcan
+                    @endcan --}}
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -143,28 +150,54 @@
 
                         </table>
 
-                        <form action="{{ route('statuspembayaran.update', $pembayaran) }}" method="post" class="mt-2">
-                            @method('PUT')
-                            @csrf
+                        @if ($pembayaran->status == 'diproses')
+                            <form action="{{ route('statuspembayaran.update', $pembayaran) }}" method="post" class="mt-2">
+                                @method('PUT')
+                                @csrf
 
-                            <label for=""><small><i>Ubah status transaksi</i></small></label>
-                            <div class="input-group">
-                                <select name="status" class="form-select" id="inputGroupSelect04"
-                                    aria-label="Example select with button addon">
-                                    <option disabled>-- Pilih --</option>
-                                    <option value="diproses" {{ $pembayaran->status == 'diproses' ? 'selected' : '' }}>
-                                        DIPROSES</option>
-                                    <option value="sukses" {{ $pembayaran->status == 'sukses' ? 'selected' : '' }}>SUKSES
-                                    </option>
-                                    <option value="gagal" {{ $pembayaran->status == 'gagal' ? 'selected' : '' }}>GAGAL
-                                    </option>
-                                </select>
-                                <input type="hidden" name="petugas_id" value="{{ auth()->user()->id }}">
-                                <button class="btn btn-primary" type="submit">Simpan</button>
-                            </div>
+                                <label for=""><small><i>Ubah status transaksi</i></small></label>
+                                <div class="input-group">
+                                    <select name="status" class="form-select" id="status"
+                                        aria-label="Example select with button addon">
+                                        <option disabled>-- Pilih --</option>
+                                        <option value="diproses" {{ $pembayaran->status == 'diproses' ? 'selected' : '' }}>
+                                            DIPROSES</option>
+                                        <option value="sukses" {{ $pembayaran->status == 'sukses' ? 'selected' : '' }}>SUKSES
+                                        </option>
+                                        <option value="gagal" {{ $pembayaran->status == 'gagal' ? 'selected' : '' }}>GAGAL
+                                        </option>
+                                    </select>
+                                    <input type="hidden" name="petugas_id" value="{{ auth()->user()->id }}">
 
-                        </form>
+                                    <a href="#ubahStatus" class="btn btn-primary" data-bs-toggle="modal"
+                                    >Simpan</a>
+                                </div>
 
+                                <div class="modal fade" id="ubahStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title fw-semibold poppins" id="exampleModalLabel">Ubah Status Transaksi                                              </h5>
+                                              <button type="button" class="btn-close"
+                                                  data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                            Nama Siswa: <p class="text-primary fw-bold mb-2">
+                                                {{ $pembayaran->userSiswa->name }} -
+                                                {{ $pembayaran->userSiswa->kelas->name }}</p>
+                                            Kode Transaksi: <p class="text-primary fw-bold">
+                                                {{ strtoupper($pembayaran->identifier) }}</p>
+                                            Apakah anda yakin akan mengubah status transaksi tersebut?
+                                          </div>
+                                        <div class="modal-footer">
+                                          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Ya, Ubah</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                            </form>
+                        @endif
 
                     </div>
 
@@ -261,6 +294,9 @@
 
     </div>
 
+    <script>
+        var rubahStatus = document.getElementById("status").value;
+    </script>
     <script>
         var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
         var collapseList = collapseElementList.map(function(collapseEl) {

@@ -6,11 +6,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
+    /**f
      * Register any application services.
      *
      * @return void
@@ -47,4 +49,5 @@ class AppServiceProvider extends ServiceProvider
         date_default_timezone_set('Asia/Jakarta');
 
     }
+   
 }

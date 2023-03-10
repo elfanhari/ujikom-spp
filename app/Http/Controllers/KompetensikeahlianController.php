@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\KompetensikeahlianRequest;
+use App\Models\Kelas;
 use App\Models\Kompetensikeahlian;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -20,7 +22,10 @@ class KompetensikeahlianController extends Controller
         }
         
         $prodi = Kompetensikeahlian::latest()->get();
-        return view('pages.admin.dataprodi.index', compact('prodi'));
+        return view('pages.admin.dataprodi.index', [
+            'prodi' => $prodi,
+            'kelas' => Kelas::get()
+        ]);
     }
 
 
@@ -69,8 +74,13 @@ class KompetensikeahlianController extends Controller
     // Prodi - Destroy
     public function destroy(Kompetensikeahlian $prodi)
     {
-        $prodi->delete(); 
-        return back()->withInfo('Data berhasil dihapus!');
+        if (Kelas::where('kompetensikeahlian_id', $prodi->id)->count() < 1) {
+            $prodi->delete(); 
+            return back()->withInfo('Data berhasil dihapus!');
+        } else {
+            return back()->withGagal('Data tidak dapat dihapus! Karena beberapa kelas berelasi dengan <b> Prodi - ' . $prodi->singkatan . '</b> !');
+        }
+        
     }
 
 }

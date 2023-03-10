@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PetugasRequest;
 use App\Http\Requests\UpdatePetugasRequest;
+use App\Models\Pembayaran;
 use App\Models\User;
 use App\Models\Userphoto;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class PetugasController extends Controller
 
         return view('pages.admin.datapetugas.index', [
             'petuga' => User::where('level', 'petugas')->latest()->get(),
+            'pembayaran' => Pembayaran::all()
         ]);
     }
 
@@ -76,7 +78,11 @@ class PetugasController extends Controller
 
     public function destroy(User $petuga)
     {
-        $petuga->delete();
-        return redirect(route('petugas.index'))->withInfo('Data berhasil dihapus!');
+        if (Pembayaran::where('petugas_id', $petuga->id)->count() < 1) {
+            $petuga->delete();
+            return redirect(route('petugas.index'))->withInfo('Data berhasil dihapus!');
+        } else {
+            return redirect(route('petugas.index'))->withInfo('Data gagal dihapus!');
+        }
     }
 }

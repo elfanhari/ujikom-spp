@@ -15,7 +15,7 @@ class CreateKompetensikeahliansTable extends Migration
     {
         Schema::create('kompetensikeahlians', function (Blueprint $table) {
             $table->id();
-            $table->string('identifier')->unique()->nullable();                       
+            $table->string('identifier')->unique();                       
             $table->string('name');
             $table->string('singkatan');
             $table->timestamps();

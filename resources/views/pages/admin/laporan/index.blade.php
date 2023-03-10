@@ -6,18 +6,16 @@
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @include('_success')
-            <strong>Berhasil.</strong> {{ session('info') }}
+             {{ session('info') }}
         </div>
     @endif
 
     @if (session()->has('gagal'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Gagal!</strong> {{ session('gagal') }}
-            @include('_closebutton')
+            @include('_failed')
+             {!! session('gagal') !!}
         </div>
     @endif
-
-    
 
     <div class="row mb-3">
         <div class="col-12">
@@ -40,15 +38,23 @@
                                 <label for="petugas_id" class="mb-1  fw-semibold">Pilih Petugas</label>
                                 <select name="petugas_id" id="petugas_id" class="form-select mb-1">
                                     <option value="" disabled selected>-- Pilih petugas --</option>
-                                    <option value="" {{ request('petugas_id') == '' ? 'selected' : '' }}>Semua
-                                    </option>
-                                    @foreach ($petugas as $tampilkan)
+                                    {{-- <option value="" {{ request('petugas_id') == '' ? 'selected' : '' }}>Semua
+                                    </option> --}}
+                                    @if (auth()->user()->level == 'admin')
+                                        @foreach ($petugas as $tampilkan)
+                                            <option 
+                                                value="{{ $tampilkan->id }}"
+                                                {{ $tampilkan->id == request('petugas_id') ? 'selected' : '' }} {{ $tampilkan->id == auth()->user()->id ? 'selected' : '' }}>
+                                                {{ $tampilkan->name }} - {{ strtoupper($tampilkan->level) }} 
+                                            </option>
+                                        @endforeach
+                                    @else
                                         <option 
-                                            value="{{ $tampilkan->id }}"
-                                             {{ $tampilkan->id == request('petugas_id') ? 'selected' : '' }} {{ $tampilkan->id == auth()->user()->id ? 'selected' : '' }}>
-                                             {{ $tampilkan->name }} - {{ strtoupper($tampilkan->level) }} 
+                                            value="{{ auth()->user()->id }}"
+                                            {{ auth()->user()->id == request('petugas_id') ? 'selected' : '' }} {{ auth()->user()->id == auth()->user()->id ? 'selected' : '' }}>
+                                            {{ auth()->user()->name }} - {{ strtoupper(auth()->user()->level) }} 
                                         </option>
-                                    @endforeach
+                                    @endif
                                 </select>
                             </div>
                             
@@ -79,9 +85,12 @@
                         <input type="hidden" name="daritanggal" id="daritanggal" value="{{ request('daritanggal') }}">
                         <input type="hidden" name="sampaitanggal" id="sampaitanggal"
                             value="{{ request('sampaitanggal') }}">
+                    
+                        @if ($pembayaran->count() > 0)
                         <button type="submit" class="btn float-right btn btn-sm btn-outline-success">
                             Cetak Laporan
                         </button>
+                        @endif
                     </form>
                 </div>
                 <div class="card-body">
@@ -125,15 +134,11 @@
                                             <td>Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
                                             <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
                                             <td>
-                                                @if ($tampilkan->jenistransaksi == 'petugas')
+                                               
                                                     <a href="{{ route('petugas.show', $tampilkan->userPetugas->identifier) }}"
                                                         class="text-decoration-none">
                                                         {{ $tampilkan->userPetugas->name }}
                                                     </a>
-                                                @else
-                                                    -
-                                                @endif
-
 
                                             </td>
 

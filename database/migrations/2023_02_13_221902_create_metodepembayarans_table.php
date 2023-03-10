@@ -15,7 +15,7 @@ class CreateMetodepembayaransTable extends Migration
     {
         Schema::create('metodepembayarans', function (Blueprint $table) {
             $table->id();
-            $table->string('identifier')->unique()->nullable();
+            $table->string('identifier')->unique();
             $table->string('payment')->nullable();
             $table->string('number')->nullable();
             $table->string('atasnama')->nullable();
