@@ -35,6 +35,10 @@
     <link href="/extensions/simple-datatables/style.css" rel="stylesheet">
     <link href="/extensions/simple-datatables.css" rel="stylesheet">
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;500;700&family=Poppins:wght@300;400;500;700;800&display=swap');
+    </style>
+    
 </head>
 
 <body id="page-top" style="font-family: 'Mulish';">

@@ -95,8 +95,8 @@ class User extends Authenticatable
     public function routeNotificationForNexmo($notification)
     {
         // $telepon = Str::replaceFirst('0', '62', $this->telepon);
-        return $this->telepon;
-        // return '6285315755352';
+        // return $this->telepon;
+        return '6285315755352';
     }
 
     public function logaktivitas() //relasi

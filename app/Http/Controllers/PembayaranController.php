@@ -201,8 +201,8 @@ class PembayaranController extends Controller
             'status' => strtoupper($pembayaran->status),
         ];
 
-        // Mail::to($emailSiswa)->send(new StrukPembayaran($dataEmail));  // kirim password ke email user tersebut
-        Mail::to('elfanhari88@gmail.com')->send(new StrukPembayaran($dataEmail));  // kirim password ke email elfan
+        Mail::to($emailSiswa)->send(new StrukPembayaran($dataEmail));  // kirim password ke email user tersebut
+        // Mail::to('elfanhari88@gmail.com')->send(new StrukPembayaran($dataEmail));  // kirim password ke email elfan
 
         return back()->with('info', 'Rincian pembayaran telah dikirim ke email ' . $emailSiswa . '.');
     }

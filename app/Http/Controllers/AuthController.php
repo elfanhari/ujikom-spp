@@ -78,9 +78,9 @@ class AuthController extends Controller
                 'pesan' => 'Hai, ' . $user->name . '! ' . $kodeverifikasi . ' adalah kode verifikasi Anda pada Aplikasi E-SPP SMK REKAYASA. Jangan beritahu kepada siapapun!'
             ];
 
-            // $user->notify(new LoginVerificationNotification($dataSms));
+            $user->notify(new LoginVerificationNotification($dataSms));
             // Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email elfan
-            // Mail::to($email)->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
+            Mail::to($email)->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
 
             return redirect('/verifikasiemail')->with('kodeverifikasi', $kodeverifikasi);
         }
@@ -168,9 +168,9 @@ class AuthController extends Controller
                 'pesan' => 'Hai, ' . $user[0]->name . '! ' . $passwordBaru . ' adalah password baru Anda pada Aplikasi E-SPP SMK REKAYASA. Jangan beritahu kepada siapapun!'
             ];
 
-            // $user[0]->notify(new ForgotPasswordNotification($dataSms)); // kirim sms ke nomor user tersebut
-            Mail::to('elfanhari88@gmail.com')->send(new SendEmail($dataEmail));  // kirim password ke email elfan
-            // Mail::to($user->email)->send(new SendEmail($dataEmail));  // kirim password ke email user tersebut
+            $user[0]->notify(new ForgotPasswordNotification($dataSms)); // kirim sms ke nomor user tersebut
+            // Mail::to('elfanhari88@gmail.com')->send(new SendEmail($dataEmail));  // kirim password ke email elfan
+            Mail::to($user[0]->email)->send(new SendEmail($dataEmail));  // kirim password ke email user tersebut
 
             return view('pages.auth.lupapassword.success', [
                 'email' => $request->email
