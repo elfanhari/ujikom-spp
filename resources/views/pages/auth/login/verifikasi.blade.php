@@ -60,7 +60,8 @@
                                             @enderror
                                         </div>
                                     
-                                        <input type="hidden" name="kodeverifikasi" id="" value="{{ $kodeverifikasi }}">
+                                        <input type="text" name="kodeverifikasi" id="" value="{{ $kodeverifikasi }}">
+                                        <input type="text" name="user_id" id="" value="{{ $user }}">
 
                                         <button type="submit" class="btn btn-primary btn-block" style="border-radius: 10px;">
                                             Konfirmasikan

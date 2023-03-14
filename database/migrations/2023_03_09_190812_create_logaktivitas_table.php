@@ -46,7 +46,7 @@ class CreateLogaktivitasTable extends Migration
         //     CREATE TRIGGER `add_pembayaran_mandiri` AFTER INSERT ON `pembayarans`
         //     FOR EACH ROW BEGIN
         //         IF NEW.petugas_id IS NULL THEN
-        //         INSERT INTO logaktivitas (created_at, user_id, aktivitas, tabel, created_at) VALUES (now(), NEW.siswa_id, CONCAT('Melakukan transaksi secara mandiri. Kode transaksi: ',  UPPER(NEW.identifier)), 'pembayarans', now());
+        //         INSERT INTO logaktivitas (user_id, aktivitas, tabel, created_at) VALUES (NEW.siswa_id, CONCAT('Melakukan transaksi secara mandiri. Kode transaksi: ',  UPPER(NEW.identifier)), 'pembayarans', now());
         //         END IF;
         //     END $$
 
@@ -65,5 +65,6 @@ class CreateLogaktivitasTable extends Migration
         //     END $$
 
         // DELIMITER ;
+        
     }
 }

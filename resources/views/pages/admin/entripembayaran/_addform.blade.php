@@ -1,5 +1,4 @@
 @php
-
     use App\Models\Bulanbayar;
     use App\Models\Pembayaran;
     
@@ -18,7 +17,6 @@
     $forDisable = Pembayaran::where('siswa_id', $siswaCek[0]->id)
         ->where('status', 'sukses')
         ->get();
-    
 @endphp
 
 <label for="siswa_id" class="mb-1 fw-semibold">Nama Siswa</label>
@@ -83,7 +81,7 @@
 
 <label for="jumlahbayar" class="mb-1 mt-3 fw-semibold">Jumlah Bayar</label>
 <input type="text" value="Rp{{ number_format($siswaCek[0]->spp->nominal, 0, '.', '.') }}" name=""
-    class="text-black input-sm form form-control mt-0  @error('siswa_id') is-invalid @enderror"
+    class="text-black input-sm form form-control mt-0 @error('siswa_id') is-invalid @enderror"
     placeholder="Masukkan siswa_id siswa" readonly disabled>
 
 <input type="hidden" name="petugas_id" value="{{ auth()->user()->id }}">
