@@ -34,6 +34,15 @@ class KelasController extends Controller
         return redirect(route('kelas.index'))->withInfo('Data berhasil ditambahkan!');
     }
 
+    // Kelas - Show
+    public function show(Kelas $kela)
+    {
+        return view('pages.admin.datakelas.show', [
+            'siswa' => User::where('kelas_id', $kela->id)->orderBy('name', 'ASC')->get(),
+        ]);
+    }
+
+
     // Kelas - Edit
     public function edit(Kelas $kela)
     {

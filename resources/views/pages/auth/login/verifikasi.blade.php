@@ -52,16 +52,17 @@
 
                                         <div class="form-group">
                                             <input type="text" name="inputverifikasi" value="{{ old('inputverifikasi') }}"
-                                                class=" @error('inputverifikasi') is-invalid @enderror form-control text-black"
+                                                class=" {{ session()->has('inputverifikasi') ? 'is-invalid' : ''}} form-control text-black"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Masukkan kode verifikasi..." style="border-radius: 10px;">
-                                                @error('inputverifikasi')
-                                                <span class="invalid-feedback mt-1">{{ $message }}</span>
-                                            @enderror
+                                            @if(session()->has('inputverifikasi'))
+                                                <span class="invalid-feedback mt-1">{{ session('inputverifikasi') }}</span>
+                                            @endif
                                         </div>
                                     
                                         <input type="text" name="kodeverifikasi" id="" value="{{ $kodeverifikasi }}">
-                                        <input type="text" name="user_id" id="" value="{{ $user }}">
+                                        <input type="text" name="user_id" id="" value="{{ $user_id }}">
+                                        <input type="text" name="kadaluarsa" id="" value="{{ $kadaluarsa }}">
 
                                         <button type="submit" class="btn btn-primary btn-block" style="border-radius: 10px;">
                                             Konfirmasikan

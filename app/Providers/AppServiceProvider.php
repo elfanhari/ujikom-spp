@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('siswa', function(User $user) {
             return $user->level === 'siswa';    
         });
-
+        
         // LOCAL TIME
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
