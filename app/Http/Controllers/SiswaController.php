@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportSiswaRequest;
 use App\Http\Requests\SiswaRequest;
+use App\Http\Requests\UpdateSiswaRequest;
 use App\Models\Kelas;
 use App\Models\Pembayaran;
 use App\Models\Spp;
@@ -85,7 +86,7 @@ class SiswaController extends Controller
     }
 
     // Siswa - Update
-    public function update(SiswaRequest $request, User $siswa)
+    public function update(UpdateSiswaRequest $request, User $siswa)
     {
         $siswa->update($request->all());
         return redirect(route('siswa.index'))->with('info', 'Data berhasil diubah!');
@@ -111,6 +112,11 @@ class SiswaController extends Controller
         }
         
         $file = $request->file('file');
+        if ($file->getClientOriginalExtension() != 'xlsx') {
+            return back()->withGagal('Import Gagal! File yang anda masukkan tidak sesuai ketentuan!');
+        } else {
+            dd('okehh');
+        }
         $namaFile = $file->getClientOriginalName();
         $file->move('datasiswa', $namaFile);
 

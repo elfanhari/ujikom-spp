@@ -109,7 +109,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tampilkan->name }}</td>
                                             <td class="d-xs-none">{{ $tampilkan->nisn }}</td>
-                                            <td>{{ $tampilkan->kelas->name }}</td>
+                                            <td>{{ $tampilkan->lulus == false ? $tampilkan->kelas->name : 'LULUS' }}</td>
                                             <td class="d-xs-none">{{ $tampilkan->email }}</td>
                                             <td class="">
 
@@ -228,7 +228,7 @@
                     <div class="card-header">
                         <p class="m-0 font-weight-bold d-inline text-grey d-xs-none mt-3">Data Siswa</p>
     
-    
+
                         {{-- Petunjuk Aksi --}}
                         <button class="btn btn-info d-inline btn-sm btn-icon-split float-right ms-2 rounded-circle"
                             data-bs-toggle="modal" data-bs-target="#petunjukAksi">
@@ -274,7 +274,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $tampilkan->name }}</td>
                                                 <td>{{ $tampilkan->nisn }}</td>
-                                                <td>{{ $tampilkan->kelas->name }}</td>
+                                                <td>{{ $tampilkan->lulus == false ? $tampilkan->kelas->name : 'LULUS' }}</td>
                                                 <td>{{ $tampilkan->email }}</td>
                                                 <td class="">
     

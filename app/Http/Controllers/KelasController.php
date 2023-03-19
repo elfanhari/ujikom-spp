@@ -40,7 +40,7 @@ class KelasController extends Controller
     public function show(Kelas $kela)
     {
         return view('pages.admin.datakelas.show', [
-            'siswa' => User::where('kelas_id', $kela->id)->orderBy('name', 'ASC')->get(),
+            'siswa' => User::where('kelas_id', $kela->id)->where('lulus', false)->where('aktif', true)->orderBy('name', 'ASC')->get(),
             'kelas' => $kela,
             'semuakelas' => Kelas::orderBy('name', 'ASC')->get(),
             'semuaspp' => Spp::orderBy('tahun', 'ASC')->get()
@@ -84,15 +84,33 @@ class KelasController extends Controller
     public function naikKelas(Request $request)
     {
         $kelasBaru = $request->validate(['kelas_id' => 'required']);
-        User::where('kelas_id', $request->kelasSebelumnya)->update($kelasBaru);
+        User::where('kelas_id', $request->kelasSebelumnya)
+              ->where('lulus', false)
+              ->where('aktif', true)
+              ->update($kelasBaru);
         return redirect()->route('kelas.index')->withInfo('Siswa pada kelas tersebut berhasil dinaikkan kelas!');
+    }
+
+    // Kelas - Luluskan Siswa
+    public function luluskanSiswa(Request $request)
+    {
+        $lulus =['lulus' => true];
+        User::where('kelas_id', $request->kelasSebelumnya)
+              ->where('lulus', false)
+              ->where('aktif', true)
+              ->update($lulus);
+        return redirect()->route('kelas.index')->withInfo('Status siswa pada kelas tersebut telah dirubah menjadi LULUS!');
     }
 
     // Kelas - Ganti SPP
     public function gantiSpp(Request $request)
     {
         $sppBaru = $request->validate(['spp_id' => 'required']);
-        User::where('kelas_id', $request->kelasSebelumnya)->where('spp_id', $request->sppSebelumnya)->update($sppBaru);
+        User::where('kelas_id', $request->kelasSebelumnya)
+              ->where('spp_id', $request->sppSebelumnya)
+              ->where('lulus', false)
+              ->where('aktif', true)
+              ->update($sppBaru);
         return back()->withInfo('SPP siswa pada kelas ini berhasil diperbarui!');
     }
 

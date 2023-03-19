@@ -42,7 +42,7 @@
   @enderror
 </div>
 
-<div class="form-floating">
+<div class="form-floating mb-3">
   <input type="text" value="{{ old('username', $admin->username) }}" name="username"
       class="form-control text-black @error('username') is-invalid @enderror" id="floatingInput"
       placeholder="username">
@@ -50,6 +50,19 @@
   @error('username')
       <span class="invalid-feedback mt-1 ">{{ $message }}</span>
   @enderror
+</div>
+
+<div class="form-floating">
+    <select name="aktif" class="form-select @error('aktif') is-invalid @enderror" id="floatingSelect"
+        aria-label="Floating label select example">
+        <option disabled selected>-- Pilih --</option>
+        <option value=1 {{ $admin->aktif == 1 ? 'selected' : '' }}>AKTIF</option>
+        <option value=0 {{ $admin->aktif == 0 ? 'selected' : '' }}>TIDAK AKTIF</option>
+    </select>
+    <label for="floatingSelect">Status Akun</label>
+    @error('aktif')
+        <span class="invalid-feedback mt-1">{{ $message }}</span>
+    @enderror
 </div>
 
 <input type="hidden" value="{{ old('level', $admin->level) }}" name="level" id="level" class="text-black input-sm form form-control mt-0" >

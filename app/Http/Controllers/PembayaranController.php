@@ -44,12 +44,12 @@ class PembayaranController extends Controller
 
     public function create(Request $request)
     {
-        
+
         if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
             return view('denied');
         }
 
-        $siswa = User::with('kelas')->where('kelas_id', $request->kelas_id);
+        $siswa = User::with('kelas')->where('kelas_id', $request->kelas_id)->where('aktif', true);
         $siswaCek = User::with('kelas', 'spp', 'notifikasiPenerima')->where('id', $request->siswa_id);
         $bulanbayar = Bulanbayar::get();
         return view(
@@ -70,11 +70,11 @@ class PembayaranController extends Controller
     public function store(PembayaranRequest $request)
     {
 
-        // PERCOBAAN
-
         $jumlahBulanDibayar = count($request->pembayaranuntuk);
+
         if ($jumlahBulanDibayar > 1) {
-        for ($i = $jumlahBulanDibayar - 1; $i >= 0; $i--) {
+
+            for ($i = $jumlahBulanDibayar - 1; $i >= 0; $i--) {
                 $bulanbayar = Str::before($request->pembayaranuntuk[$i], '-');
                 $tahunbayar = Str::after($request->pembayaranuntuk[$i], '-');
 
@@ -82,6 +82,7 @@ class PembayaranController extends Controller
                 $request['tahunbayar'] = $tahunbayar;
                 $request['identifier'] = 'i' . Str::random(4) . time() . Str::random(5);
                 Pembayaran::create($request->all());
+
             }
             return redirect()->route('pembayaran.index')->with('info', 'Pembayaran sukses!');
         } else {

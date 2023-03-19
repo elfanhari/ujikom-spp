@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
                 'username' => 'yasrifanpetugas',
                 'level' => 'petugas',
                 'password' => 'password',
+                'lulus' => null,
             ],
             [   // 2 - PETUGAS
                 'name' => 'Dian Nugraha, S.T',
@@ -38,6 +39,7 @@ class UserSeeder extends Seeder
                 'username' => 'dianpetugas',
                 'level' => 'petugas',
                 'password' => 'password',
+                'lulus' => null,
             ],
             [   // 3 - PETUGAS
                 'name' => 'Rini, S.Kom',
@@ -48,6 +50,7 @@ class UserSeeder extends Seeder
                 'username' => 'rinipetugas',
                 'level' => 'petugas',
                 'password' => 'password',
+                'lulus' => null,
             ],
             [   // 4 - ADMIN
                 'name' => 'Maman Suparman, S.T',
@@ -58,6 +61,7 @@ class UserSeeder extends Seeder
                 'username' => 'mamanadmin',
                 'level' => 'admin',
                 'password' => 'password',
+                'lulus' => null,
             ],
             [   // 5 - ADMIN
                 'name' => 'Wahyu Suryaman, S.T',
@@ -68,6 +72,7 @@ class UserSeeder extends Seeder
                 'username' => 'wahyuadmin',
                 'level' => 'admin',
                 'password' => 'password',
+                'lulus' => null,
             ],
             [   // 6 - ADMIN
                 'name' => 'Deni, S.Kom',
@@ -78,6 +83,7 @@ class UserSeeder extends Seeder
                 'username' => 'deniadmin',
                 'level' => 'admin',
                 'password' => 'password',
+                'lulus' => null,
             ],
             [   // 7 - SISWA
                 'name' => 'Elfan Hari Saputra',
@@ -89,7 +95,7 @@ class UserSeeder extends Seeder
                 'nis' => '10.2021.334',
                 'telepon' => '6285315755352',
                 'alamat' => 'Jl. Raya Lakbok',
-                'email' => 'elfanhari88@gmail.com',
+                'email' => 'siswaspp@gmail.com',
                 'username' => 'elfansiswa',
                 'level' => 'siswa',
                 'password' => 'password',

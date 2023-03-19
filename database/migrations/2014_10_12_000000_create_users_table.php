@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();              //WAJIB
             $table->string('username')->unique();           //WAJIB
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('aktif')->default(true)->nullable();
+            $table->boolean('lulus')->default(false)->nullable();
             $table->text('password');   //WAJIB
             $table->rememberToken();
             $table->timestamps();

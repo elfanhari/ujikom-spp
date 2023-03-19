@@ -84,6 +84,17 @@
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $petuga->username }}</td>
                             </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Status Akun</td>
+                                <td style="width: 1px;">:</td>
+                                <td>
+                                    @if ($petuga->aktif == true)
+                                        <span class="badge bg-success">{{ strtoupper('aktif') }}</span>
+                                    @elseif ($petuga->aktif == false)
+                                        <span class="badge bg-danger">{{ strtoupper('tidak aktif') }}</span>
+                                    @endif
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>

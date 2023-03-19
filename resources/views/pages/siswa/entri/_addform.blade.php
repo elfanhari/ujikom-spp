@@ -24,7 +24,7 @@
 <input type="text" value="{{ old('namasiswa', $siswa->name . ' - ' . $siswa->kelas->name ) }}" name="siswa_id" class="text-black input-sm form form-control mt-0  @error('siswa_id') is-invalid @enderror" placeholder="Masukkan siswa_id siswa" readonly disabled>
 
 <label for="tanggalbayar" class="mb-1 fw-semibold mt-3">Tanggal Bayar</label>
-<input type="date" value="{{ old('tanggalbayar') }}" name="tanggalbayar" id="tanggalbayar" class="text-black input-sm form form-control mt-0  @error('tanggalbayar') is-invalid @enderror" placeholder="Masukkan nomor tanggalbayar siswa">
+<input type="date" value="{{ old('tanggalbayar') }}" name="tanggalbayar" id="tanggalbayar" class="text-black input-sm form form-control mt-0  @error('tanggalbayar') is-invalid @enderror" placeholder="Masukkan nomor tanggalbayar siswa" hidden>
 @error('tanggalbayar')
 <span class="invalid-feedback mt-1">{{ $message }}</span>
 @enderror
@@ -143,4 +143,12 @@
     }
   }
     
+</script>
+
+
+<script>
+  let today = new Date();
+  let formattedDate = today.toISOString().substr(0, 10);
+  let tanggalInput = document.getElementById("tanggalbayar");
+  tanggalInput.value = formattedDate;
 </script>

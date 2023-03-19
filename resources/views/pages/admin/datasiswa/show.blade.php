@@ -114,6 +114,28 @@
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $siswa->spp->tahun }} - Rp{{ number_format($siswa->spp->nominal, 0, '.', '.') }}</td>
                             </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Status Akun</td>
+                                <td style="width: 1px;">:</td>
+                                <td>
+                                    @if ($siswa->aktif == true)
+                                        <span class="badge bg-success">{{ strtoupper('aktif') }}</span>
+                                    @elseif ($siswa->aktif == false)
+                                        <span class="badge bg-danger">{{ strtoupper('tidak aktif') }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Status Lulus</td>
+                                <td style="width: 1px;">:</td>
+                                <td>
+                                    @if ($siswa->lulus == true)
+                                        <span class="badge bg-info">{{ strtoupper('lulus') }}</span>
+                                    @elseif ($siswa->lulus == false)
+                                        <span class="badge bg-warning">{{ strtoupper('belum lulus') }}</span>
+                                    @endif
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>

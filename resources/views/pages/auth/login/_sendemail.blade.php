@@ -1,7 +1,7 @@
 Halo, <b> {{ $dataEmail['name'] }} </b> <br> <br>
 
 Percobaan masuk pada E-SPP SMK REKAYASA terdeteksi. <br>
-Berikut ini adalah Kode Verifikasi anda! <br> <br>
+Berikut ini adalah Kode Verifikasi anda! Berlaku 5 menit.<br> <br>
 
 <h1><b> {!! $dataEmail['kodeverifikasi'] !!} </b></h1> <br>
 

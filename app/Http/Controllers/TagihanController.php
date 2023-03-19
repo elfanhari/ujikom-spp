@@ -13,11 +13,16 @@ class TagihanController extends Controller
     // LAPORAN - siswa yang belum bayar
     public function index(Request $request)
     {   
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         $pembayaran = Pembayaran::whereRaw("CONCAT(bulanbayar_id, tahunbayar) = :merge", 
                       ['merge' => $request->bulanbayar_id . $request->tahunbayar])
                       ->pluck('siswa_id');
 
         $siswa = User::where('kelas_id', $request->kelas_id)
+                       ->where('aktif', true)
                        ->whereNotIn('id', $pembayaran)
                        ->orderBy('name', 'ASC')
                        ->get();
@@ -33,6 +38,10 @@ class TagihanController extends Controller
     // PRINT - Laporan Tagihan
     public function create(Request $request)
     {
+        if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
+            return view('denied');
+        }
+
         $pembayaran = Pembayaran::whereRaw("CONCAT(bulanbayar_id, tahunbayar) = :merge", 
                       ['merge' => $request->bulanbayar_id . $request->tahunbayar])
                       ->pluck('siswa_id');

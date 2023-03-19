@@ -60,9 +60,9 @@
                                             @endif
                                         </div>
                                     
-                                        <input type="text" name="kodeverifikasi" id="" value="{{ $kodeverifikasi }}">
-                                        <input type="text" name="user_id" id="" value="{{ $user_id }}">
-                                        <input type="text" name="kadaluarsa" id="" value="{{ $kadaluarsa }}">
+                                        <input type="hidden" name="kodeverifikasi" id="" value="{{ $kodeverifikasi }}" hidden>
+                                        <input type="hidden" name="user_id" id="" value="{{ $user_id }}" hidden>
+                                        <input type="hidden" name="kadaluarsa" id="" value="{{ $kadaluarsa }}" hidden>
 
                                         <button type="submit" class="btn btn-primary btn-block" style="border-radius: 10px;">
                                             Konfirmasikan

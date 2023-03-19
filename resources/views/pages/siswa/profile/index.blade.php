@@ -114,6 +114,28 @@
                                 <td style="width: 1px;">:</td>
                                 <td class="text-uppercase">{{ $user->level }}</td>
                             </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Status Akun</td>
+                                <td style="width: 1px;">:</td>
+                                <td>
+                                    @if ($user->aktif == true)
+                                        <span class="badge bg-success">{{ strtoupper('aktif') }}</span>
+                                    @elseif ($user->aktif == false)
+                                        <span class="badge bg-danger">{{ strtoupper('tidak aktif') }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Status Lulus</td>
+                                <td style="width: 1px;">:</td>
+                                <td>
+                                    @if ($user->lulus == true)
+                                        <span class="badge bg-info">{{ strtoupper('lulus') }}</span>
+                                    @elseif ($user->lulus == false)
+                                        <span class="badge bg-warning">{{ strtoupper('belum lulus') }}</span>
+                                    @endif
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>

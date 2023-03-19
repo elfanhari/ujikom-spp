@@ -1,7 +1,7 @@
 @php
     use App\Models\Bulanbayar;
     use App\Models\Pembayaran;
-    
+
     $bulanbayar1 = DB::select('select * from bulanbayars where id > 6');
     $tahunbayar1 = $siswaCek->first()->spp->tahun;
     
@@ -14,6 +14,8 @@
     $bulanbayar4 = Bulanbayar::limit(6)->get();
     $tahunbayar4 = $siswaCek->first()->spp->tahun + 3;
     
+    $nominal = $siswaCek[0]->spp->nominal;
+
     $forDisable = Pembayaran::where('siswa_id', $siswaCek[0]->id)
         ->where('status', 'sukses')
         ->get();
@@ -106,7 +108,7 @@
 </div>
 
 <label for="jumlahbayar" class="mb-1 mt-3 fw-semibold">Jumlah Bayar</label>
-<input type="text" id="jumlahbayar" value="100000" name=""
+<input type="text" id="jumlahbayar" value="{{ $nominal }}" name=""
     class="text-black input-sm form form-control mt-0 @error('siswa_id') is-invalid @enderror"
     placeholder="Masukkan siswa_id siswa" readonly disabled>
 
@@ -130,15 +132,11 @@
 }
 </script>
 
-@php
-    $nominal = $siswaCek[0]->spp->nominal;
-@endphp
-
 <script>
   function tambahNilaiInput() {
   let inputElement = document.getElementById("jumlahbayar");
   let nilaiInput = parseInt(inputElement.value);
-  nilaiInput += 100000;
+  nilaiInput += {{ $nominal }};
   inputElement.value = nilaiInput.toString();
 }
 </script>
@@ -147,7 +145,7 @@
   function kurangiNilaiInput() {
   let inputElement = document.getElementById("jumlahbayar");
   let nilaiInput = parseInt(inputElement.value);
-  nilaiInput -= 100000;
+  nilaiInput -= {{ $nominal }};
   inputElement.value = nilaiInput.toString();
 }
 </script>

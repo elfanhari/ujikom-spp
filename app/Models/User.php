@@ -109,4 +109,8 @@ class User extends Authenticatable
         return $this->hasMany(Logaktivitas::class, 'user_id', 'id');
     }
 
+    public function login_session() {
+        return $this->hasOne(LoginSession::class, 'user_id','id');
+    }
+
 }

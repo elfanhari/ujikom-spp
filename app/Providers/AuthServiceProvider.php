@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\LoginSession;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -25,6 +27,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $this->app['auth']->viaRequest('web', function ($request) {
+            // Periksa apakah user telah login dari sesi sebelumnya
+            $sessionId = $request->session()->getId();
+            $loginSession = LoginSession::where('session_id', $sessionId)->first();
+
+            if ($loginSession && $user = $loginSession->user) {
+                Auth::login($user);
+                return $user;
+            }
+
+            return null;
+        });
     }
 }

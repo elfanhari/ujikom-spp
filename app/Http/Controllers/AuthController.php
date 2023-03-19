@@ -6,6 +6,8 @@ use App\Jobs\ForgotPasswordJob;
 use App\Jobs\LoginVerificationJob;
 use App\Mail\LoginVerification;
 use App\Mail\SendEmail;
+use App\Models\LoginSession;
+use App\Models\Session;
 use App\Models\User;
 use App\Notifications\ForgotPasswordNotification;
 use App\Notifications\LoginVerificationNotification;
@@ -69,31 +71,38 @@ class AuthController extends Controller
 
         if (Auth::attempt($input)) {
 
-            $user = User::where('id', auth()->user()->id)->first(); // get User sesuai auth
-
-            Auth::logout();
-
-            $kodeverifikasi = random_int(100000, 999999);  // kode verifikasi
+            if (Auth::user()->lulus == true) {
+                Auth::logout();
+                return redirect('/login')->with('info', 'Anda telah lulus, Akun anda dinonaktifkan!');
+            }
+            if (Auth::user()->aktif == true) {
+                $user = User::where('id', auth()->user()->id)->first(); // get User sesuai auth
+                Auth::logout();
+                $kodeverifikasi = random_int(100000, 999999);  // kode verifikasi
+        
+                $dataEmail = [
+                    'subjek' => '[E-SPP SMK REKAYASA] - Verifikasi Masuk',
+                    'kodeverifikasi' => $kodeverifikasi,
+                    'name' => $user->name,
+                ];
+        
+                $dataSms = [
+                    'pesan' => 'Hai, ' . $user->name . '! ' . $kodeverifikasi . ' adalah kode verifikasi Anda pada Aplikasi E-SPP SMK REKAYASA. Jangan beritahu kepada siapapun!'
+                ];
     
-            $dataEmail = [
-                'subjek' => '[E-SPP SMK REKAYASA] - Verifikasi Masuk',
-                'kodeverifikasi' => $kodeverifikasi,
-                'name' => $user->name,
-            ];
+                // $user->notify(new LoginVerificationNotification($dataSms));
+                // Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email elfan
+                Mail::to($email)->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
     
-            $dataSms = [
-                'pesan' => 'Hai, ' . $user->name . '! ' . $kodeverifikasi . ' adalah kode verifikasi Anda pada Aplikasi E-SPP SMK REKAYASA. Jangan beritahu kepada siapapun!'
-            ];
-
-            // $user->notify(new LoginVerificationNotification($dataSms));
-            // Mail::to('elfanhari88@gmail.com')->send(new LoginVerification($dataEmail));  // kirim password ke email elfan
-            // Mail::to($email)->send(new LoginVerification($dataEmail));  // kirim password ke email user tersebut
-
-            return redirect('/verifikasiemail')->with([
-                'kodeverifikasi' => $kodeverifikasi,
-                'user_id'        => $user->id,
-                'kadaluarsa'    => time() + 60,
-            ]);
+                return redirect('/verifikasiemail')->with([
+                    'kodeverifikasi' => $kodeverifikasi,
+                    'user_id'        => $user->id,
+                    'kadaluarsa'    => time() + 300,
+                ]);    
+            } else {
+                Auth::logout();
+                return redirect('/login')->with('info', 'Akun anda tidak aktif! Silakan hubungi petugas');
+            }
         }
             
         else {
@@ -143,8 +152,6 @@ class AuthController extends Controller
     // KONFIRMASI VERIFIKASI EMAIL
     public function storeVerifikasiEmail(Request $request)
     {   
-
-        
         $kodeverifikasi = $request->kodeverifikasi;
         $user_id = $request->user_id;
         $kadaluarsa = intval($request->kadaluarsa);
@@ -153,9 +160,13 @@ class AuthController extends Controller
             
             if ($request->inputverifikasi == $kodeverifikasi) {
                 Auth::loginUsingId($user_id);
+                LoginSession::create([
+                    'user_id' => auth()->user()->id,
+                    'session_id' => session()->getId()
+                ]); 
                 
                 $level = auth()->user()->level;
-                
+            
                 if ($level == 'admin') {
                     return redirect('/admin')->withInfo('Admin');
                 } 
@@ -176,7 +187,7 @@ class AuthController extends Controller
             }
 
         } else {
-            return redirect('/login')->with('info', 'Kode verifikasi anda sudah kadaluarsa!');
+            return redirect('/login')->with('info', 'Kode verifikasi anda sudah kadaluarsa! Silakan login kembali.');
         }
         
     }
@@ -213,7 +224,7 @@ class AuthController extends Controller
             $user[0]->notify(new ForgotPasswordNotification($dataSms)); // kirim sms ke nomor user tersebut
             // Mail::to('elfanhari88@gmail.com')->send(new SendEmail($dataEmail));  // kirim password ke email elfan
             Mail::to($user[0]->email)->send(new SendEmail($dataEmail));  // kirim password ke email user tersebut
-        
+            
             return view('pages.auth.lupapassword.success', [
                 'email' => $request->email
             ]);  
@@ -227,6 +238,7 @@ class AuthController extends Controller
     
     // LOGOUT
     public function logout() {
+        LoginSession::where('user_id', auth()->user()->id)->delete();
         Auth::logout();
         return redirect(route('home'));
     }

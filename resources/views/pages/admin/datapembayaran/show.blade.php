@@ -15,14 +15,14 @@
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             @include('_success')
-             {{ session('info') }}
+            {{ session('info') }}
         </div>
     @endif
 
     @if (session()->has('gagal'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             @include('_failed')
-             {!! session('gagal') !!}
+            {!! session('gagal') !!}
         </div>
     @endif
 
@@ -57,8 +57,9 @@
                                 </a>
 
                                 <form action="{{ route('pembayaran.kirimstruk', $pembayaran) }}" method="POST">
-                                @csrf
-                                    <button type="submit" class="mt-0 mb-3 ms-2 float-right btn btn-info btn-sm btn-icon-split fs-14">
+                                    @csrf
+                                    <button type="submit"
+                                        class="mt-0 mb-3 ms-2 float-right btn btn-info btn-sm btn-icon-split fs-14">
                                         <span class="icon text-white m-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
@@ -71,7 +72,6 @@
                                         <span class="text">Kirim Struk</span>
                                     </button>
                                 </form>
-
                             @endif
 
                             <tr class="border-bottom">
@@ -151,7 +151,8 @@
                         </table>
 
                         @if ($pembayaran->status == 'diproses')
-                            <form action="{{ route('statuspembayaran.update', $pembayaran) }}" method="post" class="mt-2">
+                            <form action="{{ route('statuspembayaran.update', $pembayaran) }}" method="post"
+                                class="mt-2">
                                 @method('PUT')
                                 @csrf
 
@@ -160,41 +161,46 @@
                                     <select name="status" class="form-select" id="status"
                                         aria-label="Example select with button addon">
                                         <option disabled>-- Pilih --</option>
-                                        <option value="diproses" {{ $pembayaran->status == 'diproses' ? 'selected' : '' }}>
+                                        <option value="diproses"
+                                            {{ $pembayaran->status == 'diproses' ? 'selected' : '' }}>
                                             DIPROSES</option>
-                                        <option value="sukses" {{ $pembayaran->status == 'sukses' ? 'selected' : '' }}>SUKSES
+                                        <option value="sukses" {{ $pembayaran->status == 'sukses' ? 'selected' : '' }}>
+                                            SUKSES
                                         </option>
-                                        <option value="gagal" {{ $pembayaran->status == 'gagal' ? 'selected' : '' }}>GAGAL
+                                        <option value="gagal" {{ $pembayaran->status == 'gagal' ? 'selected' : '' }}>
+                                            GAGAL
                                         </option>
                                     </select>
                                     <input type="hidden" name="petugas_id" value="{{ auth()->user()->id }}">
 
-                                    <a href="#ubahStatus" class="btn btn-primary" data-bs-toggle="modal"
-                                    >Simpan</a>
+                                    <a href="#ubahStatus" class="btn btn-primary" data-bs-toggle="modal">Simpan</a>
                                 </div>
 
-                                <div class="modal fade" id="ubahStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="ubahStatus" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h5 class="modal-title fw-semibold poppins" id="exampleModalLabel">Ubah Status Transaksi                                              </h5>
-                                              <button type="button" class="btn-close"
-                                                  data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                            Nama Siswa: <p class="text-primary fw-bold mb-2">
-                                                {{ $pembayaran->userSiswa->name }} -
-                                                {{ $pembayaran->userSiswa->kelas->name }}</p>
-                                            Kode Transaksi: <p class="text-primary fw-bold">
-                                                {{ strtoupper($pembayaran->identifier) }}</p>
-                                            Apakah anda yakin akan mengubah status transaksi tersebut?
-                                          </div>
-                                        <div class="modal-footer">
-                                          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Ya, Ubah</button>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title fw-semibold poppins" id="exampleModalLabel">Ubah
+                                                    Status Transaksi </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Nama Siswa: <p class="text-primary fw-bold mb-2">
+                                                    {{ $pembayaran->userSiswa->name }} -
+                                                    {{ $pembayaran->userSiswa->kelas->name }}</p>
+                                                Kode Transaksi: <p class="text-primary fw-bold">
+                                                    {{ strtoupper($pembayaran->identifier) }}</p>
+                                                Apakah anda yakin akan mengubah status transaksi tersebut?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary"
+                                                    data-bs-dismiss="modal">Ya, Ubah</button>
+                                            </div>
                                         </div>
-                                      </div>
                                     </div>
-                                  </div>
+                                </div>
 
                             </form>
                         @endif
@@ -268,22 +274,28 @@
                                     belum memiliki riwayat
                                     pembayaran.</small>
                             @else
-                                <table class="table table-sm table-hover fs-14 c-black">
-                                    <tr class="border-bottom bg-dark text-white">
-                                        <td>#</td>
-                                        <td>Tanggal</td>
-                                        <td>Pembayaran untuk</td>
-                                        <td class="d-xs-none">Nominal bayar</td>
-                                    </tr>
-                                    @foreach ($historysiswa->where('status', 'sukses') as $tampilkan)
-                                        <tr class="border-bottom">
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
-                                            <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
-                                            <td class="d-xs-none">
-                                                Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                                <table class="table table-sm table-hover fs-14 c-black"
+                                   
+                                >
+                                    <thead>
+                                        <tr class="border-bottom bg-dark text-white">
+                                            <td scope="col">#</td>
+                                            <td scope="col">Tanggal</td>
+                                            <td scope="col">Pembayaran untuk</td>
+                                            <td class="d-xs-none">Nominal bayar</td>
                                         </tr>
-                                    @endforeach
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($historysiswa->where('status', 'sukses') as $tampilkan)
+                                            <tr class="border-bottom">
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($tampilkan->tanggalbayar)) }}</td>
+                                                <td>{{ $tampilkan->bulanbayar->name }} - {{ $tampilkan->tahunbayar }}</td>
+                                                <td class="d-xs-none">
+                                                    Rp{{ number_format($tampilkan->jumlahbayar, 0, '.', '.') }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             @endif
                         </div>

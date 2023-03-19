@@ -84,6 +84,17 @@
                                 <td style="width: 1px;">:</td>
                                 <td>{{ $admin->username }}</td>
                             </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bold">Status Akun</td>
+                                <td style="width: 1px;">:</td>
+                                <td>
+                                    @if ($admin->aktif == true)
+                                        <span class="badge bg-success">{{ strtoupper('aktif') }}</span>
+                                    @elseif ($admin->aktif == false)
+                                        <span class="badge bg-danger">{{ strtoupper('tidak aktif') }}</span>
+                                    @endif
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>
