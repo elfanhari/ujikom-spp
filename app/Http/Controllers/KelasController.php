@@ -6,9 +6,11 @@ use App\Http\Requests\KelasRequest;
 use App\Models\Kelas;
 use App\Models\User;
 use App\Models\Kompetensikeahlian;
+use App\Models\Spp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 
 class KelasController extends Controller
 {
@@ -39,6 +41,9 @@ class KelasController extends Controller
     {
         return view('pages.admin.datakelas.show', [
             'siswa' => User::where('kelas_id', $kela->id)->orderBy('name', 'ASC')->get(),
+            'kelas' => $kela,
+            'semuakelas' => Kelas::orderBy('name', 'ASC')->get(),
+            'semuaspp' => Spp::orderBy('tahun', 'ASC')->get()
         ]);
     }
 
@@ -73,6 +78,22 @@ class KelasController extends Controller
             return redirect(route('kelas.index'))->withGagal('Data tidak dapat dihapus! Karena ada beberapa siswa dengan <b> Kelas - ' . $kela->name . '</b>!');
         }
        
+    }
+
+    // Kelas - Naik Kelas
+    public function naikKelas(Request $request)
+    {
+        $kelasBaru = $request->validate(['kelas_id' => 'required']);
+        User::where('kelas_id', $request->kelasSebelumnya)->update($kelasBaru);
+        return redirect()->route('kelas.index')->withInfo('Siswa pada kelas tersebut berhasil dinaikkan kelas!');
+    }
+
+    // Kelas - Ganti SPP
+    public function gantiSpp(Request $request)
+    {
+        $sppBaru = $request->validate(['spp_id' => 'required']);
+        User::where('kelas_id', $request->kelasSebelumnya)->where('spp_id', $request->sppSebelumnya)->update($sppBaru);
+        return back()->withInfo('SPP siswa pada kelas ini berhasil diperbarui!');
     }
 
 }

@@ -33,9 +33,9 @@
             <div class="card shadow">
                 <div class="card-header">
                     <p class="m-0 d-inline font-weight-bold text-grey">Detail Pembayaran</p>
-                    {{-- @can('admin')
+                    @can('admin')
                         <a href="{{ route('pembayaran.edit', $pembayaran) }}" class="float-right">Edit pembayaran</a>
-                    @endcan --}}
+                    @endcan
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

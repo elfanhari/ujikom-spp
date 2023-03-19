@@ -1,7 +1,7 @@
 @extends('master.admin.main')
 
 @section('content')
-    <h5 class="mb-3 fw-bold text-xs-center poppins">Laporan</h5>
+    <h5 class="mb-3 fw-bold text-xs-center poppins">Laporan Transaksi</h5>
 
     @if (session()->has('info'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -19,9 +19,6 @@
 
     <div class="row mb-3">
         <div class="col-12">
-
-            <!-- Input XS -->
-
 
             <!-- Input MD -->
             <div class="card shadow">

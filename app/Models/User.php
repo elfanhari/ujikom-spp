@@ -92,6 +92,11 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+    // public function setIdentifierAttribute($identifier) // Bcrypt Otomatis
+    // {
+    //     $this->attributes['identifier'] = hash('md5', $identifier . '_1');
+    // }
+
     public function routeNotificationForNexmo($notification)
     {
         // $telepon = Str::replaceFirst('0', '62', $this->telepon);

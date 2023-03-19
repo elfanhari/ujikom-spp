@@ -122,6 +122,11 @@
                                         <td>{{ $tampilkan->kelas->name }}</td>
                                     </tr>
                                     <tr class="border-bottom">
+                                        <td class="fw-bold">NISN</td>
+                                        <td style="width: 1px;">:</td>
+                                        <td>{{ $tampilkan->nisn }}</td>
+                                    </tr>
+                                    <tr class="border-bottom">
                                         <td class="fw-bold">Email</td>
                                         <td style="width: 1px;">:</td>
                                         <td>{{ $tampilkan->email }}</td>

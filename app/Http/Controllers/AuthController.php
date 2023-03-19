@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
 use App\Notifications\WelcomeSmsNotification;
+use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Type\Integer;
 
 class AuthController extends Controller
@@ -57,7 +58,7 @@ class AuthController extends Controller
     
 
     // LOGIN DENGAN VERIFIKASI GMAIL
-    public function cekLoginAdmin(Request $request)
+    public function cekLoginAdmin(Request $request) // cek login untuk semua user, tadinya maunya admin doang
     {   
         $input = $request->validate([
             'email' => ['required'],
@@ -142,6 +143,8 @@ class AuthController extends Controller
     // KONFIRMASI VERIFIKASI EMAIL
     public function storeVerifikasiEmail(Request $request)
     {   
+
+        
         $kodeverifikasi = $request->kodeverifikasi;
         $user_id = $request->user_id;
         $kadaluarsa = intval($request->kadaluarsa);

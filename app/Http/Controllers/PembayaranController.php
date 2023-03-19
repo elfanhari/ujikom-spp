@@ -44,6 +44,7 @@ class PembayaranController extends Controller
 
     public function create(Request $request)
     {
+        
         if (auth()->user()->level === 'siswa') { // pembatasan akses selain admin dan petugas
             return view('denied');
         }
@@ -66,32 +67,46 @@ class PembayaranController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(PembayaranRequest $request)
     {
-        $bulanbayar = Str::before($request->pembayaranuntuk, '-');
-        $tahunbayar = Str::after($request->pembayaranuntuk, '-');
 
-        $petugas_id = $request->petugas_id;
-        $siswa_id = $request->siswa_id;
-        $bulanbayar_id = $bulanbayar;
-        $tahunbayar = $tahunbayar;
-        $tanggalbayar = $request->tanggalbayar;
-        $jumlahbayar = $request->jumlahbayar;
-        $identifier = 'i' . Str::random(4) . time() . Str::random(5);
-        Pembayaran::create($request->all());
+        // PERCOBAAN
 
-        $pembayaranTerakhir = Pembayaran::latest()->first();
-        $kodeTransaksi = Str::upper($pembayaranTerakhir->identifier);
-        $notifikasiSukses = [
-            'identifier' => 'i' . Str::random(4) . time() . Str::random(5),
-            'pengirim_id' => Auth::id(),
-            'penerima_id' => $pembayaranTerakhir->siswa_id,
-            'pesan' => 'Transaksi anda dengan kode transaksi ' . $kodeTransaksi . ' telah berhasil! ' . ' Terimakasih telah melakukan pembayaran untuk ' . $pembayaranTerakhir->bulanbayar->name . ' ' . $pembayaranTerakhir->tahunbayar . '.',
-            'tipe' => 'sukses',
-            'dibaca' => false
-        ];
-        Notifikasi::create($notifikasiSukses);
-        return redirect(route('pembayaran.show', $pembayaranTerakhir->identifier))->with('info', 'Pembayaran berhasil dibuat!');
+        $jumlahBulanDibayar = count($request->pembayaranuntuk);
+        if ($jumlahBulanDibayar > 1) {
+        for ($i = $jumlahBulanDibayar - 1; $i >= 0; $i--) {
+                $bulanbayar = Str::before($request->pembayaranuntuk[$i], '-');
+                $tahunbayar = Str::after($request->pembayaranuntuk[$i], '-');
+
+                $request['bulanbayar_id'] = $bulanbayar;
+                $request['tahunbayar'] = $tahunbayar;
+                $request['identifier'] = 'i' . Str::random(4) . time() . Str::random(5);
+                Pembayaran::create($request->all());
+            }
+            return redirect()->route('pembayaran.index')->with('info', 'Pembayaran sukses!');
+        } else {
+
+            $bulanbayar = Str::before($request->pembayaranuntuk[0], '-');
+            $tahunbayar = Str::after($request->pembayaranuntuk[0], '-');
+
+            $request['bulanbayar_id'] = $bulanbayar;
+            $request['tahunbayar'] = $tahunbayar;
+            $request['identifier'] = 'i' . Str::random(4) . time() . Str::random(5);
+            Pembayaran::create($request->all());
+
+            $pembayaranTerakhir = Pembayaran::latest()->first();
+            $kodeTransaksi = Str::upper($pembayaranTerakhir->identifier);
+            $notifikasiSukses = [
+                'identifier' => 'i' . Str::random(4) . time() . Str::random(5),
+                'pengirim_id' => Auth::id(),
+                'penerima_id' => $pembayaranTerakhir->siswa_id,
+                'pesan' => 'Transaksi anda dengan kode transaksi ' . $kodeTransaksi . ' telah berhasil! ' . ' Terimakasih telah melakukan pembayaran untuk ' . $pembayaranTerakhir->bulanbayar->name . ' ' . $pembayaranTerakhir->tahunbayar . '.',
+                'tipe' => 'sukses',
+                'dibaca' => false
+            ];
+            Notifikasi::create($notifikasiSukses);
+            return redirect(route('pembayaran.show', $pembayaranTerakhir->identifier))->with('info', 'Pembayaran berhasil dibuat!');
+        }
     }
 
 
@@ -126,6 +141,7 @@ class PembayaranController extends Controller
 
     public function update(PembayaranRequest $request, Pembayaran $pembayaran)
     {
+        $request->validate(['tahunbayar' => ['required', 'digits:4']]);
         $pembayaran->update($request->all());
         return redirect(route('pembayaran.show', $pembayaran->identifier))->withInfo('Data berhasil diubah!');
     }

@@ -50,4 +50,9 @@ class Pembayaran extends Model
         return 'identifier';
     }
 
+    // public function setIdentifierAttribute($identifier) // Bcrypt Otomatis
+    // {
+    //     $this->attributes['identifier'] = hash('md5', $identifier . '_1');
+    // }
+
 }

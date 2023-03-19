@@ -21,7 +21,7 @@
 
 <div class="form-floating mb-3">
     <select name="bulanbayar_id" class="form-select fw-semibold @error('bulanbayar_id') is-invalid @enderror" id="floatingSelect"
-        aria-label="Floating label select example" disabled readonly>
+        aria-label="Floating label select example" >
         <option value="" selected disabled>-- Pilih --</option>
         @foreach ($bulanbayar as $tampilkan)
             <option value="{{ $tampilkan->id }}" {{ $tampilkan->id == $pembayaran->bulanbayar_id ? 'selected' : '' }}>
@@ -35,9 +35,9 @@
 </div>
 
 <div class="form-floating mt-3 mb-3">
-    <input type="text" value="{{ old('jumlahbayar', $pembayaran->tahunbayar) }}" name="tahunbayar"
+    <input type="text" value="{{ old('tahunbayar', $pembayaran->tahunbayar) }}" name="tahunbayar"
         class="form-control text-black @error('tahunbayar') is-invalid @enderror fw-semibold" id="floatingInput"
-        placeholder="tahunbayar" disabled readonly>
+        placeholder="tahunbayar">
     <label for="floatingInput" class="">Pembayaran untuk tahun</label>
     @error('tahunbayar')
         <span class="invalid-feedback mt-1 ">{{ $message }}</span>

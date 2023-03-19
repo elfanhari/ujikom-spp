@@ -21,6 +21,7 @@ use App\Http\Controllers\SiswaHistoryController;
 use App\Http\Controllers\SiswaNotifikasiController;
 use App\Http\Controllers\SiswaShowController;
 use App\Http\Controllers\SppController;
+use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\UpdatePasswordController;
 use App\Http\Controllers\UserphotoController;
 use App\Models\Pembayaran;
@@ -72,6 +73,9 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/log/{id}', [DashboardController::class, 'show'])->name('admin.log.show'); // ADMIN - Dashboard        
         Route::resource('/prodi', KompetensikeahlianController::class); // ADMIN - Kompetensi Keahlian
         Route::resource('/kelas', KelasController::class);
+        Route::put('/kelas/naikkelas/{kela}', [KelasController::class, 'naikKelas'])->name('kela.naikkelas');
+        Route::put('/kelas/gantispp/{kela}', [KelasController::class, 'gantiSpp'])->name('kela.gantispp');
+        
         Route::resource('/spp', SppController::class);
         Route::resource('/petugas', PetugasController::class);
         Route::resource('/siswa', SiswaController::class);
@@ -88,6 +92,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('entri', [PembayaranController::class, 'create'])->name('entri.create');
         Route::resource('/history', HistoryController::class);
         Route::resource('/laporan', LaporanController::class);
+        Route::resource('/tagihan', TagihanController::class);
 
         Route::get('/notifikasi', [AdminNotifikasiController::class, 'index'])->name('admin.notifikasi.index');
         Route::post('/notifikasi', [AdminNotifikasiController::class, 'store'])->name('admin.notifikasi.store');
