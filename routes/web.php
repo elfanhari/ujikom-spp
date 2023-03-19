@@ -76,7 +76,6 @@ Route::group(['middleware' => ['auth']], function(){
         Route::put('/kelas/naikkelas/{kela}', [KelasController::class, 'naikKelas'])->name('kela.naikkelas');
         Route::put('/kelas/gantispp/{kela}', [KelasController::class, 'gantiSpp'])->name('kela.gantispp');
         Route::put('/kelas/luluskansiswa/{kela}', [KelasController::class, 'luluskanSiswa'])->name('kela.luluskansiswa');
-        
         Route::resource('/spp', SppController::class);
         Route::resource('/petugas', PetugasController::class);
         Route::resource('/siswa', SiswaController::class);
